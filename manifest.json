@@ -1,0 +1,15 @@
+{
+  "name": "La Cabaña · Panel de Inventario",
+  "short_name": "La Cabaña",
+  "description": "Panel de inventario y ventas de La Cabaña",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF3EA",
+  "theme_color": "#FFFDF9",
+  "lang": "es",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

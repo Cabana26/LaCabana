@@ -835,6 +835,27 @@ const DB = {
   // "Archivar Vendidos": el servidor decide (misma regla que antes) — solo
   // elimina fotos de productos vendidos hace N días y los marca archivado=true.
   async archivarVendidos(){
+    // El SQL (fn_archivar_vendidos) solo borra las filas de fotos: no puede
+    // tocar Storage. Por eso, antes, el admin borra desde aquí los archivos
+    // reales de los productos que están por archivarse. Si algo falla, se
+    // cancela esta vuelta (los productos siguen sin archivar y se reintenta),
+    // para no dejar archivos huérfanos ocupando espacio.
+    if(this.isAdmin()){
+      const d = Number(this.state && this.state.configuracion.dias_archivo_productos_vendidos);
+      const dias = Number.isNaN(d) ? 3 : d;
+      const limite = new Date(Date.now() - dias * 86400000).toISOString();
+      const { data: cand, error: errCand } = await sb.from('productos').select('id')
+        .eq('estado','vendido').eq('archivado', false).lt('vendido_en', limite);
+      if(errCand) return 0;
+      for(const p of (cand||[])){
+        const { data: archivos, error: errList } = await sb.storage.from('productos-fotos').list(p.id);
+        if(errList) return 0;
+        if(archivos && archivos.length){
+          const { error: errRem } = await sb.storage.from('productos-fotos').remove(archivos.map(a=>p.id+'/'+a.name));
+          if(errRem) return 0;
+        }
+      }
+    }
     const { data, error } = await sb.rpc('fn_archivar_vendidos');
     return error ? 0 : data;
   },
@@ -2395,7 +2416,7 @@ PAGES['a-config'] = () => {
   <div class="panel" style="max-width:600px;">
     <form id="formConfig">
       <div class="form-group"><label>Símbolo de moneda</label><input id="cfMoneda" value="${c.moneda_simbolo}"></div>
-      <div class="form-group"><label>Días para archivar un producto vendido (elimina solo sus fotos)</label><input type="number" id="cfDias" value="${c.dias_archivo_productos_vendidos}"></div>
+      <div class="form-group"><label>Días para archivar un producto vendido (elimina solo sus fotos)</label><input type="number" id="cfDias" min="0" value="${c.dias_archivo_productos_vendidos}"><small class="text-faint" style="font-size:11.5px;display:block;margin-top:5px;">Pon 0 para que se archive apenas se venda.</small></div>
       <div class="form-group"><label>Días para eliminar definitivamente un producto ya archivado</label><input type="number" id="cfDiasEliminar" value="${c.dias_eliminacion_productos_archivados}">
         <small class="text-faint" style="font-size:11.5px;display:block;margin-top:5px;">El historial de ganancia en Reportes nunca se borra, aunque el producto se elimine.</small></div>
       <div class="form-group"><label>% de comisión sugerido para productos nuevos</label><input type="number" id="cfComision" value="${c.comision_default_porcentaje}"></div>
@@ -2502,7 +2523,13 @@ function closeModal(){
   document.removeEventListener('keydown', onModalEscape);
   if(!overlay){ document.getElementById('modalRoot').innerHTML=''; return; }
   overlay.classList.remove('open');
-  setTimeout(()=>{ document.getElementById('modalRoot').innerHTML=''; }, overlay.classList.contains('sheet-b') ? 300 : 180);
+  // Solo se limpia si la ventana que se está cerrando sigue siendo la que está
+  // en pantalla: si mientras tanto se abrió otra (ej. "Más" → "Compartir
+  // catálogo"), no hay que borrarla.
+  setTimeout(()=>{
+    const root = document.getElementById('modalRoot');
+    if(root.contains(overlay)) root.innerHTML = '';
+  }, overlay.classList.contains('sheet-b') ? 300 : 180);
 }
 
 // Zoom de fotos: clic en cualquier imagen de una galería la abre en grande,
@@ -2851,14 +2878,25 @@ async function renderCatalogoPublico(){
   const root = document.getElementById('publicPage');
   root.hidden = false; root.classList.add('wide');
   root.innerHTML = `<div class="text-center text-faint" style="padding:60px 0;">Cargando catálogo…</div>`;
-  const { data } = await sb.from('vista_producto_publico')
-    .select('codigo,nombre,descripcion,categoria,precio_venta,fotos').eq('estado','en_inventario').order('codigo', { ascending:false });
-  const productos = data || [];
+  const leerProductos = async ()=>{
+    const { data, error } = await sb.from('vista_producto_publico')
+      .select('codigo,nombre,descripcion,categoria,precio_venta,fotos').eq('estado','en_inventario').order('codigo', { ascending:false });
+    return error ? null : (data || []);
+  };
+  let productos = (await leerProductos()) || [];
   const params = new URLSearchParams(location.search);
   const vNombre = params.get('v'), vTel = params.get('tel');
   const negocio = document.querySelector('.login-logo .name')?.textContent || 'Catálogo';
-  const categorias = [...new Set(productos.map(p=>p.categoria).filter(Boolean))].sort();
   let cat = '', q = '';
+  const chipsHtml = ()=>{
+    const categorias = [...new Set(productos.map(p=>p.categoria).filter(Boolean))].sort();
+    return categorias.length ? `<button class="cat-chip${cat===''?' active':''}" data-cat="">Todo</button>${categorias.map(c=>`<button class="cat-chip${cat===c?' active':''}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}` : '';
+  };
+  const enlazarChips = ()=>{
+    root.querySelectorAll('.cat-chip').forEach(b=>b.addEventListener('click', ()=>{
+      cat = b.dataset.cat; document.getElementById('catChips').innerHTML = chipsHtml(); enlazarChips(); dibujar();
+    }));
+  };
   const resto = (vNombre?'&v='+encodeURIComponent(vNombre):'') + (vTel?'&tel='+encodeURIComponent(vTel):'');
   const tarjeta = p=>{
     const foto = (p.fotos||[])[0];
@@ -2882,13 +2920,29 @@ async function renderCatalogoPublico(){
   };
   root.innerHTML = `<div class="cat-head"><h1>${escHtml(negocio)}</h1><div class="text-muted" id="catConteo"></div></div>
     <input id="catBuscar" placeholder="Buscar…" autocomplete="off">
-    ${categorias.length?`<div class="cat-chips"><button class="cat-chip active" data-cat="">Todo</button>${categorias.map(c=>`<button class="cat-chip" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}</div>`:''}
+    <div class="cat-chips" id="catChips">${chipsHtml()}</div>
     <div class="cat-grid" id="catGrid"></div>`;
   document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value.trim().toLowerCase(); dibujar(); });
-  root.querySelectorAll('.cat-chip').forEach(b=>b.addEventListener('click', ()=>{
-    root.querySelectorAll('.cat-chip').forEach(x=>x.classList.remove('active')); b.classList.add('active'); cat = b.dataset.cat; dibujar();
-  }));
+  enlazarChips();
   dibujar();
+
+  // En vivo: la base avisa por un canal público (sin datos dentro) cuando algo
+  // cambia en el inventario; aquí solo se vuelve a leer la vista pública.
+  let t = null;
+  const actualizar = ()=>{
+    clearTimeout(t);
+    t = setTimeout(async ()=>{
+      const nuevos = await leerProductos();
+      if(!nuevos) return;
+      productos = nuevos;
+      if(cat && !productos.some(p=>p.categoria===cat)) cat = '';
+      const chips = document.getElementById('catChips');
+      if(chips){ chips.innerHTML = chipsHtml(); enlazarChips(); }
+      dibujar();
+    }, 600);
+  };
+  sb.channel('catalogo').on('broadcast', { event:'cambio' }, actualizar).subscribe();
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) actualizar(); });
 }
 
 // Link del catálogo para compartir (con el WhatsApp de quien lo comparte).
@@ -3820,7 +3874,7 @@ function bindPageEvents(page){
       e.preventDefault();
       const res = await DB.guardarConfiguracion({
         moneda_simbolo: document.getElementById('cfMoneda').value || 'Q',
-        dias_archivo_productos_vendidos: Number(document.getElementById('cfDias').value)||3,
+        dias_archivo_productos_vendidos: (v=>Number.isNaN(v)||v<0?3:v)(parseInt(document.getElementById('cfDias').value,10)),
         dias_eliminacion_productos_archivados: Number(document.getElementById('cfDiasEliminar').value)||30,
         comision_default_porcentaje: Number(document.getElementById('cfComision').value)||10,
         permitir_auto_liberacion: document.getElementById('cfAutoLib').checked,
@@ -4112,6 +4166,7 @@ async function boot(){
   showApp(DB.currentUser());
 }
 function showLogin(){
+  detenerRealtime();
   document.getElementById('loginScreen').hidden = false;
   document.getElementById('appShell').hidden = true;
   document.getElementById('loginError').hidden = true;
@@ -4127,6 +4182,7 @@ function showApp(user){
   buildBottomNav();
   iniciarBotonAtras();
   refreshBadges();
+  iniciarRealtime();
   // Si venimos del "abrir en Safari" que dispara exportReportePDF() cuando la
   // app instalada en iOS no puede imprimir (ver ahí el porqué): al cargar acá
   // (ya en Safari normal, con la sesión ya iniciada) vamos directo a Reportes
@@ -4198,6 +4254,45 @@ document.addEventListener('keydown', e=>{
 // apartados/ventas de otras. OJO: nunca repinta una página con un formulario
 // que puedas estar llenando (perderías lo escrito) — solo actualiza badges.
 const PAGINAS_CON_FORMULARIO = new Set(['a-nuevo','a-config']);
+// ---------------------------------------------------------------------
+// Actualización en vivo (Supabase Realtime). Cuando alguien aparta, vende,
+// sube fotos, abona, etc., todas las pantallas abiertas se actualizan solas.
+// El refresco de 60s de abajo queda como respaldo por si se corta la conexión
+// (por ejemplo, el celular dormido). Nunca repinta mientras escribes en un
+// campo ni en las páginas con formulario largo.
+// ---------------------------------------------------------------------
+let realtimeCanal = null, realtimeTimer = null, sincronizando = false;
+function sincronizarRealtime(){
+  clearTimeout(realtimeTimer);
+  realtimeTimer = setTimeout(sincronizarAhora, 700);   // junta ráfagas de cambios
+}
+async function sincronizarAhora(){
+  if(sincronizando || document.getElementById('appShell').hidden || !DB.state) return;
+  sincronizando = true;
+  try{
+    await DB.fetchAll();
+    refreshBadges();
+    const enc = document.activeElement;
+    const escribiendo = enc && /^(INPUT|TEXTAREA|SELECT)$/.test(enc.tagName) && document.getElementById('mainContent').contains(enc);
+    if(currentPage && !PAGINAS_CON_FORMULARIO.has(currentPage) && !escribiendo){
+      const y = window.scrollY;
+      navigate(currentPage);
+      window.scrollTo(0, y);
+    }
+  } finally { sincronizando = false; }
+}
+function iniciarRealtime(){
+  if(realtimeCanal) return;
+  realtimeCanal = sb.channel('panel-cambios');
+  ['productos','fotos_producto','venta_historial','abonos','devoluciones','notificaciones'].forEach(t=>
+    realtimeCanal.on('postgres_changes', { event:'*', schema:'public', table:t }, sincronizarRealtime));
+  realtimeCanal.subscribe();
+}
+function detenerRealtime(){
+  if(realtimeCanal){ sb.removeChannel(realtimeCanal); realtimeCanal = null; }
+}
+// Al volver a la app (celular que estuvo dormido), ponerse al día de inmediato.
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden && realtimeCanal) sincronizarRealtime(); });
 setInterval(async ()=>{
   if(document.getElementById('appShell').hidden) return;
   if(DB.isAdmin()){

@@ -459,6 +459,7 @@ tbody tr:hover{background:var(--color-surface-alt);}
   .icon-actions-row{gap:10px;}
   .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
   .kpi-card{padding:14px;}
+  .kpi-grid>.kpi-card:last-child:nth-child(odd){grid-column:1/-1;}
   .kpi-top{gap:8px;margin-bottom:8px;}
   .kpi-icon{width:32px;height:32px;}
   .kpi-label{font-size:9.5px;}
@@ -511,6 +512,146 @@ tbody tr:hover{background:var(--color-surface-alt);}
 .mas-item.peligro{color:var(--red-700);}
 .mas-item.peligro>svg:first-child{stroke:var(--red-700);}
 @media (max-width:980px){ .sidebar,.sidebar-scrim{display:none !important;} }
+
+/* ---------- Mejoras: tarjetas, búsqueda, clientes, inicio (celular primero) ---------- */
+.buscador{position:relative;flex:1 1 260px;min-width:0;}
+.buscador>svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--color-text-faint);fill:none;pointer-events:none;}
+.buscador input{width:100%;min-width:0;padding-left:40px;}
+.toolbar .buscador input{width:100%;min-width:0;}
+.chips-scroll{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin:0 -2px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.chips-scroll::-webkit-scrollbar{display:none;}
+.chip{flex-shrink:0;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text-muted);border-radius:999px;
+  padding:8px 15px;font-size:13px;font-weight:600;cursor:pointer;min-height:38px;transition:transform 120ms var(--ease-out);}
+.chip:active{transform:scale(.96);}
+.chip.active{background:var(--color-accent);border-color:var(--color-accent);color:#fff;}
+.chip .n{opacity:.7;margin-left:5px;font-weight:700;}
+.res-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:2px 2px 12px;font-size:13px;color:var(--color-text-muted);}
+
+/* Tarjeta de producto: foto cuadrada arriba, lo importante abajo, y un solo botón "···" con el resto */
+.product-card{display:flex;flex-direction:column;}
+.product-card .pc-info{flex:1;padding:0;}
+.product-card .pc-text{padding:10px 12px 6px;}
+.product-card .pc-photo{position:relative;aspect-ratio:4/3;border-radius:0;margin:0;}
+.product-card .pc-photo.vacia{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--color-text-faint);font-size:11.5px;}
+.product-card .pc-photo.vacia svg{width:30px;height:30px;stroke:currentColor;fill:none;}
+.pc-badge{position:absolute;top:8px;left:8px;box-shadow:0 1px 5px rgba(0,0,0,.22);}
+.pc-code{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,.58);color:#fff;font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;letter-spacing:.02em;}
+.product-card .name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;min-height:2.6em;font-size:14px;margin-bottom:2px;}
+.product-card .cat{margin-bottom:6px;}
+.product-card .price{font-weight:800;font-size:17px;display:block;}
+.product-card .pct{display:block;margin-top:1px;}
+.product-card .body{padding:0 10px 10px;}
+.product-card .actions{display:flex;gap:6px;border-top:none;padding-top:6px;}
+.product-card .actions:empty{display:none;}
+.product-card .actions .btn{flex:1;justify-content:center;padding-left:8px;padding-right:8px;white-space:nowrap;}
+.pc-more{display:none;position:absolute;top:6px;right:6px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.93);border:none;
+  box-shadow:0 1px 6px rgba(0,0,0,.25);align-items:center;justify-content:center;color:#3b2a20;cursor:pointer;padding:0;}
+.pc-more:active{transform:scale(.92);}
+.pc-more svg{width:20px;height:20px;stroke:currentColor;fill:currentColor;}
+.product-card .icon-actions-row{margin-top:2px;}
+@media (max-width:980px){
+  .card-grid,.kanban-cards{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+  .kanban-cards{padding:0 10px 12px;}
+  .product-card .pc-photo{aspect-ratio:1/1;}
+  .product-card .icon-actions-row{display:none;}
+  .pc-more{display:flex;}
+  .product-card .actions .btn svg{display:none;}
+  .product-card .actions .btn{padding-left:4px;padding-right:4px;}
+  .toolbar .buscador{flex:1 1 100%;}
+  .toolbar .btn{flex:1 1 auto;}
+  .toolbar #btnCompartirCatalogo{flex:1 1 calc(100% - 60px);}
+  .toolbar #btnNuevoCliente{flex:1 1 100%;}
+  .toolbar #btnInvMas{flex:0 0 48px;padding-left:0;padding-right:0;justify-content:center;}
+  .toolbar #btnInvMas svg{fill:currentColor;}
+}
+
+/* Búsqueda global */
+.res-grupo{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-faint);margin:14px 2px 6px;}
+.res-grupo:first-child{margin-top:0;}
+.res-item{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:12px;cursor:pointer;width:100%;background:none;border:none;text-align:left;color:inherit;font:inherit;}
+.res-item:hover{background:var(--color-surface-alt);}
+.res-item:active{background:var(--coffee-100);}
+.res-thumb{width:46px;height:46px;border-radius:10px;overflow:hidden;background:var(--coffee-100);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--color-text-faint);font-weight:800;}
+.res-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.res-thumb svg{width:22px;height:22px;stroke:currentColor;fill:none;}
+.res-thumb.debe{background:var(--red-100,#fde8e8);color:var(--red-700);}
+.res-main{flex:1;min-width:0;}
+.res-nombre{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.res-sub{font-size:12px;color:var(--color-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.res-right{text-align:right;flex-shrink:0;font-size:13px;font-weight:700;display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+a.mas-item{text-decoration:none;color:inherit;}
+.estado-tabs{margin-bottom:2px;}
+.estado-tab{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);
+  border-radius:14px;padding:10px 14px;font-size:14px;font-weight:700;cursor:pointer;min-height:44px;transition:transform 120ms var(--ease-out);}
+.estado-tab:active{transform:scale(.97);}
+.estado-tab .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.estado-tab .n{background:var(--color-surface-alt);border-radius:999px;padding:1px 9px;font-size:12px;color:var(--color-text-muted);}
+.estado-tab.active{background:var(--color-text);border-color:var(--color-text);color:var(--color-surface);}
+.estado-tab.active .n{background:rgba(255,255,255,.22);color:inherit;}
+.estado-nota{font-size:12.5px;color:var(--color-text-muted);margin:2px 2px 12px;}
+.chips-scroll.cats .chip{padding:5px 12px;min-height:32px;font-size:12px;}
+.solo-celular{display:none;}
+@media (max-width:980px){ .solo-escritorio{display:none !important;} .solo-celular{display:inline-flex;} }
+.res-mas{font-size:12px;color:var(--color-text-faint);text-align:center;padding:8px 0 0;}
+
+/* Clientes */
+.cliente-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px;}
+.cliente-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px;}
+.cl-top{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.cl-avatar{width:44px;height:44px;border-radius:50%;background:var(--coffee-100);color:var(--color-accent-dark);font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cl-avatar.debe{background:var(--red-100,#fde8e8);color:var(--red-700);}
+.cl-main{flex:1;min-width:0;}
+.cl-nombre{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cl-sub{font-size:12px;color:var(--color-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cl-deuda{text-align:right;flex-shrink:0;}
+.cl-deuda-n{font-weight:800;font-size:15px;color:var(--red-700);}
+.cl-deuda small{display:block;font-size:10.5px;color:var(--color-text-muted);}
+.cl-actions{display:flex;gap:8px;align-items:center;border-top:1px solid var(--color-border);padding-top:10px;}
+.cl-actions .spacer{flex:1;}
+.cobro-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px;}
+.cobro-card{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--color-border);border-radius:14px;background:var(--color-surface);}
+.cobro-main{flex:1;min-width:0;}
+.cobro-prod{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cobro-sub{font-size:12px;color:var(--color-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cobro-monto{font-weight:800;font-size:15px;color:var(--red-700);text-align:right;}
+.cobro-der{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+
+/* Inicio */
+.home-hello{margin:0 2px 14px;}
+.home-hello h2{font-size:22px;margin:0;}
+.home-hello p{margin:2px 0 0;color:var(--color-text-muted);font-size:13px;}
+.qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+.qa-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:12px 4px;border:1px solid var(--color-border);background:var(--color-surface);
+  border-radius:16px;font-size:12px;font-weight:600;color:var(--color-text);cursor:pointer;min-height:84px;transition:transform 120ms var(--ease-out);}
+.qa-tile:active{transform:scale(.96);}
+.qa-tile .qa-ic{width:38px;height:38px;border-radius:12px;background:var(--coffee-100);display:flex;align-items:center;justify-content:center;}
+.qa-tile svg{width:20px;height:20px;stroke:var(--color-accent-dark);fill:none;}
+.hero-card{background:var(--color-accent);color:#fff;border-radius:18px;padding:18px 18px 16px;margin-bottom:16px;}
+.hero-label{font-size:11.5px;opacity:.88;text-transform:uppercase;letter-spacing:.07em;font-weight:700;}
+.hero-num{font-size:32px;font-weight:800;margin:4px 0 6px;line-height:1.1;}
+.hero-delta{display:inline-block;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.28);}
+.hero-stats b{display:block;font-size:16px;}
+.hero-stats span{font-size:11px;opacity:.88;}
+.venta-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--color-border);}
+.venta-item:last-child{border-bottom:none;}
+.vi-main{min-width:0;flex:1;}
+.vi-nombre{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vi-sub{font-size:12px;color:var(--color-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vi-right{text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+.vi-monto{font-weight:700;font-size:14px;}
+.vi-btns{display:flex;gap:6px;flex-shrink:0;}
+details.panel-plegable>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px;}
+details.panel-plegable>summary::-webkit-details-marker{display:none;}
+details.panel-plegable>summary .chev{transition:transform 160ms var(--ease-out);}
+details.panel-plegable[open]>summary .chev{transform:rotate(180deg);}
+details.panel-plegable>summary .chev svg{width:18px;height:18px;stroke:var(--color-text-muted);fill:none;}
+@media (max-width:420px){ .hero-num{font-size:28px;} .qa-tile{font-size:11.5px;} }
+
+/* Catálogo público: buscador + orden */
+.cat-tools{display:flex;gap:8px;margin-bottom:4px;}
+.cat-tools input{flex:1;min-width:0;}
+.cat-tools select{width:auto;flex-shrink:0;max-width:44%;}
 </style>
 </head>
 <body>
@@ -1369,6 +1510,7 @@ function icon(name){
     sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
     phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
     chevron:'<polyline points="6 9 12 15 18 9"/>',
+    dots:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
     menu:'<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     ayuda:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
     truck:'<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
@@ -1791,6 +1933,41 @@ function botonEntrega(p){
   const ok = v.entregado!==false;
   return `<button class="icon-btn ${ok?'confirm':'edit'}" data-action="toggle-entrega" data-id="${v.id}" data-tip="${ok?'Entregado — click para marcar pendiente':'Pendiente de entrega — click para marcar entregado'}">${icon('truck')}</button>`;
 }
+// ---------------------------------------------------------------------
+// Búsqueda: sin importar mayúsculas ni acentos ("camara" encuentra "Cámara"),
+// varias palabras a la vez ("bolsa negra" = las dos), y busca en nombre, código,
+// descripción, categoría, etiquetas y precio.
+// ---------------------------------------------------------------------
+function normalizar(t){ return String(t==null?'':t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function coincideProducto(p, q, cat){
+  if(cat && p.categoria!==cat) return false;
+  const tokens = normalizar(q).split(/\s+/).filter(Boolean);
+  if(!tokens.length) return true;
+  const pajar = normalizar([p.nombre, p.codigo, p.descripcion, p.categoria, (p.etiquetas||[]).join(' '), p.precio_venta].join(' '));
+  return tokens.every(t=>pajar.includes(t));
+}
+let busquedaInv = { q:'', cat:'' };   // Inventario (admin)
+let busquedaCat = { q:'', cat:'' };   // Catálogo (vendedora)
+let busquedaClientes = { q:'', filtro:'todos', vend:'' };
+
+function chipsCategoriasHtml(sel){
+  return `<button type="button" class="chip${!sel?' active':''}" data-cat="">Todo</button>` +
+    DB.state.categorias.map(c=>`<button type="button" class="chip${sel===c.nombre?' active':''}" data-cat="${escHtml(c.nombre)}">${escHtml(c.nombre)}</button>`).join('');
+}
+function enlazarChipsCategoria(contId, estado, dibujar){
+  const cont = document.getElementById(contId); if(!cont) return;
+  cont.addEventListener('click', e=>{
+    const b = e.target.closest('.chip'); if(!b) return;
+    estado.cat = b.dataset.cat;
+    cont.innerHTML = chipsCategoriasHtml(estado.cat);
+    dibujar();
+  });
+}
+function iconoBuscar(){ return icon('search'); }
+
+// Foto cuadrada arriba con el estado encima; abajo nombre, categoría y precio.
+// Las acciones sueltas (editar, QR, duplicar, WhatsApp, eliminar…) viven en una
+// fila de íconos que en el celular se esconde detrás de un solo botón "···".
 function productCard(p, opts){
   opts = opts || {};
   const info = productBadgeInfo(p);
@@ -1798,8 +1975,9 @@ function productCard(p, opts){
   const vend = p.reservado_por_id ? DB.state.usuarios.find(u=>u.id===p.reservado_por_id) : null;
   const cur = DB.currentUser();
   const hasVideo = !!p.url_video;
-  let actions = '';
+  const foto = DB.fotosDe(p.id)[0];
   let ventaActions = '';
+  let iconos = '';
   if(p.estado==='en_inventario'){
     ventaActions = `<button class="btn btn-secondary btn-sm" data-action="apartar" data-id="${p.id}">${icon('bookmark')} Apartar</button>
                <button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">${icon('crate')} Vender</button>`;
@@ -1808,39 +1986,39 @@ function productCard(p, opts){
                <button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">${icon('crate')} Vender</button>`;
   }
   if(opts.mode==='vendedor'){
-    actions = `${ventaActions}
-      <div class="icon-actions-row">
-      <button class="icon-btn info" data-action="qr" data-id="${p.id}" data-tip="Código QR / compartir">${icon('qr')}</button>
-      ${botonesEstadoWsp(p)}
-      </div>`;
+    iconos = `<button class="icon-btn info" data-action="qr" data-id="${p.id}" data-tip="Código QR / compartir">${icon('qr')}</button>
+      ${botonesEstadoWsp(p)}`;
   } else if(opts.mode==='admin'){
-    // El admin también puede vender como cualquier vendedor, además de administrar el producto.
-    actions = `${ventaActions}
-      <div class="icon-actions-row">
-      <button class="icon-btn edit" data-action="editar" data-id="${p.id}" data-tip="Editar">${icon('edit')}</button>
+    iconos = `<button class="icon-btn edit" data-action="editar" data-id="${p.id}" data-tip="Editar">${icon('edit')}</button>
       <button class="icon-btn info" data-action="qr" data-id="${p.id}" data-tip="Código QR">${icon('qr')}</button>
       <button class="icon-btn view" data-action="duplicar" data-id="${p.id}" data-tip="Duplicar">${icon('copy')}</button>
       ${botonesEstadoWsp(p)}
       ${botonEntrega(p)}
       ${(p.estado==='en_inventario' || p.archivado)?`<button class="icon-btn delete" data-action="eliminar" data-id="${p.id}" data-tip="${p.archivado?'Eliminar ahora':'Eliminar'}">${icon('trash')}</button>`:''}
       ${p.estado==='en_reserva' && p.reservado_por_id!==cur.id?`<button class="icon-btn delete" data-action="liberar" data-id="${p.id}" data-tip="Liberar reserva">${icon('x')}</button>`:''}
-      ${p.estado==='devuelto'?`<button class="icon-btn confirm" data-action="reingresar" data-id="${p.id}" data-tip="Regresar a inventario">${icon('undo')}</button>`:''}
-      </div>`;
+      ${p.estado==='devuelto'?`<button class="icon-btn confirm" data-action="reingresar" data-id="${p.id}" data-tip="Regresar a inventario">${icon('undo')}</button>`:''}`;
   }
-  return `<div class="product-card">
+  const masBtn = iconos.trim() ? `<button type="button" class="pc-more" data-action="mas-producto" data-id="${p.id}" aria-label="Más opciones">${icon('dots')}</button>` : '';
+  const pendEntrega = p.estado==='vendido' && (ventaDeProducto(p)||{}).entregado===false;
+  return `<div class="product-card" data-id="${p.id}">
     <div class="pc-info" data-action="ver" data-id="${p.id}">
-      ${fotoCard(p)}
-      <div class="flex-between"><span class="badge ${info.cls}">${info.label}</span><span class="text-faint" style="font-size:10.5px;">${p.codigo}</span></div>
-      <div class="name mt-8">${p.nombre}${hasVideo?` <span class="pc-video-flag" data-tip="Tiene video">${icon('play')}</span>`:''}</div>
-      <div class="cat">${p.categoria||'Sin categoría'}</div>
-      ${p.etiquetas && p.etiquetas.length ? `<div class="tag-row">${p.etiquetas.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</div>` : ''}
-      <div class="price-row"><span class="price">${money(p.precio_venta)}</span><span class="pct">${p.porcentaje_ganancia}% comisión</span></div>
-      ${vend?`<div class="who">Apartado por ${vend.nombre} ${reservaCountdownBadge(p)}</div>`:''}
-      ${p.vendido_por_id?`<div class="who">Vendido por ${(DB.state.usuarios.find(u=>u.id===p.vendido_por_id)||{}).nombre||'—'}</div>`:''}
-      ${p.estado==='vendido' && (ventaDeProducto(p)||{}).entregado===false?`<div class="who"><span class="badge badge-warning">Pendiente de entrega</span></div>`:''}
-      ${p.archivado?`<div class="who archived-countdown">${icon('trash')} ${diasParaEliminar<=0?'Se elimina en el próximo chequeo':'Se elimina en '+diasParaEliminar+' día'+(diasParaEliminar===1?'':'s')}</div>`:''}
+      <div class="pc-photo${foto?'':' vacia'}">${foto?imgMini(foto.url_foto, escHtml(p.nombre)):icon('crate')+'<span>Sin foto</span>'}
+        <span class="badge ${info.cls} pc-badge">${info.label}</span><span class="pc-code">${escHtml(p.codigo)}</span>${masBtn}</div>
+      <div class="pc-text">
+        <div class="name">${escHtml(p.nombre)}${hasVideo?` <span class="pc-video-flag" data-tip="Tiene video">${icon('play')}</span>`:''}</div>
+        <div class="cat">${escHtml(p.categoria||'Sin categoría')}</div>
+        <span class="price">${money(p.precio_venta)}</span>
+        <span class="pct">${p.porcentaje_ganancia}% comisión</span>
+        ${vend?`<div class="who">Apartado por ${escHtml(vend.nombre)} ${reservaCountdownBadge(p)}</div>`:''}
+        ${p.vendido_por_id?`<div class="who">Vendido por ${escHtml((DB.state.usuarios.find(u=>u.id===p.vendido_por_id)||{}).nombre||'—')}</div>`:''}
+        ${pendEntrega?`<div class="who"><span class="badge badge-warning">Pendiente de entrega</span></div>`:''}
+        ${p.archivado?`<div class="who archived-countdown">${icon('trash')} ${diasParaEliminar<=0?'Se elimina en el próximo chequeo':'Se elimina en '+diasParaEliminar+' día'+(diasParaEliminar===1?'':'s')}</div>`:''}
+      </div>
     </div>
-    <div class="body"><div class="actions">${actions}</div></div>
+    <div class="body">
+      <div class="actions">${ventaActions}</div>
+      ${iconos.trim()?`<div class="icon-actions-row">${iconos}</div>`:''}
+    </div>
   </div>`;
 }
 // Cada fase colapsa a ~2 filas cuando hay muchos productos (100, 500, 1000...);
@@ -1867,62 +2045,109 @@ function kanbanColumn(estado, title, dotColor, productos, mode){
 --------------------------------------------------------------------- */
 const PAGES = {};
 
+// Piezas compartidas del Inicio
+function saludoInicio(){
+  const cur = DB.currentUser();
+  const fecha = new Date().toLocaleDateString('es-GT', { weekday:'long', day:'numeric', month:'long' });
+  return `<div class="home-hello"><h2>Hola, ${escHtml(cur.nombre.split(' ')[0])}</h2><p>${fecha.charAt(0).toUpperCase()+fecha.slice(1)}</p></div>`;
+}
+function accionesRapidas(){
+  const admin = DB.isAdmin();
+  const t = (ic, txt, onclick)=>`<button type="button" class="qa-tile" onclick="${onclick}"><span class="qa-ic">${icon(ic)}</span>${txt}</button>`;
+  return `<div class="qa-grid">
+    ${admin ? t('plus','Nuevo producto',"navigate('a-nuevo')") : t('crate','Catálogo',"navigate('v-catalogo')")}
+    ${t('whatsapp','Compartir catálogo','modalCompartirCatalogo()')}
+    ${t('search','Buscar','modalBuscar()')}
+    ${t('users2','Clientes',admin?"navigate('a-clientes')":"navigate('v-clientes')")}
+  </div>`;
+}
+function inicioDia(){ const d = new Date(); d.setHours(0,0,0,0); return d; }
+function inicioMesActual(){ const d = new Date(); d.setDate(1); d.setHours(0,0,0,0); return d; }
+function ventaItemHtml(v, opts){
+  opts = opts || {};
+  const vend = opts.vendedora ? DB.state.usuarios.find(u=>u.id===v.vendedor_id) : null;
+  const pendiente = v.estado_pago==='pendiente';
+  let badge;
+  if(v.estado_venta==='devuelto') badge = `<span class="badge badge-danger">Devuelto</span>`;
+  else if(pendiente) badge = `<span class="badge badge-warning">Debe ${money(saldoPendiente(v))}</span>`;
+  else badge = `<span class="badge badge-success">Pagado</span>`;
+  const sub = [vend?vend.nombre:null, opts.comision?('Tu comisión '+money(v.comision_monto)):null, timeAgo(v.fecha_venta)].filter(Boolean).join(' · ');
+  return `<div class="venta-item"><div class="vi-main"><div class="vi-nombre">${escHtml(v.producto_nombre)}</div><div class="vi-sub">${sub}</div></div>
+    <div class="vi-right"><div class="vi-monto">${money(v.precio_venta)}</div>${badge}</div></div>`;
+}
+
 PAGES['v-dashboard'] = () => {
   const cur = DB.currentUser();
   const misApartados = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id===cur.id);
   const misVentas = DB.state.venta_historial.filter(v=>v.vendedor_id===cur.id);
-  const inicioMes = new Date(); inicioMes.setDate(1); inicioMes.setHours(0,0,0,0);
-  const ventasMes = misVentas.filter(v=>new Date(v.fecha_venta)>=inicioMes && v.estado_venta==='vendido');
+  const vendidas = misVentas.filter(v=>v.estado_venta==='vendido');
+  const ini = inicioMesActual(), hoyIni = inicioDia();
+  const ventasMes = vendidas.filter(v=>new Date(v.fecha_venta)>=ini);
+  const ventasHoy = vendidas.filter(v=>new Date(v.fecha_venta)>=hoyIni);
+  const comisionMes = ventasMes.filter(v=>v.comision_estado!=='reversada').reduce((s,v)=>s+v.comision_monto,0);
   const comisionGanada = misVentas.filter(v=>v.comision_estado!=='reversada').reduce((s,v)=>s+v.comision_monto,0);
   const comisionPendiente = misVentas.filter(v=>v.comision_estado==='ganada').reduce((s,v)=>s+v.comision_monto,0);
+  const vendidoMes = ventasMes.reduce((s,v)=>s+v.precio_venta,0);
   const diasArr = [...Array(14)].map((_,i)=>{ const d=new Date(); d.setDate(d.getDate()-(13-i)); d.setHours(0,0,0,0); return d; });
   const porDia = diasArr.map(d=>{ const next=new Date(d); next.setDate(next.getDate()+1); return misVentas.filter(v=>v.estado_venta==='vendido' && new Date(v.fecha_venta)>=d && new Date(v.fecha_venta)<next).reduce((s,v)=>s+v.comision_monto,0); });
   const etiquetasDias = diasArr.map(d=>d.toLocaleDateString('es-GT',{day:'2-digit',month:'2-digit'}));
   return `
+    ${saludoInicio()}
     ${panelQueHacer()}
+    ${accionesRapidas()}
+    <div class="hero-card">
+      <div class="hero-label">Tu comisión este mes</div>
+      <div class="hero-num">${money(comisionMes)}</div>
+      <div class="hero-stats">
+        <div><b>${ventasMes.length}</b><span>ventas del mes</span></div>
+        <div><b>${money(vendidoMes)}</b><span>vendido</span></div>
+        <div><b>${ventasHoy.length}</b><span>ventas hoy</span></div>
+      </div>
+    </div>
     <div class="kpi-grid">
       ${kpi('Productos Apartados', misApartados.length, 'bookmark','icon-info',null,"navigate('v-catalogo')")}
-      ${kpi('Ventas Este Mes', ventasMes.length, 'crate','icon-success',null,"navigate('v-ventas')")}
-      ${kpi('Comisión Acumulada', money(comisionGanada), 'percent','icon-warn',null,"navigate('v-comisiones')")}
-      ${kpi('Comisión Por Pagar', money(comisionPendiente), 'card','icon-neutral',null,"navigate('v-comisiones')")}
+      ${kpi('Comisión Por Pagar', money(comisionPendiente), 'card','icon-warn',null,"navigate('v-comisiones')")}
+      ${kpi('Comisión Acumulada', money(comisionGanada), 'percent','icon-success',null,"navigate('v-comisiones')")}
+      ${kpi('Ventas En Total', vendidas.length, 'crate','icon-neutral',null,"navigate('v-ventas')")}
+    </div>
+    ${misApartados.length ? `<div class="panel">
+      <div class="panel-head"><div class="panel-title">Mis productos apartados</div><span class="badge badge-warning">${misApartados.length}</span></div>
+      ${misApartados.map(p=>`<div class="venta-item"><div class="vi-main"><div class="vi-nombre">${escHtml(p.nombre)}</div><div class="vi-sub">${money(p.precio_venta)} · ${timeAgo(p.reservado_en)} ${reservaCountdownBadge(p)}</div></div>
+        <div class="vi-btns"><button class="btn btn-secondary btn-sm" data-action="liberar" data-id="${p.id}">Liberar</button><button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">Vender</button></div></div>`).join('')}
+    </div>` : ''}
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Mis últimas ventas</div><button class="btn btn-secondary btn-sm" onclick="navigate('v-ventas')">Ver todas</button></div>
+      ${misVentas.slice(0,6).map(v=>ventaItemHtml(v,{comision:true})).join('') || `<div class="text-faint text-center" style="padding:16px 0;">Aún no tienes ventas</div>`}
     </div>
     <div class="panel">
       <div class="panel-title" style="margin-bottom:8px;">Mi comisión — últimos 14 días</div>
       ${svgLineaTendencia(porDia, etiquetasDias)}
-    </div>
-    <div class="panel">
-      <div class="panel-head"><div class="panel-title">Mis productos apartados</div></div>
-      <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Precio</th><th>Apartado</th><th>Vence</th><th></th></tr></thead><tbody>
-      ${misApartados.length ? misApartados.map(p=>`<tr><td>${p.nombre}</td><td>${money(p.precio_venta)}</td><td>${timeAgo(p.reservado_en)}</td><td>${reservaCountdownBadge(p)}</td>
-        <td><button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">Vender</button>
-            <button class="btn btn-secondary btn-sm" data-action="liberar" data-id="${p.id}">Liberar</button></td></tr>`).join('')
-        : `<tr class="empty-row"><td colspan="5">No tienes productos apartados</td></tr>`}
-      </tbody></table></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><div class="panel-title">Mis últimas ventas</div></div>
-      ${renderVentasTable(misVentas.slice(0,6), false)}
     </div>`;
 };
 
-PAGES['v-catalogo'] = () => {
+function catalogoContenido(){
   const cur = DB.currentUser();
-  const disponibles = DB.state.productos.filter(p=>p.estado==='en_inventario');
-  const misReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id===cur.id);
-  const otrasReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id!==cur.id);
-  return `
-    <div class="toolbar">
-      <input id="catalogoSearch" placeholder="Buscar producto...">
-      <select id="catalogoCategoria"><option value="">Todas las categorías</option>${DB.state.categorias.map(c=>`<option>${c.nombre}</option>`).join('')}</select>
-      <button class="btn btn-primary btn-sm" id="btnCompartirCatalogo">${icon('whatsapp')} Compartir catálogo</button>
-    </div>
-    <div id="catalogoGrid" class="card-grid">
-      ${[...misReservas, ...disponibles].map(p=>productCard(p,{mode:'vendedor'})).join('') || `<div class="text-faint text-center" style="padding:30px;">No hay productos disponibles</div>`}
+  const { q, cat } = busquedaCat;
+  const f = p=>coincideProducto(p, q, cat);
+  const disponibles = DB.state.productos.filter(p=>p.estado==='en_inventario').filter(f);
+  const misReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id===cur.id).filter(f);
+  const otrasReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id!==cur.id).filter(f);
+  const total = disponibles.length + misReservas.length;
+  const filtrando = !!(q.trim() || cat);
+  return `${filtrando?`<div class="res-head"><span>${total} producto${total===1?'':'s'} encontrado${total===1?'':'s'}</span><button type="button" class="btn btn-secondary btn-sm" data-action="limpiar-busqueda-cat">Limpiar</button></div>`:''}
+    <div class="card-grid">
+      ${[...misReservas, ...disponibles].map(p=>productCard(p,{mode:'vendedor'})).join('') || `<div class="text-faint text-center" style="padding:30px;grid-column:1/-1;">${filtrando?'No hay productos con esa búsqueda':'No hay productos disponibles'}</div>`}
     </div>
     ${otrasReservas.length ? `<div class="panel mt-16"><div class="panel-title mt-0" style="margin-bottom:12px;">Apartados por otras compañeras</div>
-      <div class="card-grid">${otrasReservas.map(p=>productCard(p,{mode:'vendedor'})).join('')}</div></div>` : ''}
-  `;
-};
+      <div class="card-grid">${otrasReservas.map(p=>productCard(p,{mode:'vendedor'})).join('')}</div></div>` : ''}`;
+}
+PAGES['v-catalogo'] = () => `
+    <div class="toolbar">
+      <div class="buscador"><input id="catalogoSearch" type="search" placeholder="Buscar producto o código…" autocomplete="off" value="${escHtml(busquedaCat.q)}">${iconoBuscar()}</div>
+      <button class="btn btn-primary btn-sm" id="btnCompartirCatalogo">${icon('whatsapp')} Compartir catálogo</button>
+    </div>
+    <div class="chips-scroll cats" id="catalogoChips">${chipsCategoriasHtml(busquedaCat.cat)}</div>
+    <div id="catalogoLista">${catalogoContenido()}</div>`;
 
 // Casi todos los números de clientes son de Guatemala: si no trae ya un
 // código de país (con "+" al inicio), se le antepone +502 automáticamente.
@@ -2004,6 +2229,79 @@ PAGES['v-comisiones'] = () => {
 
 // RLS ya filtra DB.state.clientes a solo los que ELLA creó — no hace falta
 // filtrar nada acá (ver migracion_11_clientes_por_vendedora.sql).
+// ---------------------------------------------------------------------
+// Clientes: tarjetas en vez de tabla (se leen bien en el celular), con
+// buscador (nombre o teléfono), filtros "Con deuda / Al día" y orden por deuda.
+// ---------------------------------------------------------------------
+function clientesFiltrados(){
+  const { q, filtro, vend } = busquedaClientes;
+  const tokens = normalizar(q).split(/\s+/).filter(Boolean);
+  const qDig = q.replace(/\D/g,'');
+  return DB.state.clientes.map(c=>({ c, r: DB.resumenCliente(c.id) }))
+    .filter(({c,r})=>{
+      if(vend && c.created_by!==vend) return false;
+      if(filtro==='deuda' && !(r.deuda>0)) return false;
+      if(filtro==='aldia' && r.deuda>0) return false;
+      if(!tokens.length) return true;
+      if(tokens.every(t=>normalizar(c.nombre+' '+(c.telefono||'')).includes(t))) return true;
+      return qDig.length>=3 && (c.telefono||'').replace(/\D/g,'').includes(qDig);
+    })
+    .sort((a,b)=> b.r.deuda-a.r.deuda || a.c.nombre.localeCompare(b.c.nombre,'es'));
+}
+function clienteCardHtml(c, r, admin){
+  const vend = admin ? DB.state.usuarios.find(u=>u.id===c.created_by) : null;
+  const sub = [c.telefono || 'Sin teléfono', vend ? vend.nombre : null].filter(Boolean).join(' · ');
+  const tel = telefonoInternacional(c.telefono);
+  return `<div class="cliente-card">
+    <div class="cl-top" data-action="ver-historial-cliente" data-id="${c.id}">
+      <div class="cl-avatar${r.deuda>0?' debe':''}">${escHtml(c.nombre.trim().charAt(0).toUpperCase()||'?')}</div>
+      <div class="cl-main"><div class="cl-nombre">${escHtml(c.nombre)}</div><div class="cl-sub">${escHtml(sub)}</div>
+        <div class="cl-sub">${r.compras.length} compra${r.compras.length===1?'':'s'} · ${money(r.totalGastado)}</div></div>
+      <div class="cl-deuda">${r.deuda>0 ? `<div class="cl-deuda-n">${money(r.deuda)}</div><small>debe</small>` : `<span class="badge badge-success">Al día</span>`}</div>
+    </div>
+    <div class="cl-actions">
+      ${botonesContacto(c.telefono)}
+      ${iconEstadoCuentaWhatsApp(c)}
+      <span class="spacer"></span>
+      <button type="button" class="icon-btn" data-action="mas-cliente" data-id="${c.id}" aria-label="Más opciones" data-tip="Más opciones">${icon('dots')}</button>
+    </div>
+  </div>`;
+}
+function clientesListaHtml(){
+  const admin = DB.isAdmin();
+  const lista = clientesFiltrados();
+  if(!lista.length){
+    const hay = DB.state.clientes.length;
+    return `<div class="text-faint text-center" style="padding:30px 10px;grid-column:1/-1;">${hay?'Ningún cliente coincide con esa búsqueda':'Aún no hay clientes — se crean aquí o directo al vender un producto'}</div>`;
+  }
+  return lista.map(({c,r})=>clienteCardHtml(c, r, admin)).join('');
+}
+function clientesToolbarHtml(conVendedoras){
+  const todos = DB.state.clientes.map(c=>DB.resumenCliente(c.id));
+  const conDeuda = todos.filter(r=>r.deuda>0).length;
+  const f = busquedaClientes.filtro;
+  const chip = (k, txt, n)=>`<button type="button" class="chip${f===k?' active':''}" data-f="${k}">${txt}<span class="n">${n}</span></button>`;
+  const vendedoras = conVendedoras ? [...new Set(DB.state.clientes.map(c=>c.created_by))].map(uid=>DB.state.usuarios.find(u=>u.id===uid)).filter(Boolean) : [];
+  return `<div class="toolbar">
+      <div class="buscador"><input id="clientesBuscar" type="search" placeholder="Buscar por nombre o teléfono…" autocomplete="off" value="${escHtml(busquedaClientes.q)}">${iconoBuscar()}</div>
+      ${vendedoras.length>1 ? `<select id="clientesFiltroVendedor"><option value="">Todas las vendedoras</option>${vendedoras.map(u=>`<option value="${u.id}"${busquedaClientes.vend===u.id?' selected':''}>${escHtml(u.nombre)}</option>`).join('')}</select>` : ''}
+      <button class="btn btn-primary btn-sm" id="btnNuevoCliente">${icon('plus')} Nuevo Cliente</button>
+    </div>
+    <div class="chips-scroll" id="clientesFiltros">${chip('todos','Todos',todos.length)}${chip('deuda','Con deuda',conDeuda)}${chip('aldia','Al día',todos.length-conDeuda)}</div>`;
+}
+function enlazarBusquedaClientes(){
+  const input = document.getElementById('clientesBuscar'); if(!input) return;
+  const dibujar = ()=>{ document.getElementById('clientesLista').innerHTML = clientesListaHtml(); };
+  input.addEventListener('input', ()=>{ busquedaClientes.q = input.value; dibujar(); });
+  document.getElementById('clientesFiltros').addEventListener('click', e=>{
+    const b = e.target.closest('.chip'); if(!b) return;
+    busquedaClientes.filtro = b.dataset.f;
+    document.querySelectorAll('#clientesFiltros .chip').forEach(x=>x.classList.toggle('active', x===b));
+    dibujar();
+  });
+  document.getElementById('clientesFiltroVendedor')?.addEventListener('change', e=>{ busquedaClientes.vend = e.target.value; dibujar(); });
+}
+
 PAGES['v-clientes'] = () => {
   const clientes = DB.state.clientes;
   const totalDeuda = clientes.reduce((s,c)=>s+DB.resumenCliente(c.id).deuda,0);
@@ -2012,22 +2310,8 @@ PAGES['v-clientes'] = () => {
       ${kpi('Mis clientes', clientes.length, 'users2','icon-info')}
       ${kpi('Me deben (total)', money(totalDeuda), 'wallet','icon-warn')}
     </div>
-    <div class="panel">
-      <div class="panel-head"><div class="panel-title">Mis Clientes</div><button class="btn btn-primary btn-sm" id="btnNuevoCliente">${icon('plus')} Nuevo Cliente</button></div>
-      <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Teléfono</th><th>Compras</th><th>Total gastado</th><th>Deuda actual</th><th></th></tr></thead><tbody>
-      ${clientes.length ? clientes.map(c=>{
-        const r = DB.resumenCliente(c.id);
-        return `<tr><td>${c.nombre}</td><td>${c.telefono||'—'}</td><td>${r.compras.length}</td><td>${money(r.totalGastado)}</td>
-          <td>${r.deuda>0?`<strong style="color:var(--red-700);">${money(r.deuda)}</strong>`:money(0)}</td>
-          <td><div class="icon-actions-row" style="margin-top:0;">
-            ${botonesContacto(c.telefono)}
-            ${iconEstadoCuentaWhatsApp(c)}
-            <button class="icon-btn info" data-action="ver-historial-cliente" data-id="${c.id}" data-tip="Ver historial">${icon('file')}</button>
-            <button class="icon-btn edit" data-action="editar-cliente" data-id="${c.id}" data-tip="Editar">${icon('edit')}</button>
-          </div></td></tr>`;
-      }).join('') : `<tr class="empty-row"><td colspan="6">Aún no has registrado clientes — se crean aquí o directo al vender un producto</td></tr>`}
-      </tbody></table></div>
-    </div>`;
+    ${clientesToolbarHtml(false)}
+    <div class="cliente-lista" id="clientesLista">${clientesListaHtml()}</div>`;
 };
 
 /* ---------------------------------------------------------------------
@@ -2035,43 +2319,64 @@ PAGES['v-clientes'] = () => {
 --------------------------------------------------------------------- */
 PAGES['a-dashboard'] = () => {
   const productos = DB.state.productos;
-  const inicioMes = new Date(); inicioMes.setDate(1); inicioMes.setHours(0,0,0,0);
-  const ventasMes = DB.state.venta_historial.filter(v=>new Date(v.fecha_venta)>=inicioMes && v.estado_venta==='vendido');
+  const vendidas = DB.state.venta_historial.filter(v=>v.estado_venta==='vendido');
+  const ini = inicioMesActual(), hoyIni = inicioDia();
+  const iniPrev = new Date(ini); iniPrev.setMonth(iniPrev.getMonth()-1);
+  const ventasMes = vendidas.filter(v=>new Date(v.fecha_venta)>=ini);
+  const ventasPrev = vendidas.filter(v=>{ const f=new Date(v.fecha_venta); return f>=iniPrev && f<ini; });
+  const ventasHoy = vendidas.filter(v=>new Date(v.fecha_venta)>=hoyIni);
+  const vendidoMes = ventasMes.reduce((s,v)=>s+v.precio_venta,0);
+  const vendidoPrev = ventasPrev.reduce((s,v)=>s+v.precio_venta,0);
   const gananciaMes = ventasMes.reduce((s,v)=>s+v.ganancia_neta,0);
+  const delta = vendidoPrev>0 ? Math.round((vendidoMes-vendidoPrev)/vendidoPrev*100) : null;
   const comisionesPendientes = DB.state.venta_historial.filter(v=>v.comision_estado==='ganada').reduce((s,v)=>s+v.comision_monto,0);
+  const porCobrar = DB.ventasPendientesDeCobro().reduce((s,v)=>s+saldoPendiente(v),0);
   const bitacoraReciente = DB.state.bitacora.slice(0,8);
   const porVendedor = {};
-  DB.state.venta_historial.filter(v=>v.estado_venta==='vendido').forEach(v=>{ porVendedor[v.vendedor_id]=(porVendedor[v.vendedor_id]||0)+v.comision_monto; });
+  vendidas.forEach(v=>{ porVendedor[v.vendedor_id]=(porVendedor[v.vendedor_id]||0)+v.comision_monto; });
   const topVendedorId = Object.keys(porVendedor).sort((a,b)=>porVendedor[b]-porVendedor[a])[0];
   const topVendedor = topVendedorId ? DB.state.usuarios.find(u=>u.id===topVendedorId) : null;
+  const ultimas = DB.state.venta_historial.slice(0,5);
   return `
+    ${saludoInicio()}
     ${panelQueHacer()}
+    ${accionesRapidas()}
+    <div class="hero-card">
+      <div class="hero-label">Vendido este mes</div>
+      <div class="hero-num">${money(vendidoMes)}</div>
+      ${delta===null ? '' : `<span class="hero-delta">${delta>=0?'▲':'▼'} ${Math.abs(delta)}% vs. mes pasado</span>`}
+      <div class="hero-stats">
+        <div><b>${ventasMes.length}</b><span>ventas del mes</span></div>
+        <div><b>${money(gananciaMes)}</b><span>ganancia neta</span></div>
+        <div><b>${ventasHoy.length}</b><span>ventas hoy</span></div>
+      </div>
+    </div>
     <div class="kpi-grid">
       ${kpi('En Inventario', productos.filter(p=>p.estado==='en_inventario').length,'crate','icon-neutral',null,"irAInventario('en_inventario')")}
       ${kpi('En Reserva', productos.filter(p=>p.estado==='en_reserva').length,'bookmark','icon-warn',null,"irAInventario('en_reserva')")}
-      ${kpi('Vendidos Este Mes', ventasMes.length,'box','icon-info',null,"irAInventario('vendido')")}
-      ${kpi('Ganancia Neta (Mes)', money(gananciaMes),'trending','icon-success',null,"navigate('a-reportes')")}
-      ${kpi('Comisiones Pendientes', money(comisionesPendientes),'percent','icon-warn',null,"navigate('a-comisiones')")}
+      ${kpi('Por Cobrar', money(porCobrar),'wallet','icon-danger',null,"navigate('a-clientes')")}
+      ${kpi('Comisiones Pendientes', money(comisionesPendientes),'percent','icon-info',null,"navigate('a-comisiones')")}
     </div>
-    <div class="form-row">
-      <div class="panel">
-        <div class="panel-title" style="margin-bottom:14px;">Vendedora destacada</div>
-        ${topVendedor ? `<div style="display:flex;align-items:center;gap:14px;">
-          <div class="user-chip .avatar" style="width:48px;height:48px;border-radius:50%;background:var(--color-accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;">${topVendedor.nombre.charAt(0)}</div>
-          <div><div style="font-weight:700;">${topVendedor.nombre}</div><div class="text-muted" style="font-size:12.5px;">${money(porVendedor[topVendedorId])} en comisiones ganadas</div></div>
-        </div>` : `<div class="text-faint">Aún no hay ventas registradas</div>`}
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Últimas ventas</div><button class="btn btn-secondary btn-sm" onclick="navigate('a-reportes')">Reportes</button></div>
+      ${ultimas.map(v=>ventaItemHtml(v,{vendedora:true})).join('') || `<div class="text-faint text-center" style="padding:16px 0;">Aún no hay ventas registradas</div>`}
+    </div>
+    ${topVendedor ? `<div class="panel">
+      <div class="panel-title" style="margin-bottom:14px;">Vendedora destacada</div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--color-accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex-shrink:0;">${escHtml(topVendedor.nombre.charAt(0))}</div>
+        <div><div style="font-weight:700;">${escHtml(topVendedor.nombre)}</div><div class="text-muted" style="font-size:12.5px;">${money(porVendedor[topVendedorId])} en comisiones ganadas</div></div>
       </div>
-      <div class="panel">
-        <div class="panel-head" style="margin-bottom:14px;"><div class="panel-title">Actividad reciente</div>
-          ${bitacoraReciente.length ? `<button class="icon-btn delete" id="btnBorrarBitacoraDash" data-tip="Borrar toda la bitácora">${icon('trash')}</button>` : ''}
-        </div>
-        ${bitacoraReciente.length ? bitacoraReciente.map(b=>{
-          const u = DB.state.usuarios.find(x=>x.id===b.usuario_id);
-          return `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--color-border);font-size:12.5px;">
-            <span>${b.descripcion||b.tipo_cambio}</span><span class="text-faint">${timeAgo(b.created_at)}</span></div>`;
-        }).join('') : `<div class="text-faint">Sin actividad todavía</div>`}
+    </div>` : ''}
+    <details class="panel panel-plegable">
+      <summary>Actividad reciente<span class="chev">${icon('chevron')}</span></summary>
+      <div style="margin-top:12px;">
+        ${bitacoraReciente.length ? bitacoraReciente.map(b=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--color-border);font-size:12.5px;">
+            <span>${escHtml(b.descripcion||b.tipo_cambio)}</span><span class="text-faint" style="flex-shrink:0;">${timeAgo(b.created_at)}</span></div>`).join('')
+          + `<div style="text-align:right;margin-top:10px;"><button class="icon-btn delete" id="btnBorrarBitacoraDash" data-tip="Borrar toda la bitácora">${icon('trash')}</button></div>`
+          : `<div class="text-faint">Sin actividad todavía</div>`}
       </div>
-    </div>`;
+    </details>`;
 };
 
 // Bandeja única de todo lo que necesita revisión del admin: devoluciones
@@ -2159,24 +2464,72 @@ PAGES['a-pendientes'] = () => {
     </div>` : ''}`;
 };
 
-PAGES['a-inventario'] = () => {
-  const productos = DB.state.productos;
-  return `
+// Estados del inventario como pestañas (una lista a la vez, con contador),
+// en vez de secciones gigantes desplegables.
+function estadosInventario(){
+  const cfg = DB.state.configuracion;
+  const todos = DB.state.productos.filter(p=>!busquedaInv.cat || p.categoria===busquedaInv.cat);
+  const lista = [
+    { k:'en_inventario', t:'Disponibles', c:'var(--forest-600)', f:p=>p.estado==='en_inventario', vacio:'No hay productos disponibles' },
+    { k:'en_reserva', t:'Reservados', c:'var(--amber-500)', f:p=>p.estado==='en_reserva',
+      nota:`Se liberan solos a las ${Number(cfg.tiempo_auto_liberacion_horas)||24} horas si nadie los vende.`, vacio:'No hay productos reservados' },
+    { k:'vendido', t:'Vendidos', c:'var(--sage-600)', f:p=>p.estado==='vendido' && !p.archivado,
+      nota:`A los ${cfg.dias_archivo_productos_vendidos} días se archivan y se borran sus fotos. La venta siempre queda en Reportes.`, vacio:'No hay productos vendidos' },
+    { k:'archivado', t:'Archivados', c:'var(--coffee-400)', f:p=>p.archivado, solo:true,
+      nota:`Sin fotos. Se eliminan para siempre a los ${cfg.dias_eliminacion_productos_archivados} días de archivados.`, vacio:'No hay archivados' },
+    { k:'devuelto', t:'Por revisar', c:'var(--red-600)', f:p=>p.estado==='devuelto', solo:true,
+      nota:'Productos devueltos: revísalos y regrésalos a inventario.', vacio:'No hay devoluciones por revisar' }
+  ].map(e=>({ ...e, items: todos.filter(e.f) }));
+  return lista.filter(e=>!e.solo || e.items.length);
+}
+function estadoInventarioActual(){
+  const est = estadosInventario();
+  return est.find(e=>e.k===inventarioSeccionAbierta) || est[0];
+}
+function invEstadosHtml(){
+  if(busquedaInv.q.trim()) return '';
+  const act = estadoInventarioActual();
+  return `<div class="chips-scroll estado-tabs">${estadosInventario().map(e=>
+    `<button type="button" class="estado-tab${e.k===act.k?' active':''}" data-action="inv-estado" data-key="${e.k}"><span class="dot" style="background:${e.c}"></span>${e.t}<span class="n">${e.items.length}</span></button>`).join('')}</div>`;
+}
+function inventarioContenido(){
+  const { q, cat } = busquedaInv;
+  if(q.trim()){
+    const r = DB.state.productos.filter(p=>coincideProducto(p, q, cat));
+    return `<div class="res-head"><span>${r.length} resultado${r.length===1?'':'s'} en todo el inventario</span><button type="button" class="btn btn-secondary btn-sm" data-action="limpiar-busqueda-inv">Limpiar</button></div>
+      <div class="card-grid">${r.map(p=>productCard(p,{mode:'admin'})).join('') || `<div class="text-faint text-center" style="padding:30px;grid-column:1/-1;">No hay productos con esa búsqueda</div>`}</div>`;
+  }
+  const e = estadoInventarioActual();
+  return `${e.nota?`<div class="estado-nota">${e.nota}</div>`:''}
+    <div class="card-grid">${e.items.map(p=>productCard(p,{mode:'admin'})).join('') || `<div class="text-faint text-center" style="padding:30px;grid-column:1/-1;">${e.vacio}</div>`}</div>`;
+}
+// Si la pestaña activa queda fuera de la pantalla (barra deslizable), la centra.
+function centrarTabActiva(){
+  const cont = document.querySelector('#invEstados .estado-tabs'), act = cont && cont.querySelector('.estado-tab.active');
+  if(act) cont.scrollLeft = act.offsetLeft - (cont.clientWidth - act.offsetWidth) / 2;
+}
+function dibujarInventario(){
+  const t = document.getElementById('invEstados'), w = document.getElementById('kanbanWrap');
+  if(t) t.innerHTML = invEstadosHtml();
+  if(w) w.innerHTML = inventarioContenido();
+  centrarTabActiva();
+}
+async function accionArchivarVendidos(){
+  const n = await DB.archivarVendidos();
+  toast(n ? 'Fotos eliminadas de '+n+' producto(s) vendido(s)' : 'No hay productos vendidos listos para archivar todavía', n?'success':'');
+  await refresh();
+}
+PAGES['a-inventario'] = () => `
     <div class="toolbar">
-      <input id="invSearch" placeholder="Buscar producto o código...">
-      <select id="invCategoria"><option value="">Todas las categorías</option>${DB.state.categorias.map(c=>`<option>${c.nombre}</option>`).join('')}</select>
+      <div class="buscador"><input id="invSearch" type="search" placeholder="Buscar producto o código…" autocomplete="off" value="${escHtml(busquedaInv.q)}">${iconoBuscar()}</div>
       <button class="btn btn-primary btn-sm" id="btnCompartirCatalogo">${icon('whatsapp')} Compartir catálogo</button>
-      <button class="btn btn-secondary btn-sm" id="btnArchivar" data-tip="Elimina las fotos de los productos vendidos hace más de ${DB.state.configuracion.dias_archivo_productos_vendidos} días">${icon('trash')} Archivar Vendidos</button>
-      <button class="btn btn-secondary btn-sm" id="btnImportarCSV">${icon('upload')} Importar CSV</button>
+      <button class="btn btn-secondary btn-sm solo-escritorio" id="btnArchivar" data-tip="Elimina las fotos de los productos vendidos hace más de ${DB.state.configuracion.dias_archivo_productos_vendidos} días">${icon('trash')} Archivar Vendidos</button>
+      <button class="btn btn-secondary btn-sm solo-escritorio" id="btnImportarCSV">${icon('upload')} Importar CSV</button>
+      <button class="btn btn-secondary btn-sm solo-celular" id="btnInvMas" aria-label="Más acciones">${icon('dots')}</button>
     </div>
-    <div id="kanbanWrap" class="kanban">
-      ${kanbanColumn('en_inventario','Disponible','var(--forest-600)', productos.filter(p=>p.estado==='en_inventario'),'admin')}
-      ${kanbanColumn('en_reserva','En Reserva','var(--amber-500)', productos.filter(p=>p.estado==='en_reserva'),'admin')}
-      ${kanbanColumn('vendido','Vendido','var(--sage-600)', productos.filter(p=>p.estado==='vendido' && !p.archivado),'admin')}
-      ${productos.some(p=>p.archivado) ? kanbanColumn('archivado','Archivado — sin fotos','var(--coffee-400)', productos.filter(p=>p.archivado),'admin') : ''}
-      ${productos.some(p=>p.estado==='devuelto') ? kanbanColumn('devuelto','Devuelto — requiere revisión','var(--red-600)', productos.filter(p=>p.estado==='devuelto'),'admin') : ''}
-    </div>`;
-};
+    <div id="invEstados">${invEstadosHtml()}</div>
+    <div class="chips-scroll cats" id="invChips">${chipsCategoriasHtml(busquedaInv.cat)}</div>
+    <div id="kanbanWrap">${inventarioContenido()}</div>`;
 
 PAGES['a-nuevo'] = () => `
   <div class="panel np-panel">
@@ -2340,43 +2693,26 @@ PAGES['a-clientes'] = () => {
       ${kpi('Ventas pendientes de pago', pendientes.length, 'alert','icon-danger')}
       ${kpi('Clientes registrados', clientes.length, 'users2','icon-info')}
     </div>
-    <div class="panel">
+    ${pendientes.length ? `<div class="panel">
       <div class="panel-head"><div class="panel-title">Cuentas por cobrar</div><span class="badge badge-warning">${pendientes.length}</span></div>
-      <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Cliente</th><th>Vendedora</th><th>Monto</th><th>Fecha</th><th>Días</th><th></th></tr></thead><tbody>
-      ${pendientes.length ? pendientes.slice().sort((a,b)=>new Date(a.fecha_venta)-new Date(b.fecha_venta)).map(v=>{
+      <div class="cobro-lista">
+      ${pendientes.slice().sort((a,b)=>new Date(a.fecha_venta)-new Date(b.fecha_venta)).map(v=>{
         const cliente = DB.state.clientes.find(c=>c.id===v.cliente_id);
         const vend = DB.state.usuarios.find(u=>u.id===v.vendedor_id);
-        return `<tr><td>${v.producto_nombre}</td><td>${cliente?cliente.nombre:'<span class="text-faint">Sin cliente asignado</span>'}</td>
-          <td>${vend?vend.nombre:'—'}</td><td>${money(saldoPendiente(v))}${v.monto_pagado>0?`<div class="text-faint" style="font-size:11px;">de ${money(v.precio_venta)}</div>`:''}</td><td>${fmtDateShort(v.fecha_venta)}</td><td>${deudaBadge(v)}</td>
-          <td><button class="btn btn-primary btn-sm" data-action="marcar-pago-cliente" data-id="${v.id}">${icon('check')} Abonar</button></td></tr>`;
-      }).join('') : `<tr class="empty-row"><td colspan="7">No hay ventas pendientes de cobro</td></tr>`}
-      </tbody></table></div>
-    </div>
-    <div class="panel">
-      <div class="panel-head"><div class="panel-title">Clientes — de todas las vendedoras</div>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <select id="clientesFiltroVendedor"><option value="">Todas las vendedoras</option>
-            ${[...new Set(clientes.map(c=>c.created_by))].map(uid=>DB.state.usuarios.find(u=>u.id===uid)).filter(Boolean)
-              .map(u=>`<option value="${u.id}">${u.nombre}</option>`).join('')}
-          </select>
-          <button class="btn btn-primary btn-sm" id="btnNuevoCliente">${icon('plus')} Nuevo Cliente</button>
-        </div>
+        return `<div class="cobro-card">
+          <div class="cobro-main"><div class="cobro-prod">${escHtml(v.producto_nombre)}</div>
+            <div class="cobro-sub">${cliente?escHtml(cliente.nombre):'Sin cliente asignado'}${vend?' · '+escHtml(vend.nombre):''}</div>
+            <div class="cobro-sub">${fmtDateShort(v.fecha_venta)}${v.monto_pagado>0?' · abonó '+money(v.monto_pagado):''}</div></div>
+          <div class="cobro-der"><div class="cobro-monto">${money(saldoPendiente(v))}</div>${deudaBadge(v)}
+            <button class="btn btn-primary btn-sm" data-action="marcar-pago-cliente" data-id="${v.id}">${icon('check')} Abonar</button></div>
+        </div>`;
+      }).join('')}
       </div>
-      <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Vendedora</th><th>Teléfono</th><th>Compras</th><th>Total gastado</th><th>Deuda actual</th><th></th></tr></thead><tbody id="clientesTbody">
-      ${clientes.length ? clientes.map(c=>{
-        const r = DB.resumenCliente(c.id);
-        const vend = DB.state.usuarios.find(u=>u.id===c.created_by);
-        return `<tr data-vendedor="${c.created_by||''}"><td>${c.nombre}</td><td>${vend?vend.nombre:'—'}</td><td>${c.telefono||'—'}</td><td>${r.compras.length}</td><td>${money(r.totalGastado)}</td>
-          <td>${r.deuda>0?`<strong style="color:var(--red-700);">${money(r.deuda)}</strong>`:money(0)}</td>
-          <td><div class="icon-actions-row" style="margin-top:0;">
-            ${botonesContacto(c.telefono)}
-            ${iconEstadoCuentaWhatsApp(c)}
-            <button class="icon-btn info" data-action="ver-historial-cliente" data-id="${c.id}" data-tip="Ver historial">${icon('file')}</button>
-            <button class="icon-btn edit" data-action="editar-cliente" data-id="${c.id}" data-tip="Editar">${icon('edit')}</button>
-            <button class="icon-btn delete" data-action="eliminar-cliente" data-id="${c.id}" data-tip="Eliminar">${icon('trash')}</button>
-          </div></td></tr>`;
-      }).join('') : `<tr class="empty-row"><td colspan="7">Sin clientes registrados todavía — se pueden crear aquí o directo al vender un producto</td></tr>`}
-      </tbody></table></div>
+    </div>` : ''}
+    <div class="panel">
+      <div class="panel-head"><div class="panel-title">Clientes — de todas las vendedoras</div></div>
+      ${clientesToolbarHtml(true)}
+      <div class="cliente-lista" id="clientesLista">${clientesListaHtml()}</div>
     </div>`;
 };
 
@@ -2887,7 +3223,7 @@ async function renderCatalogoPublico(){
   const params = new URLSearchParams(location.search);
   const vNombre = params.get('v'), vTel = params.get('tel');
   const negocio = document.querySelector('.login-logo .name')?.textContent || 'Catálogo';
-  let cat = '', q = '';
+  let cat = '', q = '', orden = 'nuevo';
   const chipsHtml = ()=>{
     const categorias = [...new Set(productos.map(p=>p.categoria).filter(Boolean))].sort();
     return categorias.length ? `<button class="cat-chip${cat===''?' active':''}" data-cat="">Todo</button>${categorias.map(c=>`<button class="cat-chip${cat===c?' active':''}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}` : '';
@@ -2914,15 +3250,24 @@ async function renderCatalogoPublico(){
     </div>`;
   };
   const dibujar = ()=>{
-    const lista = productos.filter(p=>(!cat || p.categoria===cat) && (!q || (p.nombre+' '+(p.descripcion||'')+' '+p.codigo).toLowerCase().includes(q)));
+    const tokens = normalizar(q).split(/\s+/).filter(Boolean);
+    let lista = productos.filter(p=>(!cat || p.categoria===cat) && (!tokens.length || (()=>{
+      const pajar = normalizar([p.nombre, p.descripcion, p.categoria, p.codigo, p.precio_venta].join(' '));
+      return tokens.every(t=>pajar.includes(t));
+    })()));
+    if(orden==='precio_asc') lista = lista.slice().sort((a,b)=>a.precio_venta-b.precio_venta);
+    else if(orden==='precio_desc') lista = lista.slice().sort((a,b)=>b.precio_venta-a.precio_venta);
+    else if(orden==='nombre') lista = lista.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
     document.getElementById('catGrid').innerHTML = lista.map(tarjeta).join('') || `<div class="text-faint text-center" style="grid-column:1/-1;padding:40px 0;">No hay productos con ese filtro</div>`;
     document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + ' disponible' + (lista.length===1?'':'s');
   };
   root.innerHTML = `<div class="cat-head"><h1>${escHtml(negocio)}</h1><div class="text-muted" id="catConteo"></div></div>
-    <input id="catBuscar" placeholder="Buscar…" autocomplete="off">
+    <div class="cat-tools"><input id="catBuscar" type="search" placeholder="Buscar producto…" autocomplete="off">
+      <select id="catOrden" aria-label="Ordenar"><option value="nuevo">Más nuevos</option><option value="precio_asc">Menor precio</option><option value="precio_desc">Mayor precio</option><option value="nombre">A–Z</option></select></div>
     <div class="cat-chips" id="catChips">${chipsHtml()}</div>
     <div class="cat-grid" id="catGrid"></div>`;
-  document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value.trim().toLowerCase(); dibujar(); });
+  document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value; dibujar(); });
+  document.getElementById('catOrden').addEventListener('change', e=>{ orden = e.target.value; dibujar(); });
   enlazarChips();
   dibujar();
 
@@ -3754,30 +4099,51 @@ function modalImportarCSV(){
 // Buscador rápido global (Cmd/Ctrl+K): filtra por nombre o código sin salir de la página actual.
 function modalBuscar(){
   openModal(`
-    <div class="modal-head"><div class="modal-title">${icon('search')} Buscar producto</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-head"><div class="modal-title">${icon('search')} Buscar</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
-      <input id="buscarInput" placeholder="Nombre o código..." autocomplete="off">
+      <div class="buscador"><input id="buscarInput" type="search" placeholder="Producto, código, cliente o teléfono…" autocomplete="off" enterkeyhint="search">${icon('search')}</div>
       <div id="buscarResultados" class="mt-16"></div>
     </div>`);
   const input = document.getElementById('buscarInput');
   const resultados = document.getElementById('buscarResultados');
-  const render = q=>{
-    q = q.trim().toLowerCase();
-    if(!q){ resultados.innerHTML = `<div class="text-faint text-center" style="padding:20px 0;">Escribe para buscar en todo el inventario</div>`; return; }
-    const encontrados = DB.state.productos.filter(p=>p.nombre.toLowerCase().includes(q) || p.codigo.toLowerCase().includes(q)).slice(0,20);
-    resultados.innerHTML = encontrados.length ? encontrados.map(p=>{
-      const info = productBadgeInfo(p);
-      return `<div class="dropdown-item" data-buscar-id="${p.id}" style="cursor:pointer;justify-content:space-between;border-radius:10px;">
-        <span>${p.nombre} <span class="text-faint" style="font-size:10.5px;">${p.codigo}</span></span>
-        <span class="badge ${info.cls}">${info.label}</span></div>`;
-    }).join('') : `<div class="text-faint text-center" style="padding:20px 0;">Sin resultados para "${q}"</div>`;
-    resultados.querySelectorAll('[data-buscar-id]').forEach(el=>el.addEventListener('click', ()=>{
-      const p = DB.state.productos.find(x=>x.id===el.dataset.buscarId);
-      closeModal();
-      if(p) setTimeout(()=>modalVerFicha(p), 190);
-    }));
+  const filaProducto = p=>{
+    const info = productBadgeInfo(p);
+    const f = DB.fotosDe(p.id)[0];
+    return `<button type="button" class="res-item" data-buscar-producto="${p.id}">
+      <span class="res-thumb">${f?imgMini(f.url_foto, escHtml(p.nombre)):icon('crate')}</span>
+      <span class="res-main"><span class="res-nombre" style="display:block;">${escHtml(p.nombre)}</span><span class="res-sub" style="display:block;">${escHtml(p.codigo)}${p.categoria?' · '+escHtml(p.categoria):''}</span></span>
+      <span class="res-right"><span>${money(p.precio_venta)}</span><span class="badge ${info.cls}">${info.label}</span></span></button>`;
   };
+  const filaCliente = (c, r)=>`<button type="button" class="res-item" data-buscar-cliente="${c.id}">
+      <span class="res-thumb${r.deuda>0?' debe':''}">${escHtml(c.nombre.trim().charAt(0).toUpperCase()||'?')}</span>
+      <span class="res-main"><span class="res-nombre" style="display:block;">${escHtml(c.nombre)}</span><span class="res-sub" style="display:block;">${escHtml(c.telefono||'Sin teléfono')} · ${r.compras.length} compra${r.compras.length===1?'':'s'}</span></span>
+      <span class="res-right">${r.deuda>0?`<span style="color:var(--red-700);">${money(r.deuda)}</span><span class="text-faint" style="font-weight:500;font-size:11px;">debe</span>`:`<span class="badge badge-success">Al día</span>`}</span></button>`;
+  const MAX_P = 12, MAX_C = 8;
+  const render = texto=>{
+    const q = texto.trim();
+    if(!q){
+      const deudores = DB.state.clientes.map(c=>({c, r:DB.resumenCliente(c.id)})).filter(x=>x.r.deuda>0).sort((a,b)=>b.r.deuda-a.r.deuda).slice(0,5);
+      resultados.innerHTML = deudores.length
+        ? `<div class="res-grupo">Clientes con deuda</div>${deudores.map(x=>filaCliente(x.c,x.r)).join('')}<div class="res-mas">O escribe arriba para buscar productos y clientes</div>`
+        : `<div class="text-faint text-center" style="padding:20px 0;">Busca por nombre o código de producto, nombre o teléfono de un cliente</div>`;
+    } else {
+      const tokens = normalizar(q).split(/\s+/).filter(Boolean);
+      const qDig = q.replace(/\D/g,'');
+      const prods = DB.state.productos.filter(p=>coincideProducto(p, q, ''));
+      const clis = DB.state.clientes.filter(c=>tokens.every(t=>normalizar(c.nombre+' '+(c.telefono||'')).includes(t)) || (qDig.length>=3 && (c.telefono||'').replace(/\D/g,'').includes(qDig)))
+        .map(c=>({c, r:DB.resumenCliente(c.id)}));
+      resultados.innerHTML = (prods.length ? `<div class="res-grupo">Productos (${prods.length})</div>${prods.slice(0,MAX_P).map(filaProducto).join('')}${prods.length>MAX_P?`<div class="res-mas">y ${prods.length-MAX_P} más — escribe más para afinar</div>`:''}` : '')
+        + (clis.length ? `<div class="res-grupo">Clientes (${clis.length})</div>${clis.slice(0,MAX_C).map(x=>filaCliente(x.c,x.r)).join('')}${clis.length>MAX_C?`<div class="res-mas">y ${clis.length-MAX_C} más — escribe más para afinar</div>`:''}` : '')
+        || `<div class="text-faint text-center" style="padding:20px 0;">Sin resultados para "${escHtml(q)}"</div>`;
+    }
+  };
+  resultados.addEventListener('click', e=>{
+    const bp = e.target.closest('[data-buscar-producto]'), bc = e.target.closest('[data-buscar-cliente]');
+    if(bp){ const p = DB.state.productos.find(x=>x.id===bp.dataset.buscarProducto); closeModal(); if(p) modalVerFicha(p); }
+    else if(bc){ const c = DB.state.clientes.find(x=>x.id===bc.dataset.buscarCliente); closeModal(); if(c) modalHistorialCliente(c); }
+  });
   input.addEventListener('input', ()=>render(input.value));
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter'){ resultados.querySelector('.res-item')?.click(); } });
   render('');
   setTimeout(()=>input.focus(), 50);
 }
@@ -3827,46 +4193,27 @@ function bindPageEvents(page){
   }
   if(page==='v-catalogo' || page==='a-inventario') document.getElementById('btnCompartirCatalogo')?.addEventListener('click', modalCompartirCatalogo);
   if(page==='v-catalogo'){
-    const search = document.getElementById('catalogoSearch'), cat = document.getElementById('catalogoCategoria');
-    const filtrar = ()=>{
-      const q = search.value.toLowerCase(), c = cat.value;
-      document.querySelectorAll('#catalogoGrid .product-card').forEach(card=>{
-        const name = card.querySelector('.name').textContent.toLowerCase();
-        const catTxt = card.querySelector('.cat').textContent;
-        card.style.display = (name.includes(q) && (!c||catTxt===c)) ? '' : 'none';
-      });
-    };
-    search.addEventListener('input', filtrar); cat.addEventListener('change', filtrar);
+    const search = document.getElementById('catalogoSearch');
+    const dibujar = ()=>{ document.getElementById('catalogoLista').innerHTML = catalogoContenido(); };
+    search.addEventListener('input', ()=>{ busquedaCat.q = search.value; dibujar(); });
+    enlazarChipsCategoria('catalogoChips', busquedaCat, dibujar);
   }
   if(page==='a-inventario'){
-    const search = document.getElementById('invSearch'), cat = document.getElementById('invCategoria');
-    const filtrar = ()=>{
-      const q = search.value.toLowerCase(), c = cat.value;
-      document.querySelectorAll('#kanbanWrap .product-card').forEach(card=>{
-        const name = card.querySelector('.name').textContent.toLowerCase();
-        const catTxt = card.querySelector('.cat').textContent;
-        card.style.display = (name.includes(q) && (!c||catTxt===c)) ? '' : 'none';
-      });
-    };
-    search.addEventListener('input', filtrar); cat.addEventListener('change', filtrar);
-    document.getElementById('btnArchivar').addEventListener('click', async ()=>{
-      const n = await DB.archivarVendidos();
-      toast(n ? 'Fotos eliminadas de '+n+' producto(s) vendido(s)' : 'No hay productos vendidos listos para archivar todavía', n?'success':'');
-      await refresh();
-    });
+    const search = document.getElementById('invSearch');
+    centrarTabActiva();
+    search.addEventListener('input', ()=>{ busquedaInv.q = search.value; dibujarInventario(); });
+    enlazarChipsCategoria('invChips', busquedaInv, dibujarInventario);
+    document.getElementById('btnArchivar').addEventListener('click', accionArchivarVendidos);
     document.getElementById('btnImportarCSV').addEventListener('click', modalImportarCSV);
+    document.getElementById('btnInvMas').addEventListener('click', ()=>hojaAcciones('Más acciones', '', [
+      { icono: icon('trash'), texto: 'Archivar vendidos<br><small class="text-faint">Borra las fotos de lo vendido hace '+DB.state.configuracion.dias_archivo_productos_vendidos+' días o más</small>', hacer: accionArchivarVendidos },
+      { icono: icon('upload'), texto: 'Importar CSV', hacer: modalImportarCSV }
+    ]));
   }
   if(page==='a-cajas') document.getElementById('btnNuevaCaja').addEventListener('click', modalNuevaCaja);
   if(page==='a-categorias') document.getElementById('btnNuevaCategoria').addEventListener('click', ()=>modalCategoria(null));
   if(page==='a-clientes' || page==='v-clientes') document.getElementById('btnNuevoCliente').addEventListener('click', ()=>modalCliente(null));
-  if(page==='a-clientes'){
-    document.getElementById('clientesFiltroVendedor').addEventListener('change', e=>{
-      const v = e.target.value;
-      document.querySelectorAll('#clientesTbody tr[data-vendedor]').forEach(tr=>{
-        tr.style.display = (!v || tr.dataset.vendedor===v) ? '' : 'none';
-      });
-    });
-  }
+  if(page==='a-clientes' || page==='v-clientes') enlazarBusquedaClientes();
   if(page==='a-gastos') document.getElementById('btnNuevoGasto').addEventListener('click', ()=>modalGasto(null));
   if(page==='a-config'){
     document.getElementById('btnBackupCompleto').addEventListener('click', exportBackupCompleto);
@@ -3998,8 +4345,22 @@ function exportBackupCompleto(){
 /* ---------------------------------------------------------------------
    Delegación central de [data-action] (apartar / vender / liberar / ver / etc.)
 --------------------------------------------------------------------- */
-document.getElementById('mainContent').addEventListener('click', async e=>{
-  const btn = e.target.closest('[data-action]'); if(!btn) return;
+document.getElementById('mainContent').addEventListener('click', e=>{
+  const btn = e.target.closest('[data-action]'); if(btn) ejecutarAccion(btn);
+});
+// Hoja inferior "···" de un producto: lista las mismas acciones de su fila de
+// íconos, pero con nombre y a tamaño de dedo.
+function hojaAcciones(titulo, subtitulo, filas){
+  openModal(`<div class="modal-head"><div><div class="modal-title">${titulo}</div>${subtitulo?`<div class="text-muted" style="font-size:12.5px;">${subtitulo}</div>`:''}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body" style="padding-top:0;">${filas.map((f,i)=> f.href
+      ? `<a class="mas-item${f.peligro?' peligro':''}" href="${f.href}" target="_blank" rel="noopener">${f.icono}<span>${f.texto}</span>${icon('chevron')}</a>`
+      : `<button type="button" class="mas-item${f.peligro?' peligro':''}" data-fila="${i}">${f.icono}<span>${f.texto}</span>${icon('chevron')}</button>`).join('')}
+    </div>`, 'sheet');
+  document.querySelectorAll('#modalOverlay [data-fila]').forEach(b=>b.addEventListener('click', ()=>{
+    const f = filas[Number(b.dataset.fila)]; closeModal(); f.hacer();
+  }));
+}
+async function ejecutarAccion(btn){
   const action = btn.dataset.action, id = btn.dataset.id;
   const p = () => DB.state.productos.find(x=>x.id===id);
   if(action==='apartar'){ const r=await DB.apartarProducto(id); if(r.ok) toast('Producto apartado','success'); else toast(r.error==='PRODUCTO_NO_DISPONIBLE'?'Ya no está disponible':'No se pudo apartar: '+r.error,'danger'); await refresh(); }
@@ -4045,7 +4406,31 @@ document.getElementById('mainContent').addEventListener('click', async e=>{
   else if(action==='eliminar-cliente'){ if(confirm('¿Eliminar este cliente? Su historial de compras se conserva, solo deja de aparecer en el catálogo.')){ const r=await DB.eliminarCliente(id); if(r.ok){ toast('Cliente eliminado','success'); await refresh(); } else toast('No se pudo eliminar: '+r.error,'danger'); } }
   else if(action==='ver-historial-cliente'){ modalHistorialCliente(DB.state.clientes.find(c=>c.id===id)); }
   else if(action==='toggle-seccion'){ const key=btn.dataset.key; inventarioSeccionAbierta = (inventarioSeccionAbierta===key) ? null : key; navigate(currentPage); }
-});
+  else if(action==='inv-estado'){ inventarioSeccionAbierta = btn.dataset.key; dibujarInventario(); }
+  else if(action==='limpiar-busqueda-inv'){ busquedaInv = { q:'', cat:'' }; navigate(currentPage); }
+  else if(action==='limpiar-busqueda-cat'){ busquedaCat = { q:'', cat:'' }; navigate(currentPage); }
+  else if(action==='mas-producto'){
+    const prod = p(); const card = btn.closest('.product-card'); if(!prod || !card) return;
+    const filas = [...card.querySelectorAll('.icon-actions-row [data-action]')].map(b=>({
+      icono: b.innerHTML.includes('<svg') ? b.innerHTML.match(/<svg[\s\S]*?<\/svg>/)[0] : icon('chevron'),
+      texto: (b.dataset.tip||'Acción').replace(/click para/i,'toca para'),
+      peligro: b.classList.contains('delete'),
+      hacer: ()=>ejecutarAccion(b)
+    }));
+    hojaAcciones(escHtml(prod.nombre), escHtml(prod.codigo)+' · '+money(prod.precio_venta), filas);
+  }
+  else if(action==='mas-cliente'){
+    const c = DB.state.clientes.find(x=>x.id===id); if(!c) return;
+    const r = DB.resumenCliente(c.id);
+    const filas = [
+      { icono: icon('file'), texto: 'Ver historial y deudas', hacer: ()=>modalHistorialCliente(c) },
+      { icono: icon('edit'), texto: 'Editar cliente', hacer: ()=>modalCliente(c) }
+    ];
+    if(r.deuda>0 && telefonoInternacional(c.telefono)) filas.push({ icono: icon('receipt'), texto: 'Enviar estado de cuenta por WhatsApp', href: hrefEstadoCuentaWhatsApp(c) });
+    if(DB.isAdmin()) filas.push({ icono: icon('trash'), texto: 'Eliminar cliente', peligro:true, hacer: ()=>ejecutarAccion({ dataset:{ action:'eliminar-cliente', id:c.id } }) });
+    hojaAcciones(escHtml(c.nombre), escHtml(c.telefono||'Sin teléfono'), filas);
+  }
+}
 
 /* =====================================================================
    TOPBAR: notificaciones + menú de usuario

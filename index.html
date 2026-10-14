@@ -652,6 +652,89 @@ details.panel-plegable>summary .chev svg{width:18px;height:18px;stroke:var(--col
 .cat-tools{display:flex;gap:8px;margin-bottom:4px;}
 .cat-tools input{flex:1;min-width:0;}
 .cat-tools select{width:auto;flex-shrink:0;max-width:44%;}
+
+/* ---------- Vitrina: catálogo público y ficha (lo que ve la clienta) ---------- */
+.public-page.wide{max-width:1100px;padding:0 0 96px;}
+.sf-hero{position:relative;overflow:hidden;text-align:center;color:#fff;padding:34px 20px 40px;border-radius:0 0 34px 34px;
+  background:linear-gradient(155deg,var(--color-accent) 0%,var(--coffee-800,#5a3d30) 100%);}
+.sf-hero::before{content:'';position:absolute;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08);top:-90px;right:-70px;}
+.sf-hero::after{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06);bottom:-80px;left:-50px;}
+.sf-hero>*{position:relative;z-index:1;}
+.sf-logo{width:76px;height:76px;border-radius:22px;display:block;margin:0 auto 12px;object-fit:cover;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.28);}
+.sf-hero h1{font-size:30px;color:#fff;margin:0;letter-spacing:-.01em;}
+.sf-hero p{margin:6px auto 0;opacity:.92;font-size:14px;max-width:340px;line-height:1.4;}
+.sf-contact{display:inline-flex;align-items:center;gap:8px;margin-top:18px;padding:11px 20px;border-radius:999px;background:#fff;color:var(--color-accent-dark);
+  font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.22);transition:transform 120ms var(--ease-out);}
+.sf-contact:active{transform:scale(.97);}
+.sf-contact svg{width:18px;height:18px;stroke:currentColor;fill:none;}
+.sf-bar{position:sticky;top:0;z-index:30;background:var(--color-bg);padding:12px 16px 2px;box-shadow:0 6px 14px -10px rgba(42,29,21,.35);}
+.sf-tools{display:flex;gap:8px;}
+.sf-search{position:relative;flex:1;min-width:0;}
+.sf-search>svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--color-text-faint);fill:none;pointer-events:none;}
+.sf-search input{width:100%;padding-left:42px;border-radius:14px;min-height:46px;}
+.sf-tools select{width:auto;flex-shrink:0;max-width:42%;border-radius:14px;min-height:46px;}
+.sf-chips{display:flex;gap:8px;overflow-x:auto;padding:10px 0 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.sf-chips::-webkit-scrollbar{display:none;}
+.sf-chip{flex-shrink:0;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text-muted);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:700;cursor:pointer;min-height:38px;transition:transform 120ms var(--ease-out);}
+.sf-chip:active{transform:scale(.96);}
+.sf-chip.active{background:var(--color-accent);border-color:var(--color-accent);color:#fff;}
+.sf-conteo{padding:14px 18px 4px;font-size:13px;color:var(--color-text-muted);font-weight:600;}
+.sf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:8px 16px 0;}
+@media (min-width:640px){.sf-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding:8px 24px 0;}}
+@media (min-width:960px){.sf-grid{grid-template-columns:repeat(4,minmax(0,1fr));}}
+.sf-card{display:flex;flex-direction:column;background:var(--color-surface);border:1px solid var(--color-border);border-radius:20px;overflow:hidden;cursor:pointer;
+  box-shadow:0 3px 12px rgba(42,29,21,.07);animation:sfIn 480ms var(--ease-out) both;animation-delay:calc(var(--i,0) * 45ms);transition:transform 160ms var(--ease-out),box-shadow 200ms var(--ease-out);}
+.sf-card:active{transform:scale(.98);}
+@media (hover:hover) and (pointer:fine){.sf-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(42,29,21,.14);}.sf-card:hover .sf-foto img{transform:scale(1.05);}}
+.sf-foto{position:relative;aspect-ratio:4/5;background:var(--coffee-100);overflow:hidden;}
+.sf-foto img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 450ms var(--ease-out);}
+.sf-sinfoto{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--color-text-faint);font-size:12px;}
+.sf-sinfoto svg{width:34px;height:34px;stroke:currentColor;fill:none;}
+.sf-nuevo{position:absolute;top:10px;left:10px;background:var(--color-accent);color:#fff;font-size:11px;font-weight:800;padding:4px 11px;border-radius:999px;letter-spacing:.04em;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.sf-fotos{position:absolute;bottom:10px;right:10px;display:flex;align-items:center;gap:4px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;}
+.sf-fotos svg{width:12px;height:12px;stroke:currentColor;fill:none;}
+.sf-info{display:flex;flex-direction:column;gap:3px;padding:12px 13px 14px;flex:1;}
+.sf-cat{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sf-nombre{font-weight:700;font-size:14.5px;line-height:1.28;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.56em;}
+.sf-precio{font-size:20px;font-weight:800;color:var(--color-accent-dark);margin-top:2px;}
+.sf-btn{margin-top:10px;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px 8px;border-radius:13px;background:var(--color-accent);color:#fff;font-weight:700;font-size:13.5px;
+  border:none;text-decoration:none;cursor:pointer;}
+.sf-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;}
+.sf-btn.sec{background:var(--color-surface-alt);color:var(--color-text);}
+.sf-vacio{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--color-text-muted);}
+.sf-vacio svg{width:44px;height:44px;stroke:var(--color-text-faint);fill:none;margin-bottom:10px;}
+.sf-vacio b{display:block;font-size:16px;color:var(--color-text);margin-bottom:4px;}
+.sf-skel{border-radius:20px;overflow:hidden;background:var(--color-surface);border:1px solid var(--color-border);}
+.sf-skel .a{aspect-ratio:4/5;} .sf-skel .b{height:14px;margin:14px 13px 8px;border-radius:7px;} .sf-skel .c{height:18px;width:50%;margin:0 13px 18px;border-radius:7px;}
+.sf-skel .a,.sf-skel .b,.sf-skel .c{background:linear-gradient(90deg,var(--color-surface-alt) 25%,var(--color-bg) 50%,var(--color-surface-alt) 75%);background-size:200% 100%;animation:sfShimmer 1.4s linear infinite;}
+.sf-pie{text-align:center;padding:30px 24px 0;color:var(--color-text-faint);font-size:12.5px;line-height:1.5;}
+.sf-pie img{width:34px;height:34px;border-radius:10px;display:block;margin:0 auto 8px;opacity:.9;}
+.sf-fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:40;width:58px;height:58px;border-radius:50%;background:#1FA855;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 22px rgba(31,168,85,.45);transition:transform 120ms var(--ease-out);}
+.sf-fab:active{transform:scale(.93);}
+.sf-fab svg{width:28px;height:28px;stroke:#fff;fill:none;}
+@keyframes sfIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes sfShimmer{to{background-position:-200% 0;}}
+@media (prefers-reduced-motion:reduce){.sf-card{animation:none;}.sf-skel .a,.sf-skel .b,.sf-skel .c{animation:none;}}
+/* detalle (hoja inferior) */
+.sf-gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:18px;margin-bottom:6px;scrollbar-width:none;}
+.sf-gal::-webkit-scrollbar{display:none;}
+.sf-gal img{width:100%;flex-shrink:0;scroll-snap-align:center;aspect-ratio:4/5;object-fit:cover;cursor:zoom-in;background:var(--coffee-100);}
+.sf-dots{display:flex;justify-content:center;gap:6px;margin:8px 0 4px;}
+.sf-dots i{width:7px;height:7px;border-radius:50%;background:var(--color-border);transition:background 150ms,transform 150ms;}
+.sf-dots i.on{background:var(--color-accent);transform:scale(1.25);}
+.sf-d-cat{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--color-accent-dark);background:var(--coffee-100);padding:4px 11px;border-radius:999px;}
+.sf-d-nombre{font-size:21px;font-weight:800;line-height:1.2;margin:10px 0 4px;}
+.sf-d-precio{font-size:28px;font-weight:800;color:var(--color-accent-dark);margin:2px 0 10px;}
+.sf-d-desc{color:var(--color-text-muted);font-size:14.5px;line-height:1.55;white-space:pre-line;}
+.sf-cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:18px;padding:15px;border-radius:16px;background:#1FA855;color:#fff;font-weight:800;font-size:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(31,168,85,.3);}
+.sf-cta svg{width:22px;height:22px;stroke:currentColor;fill:none;}
+.sf-cta.sec{background:var(--color-surface-alt);color:var(--color-text);box-shadow:none;margin-top:10px;font-size:14px;padding:12px;}
+/* ficha individual (QR) */
+.sf-ficha-top{display:flex;align-items:center;gap:10px;padding:16px 18px;}
+.sf-ficha-top img{width:40px;height:40px;border-radius:12px;}
+.sf-ficha-top b{font-size:16px;flex:1;}
+.sf-ficha-top a{font-size:13px;font-weight:700;color:var(--color-accent-dark);text-decoration:none;}
 </style>
 </head>
 <body>
@@ -1510,6 +1593,7 @@ function icon(name){
     sun:'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
     phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
     chevron:'<polyline points="6 9 12 15 18 9"/>',
+    share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
     dots:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
     menu:'<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     ayuda:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
@@ -3213,42 +3297,69 @@ async function renderCatalogoPublico(){
   document.getElementById('appShell').hidden = true;
   const root = document.getElementById('publicPage');
   root.hidden = false; root.classList.add('wide');
-  root.innerHTML = `<div class="text-center text-faint" style="padding:60px 0;">Cargando catálogo…</div>`;
+  const negocio = document.querySelector('.login-logo .name')?.textContent || 'La Cabaña';
+  document.title = negocio + ' · Catálogo';
+  const params = new URLSearchParams(location.search);
+  const vNombre = params.get('v'), vTel = params.get('tel');
+  const saludoWsp = 'Hola'+(vNombre?' '+vNombre:'')+', vi tu catálogo y me interesa';
+  const cuerpoSkel = `<div class="sf-grid">${'<div class="sf-skel"><div class="a"></div><div class="b"></div><div class="c"></div></div>'.repeat(6)}</div>`;
+  const hero = n => `<div class="sf-hero">
+      <img class="sf-logo" src="icon-192.png" alt="" onerror="this.style.display='none'">
+      <h1>${escHtml(negocio)}</h1>
+      <p>Piezas únicas. Cuando se venden, se acaban.${n!=null?` Hoy hay <b>${n}</b> disponible${n===1?'':'s'}.`:''}</p>
+      ${vTel?`<a class="sf-contact" href="https://wa.me/${vTel}?text=${encodeURIComponent(saludoWsp)}" target="_blank" rel="noopener">${icon('whatsapp')} ${vNombre?'Escríbele a '+escHtml(vNombre):'Escríbenos por WhatsApp'}</a>`:''}
+    </div>`;
+  root.innerHTML = hero(null) + cuerpoSkel;
+
   const leerProductos = async ()=>{
     const { data, error } = await sb.from('vista_producto_publico')
-      .select('codigo,nombre,descripcion,categoria,precio_venta,fotos').eq('estado','en_inventario').order('codigo', { ascending:false });
+      .select('codigo,nombre,descripcion,categoria,precio_venta,fotos,url_video').eq('estado','en_inventario').order('codigo', { ascending:false });
     return error ? null : (data || []);
   };
   let productos = (await leerProductos()) || [];
-  const params = new URLSearchParams(location.search);
-  const vNombre = params.get('v'), vTel = params.get('tel');
-  const negocio = document.querySelector('.login-logo .name')?.textContent || 'Catálogo';
+
+  // "Nuevo" = llegó desde la última vez que ESTE teléfono abrió el catálogo
+  // (se recuerda en el propio navegador; la primera visita no marca nada).
+  let nuevos = new Set();
+  const marcarVistos = ()=>{
+    try{
+      const previo = JSON.parse(localStorage.getItem('cab_vistos') || 'null');
+      if(previo) productos.forEach(p=>{ if(!previo.includes(p.codigo)) nuevos.add(p.codigo); });
+      const union = new Set([...(previo||[]), ...productos.map(p=>p.codigo)]);
+      localStorage.setItem('cab_vistos', JSON.stringify([...union].slice(-500)));
+    }catch(e){}
+  };
+  marcarVistos();
+
   let cat = '', q = '', orden = 'nuevo';
   const chipsHtml = ()=>{
     const categorias = [...new Set(productos.map(p=>p.categoria).filter(Boolean))].sort();
-    return categorias.length ? `<button class="cat-chip${cat===''?' active':''}" data-cat="">Todo</button>${categorias.map(c=>`<button class="cat-chip${cat===c?' active':''}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}` : '';
+    return categorias.length ? `<button class="sf-chip${cat===''?' active':''}" data-cat="">Todo</button>${categorias.map(c=>`<button class="sf-chip${cat===c?' active':''}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}` : '';
   };
   const enlazarChips = ()=>{
-    root.querySelectorAll('.cat-chip').forEach(b=>b.addEventListener('click', ()=>{
+    document.querySelectorAll('#catChips .sf-chip').forEach(b=>b.addEventListener('click', ()=>{
       cat = b.dataset.cat; document.getElementById('catChips').innerHTML = chipsHtml(); enlazarChips(); dibujar();
     }));
   };
-  const resto = (vNombre?'&v='+encodeURIComponent(vNombre):'') + (vTel?'&tel='+encodeURIComponent(vTel):'');
-  const tarjeta = p=>{
-    const foto = (p.fotos||[])[0];
-    const ficha = location.pathname + '?p=' + encodeURIComponent(p.codigo) + resto;
-    const msg = 'Hola'+(vNombre?' '+vNombre:'')+', me interesa: '+p.nombre+' (código '+p.codigo+') — Q '+Number(p.precio_venta).toFixed(2);
-    return `<div class="cat-card">
-      <a class="cat-foto" href="${ficha}">${foto?imgMini(foto, escHtml(p.nombre)):'<div class="cat-sinfoto">Sin foto</div>'}</a>
-      <div class="cat-info">
-        <a class="cat-nombre" href="${ficha}">${escHtml(p.nombre)}</a>
-        <div class="cat-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
-        <div class="cat-desc">${escHtml(p.descripcion||'')}</div>
-        ${vTel ? `<a class="btn btn-primary btn-sm btn-block" href="https://wa.me/${vTel}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa</a>`
-               : `<a class="btn btn-secondary btn-sm btn-block" href="${ficha}">Ver detalle</a>`}
+  const linkResto = (vNombre?'&v='+encodeURIComponent(vNombre):'') + (vTel?'&tel='+encodeURIComponent(vTel):'');
+  const mensajeInteres = p => 'Hola'+(vNombre?' '+vNombre:'')+', me interesa: '+p.nombre+' (código '+p.codigo+') — Q '+Number(p.precio_venta).toFixed(2);
+
+  const tarjeta = (p, i)=>{
+    const fotos = p.fotos || [];
+    return `<div class="sf-card" data-codigo="${escHtml(p.codigo)}" style="--i:${Math.min(i,10)}">
+      <div class="sf-foto">${fotos[0]?imgMini(fotos[0], escHtml(p.nombre)):`<div class="sf-sinfoto">${icon('crate')}<span>Sin foto</span></div>`}
+        ${nuevos.has(p.codigo)?'<span class="sf-nuevo">NUEVO</span>':''}
+        ${fotos.length>1?`<span class="sf-fotos">${icon('image')} ${fotos.length}</span>`:''}</div>
+      <div class="sf-info">
+        ${p.categoria?`<div class="sf-cat">${escHtml(p.categoria)}</div>`:''}
+        <div class="sf-nombre">${escHtml(p.nombre)}</div>
+        <div class="sf-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
+        ${vTel ? `<a class="sf-btn" data-wsp href="https://wa.me/${vTel}?text=${encodeURIComponent(mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa</a>`
+               : `<button type="button" class="sf-btn sec">Ver detalle</button>`}
       </div>
     </div>`;
   };
+
   const dibujar = ()=>{
     const tokens = normalizar(q).split(/\s+/).filter(Boolean);
     let lista = productos.filter(p=>(!cat || p.categoria===cat) && (!tokens.length || (()=>{
@@ -3258,18 +3369,37 @@ async function renderCatalogoPublico(){
     if(orden==='precio_asc') lista = lista.slice().sort((a,b)=>a.precio_venta-b.precio_venta);
     else if(orden==='precio_desc') lista = lista.slice().sort((a,b)=>b.precio_venta-a.precio_venta);
     else if(orden==='nombre') lista = lista.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
-    document.getElementById('catGrid').innerHTML = lista.map(tarjeta).join('') || `<div class="text-faint text-center" style="grid-column:1/-1;padding:40px 0;">No hay productos con ese filtro</div>`;
-    document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + ' disponible' + (lista.length===1?'':'s');
+    window.__catLista = lista;
+    document.getElementById('catGrid').innerHTML = lista.length ? lista.map(tarjeta).join('')
+      : `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':'Vuelve en un ratito, se actualiza solo.'}</div>`;
+    document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + (q||cat?' encontrado'+(lista.length===1?'':'s'):' disponible'+(lista.length===1?'':'s'));
+    const h = document.querySelector('.sf-hero p b'); if(h) h.textContent = productos.length;
   };
-  root.innerHTML = `<div class="cat-head"><h1>${escHtml(negocio)}</h1><div class="text-muted" id="catConteo"></div></div>
-    <div class="cat-tools"><input id="catBuscar" type="search" placeholder="Buscar producto…" autocomplete="off">
-      <select id="catOrden" aria-label="Ordenar"><option value="nuevo">Más nuevos</option><option value="precio_asc">Menor precio</option><option value="precio_desc">Mayor precio</option><option value="nombre">A–Z</option></select></div>
-    <div class="cat-chips" id="catChips">${chipsHtml()}</div>
-    <div class="cat-grid" id="catGrid"></div>`;
+
+  root.innerHTML = hero(productos.length) + `
+    <div class="sf-bar">
+      <div class="sf-tools">
+        <div class="sf-search">${icon('search')}<input id="catBuscar" type="search" placeholder="Buscar producto…" autocomplete="off" aria-label="Buscar"></div>
+        <select id="catOrden" aria-label="Ordenar"><option value="nuevo">Más nuevos</option><option value="precio_asc">Menor precio</option><option value="precio_desc">Mayor precio</option><option value="nombre">A–Z</option></select>
+      </div>
+      <div class="sf-chips" id="catChips">${chipsHtml()}</div>
+    </div>
+    <div class="sf-conteo" id="catConteo"></div>
+    <div class="sf-grid" id="catGrid"></div>
+    <div class="sf-pie"><img src="icon-192.png" alt="" onerror="this.style.display='none'">${escHtml(negocio)}<br>Los precios y la disponibilidad se actualizan en vivo.</div>
+    ${vTel?`<a class="sf-fab" href="https://wa.me/${vTel}?text=${encodeURIComponent(saludoWsp)}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">${icon('whatsapp')}</a>`:''}`;
   document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value; dibujar(); });
   document.getElementById('catOrden').addEventListener('change', e=>{ orden = e.target.value; dibujar(); });
   enlazarChips();
   dibujar();
+
+  // Abrir el detalle al tocar la tarjeta (menos el botón de WhatsApp, que va directo)
+  document.getElementById('catGrid').addEventListener('click', e=>{
+    if(e.target.closest('[data-wsp]')) return;
+    const card = e.target.closest('.sf-card'); if(!card) return;
+    const p = productos.find(x=>x.codigo===card.dataset.codigo);
+    if(p) detalleCatalogo(p, { vNombre, vTel, linkResto, mensajeInteres });
+  });
 
   // En vivo: la base avisa por un canal público (sin datos dentro) cuando algo
   // cambia en el inventario; aquí solo se vuelve a leer la vista pública.
@@ -3277,9 +3407,9 @@ async function renderCatalogoPublico(){
   const actualizar = ()=>{
     clearTimeout(t);
     t = setTimeout(async ()=>{
-      const nuevos = await leerProductos();
-      if(!nuevos) return;
-      productos = nuevos;
+      const nuevosProductos = await leerProductos();
+      if(!nuevosProductos) return;
+      productos = nuevosProductos;
       if(cat && !productos.some(p=>p.categoria===cat)) cat = '';
       const chips = document.getElementById('catChips');
       if(chips){ chips.innerHTML = chipsHtml(); enlazarChips(); }
@@ -3288,6 +3418,39 @@ async function renderCatalogoPublico(){
   };
   sb.channel('catalogo').on('broadcast', { event:'cambio' }, actualizar).subscribe();
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) actualizar(); });
+}
+
+// Detalle de un producto: hoja que sube desde abajo, con galería deslizable.
+function detalleCatalogo(p, ctx){
+  const fotos = p.fotos || [];
+  const urlFicha = location.origin + location.pathname + '?p=' + encodeURIComponent(p.codigo) + ctx.linkResto;
+  openModal(`
+    <div class="modal-head"><div class="modal-title" style="font-size:15px;">${escHtml(p.codigo)}</div><button class="icon-btn" onclick="closeModal()" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body" style="padding-top:0;">
+      ${fotos.length ? `<div class="sf-gal" id="sfGal">${fotos.map((u,i)=>`<img src="${u}" data-i="${i}" alt="${escHtml(p.nombre)}" ${i?'loading="lazy"':''}>`).join('')}</div>
+        ${fotos.length>1?`<div class="sf-dots" id="sfDots">${fotos.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}` : ''}
+      ${p.categoria?`<span class="sf-d-cat">${escHtml(p.categoria)}</span>`:''}
+      <div class="sf-d-nombre">${escHtml(p.nombre)}</div>
+      <div class="sf-d-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
+      ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
+      ${renderVideoEmbed(p.url_video)}
+      ${ctx.vTel?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
+      <button type="button" class="sf-cta sec" id="sfCompartir">${icon('share')} Compartir esta pieza</button>
+    </div>`, 'sheet');
+  const gal = document.getElementById('sfGal');
+  gal?.querySelectorAll('img').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));
+  const dots = document.querySelectorAll('#sfDots i');
+  if(gal && dots.length) gal.addEventListener('scroll', ()=>{
+    const i = Math.round(gal.scrollLeft / gal.clientWidth);
+    dots.forEach((d,k)=>d.classList.toggle('on', k===i));
+  }, { passive:true });
+  document.getElementById('sfCompartir').addEventListener('click', async ()=>{
+    const texto = p.nombre + ' — Q ' + Number(p.precio_venta).toFixed(2);
+    try{
+      if(navigator.share) await navigator.share({ title:p.nombre, text:texto, url:urlFicha });
+      else { await navigator.clipboard.writeText(urlFicha); toast('Enlace copiado'); }
+    }catch(e){}
+  });
 }
 
 // Link del catálogo para compartir (con el WhatsApp de quien lo comparte).
@@ -4516,15 +4679,19 @@ async function renderPublicPage(codigo){
   const params = new URLSearchParams(location.search);
   const vendedorNombre = params.get('v');
   const vendedorTel = params.get('tel');
-  root.innerHTML = `<div class="public-card">
-    ${fotos.length?`<div class="public-gallery">${fotos.map((url,i)=>`<img src="${url}" class="ficha-foto" data-i="${i}">`).join('')}</div>`:''}
+  const negocio = document.querySelector('.login-logo .name')?.textContent || 'La Cabaña';
+  document.title = p.nombre + ' · ' + negocio;
+  const resto = (vendedorNombre?'&v='+encodeURIComponent(vendedorNombre):'') + (vendedorTel?'&tel='+encodeURIComponent(vendedorTel):'');
+  root.innerHTML = `<div class="sf-ficha-top"><img src="icon-192.png" alt="" onerror="this.style.display='none'"><b>${escHtml(negocio)}</b><a href="${location.pathname}?catalogo=1${resto}">Ver todo el catálogo</a></div>
+  <div class="public-card">
+    ${fotos.length?`<div class="public-gallery">${fotos.map((url,i)=>`<img src="${url}" class="ficha-foto" data-i="${i}" alt="${escHtml(p.nombre)}">`).join('')}</div>`:''}
     <div class="public-body">
-      <div class="flex-between"><h2>${p.nombre}</h2><span class="badge ${info.cls}">${info.label}</span></div>
-      <div class="text-faint mt-8">${p.categoria||''}</div>
+      ${p.categoria?`<span class="sf-d-cat">${escHtml(p.categoria)}</span>`:''}
+      <div class="flex-between" style="align-items:flex-start;gap:10px;"><div class="sf-d-nombre" style="margin-top:10px;">${escHtml(p.nombre)}</div>${p.estado!=='en_inventario'?`<span class="badge ${info.cls}" style="margin-top:12px;">${info.label}</span>`:''}</div>
+      <div class="sf-d-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
+      ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
       ${renderVideoEmbed(p.url_video)}
-      <div style="font-size:26px;font-weight:800;margin:8px 0;">Q ${Number(p.precio_venta).toFixed(2)}</div>
-      <p class="text-muted">${p.descripcion||'Sin descripción disponible.'}</p>
-      ${vendedorTel ? `<a class="btn btn-primary btn-block mt-16" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre)}" target="_blank" rel="noopener">${icon('whatsapp')} Contactar${vendedorNombre?' a '+vendedorNombre:''} por WhatsApp</a>` : ''}
+      ${vendedorTel ? `<a class="sf-cta" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre)}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
     </div>
   </div>`;
   document.querySelectorAll('.ficha-foto').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));

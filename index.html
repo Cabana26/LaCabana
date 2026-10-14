@@ -3374,7 +3374,7 @@ async function renderCatalogoPublico(){
     else if(orden==='nombre') lista = lista.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
     window.__catLista = lista;
     document.getElementById('catGrid').innerHTML = lista.length ? lista.map(tarjeta).join('')
-      : `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':'Vuelve en un ratito, se actualiza solo.'}</div>`;
+      : `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':''}</div>`;
     document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + (q||cat?' encontrado'+(lista.length===1?'':'s'):' disponible'+(lista.length===1?'':'s'));
     const h = document.querySelector('.sf-hero p b'); if(h) h.textContent = productos.length;
   };
@@ -3389,7 +3389,7 @@ async function renderCatalogoPublico(){
     </div>
     <div class="sf-conteo" id="catConteo"></div>
     <div class="sf-grid" id="catGrid"></div>
-    <div class="sf-pie"><img src="icon-192.png" alt="" onerror="this.style.display='none'">${escHtml(negocio)}<br>Los precios y la disponibilidad se actualizan en vivo.</div>
+    <div class="sf-pie"><img src="icon-192.png" alt="" onerror="this.style.display='none'">${escHtml(negocio)}</div>
     ${vTel?`<a class="sf-fab" href="https://wa.me/${vTel}?text=${encodeURIComponent(saludoWsp)}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">${icon('whatsapp')}</a>`:''}`;
   document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value; dibujar(); });
   document.getElementById('catOrden').addEventListener('change', e=>{ orden = e.target.value; dibujar(); });

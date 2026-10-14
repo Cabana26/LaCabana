@@ -832,6 +832,8 @@ const SUPABASE_URL = 'https://nacfhxkjwktohffktoxi.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5hY2ZoeGtqd2t0b2hmZmt0b3hpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5MTIxMTksImV4cCI6MjEwNzQ4ODExOX0.CsPjpvYQm75UWwoRa2vQ9n3aR_CnYv9HqVSAjUgm4E4';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
+const VERSION_PANEL = '14-oct-2026 · v3';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -1338,6 +1340,10 @@ const DB = {
       if(error) return { ok:false, error: error.message };
       if(!filas || !filas.length) return { ok:false, error:'La clave "'+clave+'" todavía no existe en la base de datos — falta correr la migración que la agrega.' };
     }
+    // Se vuelve a leer de la base: si el servidor no dejó el valor que se mandó, se avisa.
+    const { data:chk } = await sb.from('configuracion').select('clave,valor').in('clave', Object.keys(data));
+    const mal = (chk||[]).find(r=>String(data[r.clave])!==String(r.valor));
+    if(mal) return { ok:false, error:'el servidor dejó "'+mal.clave+'" en '+mal.valor+' en lugar de '+data[mal.clave] };
     Object.assign(this.state.configuracion, data);
     await sb.rpc('fn_registrar_bitacora', { p_tipo:'editar', p_tabla:'configuracion', p_registro_id:null, p_descripcion:'Configuración actualizada' });
     return { ok:true };
@@ -2851,6 +2857,7 @@ PAGES['a-config'] = () => {
         <small class="text-faint" style="font-size:11.5px;display:block;margin-top:5px;">Te avisamos una vez al día si hay cuentas por cobrar pasadas de este umbral.</small></div>
       <button type="submit" class="btn btn-primary">${icon('check')} Guardar Configuración</button>
     </form>
+    <div class="text-faint" style="font-size:11.5px;margin-top:16px;">Versión del panel: ${VERSION_PANEL}</div>
   </div>`;
 };
 
@@ -4397,7 +4404,10 @@ function bindPageEvents(page){
         dias_eliminar_notificaciones: Number(document.getElementById('cfDiasNotif').value)||30,
         dias_deuda_vencida: Number(document.getElementById('cfDiasDeuda').value)||14
       });
-      if(res.ok) toast('Configuración guardada','success'); else toast('No se pudo guardar: '+res.error,'danger');
+      if(res.ok){
+        const n = DB.state.configuracion.dias_archivo_productos_vendidos;
+        toast('Guardado. Lo vendido se archiva '+(n===0?'apenas se vende':n===1?'al día siguiente':'a los '+n+' días'),'success');
+      } else toast('No se pudo guardar: '+res.error,'danger');
     });
   }
   if(page==='a-reportes'){

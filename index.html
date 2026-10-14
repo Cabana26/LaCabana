@@ -719,7 +719,7 @@ details.panel-plegable>summary .chev svg{width:18px;height:18px;stroke:var(--col
 /* detalle (hoja inferior) */
 .sf-gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:18px;margin-bottom:6px;scrollbar-width:none;}
 .sf-gal::-webkit-scrollbar{display:none;}
-.sf-gal img{width:100%;flex-shrink:0;scroll-snap-align:center;aspect-ratio:4/5;object-fit:cover;cursor:zoom-in;background:var(--coffee-100);}
+.sf-gal img{width:100%;flex-shrink:0;scroll-snap-align:center;aspect-ratio:1/1;object-fit:cover;cursor:zoom-in;background:var(--coffee-100);}
 .sf-dots{display:flex;justify-content:center;gap:6px;margin:8px 0 4px;}
 .sf-dots i{width:7px;height:7px;border-radius:50%;background:var(--color-border);transition:background 150ms,transform 150ms;}
 .sf-dots i.on{background:var(--color-accent);transform:scale(1.25);}
@@ -727,7 +727,10 @@ details.panel-plegable>summary .chev svg{width:18px;height:18px;stroke:var(--col
 .sf-d-nombre{font-size:21px;font-weight:800;line-height:1.2;margin:10px 0 4px;}
 .sf-d-precio{font-size:28px;font-weight:800;color:var(--color-accent-dark);margin:2px 0 10px;}
 .sf-d-desc{color:var(--color-text-muted);font-size:14.5px;line-height:1.55;white-space:pre-line;}
-.sf-cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:18px;padding:15px;border-radius:16px;background:#1FA855;color:#fff;font-weight:800;font-size:16px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(31,168,85,.3);}
+.sf-cta-bar{position:sticky;bottom:0;background:var(--color-surface);padding:10px 0 calc(6px + env(safe-area-inset-bottom));margin-top:14px;}
+.sf-cta-bar .sf-cta{margin-top:0;}
+.sf-cta-bar .sf-cta.sec{margin-top:8px;}
+.sf-cta{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;margin-top:18px;padding:15px 12px;border-radius:16px;background:#1FA855;color:#fff;font-weight:800;font-size:15px;text-decoration:none;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(31,168,85,.3);}
 .sf-cta svg{width:22px;height:22px;stroke:currentColor;fill:none;}
 .sf-cta.sec{background:var(--color-surface-alt);color:var(--color-text);box-shadow:none;margin-top:10px;font-size:14px;padding:12px;}
 /* ficha individual (QR) */
@@ -3434,8 +3437,10 @@ function detalleCatalogo(p, ctx){
       <div class="sf-d-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
       ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
       ${renderVideoEmbed(p.url_video)}
-      ${ctx.vTel?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
-      <button type="button" class="sf-cta sec" id="sfCompartir">${icon('share')} Compartir esta pieza</button>
+      <div class="sf-cta-bar">
+        ${ctx.vTel?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
+        <button type="button" class="sf-cta sec" id="sfCompartir">${icon('share')} Compartir esta pieza</button>
+      </div>
     </div>`, 'sheet');
   const gal = document.getElementById('sfGal');
   gal?.querySelectorAll('img').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));

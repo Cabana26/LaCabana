@@ -920,6 +920,113 @@ details.panel-plegable>summary .chev svg{width:18px;height:18px;stroke:var(--col
 .pd-check{width:54px;height:54px;border-radius:50%;background:var(--forest-100);color:var(--forest-700);display:inline-flex;align-items:center;justify-content:center;}
 .pd-check svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2.4;}
 @media (prefers-reduced-motion:reduce){.pc-stock button,.stepper button,.modo-op{transition:none;}}
+/* ---- Rubros: fichas, etiquetas y clasificación ---- */
+.filtros-rubros:empty{display:none;}
+.rubro-tiles{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;margin:0 -2px 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.rubro-tiles::-webkit-scrollbar{display:none;}
+.rubro-tile{position:relative;flex:0 0 auto;min-width:116px;max-width:152px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:11px 12px;border-radius:16px;border:1.5px solid var(--color-border);background:var(--color-surface);cursor:pointer;text-align:left;color:var(--color-text);transition:transform 140ms var(--ease-out),background 140ms var(--ease-out),border-color 140ms var(--ease-out),color 140ms var(--ease-out);}
+.rubro-tile:active{transform:scale(.97);}
+.rt-ic{width:30px;height:30px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:var(--coffee-100);background:color-mix(in srgb,var(--rubro) 16%,transparent);color:var(--rubro);margin-bottom:3px;}
+.rt-ic svg{width:17px;height:17px;stroke:currentColor;fill:none;}
+.rt-nombre{font-weight:800;font-size:12.5px;line-height:1.2;}
+.rt-n{font-size:11px;color:var(--color-text-muted);}
+.rubro-tile.on{background:var(--rubro);border-color:var(--rubro);color:#fff;}
+.rubro-tile.on .rt-ic{background:rgba(255,255,255,.22);color:#fff;}
+.rubro-tile.on .rt-n{color:rgba(255,255,255,.9);}
+.rt-rojo{position:absolute;top:8px;right:8px;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--red-600);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--color-surface);}
+.rubro-tile.on .rt-rojo{box-shadow:0 0 0 2px var(--rubro);}
+.tipos-fila .tipo-chip.active{background:var(--rubro);border-color:var(--rubro);color:#fff;}
+.rubro-tag{display:inline-flex;align-items:center;gap:5px;max-width:100%;padding:3px 9px 3px 7px;border-radius:999px;background:var(--coffee-100);background:color-mix(in srgb,var(--rubro) 14%,transparent);color:var(--rubro);font-size:11px;}
+.rubro-tag svg{width:12px;height:12px;stroke:currentColor;fill:none;flex-shrink:0;}
+.rubro-tag b{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rubro-tag em{font-style:normal;font-weight:600;color:var(--color-text-muted);white-space:nowrap;}
+.rubro-tag em::before{content:'· ';}
+.pc-area .rubro-tag{flex-wrap:wrap;row-gap:0;}
+.pc-area .rubro-tag b{white-space:normal;}
+.product-card.con-rubro{border-top:3px solid var(--rubro);}
+.rubro-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--rubro);margin-right:7px;vertical-align:middle;}
+.rubro-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:8px;}
+.rubro-op{display:flex;align-items:center;gap:8px;padding:10px 11px;border-radius:12px;border:1.5px solid var(--color-border);background:var(--color-surface);font-weight:700;font-size:12.5px;text-align:left;line-height:1.2;cursor:pointer;color:var(--color-text);transition:transform 120ms var(--ease-out),background 140ms var(--ease-out),border-color 140ms var(--ease-out);}
+.rubro-op:active{transform:scale(.97);}
+.rubro-op svg{width:18px;height:18px;stroke:var(--rubro);fill:none;flex-shrink:0;}
+.rubro-op.on{background:var(--rubro);border-color:var(--rubro);color:#fff;}
+.rubro-op.on svg{stroke:#fff;}
+.rubro-op:disabled{opacity:.55;cursor:not-allowed;}
+.rubro-hint{margin-top:8px;font-size:11.5px;color:var(--color-text-muted);line-height:1.4;}
+
+/* ---- Pendiente de entrega: TODA la ficha en rojo ---- */
+.product-card.entrega-pend{background:var(--red-100);border:2px solid var(--red-600);border-top-width:2px;}
+.product-card.entrega-pend .pc-info:active{background:rgba(183,65,47,.1);}
+.product-card.entrega-pend .name,.product-card.entrega-pend .price{color:var(--red-700);}
+.product-card.entrega-pend .cat,.product-card.entrega-pend .who,.product-card.entrega-pend .pct{color:var(--red-700);}
+.product-card.entrega-pend .pc-photo::after{content:'';position:absolute;inset:0;background:rgba(183,65,47,.3);pointer-events:none;}
+.product-card.entrega-pend .pc-badge,.product-card.entrega-pend .pc-code,.product-card.entrega-pend .pc-more,.product-card.entrega-pend .pc-entrega{z-index:2;}
+.pc-entrega{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:6px;padding:7px 10px;background:var(--red-600);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;}
+.pc-entrega svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0;}
+.product-card.entrega-pend .pc-code{bottom:36px;}
+.product-row.entrega-pend{background:var(--red-100);border:2px solid var(--red-600);}
+.product-row.entrega-pend .pr-name,.product-row.entrega-pend .pr-price{color:var(--red-700);}
+.venta-item.entrega-pend{background:var(--red-100);border:1.5px solid var(--red-600);border-radius:12px;padding:11px 12px;margin-bottom:6px;}
+.venta-item.entrega-pend .vi-nombre,.venta-item.entrega-pend .vi-monto{color:var(--red-700);}
+tr.entrega-pend td{background:var(--red-100);}
+.estado-tab.rojo{border-color:var(--red-600);background:var(--red-100);color:var(--red-700);}
+.estado-tab.rojo.active{background:var(--red-600);border-color:var(--red-600);color:#fff;}
+.aviso-rojo{display:flex;align-items:center;gap:8px;margin-top:8px;padding:9px 11px;border-radius:10px;background:var(--red-100);color:var(--red-700);font-size:12px;font-weight:600;}
+.aviso-rojo svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0;}
+:root[data-theme="dark"] .product-card.entrega-pend,:root[data-theme="dark"] .product-row.entrega-pend,:root[data-theme="dark"] .venta-item.entrega-pend,:root[data-theme="dark"] .aviso-rojo,:root[data-theme="dark"] .estado-tab.rojo{background:#3A1F1B;}
+:root[data-theme="dark"] tr.entrega-pend td{background:#3A1F1B;}
+:root[data-theme="dark"] .product-card.entrega-pend .name,:root[data-theme="dark"] .product-card.entrega-pend .price,:root[data-theme="dark"] .product-card.entrega-pend .cat,:root[data-theme="dark"] .product-card.entrega-pend .who,:root[data-theme="dark"] .product-card.entrega-pend .pct,:root[data-theme="dark"] .product-row.entrega-pend .pr-name,:root[data-theme="dark"] .product-row.entrega-pend .pr-price,:root[data-theme="dark"] .venta-item.entrega-pend .vi-nombre,:root[data-theme="dark"] .venta-item.entrega-pend .vi-monto,:root[data-theme="dark"] .aviso-rojo,:root[data-theme="dark"] .estado-tab.rojo{color:#F2B3A8;}
+@media (prefers-reduced-motion:reduce){.rubro-tile,.rubro-op{transition:none;}}
+/* ---- Catálogo público: rubros completos ---- */
+.sf-rubros{display:flex;gap:10px;overflow-x:auto;padding:16px 16px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.sf-rubros::-webkit-scrollbar{display:none;}
+.sf-rubro{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:18px;border:1.5px solid var(--color-border);background:var(--color-surface);cursor:pointer;color:var(--color-text);text-align:left;transition:transform 140ms var(--ease-out),background 140ms var(--ease-out),border-color 140ms var(--ease-out);}
+.sf-rubro:active{transform:scale(.97);}
+.sr-ic{width:38px;height:38px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--coffee-100);background:color-mix(in srgb,var(--rubro) 16%,transparent);color:var(--rubro);}
+.sr-ic svg{width:21px;height:21px;stroke:currentColor;fill:none;}
+.sr-t{display:flex;flex-direction:column;line-height:1.2;}
+.sr-t b{font-size:13.5px;font-weight:800;}
+.sr-t small{font-size:11px;color:var(--color-text-muted);margin-top:2px;}
+.sf-rubro.on{background:var(--rubro);border-color:var(--rubro);color:#fff;}
+.sf-rubro.on .sr-ic{background:rgba(255,255,255,.22);color:#fff;}
+.sf-rubro.on .sr-t small{color:rgba(255,255,255,.9);}
+.sf-chip.tipo.active{background:var(--rubro);border-color:var(--rubro);color:#fff;}
+.sf-sec{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 14px;border-radius:18px;border:none;background:var(--coffee-100);background:color-mix(in srgb,var(--rubro) 11%,var(--color-surface));border-left:5px solid var(--rubro);cursor:pointer;text-align:left;color:var(--color-text);}
+.sf-sec:first-child{margin-top:0;}
+.ss-t{display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.2;}
+.ss-t b{font-size:16px;font-weight:800;}
+.ss-t small{font-size:11.5px;color:var(--color-text-muted);margin-top:2px;}
+.ss-n{font-size:12px;font-weight:800;background:var(--rubro);color:#fff;border-radius:999px;padding:2px 10px;}
+.ss-ver{font-size:11.5px;font-weight:700;color:var(--rubro);white-space:nowrap;}
+.sf-card{border-top:3px solid var(--rubro,var(--color-border));}
+.sf-card.agotado .sf-foto{opacity:.5;filter:grayscale(.6);}
+.sf-card.agotado .sf-nombre,.sf-card.agotado .sf-precio{opacity:.65;}
+.sf-stock.agotado{background:var(--red-600);color:#fff;}
+.sf-btn.agotado-btn{background:var(--color-surface-alt);color:var(--color-text-muted);box-shadow:none;cursor:default;}
+@media (max-width:420px){.ss-ver{display:none;}}
+@media (prefers-reduced-motion:reduce){.sf-rubro{transition:none;}}
+.swatches{display:flex;gap:10px;flex-wrap:wrap;}
+.swatch{width:34px;height:34px;border-radius:50%;border:3px solid var(--color-surface);box-shadow:0 0 0 1.5px var(--color-border);cursor:pointer;transition:transform 120ms var(--ease-out);}
+.swatch:active{transform:scale(.92);}
+.swatch.on{box-shadow:0 0 0 3px var(--color-text);}
+.icon-pick{display:flex;gap:8px;flex-wrap:wrap;}
+.icon-op{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--color-border);background:var(--color-surface);color:var(--rubro);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 120ms var(--ease-out);}
+.icon-op svg{width:21px;height:21px;stroke:currentColor;fill:none;}
+.icon-op:active{transform:scale(.94);}
+.icon-op.on{background:var(--rubro);border-color:var(--rubro);color:#fff;}
+.area-id{display:flex;align-items:center;gap:12px;}
+.area-card{border-left:5px solid var(--rubro);}
+.rubro-fila{width:100%;display:flex;align-items:center;gap:12px;padding:10px 4px;border:none;border-bottom:1px solid var(--color-border);background:transparent;cursor:pointer;text-align:left;color:var(--color-text);transition:background 120ms var(--ease-out);}
+.rubro-fila:last-child{border-bottom:none;}
+.rubro-fila:active{background:var(--coffee-100);}
+.rubro-fila .sr-ic{width:36px;height:36px;border-radius:12px;}
+.rf-t{display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.25;}
+.rf-t b{font-size:13.5px;}
+.rf-t small{font-size:11.5px;color:var(--color-text-muted);}
+.rf-monto{font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;}
+
+
+
 
 </style>
 </head>
@@ -1016,7 +1123,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '20-oct-2026 · v9';
+const VERSION_PANEL = '20-oct-2026 · v11';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -1141,7 +1248,7 @@ const DB = {
 
   // ---------------- ÁREAS, EXISTENCIAS Y PEDIDOS ----------------
   // Si la migración 22 todavía no se corrió, no hay áreas: todo cuenta como "Productos" y nada cambia.
-  areaPorDefecto: { id:null, clave:'productos', nombre:'Productos', modo:'unico', visible_vendedoras:true, vendedoras_venden:true, visible_publico:true, orden:1, activa:true },
+  areaPorDefecto: { id:null, clave:'productos', nombre:'Productos', modo:'unico', color:'#B07A7A', icono:'bag', visible_vendedoras:true, vendedoras_venden:true, visible_publico:true, orden:1, activa:true },
   hayAreas(){ return !!(this.state && this.state.areas && this.state.areas.length); },
   areaDe(p){
     const s = this.state; if(!s || !s.areas || !s.areas.length) return this.areaPorDefecto;
@@ -1192,22 +1299,22 @@ const DB = {
   async crearArea(d){
     const clave = 'a' + Date.now().toString(36);
     const orden = Math.max(0, ...this.state.areas.map(a=>a.orden||0)) + 1;
-    const { data:row, error } = await sb.from('areas').insert({ clave, nombre:d.nombre, modo:d.modo, orden }).select().single();
+    const { data:row, error } = await sb.from('areas').insert({ clave, nombre:d.nombre, modo:d.modo, orden, color:d.color||null, icono:d.icono||null }).select().single();
     if(error) return { ok:false, error: error.message };
-    await sb.rpc('fn_registrar_bitacora', { p_tipo:'crear', p_tabla:'areas', p_registro_id:row.id, p_descripcion:'Área creada: '+row.nombre });
+    await sb.rpc('fn_registrar_bitacora', { p_tipo:'crear', p_tabla:'areas', p_registro_id:row.id, p_descripcion:'Rubro creado: '+row.nombre });
     return { ok:true, data:row };
   },
   async editarArea(id, d){
     const { data:row, error } = await sb.from('areas').update(d).eq('id', id).select().single();
     if(error) return { ok:false, error: error.message };
-    await sb.rpc('fn_registrar_bitacora', { p_tipo:'editar', p_tabla:'areas', p_registro_id:id, p_descripcion:'Área editada: '+row.nombre });
+    await sb.rpc('fn_registrar_bitacora', { p_tipo:'editar', p_tabla:'areas', p_registro_id:id, p_descripcion:'Rubro editado: '+row.nombre });
     return { ok:true, data:row };
   },
   async eliminarArea(id){
     const a = this.state.areas.find(x=>x.id===id);
     const { error } = await sb.from('areas').delete().eq('id', id);
     if(error) return { ok:false, error: error.message };
-    await sb.rpc('fn_registrar_bitacora', { p_tipo:'eliminar', p_tabla:'areas', p_registro_id:id, p_descripcion:'Área eliminada: '+(a?a.nombre:'') });
+    await sb.rpc('fn_registrar_bitacora', { p_tipo:'eliminar', p_tabla:'areas', p_registro_id:id, p_descripcion:'Rubro eliminado: '+(a?a.nombre:'') });
     return { ok:true };
   },
   async crearTipo(areaId, nombre){
@@ -2311,6 +2418,21 @@ function areaTipoTexto(p){
   const a = DB.areaDe(p), t = DB.tipoDe(p);
   return [a.clave==='productos' ? '' : a.nombre, t ? t.nombre : ''].filter(Boolean).join(' · ');
 }
+// ---- Rubros: cada uno con su color e ícono, para que se noten en todo el panel ----
+const COLORES_RUBRO = ['#B07A7A','#3F7F95','#5E8A3A','#C2662D','#6B7078','#8A6BA8','#B5762A','#2F8F83'];
+const ICONOS_RUBRO = ['bag','leaf','food','plug','wrench','truck','box','tag'];
+function rubroEstilo(a){ return '--rubro:' + ((a && a.color) || '#B07A7A'); }
+function rubroTagHtml(a, extra){
+  return `<span class="rubro-tag" style="${rubroEstilo(a)}">${icon((a && a.icono) || 'box')}<b>${escHtml(a.nombre)}</b>${extra?`<em>${escHtml(extra)}</em>`:''}</span>`;
+}
+// Cuántas entregas faltan de este producto (vendido sin entregar). Si hay una, TODA su ficha va en rojo.
+function entregasPendientes(p){
+  if(!DB.state) return 0;
+  return DB.state.venta_historial.filter(v=>v.producto_id===p.id && v.estado_venta==='vendido' && v.entregado===false).length;
+}
+// ¿Se muestran los rubros en el panel? (más de uno a la vista)
+function hayVariosRubros(){ return areasVisibles().length >= 2; }
+
 // Existencias en la tarjeta: la administradora suma o resta con un toque.
 function stockLineaHtml(p){
   const modo = DB.modoDe(p);
@@ -2440,6 +2562,12 @@ function icon(name){
     share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
     dots:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
     pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    bag:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+    leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+    food:'<path d="M3 2v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3z"/><path d="M21 15v7"/>',
+    plug:'<path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8z"/>',
+    wrench:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    truck:'<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
     crop:'<path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/>',
     menu:'<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     ayuda:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
@@ -2550,7 +2678,7 @@ const NAV = {
     { section:'INVENTARIO' },
     { page:'a-inventario', label:'Inventario', icon:'box' },
     { page:'a-nuevo', label:'Nuevo Producto', icon:'plus' },
-    { page:'a-areas', label:'Áreas', icon:'switch' },
+    { page:'a-areas', label:'Rubros', icon:'switch' },
     { page:'a-pedidos', label:'Pedidos', icon:'bookmark' },
     { page:'a-categorias', label:'Clasificaciones', icon:'tag' },
     { page:'a-bodega', label:'Bodega', icon:'pin' },
@@ -2579,7 +2707,7 @@ const PAGE_TITLES = {
   'a-nuevo':['Nuevo Producto','Registrar un producto para la venta'],
   'a-cajas':['Cajas','Lotes de mercancía comprados'],
   'a-categorias':['Clasificaciones','Para ordenar tus productos'],
-  'a-areas':['Áreas','Qué se vende y qué ven las vendedoras'],
+  'a-areas':['Rubros','Cada parte de tu negocio, completa y por separado'],
   'a-pedidos':['Pedidos','Lo que piden tus clientes bajo pedido'],
   'a-bodega':['Bodega','Dónde está guardado cada producto'],
   'a-extras':['Productos extras','Inventario aparte, para las vendedoras externas'],
@@ -2987,17 +3115,18 @@ function botonEntrega(p){
 // descripción, categoría, etiquetas y precio.
 // ---------------------------------------------------------------------
 function normalizar(t){ return String(t==null?'':t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
-function coincideProducto(p, q, cat, area){
+function coincideProducto(p, q, cat, area, tipo){
   if(cat && p.categoria!==cat) return false;
   if(area && DB.areaDe(p).clave!==area) return false;
+  if(tipo && p.tipo_id!==tipo) return false;
   const tokens = normalizar(q).split(/\s+/).filter(Boolean);
   if(!tokens.length) return true;
   const ubi = DB.isAdmin() && p.ubicacion_id ? (DB.ubicacionDe(p.ubicacion_id) || {}).nombre : '';
   const pajar = normalizar([p.nombre, p.codigo, p.descripcion, p.categoria, ubi, (p.etiquetas||[]).join(' '), p.precio_venta].join(' '));
   return tokens.every(t=>pajar.includes(t));
 }
-let busquedaInv = { q:'', cat:'', area:'' };   // Inventario (admin)
-let busquedaCat = { q:'', cat:'', area:'' };   // Catálogo (vendedora)
+let busquedaInv = { q:'', cat:'', area:'', tipo:'' };   // Inventario (admin)
+let busquedaCat = { q:'', cat:'', area:'', tipo:'' };   // Catálogo (vendedora)
 let busquedaClientes = { q:'', filtro:'todos', vend:'' };
 
 function chipsCategoriasHtml(sel){
@@ -3005,28 +3134,43 @@ function chipsCategoriasHtml(sel){
     DB.state.categorias.map(c=>`<button type="button" class="chip${sel===c.nombre?' active':''}" data-cat="${escHtml(c.nombre)}">${escHtml(c.nombre)}</button>`).join('') +
     (DB.isAdmin() ? `<button type="button" class="chip chip-nueva">+ Nueva</button>` : '');
 }
-// Chips de "Áreas" (Productos, Naturales, Comida…). Solo salen si hay más de una a la vista.
+// Rubros (Productos, Naturales, Comida…): fichas grandes con su color e ícono. Solo salen si hay más de uno a la vista.
 function areasVisibles(){
   if(!DB.hayAreas()) return [];
   return DB.state.areas.filter(a=>a.activa && (DB.isAdmin() || a.visible_vendedoras));
 }
-function chipsAreasHtml(sel){
+function tilesRubrosHtml(estado){
   const areas = areasVisibles();
   if(areas.length < 2) return '';
-  const cuenta = a => DB.state.productos.filter(p=>DB.areaDe(p).clave===a.clave && p.estado!=='vendido' && !p.archivado).length;
-  return `<button type="button" class="chip${!sel?' active':''}" data-area="">Todas</button>` +
-    areas.map(a=>`<button type="button" class="chip${sel===a.clave?' active':''}" data-area="${escHtml(a.clave)}">${escHtml(a.nombre)}<span class="n">${cuenta(a)}</span></button>`).join('');
+  const delRubro = a=>DB.state.productos.filter(p=>DB.areaDe(p).id===a.id && !p.archivado);
+  const tile = (clave, nombre, ic, color, disp, pend)=>`<button type="button" class="rubro-tile${(estado.area||'')===clave?' on':''}" data-area="${escHtml(clave)}" style="--rubro:${color}">
+      <span class="rt-ic">${icon(ic)}</span><span class="rt-nombre">${escHtml(nombre)}</span><span class="rt-n">${disp} disponible${disp===1?'':'s'}</span>${pend?`<span class="rt-rojo" data-tip="Por entregar">${pend}</span>`:''}</button>`;
+  const todos = DB.state.productos.filter(p=>!p.archivado);
+  return `<div class="rubro-tiles">` +
+    tile('', 'Todos', 'dashboard', '#5B4A42', todos.filter(p=>p.estado==='en_inventario').length, todos.reduce((s,p)=>s+entregasPendientes(p),0)) +
+    areas.map(a=>{ const ps = delRubro(a); return tile(a.clave, a.nombre, a.icono||'box', a.color||'#B07A7A', ps.filter(p=>p.estado==='en_inventario').length, ps.reduce((s,p)=>s+entregasPendientes(p),0)); }).join('') + `</div>`;
 }
-function areasBarraHtml(id, sel){
-  const h = chipsAreasHtml(sel);
-  return h ? `<div class="chips-scroll areas" id="${id}">${h}</div>` : '';
+// Clasificación del rubro elegido (sus "tipos"): Usado, Nuevo, Café, Miel…
+function tiposFilaHtml(estado){
+  const areas = areasVisibles();
+  const aSel = estado.area ? areas.find(a=>a.clave===estado.area) : (areas.length===1 ? areas[0] : null);
+  if(!aSel) return '';
+  const ps = DB.state.productos.filter(p=>DB.areaDe(p).id===aSel.id && !p.archivado);
+  const tipos = DB.state.tipos.filter(t=>t.area_id===aSel.id).map(t=>({ t, n:ps.filter(p=>p.tipo_id===t.id).length })).filter(x=>x.n>0);
+  if(!tipos.length) return '';
+  return `<div class="chips-scroll tipos-fila" style="${rubroEstilo(aSel)}"><button type="button" class="chip tipo-chip${!estado.tipo?' active':''}" data-tipo="">Todos los tipos</button>` +
+    tipos.map(x=>`<button type="button" class="chip tipo-chip${estado.tipo===x.t.id?' active':''}" data-tipo="${x.t.id}">${escHtml(x.t.nombre)}<span class="n">${x.n}</span></button>`).join('') + `</div>`;
 }
-function enlazarChipsAreas(contId, estado, dibujar){
+function filtrosRubrosInner(estado){ return tilesRubrosHtml(estado) + tiposFilaHtml(estado); }
+function filtrosRubrosBarraHtml(id, estado){ return `<div class="filtros-rubros" id="${id}">${filtrosRubrosInner(estado)}</div>`; }
+function enlazarFiltrosRubros(contId, estado, dibujar){
   const cont = document.getElementById(contId); if(!cont) return;
   cont.addEventListener('click', e=>{
-    const b = e.target.closest('.chip'); if(!b) return;
-    estado.area = b.dataset.area;
-    cont.innerHTML = chipsAreasHtml(estado.area);
+    const tipo = e.target.closest('[data-tipo]'), area = e.target.closest('[data-area]');
+    if(tipo) estado.tipo = tipo.dataset.tipo;
+    else if(area){ estado.area = area.dataset.area; estado.tipo = ''; }
+    else return;
+    cont.innerHTML = filtrosRubrosInner(estado);
     dibujar();
   });
 }
@@ -3103,14 +3247,16 @@ function productCard(p, opts){
   const ubi = DB.isAdmin() ? DB.ubicacionDe(p.ubicacion_id) : null;
   const masBtn = iconos.trim() ? `<button type="button" class="pc-more" data-action="mas-producto" data-id="${p.id}" aria-label="Más opciones">${icon('dots')}</button>` : '';
   const chip = chipEntrega(p);
-  return `<div class="product-card" data-id="${p.id}">
+  const pend = entregasPendientes(p), rubro = DB.areaDe(p), conRubro = DB.hayAreas() && hayVariosRubros();
+  return `<div class="product-card${pend?' entrega-pend':''}${conRubro?' con-rubro':''}" data-id="${p.id}"${conRubro?` style="${rubroEstilo(rubro)}"`:''}>
     <div class="pc-info" data-action="ver" data-id="${p.id}">
       <div class="pc-photo${foto?'':' vacia'}">${foto?imgMini(foto.url_foto, escHtml(p.nombre)):icon('crate')+'<span>Sin foto</span>'}
-        <span class="badge ${info.cls} pc-badge">${info.label}</span><span class="pc-code">${escHtml(p.codigo)}</span>${masBtn}</div>
+        <span class="badge ${info.cls} pc-badge">${info.label}</span><span class="pc-code">${escHtml(p.codigo)}</span>${masBtn}
+        ${pend?`<span class="pc-entrega">${icon('clock')} Por entregar${DB.esPorCantidad(p)?': '+pend:''}</span>`:''}</div>
       <div class="pc-text">
         <div class="name">${escHtml(p.nombre)}${hasVideo?` <span class="pc-video-flag" data-tip="Tiene video">${icon('play')}</span>`:''}</div>
         <div class="cat">${escHtml(p.categoria||'Sin clasificación')}</div>
-        ${areaTipoTexto(p)?`<div class="pc-area">${escHtml(areaTipoTexto(p))}</div>`:''}
+        ${conRubro ? `<div class="pc-area">${rubroTagHtml(rubro, (DB.tipoDe(p)||{}).nombre)}</div>` : (areaTipoTexto(p)?`<div class="pc-area">${escHtml(areaTipoTexto(p))}</div>`:'')}
         <span class="price">${money(p.precio_venta)}</span>
         <span class="pct">${p.porcentaje_ganancia}% comisión</span>
         ${stockLineaHtml(p)}
@@ -3144,8 +3290,9 @@ function productFila(p, opts){
   ].join('');
   const sub = [escHtml(p.codigo), escHtml(areaTipoTexto(p)), ubi ? escHtml(ubi.nombre) : '', vend ? 'Apartado por ' + escHtml(vend.nombre) : ''].filter(Boolean).join(' · ');
   const chip = chipEntrega(p);
-  return `<div class="product-row" data-id="${p.id}">
-    <div class="pr-main" data-action="ver" data-id="${p.id}"><div class="pr-name">${escHtml(p.nombre)}</div><div class="pr-sub">${sub}</div></div>
+  const pend = entregasPendientes(p), rubro = DB.areaDe(p), conRubro = DB.hayAreas() && hayVariosRubros();
+  return `<div class="product-row${pend?' entrega-pend':''}" data-id="${p.id}"${conRubro?` style="${rubroEstilo(rubro)}"`:''}>
+    <div class="pr-main" data-action="ver" data-id="${p.id}"><div class="pr-name">${conRubro?'<i class="rubro-dot"></i>':''}${escHtml(p.nombre)}</div><div class="pr-sub">${sub}</div></div>
     <div class="pr-right"><div class="pr-price">${money(p.precio_venta)}</div><span class="badge ${info.cls}">${info.label}</span>${chip}</div>
     <button type="button" class="pr-more" data-action="mas-producto" data-id="${p.id}" aria-label="Más opciones">${icon('dots')}</button>
     <div class="icon-actions-row pr-oculto">${oculto}</div>
@@ -3239,8 +3386,9 @@ function ventaItemHtml(v, opts){
   else if(pendiente) badge = `<span class="badge badge-warning">Debe ${money(saldoPendiente(v))}</span>`;
   else badge = `<span class="badge badge-success">Pagado</span>`;
   const sub = [vend?vend.nombre:null, opts.comision?('Tu comisión '+money(v.comision_monto)):null, timeAgo(v.fecha_venta)].filter(Boolean).join(' · ');
-  return `<div class="venta-item"><div class="vi-main"><div class="vi-nombre">${escHtml(v.producto_nombre)}</div><div class="vi-sub">${sub}</div></div>
-    <div class="vi-right"><div class="vi-monto">${money(v.precio_venta)}</div>${badge}</div></div>`;
+  const sinEntregar = v.estado_venta==='vendido' && v.entregado===false;
+  return `<div class="venta-item${sinEntregar?' entrega-pend':''}"><div class="vi-main"><div class="vi-nombre">${escHtml(v.producto_nombre)}</div><div class="vi-sub">${sub}</div></div>
+    <div class="vi-right"><div class="vi-monto">${money(v.precio_venta)}</div>${sinEntregar?`<span class="badge entrega-no">Por entregar</span>`:badge}</div></div>`;
 }
 
 PAGES['v-dashboard'] = () => {
@@ -3294,13 +3442,13 @@ PAGES['v-dashboard'] = () => {
 
 function catalogoContenido(){
   const cur = DB.currentUser();
-  const { q, cat, area } = busquedaCat;
-  const f = p=>coincideProducto(p, q, cat, area);
+  const { q, cat, area, tipo } = busquedaCat;
+  const f = p=>coincideProducto(p, q, cat, area, tipo);
   const disponibles = DB.state.productos.filter(p=>p.estado==='en_inventario').filter(f);
   const misReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id===cur.id).filter(f);
   const otrasReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id!==cur.id).filter(f);
   const total = disponibles.length + misReservas.length;
-  const filtrando = !!(q.trim() || cat || area);
+  const filtrando = !!(q.trim() || cat || area || tipo);
   return `${filtrando?`<div class="res-head"><span>${total} producto${total===1?'':'s'} encontrado${total===1?'':'s'}</span><button type="button" class="btn btn-secondary btn-sm" data-action="limpiar-busqueda-cat">Limpiar</button></div>`:''}
     ${(misReservas.length + disponibles.length) ? productosHtml([...misReservas, ...disponibles], 'vendedor') : `<div class="text-faint text-center" style="padding:30px;">${filtrando?'No hay productos con esa búsqueda':'No hay productos disponibles'}</div>`}
     ${otrasReservas.length ? `<div class="panel mt-16"><div class="panel-title mt-0" style="margin-bottom:12px;">Apartados por otras compañeras</div>
@@ -3312,7 +3460,7 @@ PAGES['v-catalogo'] = () => `
       <button class="btn btn-primary btn-sm" id="btnCompartirCatalogo">${icon('whatsapp')} Compartir catálogo</button>
     </div>
     <div class="vista-barra">${toggleFotosHtml()}</div>
-    ${areasBarraHtml('catalogoAreas', busquedaCat.area)}
+    ${filtrosRubrosBarraHtml('catFiltros', busquedaCat)}
     <div class="chips-scroll cats" id="catalogoChips">${chipsCategoriasHtml(busquedaCat.cat)}</div>
     <div id="catalogoLista">${catalogoContenido()}</div>`;
 
@@ -3344,7 +3492,7 @@ function renderVentasTable(ventas, showVendedor){
     const info = v.estado_venta==='devuelto' ? {label:'Devuelto',cls:'badge-danger'} : {label:v.comision_estado==='pagada'?'Comisión pagada':'Comisión ganada', cls: v.comision_estado==='pagada'?'badge-info':'badge-success'};
     const pendiente = v.estado_pago==='pendiente';
     const abonado = pendiente && v.monto_pagado>0;
-    return `<tr><td>${v.producto_nombre}<div class="text-faint" style="font-size:11px;">${v.producto_codigo}</div></td>
+    return `<tr class="${v.estado_venta==='vendido' && v.entregado===false?'entrega-pend':''}"><td>${v.producto_nombre}<div class="text-faint" style="font-size:11px;">${v.producto_codigo}</div></td>
       ${showVendedor?`<td>${vend?vend.nombre:'—'}</td>`:''}
       <td>${fmtDateShort(v.fecha_venta)}</td><td>${money(v.precio_venta)}</td><td>${money(v.comision_monto)}</td>
       <td><span class="badge ${info.cls}">${info.label}</span></td>
@@ -3484,6 +3632,30 @@ PAGES['v-clientes'] = () => {
 /* ---------------------------------------------------------------------
    PÁGINAS — ADMIN
 --------------------------------------------------------------------- */
+// Cada rubro de un vistazo: lo vendido este mes, lo que hay y lo que falta entregar (en rojo).
+function rubroDeVenta(v){
+  if(v.area_nombre) return v.area_nombre;
+  const p = DB.state.productos.find(x=>x.id===v.producto_id);
+  return p ? DB.areaDe(p).nombre : 'Productos';
+}
+function irARubro(clave){ busquedaInv = { q:'', cat:'', area:clave, tipo:'' }; inventarioSeccionAbierta = 'en_inventario'; navigate('a-inventario'); }
+function panelRubros(vendidas){
+  if(!DB.hayAreas() || DB.state.areas.filter(a=>a.activa).length < 2) return '';
+  const ini = inicioMesActual();
+  const filas = DB.state.areas.filter(a=>a.activa).map(a=>{
+    const ps = DB.state.productos.filter(p=>DB.areaDe(p).id===a.id && !p.archivado);
+    const ventas = vendidas.filter(v=>new Date(v.fecha_venta)>=ini && rubroDeVenta(v)===a.nombre);
+    return { a, disp:ps.filter(p=>p.estado==='en_inventario').length, pend:ps.reduce((s,p)=>s+entregasPendientes(p),0), n:ventas.length, monto:ventas.reduce((s,v)=>s+v.precio_venta,0) };
+  });
+  return `<div class="panel">
+    <div class="panel-head"><div class="panel-title">Tus rubros este mes</div><button class="btn btn-ghost btn-sm" onclick="navigate('a-areas')">Configurar</button></div>
+    ${filas.map(f=>`<button type="button" class="rubro-fila" style="${rubroEstilo(f.a)}" onclick="irARubro('${f.a.clave}')">
+      <span class="sr-ic">${icon(f.a.icono||'box')}</span>
+      <span class="rf-t"><b>${escHtml(f.a.nombre)}</b><small>${f.disp} disponible${f.disp===1?'':'s'} · ${f.n} venta${f.n===1?'':'s'}</small></span>
+      ${f.pend?`<span class="badge entrega-no">${f.pend} por entregar</span>`:''}
+      <span class="rf-monto">${money(f.monto)}</span></button>`).join('')}
+  </div>`;
+}
 PAGES['a-dashboard'] = () => {
   const productos = DB.state.productos;
   const vendidas = DB.state.venta_historial.filter(v=>v.estado_venta==='vendido');
@@ -3509,6 +3681,7 @@ PAGES['a-dashboard'] = () => {
     ${panelQueHacer()}
     ${accionesRapidas()}
     ${panelExternas()}
+    ${panelRubros(vendidas)}
     <div class="hero-card">
       <div class="hero-label">Vendido este mes</div>
       <div class="hero-num">${money(vendidoMes)}</div>
@@ -3619,7 +3792,7 @@ PAGES['a-pendientes'] = () => {
       ${entregas.slice().sort((a,b)=>new Date(a.fecha_venta)-new Date(b.fecha_venta)).map(v=>{
         const cliente = DB.state.clientes.find(c=>c.id===v.cliente_id);
         const vend = DB.state.usuarios.find(u=>u.id===v.vendedor_id);
-        return `<tr><td>${v.producto_nombre}</td><td>${cliente?cliente.nombre:'<span class="text-faint">Sin cliente asignado</span>'}</td><td>${vend?vend.nombre:'—'}</td><td>${fmtDateShort(v.fecha_venta)}</td>
+        return `<tr class="entrega-pend"><td>${v.producto_nombre}</td><td>${cliente?cliente.nombre:'<span class="text-faint">Sin cliente asignado</span>'}</td><td>${vend?vend.nombre:'—'}</td><td>${fmtDateShort(v.fecha_venta)}</td>
           <td><button class="btn btn-primary btn-sm" data-action="toggle-entrega" data-id="${v.id}">${icon('check')} Marcar entregado</button></td></tr>`;
       }).join('')}
       </tbody></table></div>
@@ -3650,11 +3823,13 @@ PAGES['a-pendientes'] = () => {
 // en vez de secciones gigantes desplegables.
 function estadosInventario(){
   const cfg = DB.state.configuracion;
-  const todos = DB.state.productos.filter(p=>(!busquedaInv.cat || p.categoria===busquedaInv.cat) && (!busquedaInv.area || DB.areaDe(p).clave===busquedaInv.area));
+  const todos = DB.state.productos.filter(p=>(!busquedaInv.cat || p.categoria===busquedaInv.cat) && (!busquedaInv.area || DB.areaDe(p).clave===busquedaInv.area) && (!busquedaInv.tipo || p.tipo_id===busquedaInv.tipo));
   const lista = [
     { k:'en_inventario', t:'Disponibles', c:'var(--forest-600)', f:p=>p.estado==='en_inventario', vacio:'No hay productos disponibles' },
     { k:'en_reserva', t:'Reservados', c:'var(--amber-500)', f:p=>p.estado==='en_reserva',
       vacio:'No hay productos reservados' },
+    { k:'por_entregar', t:'Por entregar', c:'var(--red-600)', f:p=>entregasPendientes(p)>0, solo:true,
+      nota:'Ya se vendieron, pero todavía falta entregarlos. Quedan en rojo hasta que los marques como entregados.', vacio:'No hay nada por entregar' },
     { k:'vendido', t:'Vendidos', c:'var(--sage-600)', f:p=>p.estado==='vendido' && !p.archivado,
       nota:`Las fotos se borran solas a los ${cfg.dias_archivo_productos_vendidos} días.`, vacio:'No hay productos vendidos' },
     { k:'archivado', t:'Archivados', c:'var(--coffee-400)', f:p=>p.archivado, solo:true,
@@ -3672,12 +3847,12 @@ function invEstadosHtml(){
   if(busquedaInv.q.trim()) return '';
   const act = estadoInventarioActual();
   return `<div class="chips-scroll estado-tabs">${estadosInventario().map(e=>
-    `<button type="button" class="estado-tab${e.k===act.k?' active':''}" data-action="inv-estado" data-key="${e.k}"><span class="dot" style="background:${e.c}"></span>${e.t}<span class="n">${e.items.length}</span></button>`).join('')}</div>`;
+    `<button type="button" class="estado-tab${e.k===act.k?' active':''}${e.k==='por_entregar'?' rojo':''}" data-action="inv-estado" data-key="${e.k}"><span class="dot" style="background:${e.c}"></span>${e.t}<span class="n">${e.items.length}</span></button>`).join('')}</div>`;
 }
 function inventarioContenido(){
-  const { q, cat, area } = busquedaInv;
+  const { q, cat, area, tipo } = busquedaInv;
   if(q.trim()){
-    const r = DB.state.productos.filter(p=>coincideProducto(p, q, cat, area));
+    const r = DB.state.productos.filter(p=>coincideProducto(p, q, cat, area, tipo));
     return `<div class="res-head"><span>${r.length} resultado${r.length===1?'':'s'} en todo el inventario</span><button type="button" class="btn btn-secondary btn-sm" data-action="limpiar-busqueda-inv">Limpiar</button></div>
       ${r.length ? productosHtml(r, 'admin') : `<div class="text-faint text-center" style="padding:30px;">No hay productos con esa búsqueda</div>`}`;
   }
@@ -3710,7 +3885,7 @@ PAGES['a-inventario'] = () => `
       <button class="btn btn-secondary btn-sm solo-celular" id="btnInvMas" aria-label="Más acciones">${icon('dots')}</button>
     </div>
     <div class="vista-barra">${toggleFotosHtml()}</div>
-    ${areasBarraHtml('invAreas', busquedaInv.area)}
+    ${filtrosRubrosBarraHtml('invFiltros', busquedaInv)}
     <div id="invEstados">${invEstadosHtml()}</div>
     <div class="chips-scroll cats" id="invChips">${chipsCategoriasHtml(busquedaInv.cat)}</div>
     <div id="kanbanWrap">${inventarioContenido()}</div>`;
@@ -3731,9 +3906,11 @@ function camposAreaHtml(px, p){
   const a0 = areas.find(a=>a.id===p.area_id) || areas.find(a=>a.clave==='productos') || areas[0];
   const bloqueada = p.estado && p.estado!=='en_inventario';
   const provs = DB.state.proveedores.filter(x=>x.activo || x.id===p.proveedor_id);
-  return `<div class="form-group"><label>Área</label>
-      <select id="${px}Area"${bloqueada?' disabled':''}>${areas.map(a=>`<option value="${a.id}"${a.id===a0.id?' selected':''}>${escHtml(a.nombre)}</option>`).join('')}</select></div>
-    <div class="form-group" id="${px}TipoBox"><label>Tipo</label><select id="${px}Tipo"></select></div>
+  return `<div class="form-group"><label>Rubro</label>
+      <div class="rubro-pick" id="${px}RubroPick">${areas.map(a=>`<button type="button" class="rubro-op${a.id===a0.id?' on':''}" data-rubro="${a.id}" style="${rubroEstilo(a)}"${bloqueada?' disabled':''}>${icon(a.icono||'box')}<span>${escHtml(a.nombre)}</span></button>`).join('')}</div>
+      <select id="${px}Area" hidden${bloqueada?' disabled':''}>${areas.map(a=>`<option value="${a.id}"${a.id===a0.id?' selected':''}>${escHtml(a.nombre)}</option>`).join('')}</select>
+      <div class="rubro-hint" id="${px}RubroHint"></div></div>
+    <div class="form-group" id="${px}TipoBox"><label id="${px}TipoLbl">Tipo</label><select id="${px}Tipo"></select></div>
     <div id="${px}CantBox" class="area-extra" hidden>
       <div class="form-row">
         <div class="form-group"><label>Cantidad disponible</label><input type="number" inputmode="numeric" min="0" step="1" id="${px}Cant" value="${p.cantidad==null?'':p.cantidad}" placeholder="0"></div>
@@ -3766,6 +3943,8 @@ function enlazarCamposArea(px, p, alCambiar){
     const area = DB.state.areas.find(a=>a.id===$('Area').value);
     const modo = area ? area.modo : 'unico';
     const tipos = DB.state.tipos.filter(t=>t.area_id===(area&&area.id));
+    document.querySelectorAll('#'+px+'RubroPick .rubro-op').forEach(b=>b.classList.toggle('on', b.dataset.rubro===$('Area').value));
+    const hint = $('RubroHint'); if(hint && typeof MODOS_AREA !== 'undefined') hint.textContent = MODOS_AREA[modo].t + ': ' + MODOS_AREA[modo].d;
     $('Tipo').innerHTML = `<option value="">Sin tipo</option>` + tipos.map(t=>`<option value="${t.id}"${t.id===p.tipo_id?' selected':''}>${escHtml(t.nombre)}</option>`).join('');
     $('TipoBox').hidden = !tipos.length;
     $('CantBox').hidden = modo !== 'cantidad';
@@ -3773,6 +3952,10 @@ function enlazarCamposArea(px, p, alCambiar){
     if(alCambiar) alCambiar(modo, area);
   };
   $('Area').addEventListener('change', pintar);
+  $('RubroPick').addEventListener('click', e=>{
+    const b = e.target.closest('.rubro-op'); if(!b || b.disabled) return;
+    $('Area').value = b.dataset.rubro; pintar();
+  });
   $('Prov').addEventListener('change', ()=>{ $('ProvNuevo').hidden = $('Prov').value !== '__nuevo__'; });
   $('PedidoBox').querySelectorAll('[data-hasta]').forEach(b=>b.addEventListener('click', ()=>{
     const d = new Date(); d.setDate(d.getDate() + Number(b.dataset.hasta)); d.setHours(21, 0, 0, 0);
@@ -3915,17 +4098,17 @@ const MODOS_AREA = {
 };
 function avisoSinAreas(){
   return `<div class="panel text-center" style="padding:40px 20px;"><div class="panel-title">Falta un paso</div>
-    <div class="text-muted">Corre la migración 22 en Supabase (SQL Editor) para activar las áreas y los pedidos.</div></div>`;
+    <div class="text-muted">Corre la migración 22 en Supabase (SQL Editor) para activar los rubros y los pedidos.</div></div>`;
 }
 function areaTarjetaHtml(a){
   const n = DB.state.productos.filter(p=>DB.areaDe(p).id===a.id && !p.archivado).length;
   const tipos = DB.state.tipos.filter(t=>t.area_id===a.id);
   const sw = (campo, texto, ayuda)=>`<label class="area-sw"><span><b>${texto}</b><small>${ayuda}</small></span><span class="sw"><input type="checkbox" data-action="area-switch" data-id="${a.id}" data-campo="${campo}"${a[campo]?' checked':''}><i></i></span></label>`;
-  return `<div class="panel area-card">
+  return `<div class="panel area-card" style="${rubroEstilo(a)}">
     <div class="area-head">
-      <div><div class="area-nombre">${escHtml(a.nombre)}</div><div class="text-faint" style="font-size:12px;">${MODOS_AREA[a.modo].t} · ${n} producto${n===1?'':'s'}</div></div>
+      <div class="area-id" style="${rubroEstilo(a)}"><span class="sr-ic">${icon(a.icono||'box')}</span><div><div class="area-nombre">${escHtml(a.nombre)}</div><div class="text-faint" style="font-size:12px;">${MODOS_AREA[a.modo].t} · ${n} producto${n===1?'':'s'}</div></div></div>
       <div class="area-btns">
-        <button type="button" class="icon-btn edit" data-action="editar-area" data-id="${a.id}" data-tip="Cambiar nombre">${icon('edit')}</button>
+        <button type="button" class="icon-btn edit" data-action="editar-area" data-id="${a.id}" data-tip="Editar">${icon('edit')}</button>
         ${a.clave==='productos' ? '' : `<button type="button" class="icon-btn delete" data-action="eliminar-area" data-id="${a.id}" data-tip="Eliminar">${icon('trash')}</button>`}
       </div>
     </div>
@@ -3935,18 +4118,18 @@ function areaTarjetaHtml(a){
       ${sw('visible_publico', 'Sale en el catálogo de los clientes', 'El link que mandas por WhatsApp')}
     </div>
     <div class="area-tipos">
-      <span class="area-tipos-t">Tipos</span>
+      <span class="area-tipos-t">Clasificación</span>
       <div class="chips-scroll" style="margin:0;padding-bottom:2px;flex-wrap:wrap;">
         ${tipos.map(t=>`<button type="button" class="chip" data-action="tipo-menu" data-id="${t.id}">${escHtml(t.nombre)}</button>`).join('')}
-        <button type="button" class="chip chip-nueva" data-action="nuevo-tipo" data-id="${a.id}">+ Tipo</button>
+        <button type="button" class="chip chip-nueva" data-action="nuevo-tipo" data-id="${a.id}">+ Nuevo tipo</button>
       </div>
     </div>
   </div>`;
 }
 PAGES['a-areas'] = () => {
   if(!DB.hayAreas()) return avisoSinAreas();
-  return `<div class="panel-head"><div class="text-muted" style="font-size:12.5px;max-width:560px;">Cada área ordena un tipo de venta. Tú eliges qué ven y qué pueden vender las vendedoras; por defecto, las áreas nuevas las vendes solo tú.</div>
-    <button class="btn btn-primary" id="btnNuevaArea">${icon('plus')} Nueva área</button></div>
+  return `<div class="panel-head"><div class="text-muted" style="font-size:12.5px;max-width:560px;">Cada rubro es una parte completa de tu negocio, con su color, su clasificación y su propio inventario. Tú eliges qué ven y qué pueden vender las vendedoras; por defecto, los rubros nuevos los vendes solo tú.</div>
+    <button class="btn btn-primary" id="btnNuevaArea">${icon('plus')} Nuevo rubro</button></div>
     ${DB.state.areas.map(areaTarjetaHtml).join('')}`;
 };
 
@@ -3957,6 +4140,20 @@ const ESTADOS_PEDIDO = {
   entregado:        ['Entregado', 'badge-neutral'],
   cancelado:        ['Cancelado', 'badge-danger']
 };
+// Botón de WhatsApp con el mensaje que toca según el paso del pedido.
+function avisoPedidoHtml(x){
+  const tel = telefonoInternacional(x.cliente_telefono);
+  if(!tel) return '';
+  const cant = x.cantidad > 1 ? ' × ' + x.cantidad : '';
+  const msg = {
+    nuevo: `Hola ${x.cliente_nombre}, recibimos tu pedido: ${x.producto_nombre}${cant}. Te confirmo en cuanto lo pida al proveedor.`,
+    pedido_proveedor: `Hola ${x.cliente_nombre}, ya pedimos tu ${x.producto_nombre}${cant}. Te aviso apenas llegue.`,
+    llego: `¡Hola ${x.cliente_nombre}! Ya llegó tu ${x.producto_nombre}${cant}. ¿Cuándo pasas por él?`
+  }[x.estado] || `Hola ${x.cliente_nombre}, te escribo por tu pedido de ${x.producto_nombre}.`;
+  const tip = { nuevo:'Confirmarle el pedido', pedido_proveedor:'Avisarle que ya lo pediste', llego:'Avisarle que ya llegó' }[x.estado] || 'Escribirle';
+  return `<a href="https://wa.me/${tel.slice(1)}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener" class="icon-btn confirm" data-tip="${tip}">${icon('whatsapp')}</a>
+    <a href="tel:${tel}" class="icon-btn info" data-tip="Llamar">${icon('phone')}</a>`;
+}
 function pedidoFilaHtml(x, conProducto){
   const [txt, cls] = ESTADOS_PEDIDO[x.estado] || [x.estado, 'badge-neutral'];
   const acciones = x.estado==='llego'
@@ -3968,7 +4165,7 @@ function pedidoFilaHtml(x, conProducto){
     <div class="pf-main"><div class="pf-nombre">${escHtml(x.cliente_nombre)}${x.cantidad>1?` <span class="pf-cant">× ${x.cantidad}</span>`:''}</div>
       <div class="pf-sub">${conProducto?escHtml(x.producto_nombre)+' · ':''}${x.cliente_telefono?escHtml(x.cliente_telefono)+' · ':''}${timeAgo(x.created_at)}</div></div>
     <span class="badge ${cls}">${txt}</span>
-    <div class="pf-acc">${x.cliente_telefono?botonesContacto(x.cliente_telefono):''}${acciones}
+    <div class="pf-acc">${avisoPedidoHtml(x)}${acciones}
       ${cancelable?`<button class="icon-btn delete" data-action="pedido-estado" data-id="${x.id}" data-estado="cancelado" data-tip="Cancelar pedido">${icon('x')}</button>`:''}</div>
   </div>`;
 }
@@ -4224,11 +4421,15 @@ function datosReporte(dias){
   ventas.forEach(v=>{ const c=v.categoria||'Sin clasificación'; porCategoria[c]=(porCategoria[c]||0)+v.ganancia_neta; });
   const catEntries = Object.entries(porCategoria).sort((a,b)=>b[1]-a[1]);
 
+  const porRubro = {};
+  ventas.forEach(v=>{ const r = rubroDeVenta(v); const o = porRubro[r] = porRubro[r] || { nombre:r, count:0, ingresos:0, ganancia:0 }; o.count++; o.ingresos += v.precio_venta; o.ganancia += v.ganancia_neta; });
+  const rubroEntries = Object.values(porRubro).sort((a,b)=>b.ingresos-a.ingresos);
+
   const diasArr = [...Array(dias)].map((_,i)=>{ const d=new Date(); d.setDate(d.getDate()-(dias-1-i)); d.setHours(0,0,0,0); return d; });
   const porDia = diasArr.map(d=>{ const next=new Date(d); next.setDate(next.getDate()+1); return ventas.filter(v=>{const f=new Date(v.fecha_venta); return f>=d && f<next;}).reduce((s,v)=>s+v.ganancia_neta,0); });
   const etiquetasDias = diasArr.map(d=>d.toLocaleDateString('es-GT',{day:'2-digit',month:'2-digit'}));
 
-  return { ventas, totalIngresos, totalCostos, totalGastos, totalGanancia, totalComisiones, vendEntries, catEntries, diasArr, porDia, etiquetasDias };
+  return { ventas, totalIngresos, totalCostos, totalGastos, totalGanancia, totalComisiones, vendEntries, catEntries, rubroEntries, diasArr, porDia, etiquetasDias };
 }
 
 let reporteRangoDias = 14;
@@ -4255,6 +4456,13 @@ PAGES['a-reportes'] = () => {
       </div>
       ${svgLineaTendencia(r.porDia, r.etiquetasDias)}
     </div>
+    ${DB.hayAreas() && r.rubroEntries.length ? `<div class="panel">
+      <div class="panel-title" style="margin-bottom:12px;">Ventas por rubro</div>
+      <div class="mb-16">${horizontalBars(r.rubroEntries.map(x=>({label:x.nombre, value:x.ingresos})))}</div>
+      <div class="table-wrap"><table><thead><tr><th>Rubro</th><th>Ventas</th><th>Ingresos</th><th>Ganancia</th></tr></thead><tbody>
+      ${r.rubroEntries.map(x=>`<tr><td>${escHtml(x.nombre)}</td><td>${x.count}</td><td>${money(x.ingresos)}</td><td>${money(x.ganancia)}</td></tr>`).join('')}
+      </tbody></table></div>
+    </div>` : ''}
     <div class="form-row">
       <div class="panel">
         <div class="panel-title" style="margin-bottom:12px;">Ventas por vendedora</div>
@@ -4634,7 +4842,7 @@ function modalProductoCreado(prod, fotos, video){
         <button class="btn btn-ghost btn-block" id="npaInventario">Ver inventario</button>
       </div>
     </div>`);
-  document.getElementById('npaOtro').addEventListener('click', ()=>{ closeModal(); navigate('a-nuevo'); });
+  document.getElementById('npaOtro').addEventListener('click', ()=>{ const a = DB.areaDe(prod); if(DB.hayAreas() && a) nuevoAreaClave = a.clave; closeModal(); navigate('a-nuevo'); });
   document.getElementById('npaInventario').addEventListener('click', ()=>{ closeModal(); irAInventario('en_inventario'); });
   if(!hay) return;
   let fotosBuenas = 0, pendFotos = fotos.slice(), pendVideo = video || null;
@@ -4702,10 +4910,17 @@ async function renderCatalogoPublico(){
   const leerProductos = async ()=>{
     const base = 'codigo,nombre,descripcion,categoria,precio_venta,fotos,url_video';
     // Con la migración 22 llegan también el área, el tipo, las existencias y la fecha límite de "bajo pedido".
-    let r = await sb.from('vista_producto_publico').select(base + ',area_clave,area_nombre,area_modo,area_orden,tipo,cantidad,disponible_hasta')
+    let r = await sb.from('vista_producto_publico').select(base + ',area_clave,area_nombre,area_modo,area_orden,area_color,area_icono,tipo,cantidad,disponible_hasta')
       .eq('estado','en_inventario').order('codigo', { ascending:false });
     if(r.error) r = await sb.from('vista_producto_publico').select(base).eq('estado','en_inventario').order('codigo', { ascending:false });
-    return r.error ? null : (r.data || []).filter(visiblePublico);
+    if(r.error) return null;
+    const filas = r.data || [];
+    // Si la base ya tiene rubros pero un producto quedó sin rubro, se muestra como "Productos" (nunca se pierde del catálogo).
+    if(filas.length && 'area_clave' in filas[0]){
+      const base0 = filas.find(p=>p.area_clave==='productos') || {};
+      filas.forEach(p=>{ if(!p.area_clave) Object.assign(p, { area_clave:'productos', area_nombre:base0.area_nombre||'Productos', area_modo:'unico', area_orden:base0.area_orden||1, area_color:base0.area_color||'#B07A7A', area_icono:base0.area_icono||'bag', cantidad:null, disponible_hasta:null }); });
+    }
+    return filas.filter(visiblePublico);
   };
   let productos = (await leerProductos()) || [];
   const hayOtras = ()=>productos.some(p=>p.area_modo && p.area_modo!=='unico');
@@ -4723,80 +4938,101 @@ async function renderCatalogoPublico(){
   };
   marcarVistos();
 
-  let cat = '', q = '', orden = 'nuevo', area = '';
+  let cat = '', q = '', orden = 'nuevo', area = '', tipoSel = '';
+  // Rubros que hay hoy en el catálogo (con su color e ícono).
   const areasPresentes = ()=>{
     const m = new Map();
-    productos.forEach(p=>{ if(p.area_clave && !m.has(p.area_clave)) m.set(p.area_clave, { clave:p.area_clave, nombre:p.area_nombre, orden:p.area_orden||0 }); });
+    productos.forEach(p=>{ if(p.area_clave && !m.has(p.area_clave)) m.set(p.area_clave, { clave:p.area_clave, nombre:p.area_nombre, orden:p.area_orden||0, color:p.area_color||'#B07A7A', icono:p.area_icono||'box', modo:p.area_modo }); });
     return [...m.values()].sort((a,b)=>a.orden-b.orden);
   };
-  const areaChipsHtml = ()=>{
+  // El rubro "en uso": el elegido, o el único que hay.
+  const areaActiva = ()=>{ const as = areasPresentes(); return area ? as.find(a=>a.clave===area) : (as.length===1 ? as[0] : null); };
+  const rubrosHtml = ()=>{
     const as = areasPresentes();
     if(as.length < 2) return '';
-    return `<button class="sf-chip${area===''?' active':''}" data-area="">Todo</button>${as.map(a=>`<button class="sf-chip${area===a.clave?' active':''}" data-area="${escHtml(a.clave)}">${escHtml(a.nombre)}</button>`).join('')}`;
+    const tile = (clave, nombre, ic, color, n)=>`<button type="button" class="sf-rubro${area===clave?' on':''}" data-area="${escHtml(clave)}" style="--rubro:${color}">
+        <span class="sr-ic">${icon(ic)}</span><span class="sr-t"><b>${escHtml(nombre)}</b><small>${n} producto${n===1?'':'s'}</small></span></button>`;
+    return tile('', 'Todo', 'dashboard', '#5B4A42', productos.length) + as.map(a=>tile(a.clave, a.nombre, a.icono, a.color, productos.filter(p=>p.area_clave===a.clave).length)).join('');
   };
-  const enlazarAreas = ()=>{
-    document.querySelectorAll('#areaChips .sf-chip').forEach(b=>b.addEventListener('click', ()=>{
-      area = b.dataset.area; cat = '';
-      document.getElementById('areaChips').innerHTML = areaChipsHtml(); enlazarAreas();
-      document.getElementById('catChips').innerHTML = chipsHtml(); enlazarChips(); dibujar();
-    }));
+  // Clasificación dentro del rubro: sus tipos (Usado, Nuevo, Café, Miel…).
+  const tiposHtml = ()=>{
+    const a = areaActiva(); if(!a) return '';
+    const tipos = [...new Set(productos.filter(p=>p.area_clave===a.clave).map(p=>p.tipo).filter(Boolean))];
+    if(!tipos.length) return '';
+    return `<button class="sf-chip tipo${tipoSel===''?' active':''}" data-tipo="" style="--rubro:${a.color}">Todos</button>` +
+      tipos.map(t=>`<button class="sf-chip tipo${tipoSel===t?' active':''}" data-tipo="${escHtml(t)}" style="--rubro:${a.color}">${escHtml(t)}</button>`).join('');
   };
   const chipsHtml = ()=>{
+    if(areasPresentes().length >= 2 && !area) return '';   // viendo "Todo": las secciones ya ordenan
     const categorias = [...new Set(productos.filter(p=>!area || p.area_clave===area).map(p=>p.categoria).filter(Boolean))].sort();
     return categorias.length ? `<button class="sf-chip${cat===''?' active':''}" data-cat="">Todo</button>${categorias.map(c=>`<button class="sf-chip${cat===c?' active':''}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}` : '';
   };
-  const enlazarChips = ()=>{
-    document.querySelectorAll('#catChips .sf-chip').forEach(b=>b.addEventListener('click', ()=>{
-      cat = b.dataset.cat; document.getElementById('catChips').innerHTML = chipsHtml(); enlazarChips(); dibujar();
-    }));
+  const pintarFiltros = ()=>{
+    [['areaChips', rubrosHtml], ['tipoChips', tiposHtml], ['catChips', chipsHtml]].forEach(([id, f])=>{
+      const el = document.getElementById(id); if(!el) return;
+      const h = f(); el.hidden = !h; el.innerHTML = h;
+    });
   };
   const linkResto = (vNombre?'&v='+encodeURIComponent(vNombre):'') + (vTel?'&tel='+encodeURIComponent(vTel):'');
   const mensajeInteres = p => 'Hola'+(vNombre?' '+vNombre:'')+', me interesa: '+p.nombre+' (código '+p.codigo+') — Q '+Number(p.precio_venta).toFixed(2)+'\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo);
 
   const tarjeta = (p, i)=>{
     const fotos = p.fotos || [];
-    return `<div class="sf-card" data-codigo="${escHtml(p.codigo)}" style="--i:${Math.min(i,10)}">
+    return `<div class="sf-card${agotadoPublico(p)?' agotado':''}" data-codigo="${escHtml(p.codigo)}" style="--i:${Math.min(i,10)};--rubro:${p.area_color||'transparent'}">
       <div class="sf-foto">${fotos[0]?imgMini(fotos[0], escHtml(p.nombre)):`<div class="sf-sinfoto">${icon('crate')}<span>Sin foto</span></div>`}
         ${nuevos.has(p.codigo)?'<span class="sf-nuevo">NUEVO</span>':''}
         ${fotos.length>1?`<span class="sf-fotos">${icon('image')} ${fotos.length}</span>`:''}
         ${p.url_video?`<span class="sf-video">${icon('play')} Video</span>`:''}
-        ${p.area_modo==='cantidad'?`<span class="sf-stock">Disponibles: ${p.cantidad}</span>`:''}
+        ${p.area_modo==='cantidad'?(agotadoPublico(p)?`<span class="sf-stock agotado">Agotado</span>`:`<span class="sf-stock">Disponibles: ${p.cantidad}</span>`):''}
         ${p.area_modo==='pedido'?`<span class="sf-pedido" data-cierra="${escHtml(p.disponible_hasta)}">${icon('clock')} Cierra en <span class="t">${textoRestante(new Date(p.disponible_hasta)-Date.now())}</span></span>`:''}</div>
       <div class="sf-info">
         ${p.categoria||p.tipo?`<div class="sf-cat">${escHtml([p.tipo, p.categoria].filter(Boolean).join(' · '))}</div>`:''}
         <div class="sf-nombre">${escHtml(p.nombre)}</div>
         <div class="sf-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
-        ${p.area_modo==='pedido' ? `<button type="button" class="sf-btn pedir" data-pedir>${icon('bookmark')} Pedir</button>`
+        ${agotadoPublico(p) ? `<span class="sf-btn sec agotado-btn">Agotado por ahora</span>`
+        : p.area_modo==='pedido' ? `<button type="button" class="sf-btn pedir" data-pedir>${icon('bookmark')} Pedir</button>`
         : vTel ? `<a class="sf-btn" data-wsp href="https://wa.me/${vTel}?text=${encodeURIComponent(mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa</a>`
                : `<button type="button" class="sf-btn sec">Ver detalle</button>`}
       </div>
     </div>`;
   };
+  const SUBTITULO_RUBRO = { pedido:'Elige y toca “Pedir”: lo traemos para ti', cantidad:'Con existencias, listo para llevar' };
+  const cabeceraRubro = (a, n)=>`<button type="button" class="sf-sec" data-area="${escHtml(a.clave)}" style="--rubro:${a.color}"><span class="sr-ic">${icon(a.icono)}</span>
+      <span class="ss-t"><b>${escHtml(a.nombre)}</b>${SUBTITULO_RUBRO[a.modo]?`<small>${SUBTITULO_RUBRO[a.modo]}</small>`:''}</span><span class="ss-n">${n}</span><span class="ss-ver">Ver solo esto ›</span></button>`;
 
   const dibujar = ()=>{
     const tokens = normalizar(q).split(/\s+/).filter(Boolean);
-    let lista = productos.filter(p=>(!area || p.area_clave===area) && (!cat || p.categoria===cat) && (!tokens.length || (()=>{
+    let lista = productos.filter(p=>(!area || p.area_clave===area) && (!tipoSel || p.tipo===tipoSel) && (!cat || p.categoria===cat) && (!tokens.length || (()=>{
       const pajar = normalizar([p.nombre, p.descripcion, p.categoria, p.tipo, p.area_nombre, p.codigo, p.precio_venta].join(' '));
       return tokens.every(t=>pajar.includes(t));
     })()));
     if(orden==='precio_asc') lista = lista.slice().sort((a,b)=>a.precio_venta-b.precio_venta);
     else if(orden==='precio_desc') lista = lista.slice().sort((a,b)=>b.precio_venta-a.precio_venta);
     else if(orden==='nombre') lista = lista.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
+    lista = lista.filter(p=>!agotadoPublico(p)).concat(lista.filter(agotadoPublico));
     window.__catLista = lista;
-    document.getElementById('catGrid').innerHTML = lista.length ? lista.map(tarjeta).join('')
-      : `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':''}</div>`;
-    document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + (q||cat||area?' encontrado'+(lista.length===1?'':'s'):' disponible'+(lista.length===1?'':'s'));
-    const h = document.querySelector('.sf-hero p b'); if(h) h.textContent = productos.length;
+    const as = areasPresentes();
+    let html;
+    if(!lista.length) html = `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':''}</div>`;
+    else if(!area && as.length >= 2){
+      // "Todo": cada rubro en su propia sección, con su color y su nombre.
+      let i = 0;
+      html = as.map(a=>{ const ps = lista.filter(p=>p.area_clave===a.clave); return ps.length ? cabeceraRubro(a, ps.length) + ps.map(p=>tarjeta(p, i++)).join('') : ''; }).join('');
+    } else html = lista.map(tarjeta).join('');
+    document.getElementById('catGrid').innerHTML = html;
+    document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + (q||cat||area||tipoSel?' encontrado'+(lista.length===1?'':'s'):' disponible'+(lista.length===1?'':'s'));
+    const h = document.querySelector('.sf-hero p b'); if(h) h.textContent = productos.filter(p=>!agotadoPublico(p)).length;
   };
 
-  root.innerHTML = hero(productos.length, hayOtras()) + `
+  root.innerHTML = hero(productos.filter(p=>!agotadoPublico(p)).length, hayOtras()) + `
+    <div class="sf-rubros" id="areaChips"${rubrosHtml()?'':' hidden'}>${rubrosHtml()}</div>
     <div class="sf-bar">
       <div class="sf-tools">
         <div class="sf-search">${icon('search')}<input id="catBuscar" type="search" placeholder="Buscar producto…" autocomplete="off" aria-label="Buscar"></div>
         <select id="catOrden" aria-label="Ordenar"><option value="nuevo">Más nuevos</option><option value="precio_asc">Menor precio</option><option value="precio_desc">Mayor precio</option><option value="nombre">A–Z</option></select>
       </div>
-      ${areaChipsHtml()?`<div class="sf-chips" id="areaChips">${areaChipsHtml()}</div>`:`<div class="sf-chips" id="areaChips" hidden></div>`}
-      <div class="sf-chips" id="catChips">${chipsHtml()}</div>
+      <div class="sf-chips" id="tipoChips"${tiposHtml()?'':' hidden'}>${tiposHtml()}</div>
+      <div class="sf-chips" id="catChips"${chipsHtml()?'':' hidden'}>${chipsHtml()}</div>
     </div>
     <div class="sf-conteo" id="catConteo"></div>
     <div class="sf-grid" id="catGrid"></div>
@@ -4804,13 +5040,17 @@ async function renderCatalogoPublico(){
     ${vTel?`<a class="sf-fab" href="https://wa.me/${vTel}?text=${encodeURIComponent(saludoWsp)}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">${icon('whatsapp')}</a>`:''}`;
   document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value; dibujar(); });
   document.getElementById('catOrden').addEventListener('change', e=>{ orden = e.target.value; dibujar(); });
-  enlazarChips();
-  enlazarAreas();
+  const elegirRubro = clave=>{ area = clave; tipoSel = ''; cat = ''; pintarFiltros(); dibujar(); window.scrollTo({ top:0, behavior:'smooth' }); };
+  document.getElementById('areaChips').addEventListener('click', e=>{ const b = e.target.closest('[data-area]'); if(b) elegirRubro(b.dataset.area); });
+  document.getElementById('tipoChips').addEventListener('click', e=>{ const b = e.target.closest('[data-tipo]'); if(b){ tipoSel = b.dataset.tipo; pintarFiltros(); dibujar(); } });
+  document.getElementById('catChips').addEventListener('click', e=>{ const b = e.target.closest('[data-cat]'); if(b){ cat = b.dataset.cat; pintarFiltros(); dibujar(); } });
   dibujar();
 
   // Abrir el detalle al tocar la tarjeta (menos el botón de WhatsApp, que va directo)
   document.getElementById('catGrid').addEventListener('click', e=>{
     if(e.target.closest('[data-wsp]')) return;
+    const sec = e.target.closest('.sf-sec');
+    if(sec){ elegirRubro(sec.dataset.area); return; }
     const card = e.target.closest('.sf-card'); if(!card) return;
     const p = productos.find(x=>x.codigo===card.dataset.codigo);
     if(!p) return;
@@ -4834,11 +5074,9 @@ async function renderCatalogoPublico(){
   // Si lo que estaba filtrado desaparece (se vendió, se cerró un pedido…), se limpia el filtro.
   const refrescarFiltros = ()=>{
     if(area && !productos.some(p=>p.area_clave===area)) area = '';
+    if(tipoSel && !productos.some(p=>(!area || p.area_clave===area) && p.tipo===tipoSel)) tipoSel = '';
     if(cat && !productos.some(p=>(!area || p.area_clave===area) && p.categoria===cat)) cat = '';
-    const ac = document.getElementById('areaChips');
-    if(ac){ const h = areaChipsHtml(); ac.hidden = !h; ac.innerHTML = h; enlazarAreas(); }
-    const chips = document.getElementById('catChips');
-    if(chips){ chips.innerHTML = chipsHtml(); enlazarChips(); }
+    pintarFiltros();
   };
   sb.channel('catalogo').on('broadcast', { event:'cambio' }, actualizar).subscribe();
   // Cuentas regresivas de "bajo pedido": se actualizan solas y la tarjeta se va cuando cierra.
@@ -4853,10 +5091,10 @@ async function renderCatalogoPublico(){
 
 // Qué se muestra en el catálogo de los clientes: lo agotado y lo vencido no sale.
 function visiblePublico(p){
-  if(p.area_modo === 'cantidad') return (p.cantidad || 0) > 0;
   if(p.area_modo === 'pedido') return !!p.disponible_hasta && new Date(p.disponible_hasta).getTime() > Date.now();
-  return true;
+  return true;   // lo agotado SÍ se ve (marcado "Agotado"), para que el catálogo nunca parezca incompleto
 }
+function agotadoPublico(p){ return p.area_modo === 'cantidad' && (p.cantidad || 0) <= 0; }
 function infoAreaPublicaHtml(p){
   if(p.area_modo === 'cantidad') return (p.cantidad || 0) > 0 ? `<div class="sf-d-aviso">Disponibles: <b>${p.cantidad}</b></div>` : `<div class="sf-d-aviso cerrado">Agotado por ahora</div>`;
   if(p.area_modo === 'pedido' && p.disponible_hasta){
@@ -4932,7 +5170,7 @@ function detalleCatalogo(p, ctx){
       ${renderVideoEmbed(p.url_video)}
       <div class="sf-cta-bar">
         ${p.area_modo==='pedido' ? `<button type="button" class="sf-cta pedir" id="sfPedir">${icon('bookmark')} Pedir</button>`
-          : ctx.vTel?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
+          : (ctx.vTel && !agotadoPublico(p))?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
         <button type="button" class="sf-cta sec" id="sfCompartir">${icon('share')} Compartir esta pieza</button>
       </div>
     </div>`, 'sheet');
@@ -5178,6 +5416,7 @@ function modalVender(p, opts){
   openModal(`
     <div class="modal-head"><div class="modal-title">Vender: ${p.nombre}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
+      ${DB.hayAreas() && hayVariosRubros() ? `<div style="margin-bottom:12px;">${rubroTagHtml(DB.areaDe(p), (DB.tipoDe(p)||{}).nombre)}</div>` : ''}
       ${porCant ? `<div class="form-group"><label>Cantidad (hay ${p.cantidad||0})</label>
         <div class="stepper"><button type="button" id="vqMenos" aria-label="Menos">−</button><input type="number" inputmode="numeric" id="vqCant" min="1" max="${maxCant}" value="${cant}"><button type="button" id="vqMas" aria-label="Más">+</button></div></div>` : ''}
       <p class="text-muted mb-0">Selecciona los gastos que aplican a esta venta (se suman al precio, se cobran aparte al cliente).</p>
@@ -5225,6 +5464,7 @@ function modalVender(p, opts){
           <button type="button" class="pill-tab active" data-valor="1">Ya se entregó</button>
           <button type="button" class="pill-tab" data-valor="0">Por entregar</button>
         </div>
+        <div class="aviso-rojo" id="ventaEntregaAviso" hidden>${icon('clock')} Quedará todo en rojo en el inventario hasta que lo marques como entregado.</div>
       </div>
       </details>
     </div>
@@ -5275,6 +5515,7 @@ function modalVender(p, opts){
     document.querySelectorAll('#ventaEntregaTabs .pill-tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     entregado = btn.dataset.valor === '1';
+    document.getElementById('ventaEntregaAviso').hidden = entregado;
   }));
   document.getElementById('btnConfirmarVenta').addEventListener('click', async ()=>{
     const gastos = [...gastosOcultos, ...gastosDelProducto].map(g=>({ gasto_id:g.id, nombre:g.nombre, monto:montoAutomatico(g) }));
@@ -5300,10 +5541,14 @@ function modalVender(p, opts){
 
 function modalArea(a){
   let modo = a ? a.modo : 'cantidad';
+  let color = (a && a.color) || COLORES_RUBRO[DB.state.areas.length % COLORES_RUBRO.length];
+  let icono = (a && a.icono) || 'box';
   openModal(`
-    <div class="modal-head"><div class="modal-title">${a?'Cambiar nombre del área':'Nueva área'}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-head"><div class="modal-title">${a?'Editar rubro':'Nuevo rubro'}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
       <div class="form-group"><label>Nombre *</label><input id="arNombre" value="${a?escHtml(a.nombre):''}" placeholder="Ej: Repostería" autocomplete="off"></div>
+      <div class="form-group"><label>Color</label><div class="swatches" id="arColores">${COLORES_RUBRO.map(c=>`<button type="button" class="swatch${c===color?' on':''}" data-color="${c}" style="background:${c}" aria-label="Color ${c}"></button>`).join('')}</div></div>
+      <div class="form-group"><label>Ícono</label><div class="icon-pick" id="arIconos" style="--rubro:${color}">${ICONOS_RUBRO.map(i=>`<button type="button" class="icon-op${i===icono?' on':''}" data-icono="${i}" aria-label="${i}">${icon(i)}</button>`).join('')}</div></div>
       ${a ? `<div class="text-faint" style="font-size:12px;">${MODOS_AREA[a.modo].t}: ${MODOS_AREA[a.modo].d}</div>` : `
       <div class="form-group"><label>¿Cómo se vende?</label>
         <div class="modo-opciones" id="arModos">${Object.keys(MODOS_AREA).map(k=>`<button type="button" class="modo-op${k===modo?' active':''}" data-modo="${k}"><b>${MODOS_AREA[k].t}</b><small>${MODOS_AREA[k].d}</small></button>`).join('')}</div></div>`}
@@ -5312,13 +5557,20 @@ function modalArea(a){
   document.querySelectorAll('#arModos .modo-op').forEach(b=>b.addEventListener('click', ()=>{
     modo = b.dataset.modo; document.querySelectorAll('#arModos .modo-op').forEach(x=>x.classList.toggle('active', x===b));
   }));
+  document.querySelectorAll('#arColores .swatch').forEach(b=>b.addEventListener('click', ()=>{
+    color = b.dataset.color; document.querySelectorAll('#arColores .swatch').forEach(x=>x.classList.toggle('on', x===b));
+    document.getElementById('arIconos').style.setProperty('--rubro', color);
+  }));
+  document.querySelectorAll('#arIconos .icon-op').forEach(b=>b.addEventListener('click', ()=>{
+    icono = b.dataset.icono; document.querySelectorAll('#arIconos .icon-op').forEach(x=>x.classList.toggle('on', x===b));
+  }));
   document.getElementById('arGuardar').addEventListener('click', async ev=>{
     const nombre = document.getElementById('arNombre').value.trim();
-    if(!nombre) return toast('Escribe el nombre del área','danger');
+    if(!nombre) return toast('Escribe el nombre del rubro','danger');
     const btn = ev.target.closest('button'); btn.disabled = true;
-    const r = a ? await DB.editarArea(a.id, { nombre }) : await DB.crearArea({ nombre, modo });
+    const r = a ? await DB.editarArea(a.id, { nombre, color, icono }) : await DB.crearArea({ nombre, modo, color, icono });
     if(!r.ok){ btn.disabled = false; return toast('No se pudo guardar: '+r.error,'danger'); }
-    toast(a?'Área actualizada':'Área creada — ahora elige qué ven las vendedoras','success'); closeModal(); await refresh();
+    toast(a?'Rubro actualizado':'Rubro creado — ahora elige qué ven las vendedoras','success'); closeModal(); await refresh();
   });
 }
 function modalTipo(area, t){
@@ -5473,11 +5725,14 @@ Ctrl/Cmd+K (o la lupa) busca cualquier producto por nombre o código desde cualq
 ## Código QR y videos
 Cada producto tiene un código QR que abre su ficha pública (sin iniciar sesión) — útil para mostrarlo a un cliente. Se le puede poner un link de YouTube o TikTok (aunque sea un link corto) y se muestra embebido en la ficha.
 
-## Áreas y tipos
-Cada área ordena un tipo de venta: Productos, Electrodomésticos, 100% naturales, Comida rápida y lácteos, Ferreterías y Bajo pedido (en "Áreas" la admin puede crear más). Dentro de cada una hay "tipos" (por ejemplo, en Productos: Miscelánea, Usado, Nuevo, Importado, Amazon). Por cada área la admin elige tres cosas: si las vendedoras la ven, si pueden vender y si sale en el catálogo que se manda a los clientes. Por defecto, las áreas nuevas las vende solo la admin.
+## Rubros y su clasificación
+Tu negocio tiene varios rubros completos, cada uno con su color e ícono: Productos, Electrodomésticos, 100% naturales, Comida rápida y lácteos, Ferreterías y Bajo pedido (en "Rubros" puedes crear más, cambiarles el color y ponerles su propia clasificación). Dentro de cada rubro hay "tipos" (por ejemplo, en Productos: Miscelánea, Usado, Nuevo, Importado, Amazon; en Bajo pedido: Electrodomésticos, Hogar, Tecnología…). Los rubros se ven como fichas de colores en el inventario, en el catálogo de las vendedoras y en el catálogo de los clientes, donde cada rubro tiene su propia sección. Por cada rubro eliges tres cosas: si las vendedoras lo ven, si pueden vender y si sale en el catálogo de los clientes. Por defecto, los rubros nuevos los vendes solo tú.
 
 ## Existencias (por cantidad)
 En las áreas por cantidad (naturales, comida, ferreterías) el producto no se acaba al venderlo: dice "Disponibles: N" y baja solo con cada venta. La admin suma o resta con los botones + y − de la tarjeta (o desde "Existencias" para sumar varios de golpe). Cuando quedan pocos llega un aviso, y en el catálogo de los clientes lo agotado desaparece solo.
+
+## Pendiente de entrega
+Cuando vendes algo y marcas "Por entregar", toda la ficha del producto queda en rojo en el inventario (y la venta en rojo en las listas) hasta que lo marques como entregado. En el inventario hay una pestaña roja "Por entregar" que junta todo lo que falta.
 
 ## Bajo pedido y proveedores
 Se sube el producto con su foto, el precio, el proveedor y hasta cuándo se puede pedir. En el catálogo de los clientes aparece con una cuenta regresiva y un botón "Pedir": al tocarlo se registra el pedido y se abre WhatsApp. En "Pedidos" la admin ve quién pidió, usa "Pedir al proveedor" (mensaje listo con la foto), marca "Ya llegó" y vende. Si pasa la fecha y nadie pidió, el producto y sus fotos se borran solos; si alguien pidió, se queda hasta venderse.
@@ -6822,7 +7077,7 @@ function bindPageEvents(page){
     document.getElementById('swFotos').addEventListener('change', e=>{ verFotos = e.target.checked; guardarVerFotos(verFotos); dibujar(); });
     search.addEventListener('input', ()=>{ busquedaCat.q = search.value; dibujar(); });
     enlazarChipsCategoria('catalogoChips', busquedaCat, dibujar);
-    enlazarChipsAreas('catalogoAreas', busquedaCat, dibujar);
+    enlazarFiltrosRubros('catFiltros', busquedaCat, dibujar);
   }
   if(page==='a-inventario'){
     const search = document.getElementById('invSearch');
@@ -6830,7 +7085,7 @@ function bindPageEvents(page){
     centrarTabActiva();
     search.addEventListener('input', ()=>{ busquedaInv.q = search.value; dibujarInventario(); });
     enlazarChipsCategoria('invChips', busquedaInv, dibujarInventario);
-    enlazarChipsAreas('invAreas', busquedaInv, dibujarInventario);
+    enlazarFiltrosRubros('invFiltros', busquedaInv, dibujarInventario);
     document.getElementById('btnArchivar').addEventListener('click', accionArchivarVendidos);
     document.getElementById('btnImportarCSV').addEventListener('click', modalImportarCSV);
     document.getElementById('btnInvMas').addEventListener('click', ()=>hojaAcciones('Más acciones', '', [
@@ -6937,6 +7192,10 @@ function exportReportePDF(){
     </div>
     <h2>Ganancia neta — últimos ${reporteRangoDias} días</h2>
     ${svgLineaTendencia(r.porDia, r.etiquetasDias)}
+    ${DB.hayAreas() && r.rubroEntries.length ? `<h2>Ventas por rubro</h2>
+    <table class="print-table"><thead><tr><th>Rubro</th><th>Ventas</th><th>Ingresos</th><th>Ganancia</th></tr></thead><tbody>
+      ${r.rubroEntries.map(x=>`<tr><td>${escHtml(x.nombre)}</td><td>${x.count}</td><td>${money(x.ingresos)}</td><td>${money(x.ganancia)}</td></tr>`).join('')}
+    </tbody></table>` : ''}
     <h2>Ventas por vendedora</h2>
     <table class="print-table"><thead><tr><th>Vendedora</th><th>Ventas</th><th>Monto</th><th>Comisión</th></tr></thead><tbody>
       ${r.vendEntries.length ? r.vendEntries.map(v=>`<tr><td>${v.nombre}</td><td>${v.count}</td><td>${money(v.monto)}</td><td>${money(v.comision)}</td></tr>`).join('') : `<tr><td colspan="4">Sin datos</td></tr>`}
@@ -6959,7 +7218,7 @@ function exportBackupCompleto(){
   };
   addSheet('Productos', DB.state.productos.map(p=>({
     'Código':p.codigo, 'Nombre':p.nombre, 'Categoría':p.categoria||'', 'Etiquetas':(p.etiquetas||[]).join(', '),
-    'Área':DB.areaDe(p).nombre, 'Tipo':(DB.tipoDe(p)||{}).nombre||'', 'Existencias':p.cantidad==null?'':p.cantidad,
+    'Rubro':DB.areaDe(p).nombre, 'Tipo':(DB.tipoDe(p)||{}).nombre||'', 'Existencias':p.cantidad==null?'':p.cantidad,
     'Costo':p.costo, 'Precio':p.precio_venta, '% Comisión':p.porcentaje_ganancia, 'Estado':p.estado,
     'Disponible hasta':p.disponible_hasta?fmtDateShort(p.disponible_hasta):'',
     'Archivado':p.archivado?'Sí':'No', 'Creado':fmtDateShort(p.created_at)
@@ -7041,8 +7300,8 @@ async function ejecutarAccion(btn){
   else if(action==='editar-area'){ modalArea(DB.state.areas.find(a=>a.id===id)); }
   else if(action==='eliminar-area'){
     const a = DB.state.areas.find(x=>x.id===id);
-    if(DB.state.productos.some(p=>p.area_id===id)) return toast('Esta área todavía tiene productos. Cámbialos de área o elimínalos primero.','danger');
-    if(confirm('¿Eliminar el área "'+a.nombre+'" y sus tipos?')){ const r=await DB.eliminarArea(id); if(r.ok){ toast('Área eliminada','success'); await refresh(); } else toast('No se pudo eliminar: '+r.error,'danger'); }
+    if(DB.state.productos.some(p=>p.area_id===id)) return toast('Este rubro todavía tiene productos. Cámbialos de rubro o elimínalos primero.','danger');
+    if(confirm('¿Eliminar el rubro "'+a.nombre+'" y sus tipos?')){ const r=await DB.eliminarArea(id); if(r.ok){ toast('Rubro eliminado','success'); await refresh(); } else toast('No se pudo eliminar: '+r.error,'danger'); }
   }
   else if(action==='nuevo-tipo'){ modalTipo(DB.state.areas.find(a=>a.id===id), null); }
   else if(action==='tipo-menu'){
@@ -7105,8 +7364,8 @@ async function ejecutarAccion(btn){
   else if(action==='ver-historial-cliente'){ modalHistorialCliente(DB.state.clientes.find(c=>c.id===id)); }
   else if(action==='toggle-seccion'){ const key=btn.dataset.key; inventarioSeccionAbierta = (inventarioSeccionAbierta===key) ? null : key; navigate(currentPage); }
   else if(action==='inv-estado'){ inventarioSeccionAbierta = btn.dataset.key; dibujarInventario(); }
-  else if(action==='limpiar-busqueda-inv'){ busquedaInv = { q:'', cat:'', area:'' }; navigate(currentPage); }
-  else if(action==='limpiar-busqueda-cat'){ busquedaCat = { q:'', cat:'', area:'' }; navigate(currentPage); }
+  else if(action==='limpiar-busqueda-inv'){ busquedaInv = { q:'', cat:'', area:'', tipo:'' }; navigate(currentPage); }
+  else if(action==='limpiar-busqueda-cat'){ busquedaCat = { q:'', cat:'', area:'', tipo:'' }; navigate(currentPage); }
   else if(action==='extras-estado'){ busquedaExtras.estado = btn.dataset.key; dibujarExtras(); }
   else if(action==='limpiar-busqueda-extras'){ busquedaExtras.q = ''; navigate(currentPage); }
   else if(action==='mas-extra'){
@@ -7279,7 +7538,7 @@ async function renderPublicPage(codigo){
       ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
       ${renderVideoEmbed(p.url_video)}
       ${p.area_modo==='pedido' && visiblePublico(p) ? `<button type="button" class="sf-cta pedir" id="sfPedirFicha">${icon('bookmark')} Pedir</button>` : ''}
-      ${(p.area_modo==='pedido' || (p.area_modo==='cantidad' && !visiblePublico(p))) ? '' : vendedorTel ? `<a class="sf-cta" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre+' (código '+p.codigo+')\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
+      ${(p.area_modo==='pedido' || agotadoPublico(p)) ? '' : vendedorTel ? `<a class="sf-cta" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre+' (código '+p.codigo+')\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
     </div>
   </div>`;
   document.querySelectorAll('.ficha-foto').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));

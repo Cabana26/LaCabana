@@ -822,6 +822,105 @@ details.panel-plegable>summary .chev svg{width:18px;height:18px;stroke:var(--col
 .badge.entrega-ok{background:#DCEFE3;color:#1B6B3E;}
 .badge.entrega-no{background:#FBE3E0;color:#B3261E;}
 .chip-nueva{border-style:dashed;color:var(--color-accent-dark);}
+
+/* ---------- Recorte de fotos y fotos compartidas ---------- */
+.photo-preview img{cursor:pointer;}
+.photo-crop-badge{position:absolute;left:3px;bottom:3px;width:19px;height:19px;border-radius:6px;background:rgba(15,23,42,.65);color:#fff;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.photo-crop-badge svg{width:12px;height:12px;stroke:currentColor;fill:none;}
+.crop-overlay{position:fixed;inset:0;z-index:5000;background:#14100d;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top);}
+.crop-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;}
+.crop-titulo{color:#fff;font-weight:700;}
+.crop-area{flex:1;min-height:0;position:relative;}
+.crop-area img{display:block;max-width:100%;}
+.crop-barra{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px calc(14px + env(safe-area-inset-bottom));}
+.crop-barra .seg{flex:1;max-width:340px;}
+.crop-rot{display:flex;gap:8px;}
+.crop-rot .icon-btn{background:rgba(255,255,255,.14);color:#fff;border:none;}
+.crop-rot .icon-btn svg{stroke:#fff;}
+.sf-equipo{text-align:center;padding:18px 0 30px;}
+.sf-equipo a{font-size:11.5px;color:var(--color-text-faint);text-decoration:none;}
+.ficha-foot{justify-content:stretch;}
+.ficha-foot .btn{flex:1;justify-content:center;}
+
+/* ---------- Videos ---------- */
+.video-subido{width:100%;max-height:60vh;border-radius:14px;background:#000;display:block;margin-bottom:12px;}
+.np-video{margin:0 0 16px;}
+.video-chip{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--color-surface-alt);}
+.video-chip>svg{width:20px;height:20px;stroke:var(--color-accent-dark);fill:none;flex-shrink:0;}
+.vc-txt{flex:1;min-width:0;font-weight:600;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.vc-txt small{display:block;font-weight:500;color:var(--color-text-faint);font-size:11.5px;}
+.vc-x{width:30px;height:30px;border-radius:50%;border:none;background:rgba(15,23,42,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;color:var(--color-text);padding:0;}
+.vc-x svg{width:14px;height:14px;stroke:currentColor;fill:none;}
+.sf-video{position:absolute;bottom:10px;left:10px;display:flex;align-items:center;gap:4px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;}
+.sf-video svg{width:12px;height:12px;stroke:currentColor;fill:currentColor;}
+/* ---- Áreas, existencias y bajo pedido ---- */
+.pc-area{font-size:11.5px;color:var(--color-text-muted);margin-top:2px;}
+.pc-stock{display:inline-flex;align-items:center;margin-top:8px;border:1px solid var(--color-border);border-radius:999px;overflow:hidden;background:var(--color-surface);}
+.pc-stock button{width:36px;height:32px;border:0;background:transparent;font-size:19px;font-weight:700;line-height:1;color:var(--color-text);cursor:pointer;transition:background 120ms var(--ease-out),transform 120ms var(--ease-out);}
+.pc-stock button:active{transform:scale(.9);background:var(--color-border);}
+.pc-stock b{min-width:34px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums;}
+.stepper{display:flex;align-items:stretch;width:max-content;max-width:100%;border:1px solid var(--color-border);border-radius:12px;overflow:hidden;background:var(--color-surface);}
+.stepper button{width:48px;border:0;background:var(--color-surface-alt);font-size:22px;font-weight:700;color:var(--color-text);cursor:pointer;transition:transform 120ms var(--ease-out);}
+.stepper button:active{transform:scale(.92);}
+.stepper input{width:76px;height:46px;border:0;border-left:1px solid var(--color-border);border-right:1px solid var(--color-border);border-radius:0;text-align:center;font-size:17px;font-weight:700;background:transparent;font-variant-numeric:tabular-nums;}
+.stepper-linea{display:flex;gap:8px;}
+.stepper-linea input{flex:1;min-width:0;}
+.ex-actual{text-align:center;}
+.ex-actual b{display:block;font-size:52px;line-height:1.05;font-variant-numeric:tabular-nums;}
+.ex-actual span{color:var(--color-text-muted);font-size:13px;}
+.ex-botones{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px;}
+.area-extra{border:1px dashed var(--color-border);border-radius:12px;padding:12px 12px 2px;margin-bottom:14px;background:var(--color-surface-alt);}
+.area-card{padding:16px;}
+.area-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;}
+.area-nombre{font-size:16px;font-weight:800;}
+.area-btns{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.area-switches{display:flex;flex-direction:column;border-top:1px solid var(--color-border);margin-top:8px;}
+.area-sw{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--color-border);cursor:pointer;}
+.area-sw span:first-child{display:flex;flex-direction:column;gap:2px;}
+.area-sw b{font-size:13.5px;}
+.area-sw small{color:var(--color-text-muted);font-size:11.5px;}
+.area-tipos{display:flex;align-items:flex-start;gap:12px;padding-top:12px;}
+.area-tipos-t{font-size:12px;font-weight:800;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:.06em;padding-top:8px;}
+.modo-opciones{display:flex;flex-direction:column;gap:8px;}
+.modo-op{display:flex;flex-direction:column;gap:3px;text-align:left;border:1px solid var(--color-border);background:var(--color-surface);border-radius:12px;padding:11px 13px;cursor:pointer;transition:border-color 120ms var(--ease-out),background 120ms var(--ease-out);}
+.modo-op small{color:var(--color-text-muted);font-size:11.5px;line-height:1.35;}
+.modo-op.active{border-color:var(--color-accent);background:var(--coffee-50);}
+.pedido-card{padding:14px 16px;}
+.pedido-head .badge,.pedido-fila .badge,.product-card .who .badge{white-space:nowrap;}
+.pedido-head{display:flex;gap:12px;align-items:center;margin-bottom:8px;}
+.pc-photo.mini{width:58px;height:58px;aspect-ratio:1;margin:0;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ph-nombre{font-weight:800;font-size:15px;}
+.ph-sub{font-size:12.5px;color:var(--color-text-muted);margin:2px 0 4px;}
+.pedido-fila{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--color-border);flex-wrap:wrap;}
+.pf-main{flex:1;min-width:140px;}
+.pf-nombre{font-weight:700;font-size:13.5px;}
+.pf-cant{font-weight:600;color:var(--color-text-muted);}
+.pf-sub{font-size:11.5px;color:var(--color-text-muted);margin-top:2px;}
+.pf-acc{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.pedido-pie{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--color-border);padding-top:12px;margin-top:4px;}
+.pp-foto{width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-bottom:12px;display:block;}
+.pp-foot{flex-wrap:wrap;}
+.pp-foot .btn{flex:1;min-width:150px;justify-content:center;}
+.sf-stock{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.94);color:var(--color-text);font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.sf-pedido{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:5px;background:var(--color-accent);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.18);}
+.sf-pedido svg{width:12px;height:12px;stroke:currentColor;fill:none;}
+.sf-btn.pedir,.sf-cta.pedir{background:var(--color-accent);}
+.sf-d-aviso{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:13px;color:var(--color-text-muted);}
+.sf-d-aviso svg{width:15px;height:15px;stroke:currentColor;fill:none;}
+.sf-d-aviso b{color:var(--color-text);}
+.sf-d-aviso.cerrado{color:var(--red-600);font-weight:700;}
+.pd-prod{display:flex;flex-direction:column;gap:3px;margin-bottom:14px;}
+.pd-prod b{font-size:16px;}
+.pd-prod span{font-weight:800;color:var(--color-accent-dark);}
+.pd-prod small{color:var(--color-text-muted);display:flex;align-items:center;gap:5px;}
+.pd-prod small svg{width:13px;height:13px;stroke:currentColor;fill:none;}
+.pd-ok{text-align:center;padding:8px 0 4px;}
+.pd-ok h3{margin:10px 0 4px;}
+.pd-ok p{color:var(--color-text-muted);font-size:13.5px;}
+.pd-check{width:54px;height:54px;border-radius:50%;background:var(--forest-100);color:var(--forest-700);display:inline-flex;align-items:center;justify-content:center;}
+.pd-check svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:2.4;}
+@media (prefers-reduced-motion:reduce){.pc-stock button,.stepper button,.modo-op{transition:none;}}
+
 </style>
 </head>
 <body>
@@ -917,7 +1016,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '16-oct-2026 · v6';
+const VERSION_PANEL = '20-oct-2026 · v9';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -941,7 +1040,7 @@ const DB = {
   async fetchAll(){
     const [usuariosRes, usuariosPubRes, configRes, cajasRes, productosRes, fotosRes,
            categoriasRes, gastosRes, gastosAplicadosRes, ventaHistorialRes,
-           pagosRes, devolucionesRes, bitacoraRes, notifRes, clientesRes, abonosRes] = await Promise.all([
+           pagosRes, devolucionesRes, bitacoraRes, notifRes, clientesRes, abonosRes, areasRes, tiposRes] = await Promise.all([
       sb.from('usuarios').select('*'),
       sb.from('usuarios_publico').select('*'),
       sb.from('configuracion').select('*'),
@@ -958,6 +1057,8 @@ const DB = {
       sb.from('notificaciones').select('*').order('created_at', { ascending:false }).limit(50),
       sb.from('clientes').select('*').order('nombre'),
       sb.from('abonos').select('*').order('created_at', { ascending:false }),
+      sb.from('areas').select('*').order('orden'),
+      sb.from('tipos_producto').select('*').order('orden'),
     ]);
     // La tabla "usuarios" solo trae la fila propia (o todas, si eres admin);
     // usuarios_publico trae nombre/género/rol de todo el mundo. Se combinan
@@ -981,6 +1082,7 @@ const DB = {
       notificaciones: notifRes.data || [],
       clientes: clientesRes.data || [],
       abonos: abonosRes.data || [],
+      areas: areasRes.data || [], tipos: tiposRes.data || [], proveedores: [], pedidos: [],
       ubicaciones: [], externas: [], extras: [], cajas_ext: [], extras_items: [], extras_pagos: [],
     };
     const yo = this.state.usuarios.find(u=>u.id===this.authUserId);
@@ -995,6 +1097,11 @@ const DB = {
       ]);
       this.state.ubicaciones = ub.data || []; this.state.externas = ex.data || []; this.state.extras = pr.data || [];
       this.state.cajas_ext = cj.data || []; this.state.extras_items = it.data || []; this.state.extras_pagos = pg.data || [];
+      const [pv, pd] = await Promise.all([
+        sb.from('proveedores').select('*').order('nombre'),
+        sb.from('pedidos').select('*').order('created_at', { ascending:false }),
+      ]);
+      this.state.proveedores = pv.data || []; this.state.pedidos = pd.data || [];
     }
   },
 
@@ -1032,6 +1139,117 @@ const DB = {
     return error ? { ok:false, error:error.message } : { ok:true };
   },
 
+  // ---------------- ÁREAS, EXISTENCIAS Y PEDIDOS ----------------
+  // Si la migración 22 todavía no se corrió, no hay áreas: todo cuenta como "Productos" y nada cambia.
+  areaPorDefecto: { id:null, clave:'productos', nombre:'Productos', modo:'unico', visible_vendedoras:true, vendedoras_venden:true, visible_publico:true, orden:1, activa:true },
+  hayAreas(){ return !!(this.state && this.state.areas && this.state.areas.length); },
+  areaDe(p){
+    const s = this.state; if(!s || !s.areas || !s.areas.length) return this.areaPorDefecto;
+    return (p && p.area_id && s.areas.find(a=>a.id===p.area_id)) || s.areas.find(a=>a.clave==='productos') || this.areaPorDefecto;
+  },
+  modoDe(p){ return this.areaDe(p).modo; },
+  esPorCantidad(p){ return this.modoDe(p) !== 'unico'; },
+  // Las vendedoras solo venden en las áreas que el admin les abrió (el servidor también lo exige).
+  puedeVender(p){ return this.isAdmin() || !!this.areaDe(p).vendedoras_venden; },
+  tipoDe(p){ return p && p.tipo_id ? ((this.state.tipos||[]).find(t=>t.id===p.tipo_id) || null) : null; },
+  proveedorDe(id){ return id ? ((this.state.proveedores||[]).find(x=>x.id===id) || null) : null; },
+  pedidosDe(productoId){ return (this.state.pedidos||[]).filter(x=>x.producto_id===productoId); },
+  pedidosActivos(productoId){ return this.pedidosDe(productoId).filter(x=>x.estado!=='cancelado' && x.estado!=='entregado'); },
+  // Campos nuevos que se guardan junto al producto (solo cuando ya existen las áreas).
+  camposAreaInsert(d){
+    if(!this.hayAreas()) return {};
+    const num = v => (v==null || v==='') ? null : Math.max(0, parseInt(v,10) || 0);
+    return {
+      area_id: d.area_id || null, tipo_id: d.tipo_id || null, cantidad: num(d.cantidad),
+      cantidad_minima: num(d.cantidad_minima) || 0, proveedor_id: d.proveedor_id || null,
+      disponible_hasta: d.disponible_hasta || null
+    };
+  },
+  async venderCantidad(productoId, cantidad, gastos, clienteId, estadoPago, pedidoId){
+    const { data, error } = await sb.rpc('fn_vender_cantidad', {
+      p_producto_id: productoId, p_cantidad: cantidad, p_gastos: gastos||[],
+      p_cliente_id: clienteId||null, p_estado_pago: estadoPago||'pagado', p_pedido_id: pedidoId||null
+    });
+    if(error) return { ok:false, error: error.message };
+    return { ok:true, data };
+  },
+  async ajustarCantidad(productoId, delta, motivo){
+    const { data, error } = await sb.rpc('fn_ajustar_cantidad', { p_producto_id: productoId, p_delta: delta, p_motivo: motivo||null });
+    if(error) return { ok:false, error: error.message };
+    return { ok:true, data };
+  },
+  async cambiarEstadoPedido(pedidoId, estado){
+    const { data, error } = await sb.rpc('fn_cambiar_estado_pedido', { p_pedido_id: pedidoId, p_estado: estado });
+    if(error) return { ok:false, error: error.message };
+    return { ok:true, data };
+  },
+  // Sin login: el cliente toca "Pedir" en el catálogo público.
+  async registrarPedidoPublico(codigo, nombre, telefono, cantidad){
+    const { data, error } = await sb.rpc('fn_registrar_pedido', { p_codigo: codigo, p_nombre: nombre, p_telefono: telefono||null, p_cantidad: cantidad||1 });
+    if(error) return { ok:false, error: error.message };
+    return { ok:true, data };
+  },
+  async crearArea(d){
+    const clave = 'a' + Date.now().toString(36);
+    const orden = Math.max(0, ...this.state.areas.map(a=>a.orden||0)) + 1;
+    const { data:row, error } = await sb.from('areas').insert({ clave, nombre:d.nombre, modo:d.modo, orden }).select().single();
+    if(error) return { ok:false, error: error.message };
+    await sb.rpc('fn_registrar_bitacora', { p_tipo:'crear', p_tabla:'areas', p_registro_id:row.id, p_descripcion:'Área creada: '+row.nombre });
+    return { ok:true, data:row };
+  },
+  async editarArea(id, d){
+    const { data:row, error } = await sb.from('areas').update(d).eq('id', id).select().single();
+    if(error) return { ok:false, error: error.message };
+    await sb.rpc('fn_registrar_bitacora', { p_tipo:'editar', p_tabla:'areas', p_registro_id:id, p_descripcion:'Área editada: '+row.nombre });
+    return { ok:true, data:row };
+  },
+  async eliminarArea(id){
+    const a = this.state.areas.find(x=>x.id===id);
+    const { error } = await sb.from('areas').delete().eq('id', id);
+    if(error) return { ok:false, error: error.message };
+    await sb.rpc('fn_registrar_bitacora', { p_tipo:'eliminar', p_tabla:'areas', p_registro_id:id, p_descripcion:'Área eliminada: '+(a?a.nombre:'') });
+    return { ok:true };
+  },
+  async crearTipo(areaId, nombre){
+    const orden = Math.max(0, ...this.state.tipos.filter(t=>t.area_id===areaId).map(t=>t.orden||0)) + 1;
+    const { data:row, error } = await sb.from('tipos_producto').insert({ area_id:areaId, nombre, orden }).select().single();
+    return error ? { ok:false, error: error.message } : { ok:true, data:row };
+  },
+  async editarTipo(id, nombre){
+    const { error } = await sb.from('tipos_producto').update({ nombre }).eq('id', id);
+    return error ? { ok:false, error: error.message } : { ok:true };
+  },
+  async eliminarTipo(id){
+    const { error } = await sb.from('tipos_producto').delete().eq('id', id);
+    return error ? { ok:false, error: error.message } : { ok:true };
+  },
+  async guardarProveedor(id, d){
+    const q = id ? sb.from('proveedores').update(d).eq('id', id) : sb.from('proveedores').insert(d);
+    const { data:row, error } = await q.select().single();
+    if(error) return { ok:false, error: error.message };
+    await sb.rpc('fn_registrar_bitacora', { p_tipo: id?'editar':'crear', p_tabla:'proveedores', p_registro_id:row.id, p_descripcion:(id?'Proveedor editado: ':'Proveedor creado: ')+row.nombre });
+    return { ok:true, data:row };
+  },
+  async eliminarProveedor(id){
+    const { error } = await sb.from('proveedores').delete().eq('id', id);
+    return error ? { ok:false, error: error.message } : { ok:true };
+  },
+  // "Bajo pedido" sin ningún pedido y con la fecha vencida: se borra el producto y sus archivos.
+  // (Si alguien pidió, se queda hasta que se venda; después sigue la regla normal de los vendidos.)
+  async limpiarBajoPedido(){
+    if(!this.isAdmin() || !this.hayAreas()) return 0;
+    const ahora = Date.now();
+    const vencidos = this.state.productos.filter(p=>this.modoDe(p)==='pedido' && p.estado==='en_inventario' && !p.archivado
+      && p.disponible_hasta && new Date(p.disponible_hasta).getTime() < ahora
+      && !this.pedidosDe(p.id).some(x=>x.estado!=='cancelado'));
+    let n = 0;
+    for(const p of vencidos){
+      const r = await this.eliminarProducto(p.id);
+      if(r.ok) n++;
+    }
+    return n;
+  },
+
   // ---------------- PRODUCTOS ----------------
   async crearProducto(data, archivos){
     const insertData = {
@@ -1043,6 +1261,7 @@ const DB = {
       gastos_predefinidos: data.gastos_predefinidos || [],
       created_by_admin: this.currentUser().id
     };
+    Object.assign(insertData, this.camposAreaInsert(data));
     const { data:prod, error } = await sb.from('productos').insert(insertData).select().single();
     if(error) return { ok:false, error: error.message };
     if(archivos && archivos.length) await this.subirFotos(prod.id, 'inventario', archivos);
@@ -1060,6 +1279,7 @@ const DB = {
       gastos_predefinidos: p.gastos_predefinidos || [],
       created_by_admin: this.currentUser().id
     };
+    Object.assign(insertData, this.camposAreaInsert({ ...p, cantidad: p.cantidad==null ? null : 0 }));
     const { data:row, error } = await sb.from('productos').insert(insertData).select().single();
     if(error) return { ok:false, error: error.message };
     await sb.rpc('fn_registrar_bitacora', { p_tipo:'duplicar', p_tabla:'productos', p_registro_id:row.id, p_descripcion:'Producto duplicado de "'+p.nombre+'": '+row.nombre });
@@ -1116,29 +1336,75 @@ const DB = {
   async subirFotos(productoId, fase, archivos, onProgreso){
     const existentes = this.fotosDe(productoId, fase).length;
     const fmt = formatoFoto();
-    let hechas = 0, buenas = 0;
+    let hechas = 0, buenas = 0, lento = false;
+    const fallidas = [];
+    this.fotosFallidas = []; this.ultimoErrorFoto = '';
+    await refrescarSesion();
     const subir = async (archivo, i)=>{
       try{
-        const { grande, mini } = await procesarFoto(archivo);
+        let proc;
+        try{ proc = await procesarFoto(archivo); }catch(e){ throw new Error('No se pudo leer la foto'); }
         const base = productoId + '/' + fase + '-' + (existentes+i+1) + '-' + Date.now();
-        const opts = { contentType: fmt.mime, cacheControl: '31536000' };
-        const [up] = await Promise.all([
-          sb.storage.from('productos-fotos').upload(base + '.' + fmt.ext, grande, opts),
-          sb.storage.from('productos-fotos').upload(base + '-t.' + fmt.ext, mini, opts)
-        ]);
-        if(up.error){ toast('No se pudo subir una foto: '+up.error.message,'danger'); return; }
+        const opts = { contentType: fmt.mime, cacheControl: '31536000', upsert: true };
+        await conReintentos(async ()=>{
+          const [up] = await conTiempo(Promise.all([
+            sb.storage.from('productos-fotos').upload(base + '.' + fmt.ext, proc.grande, opts),
+            sb.storage.from('productos-fotos').upload(base + '-t.' + fmt.ext, proc.mini, opts)
+          ]), 60000, 'Se tardó demasiado (señal débil)');
+          if(up.error) throw new Error(up.error.message);
+        });
         const { data:pub } = sb.storage.from('productos-fotos').getPublicUrl(base + '.' + fmt.ext);
-        await sb.from('fotos_producto').insert({ producto_id:productoId, url_foto:pub.publicUrl, fase, orden: existentes+i+1, uploaded_by_id:this.currentUser().id });
+        await conReintentos(async ()=>{
+          const r = await sb.from('fotos_producto').insert({ producto_id:productoId, url_foto:pub.publicUrl, fase, orden: existentes+i+1, uploaded_by_id:this.currentUser().id });
+          if(r.error) throw new Error(r.error.message);
+        });
         buenas++;
-      }catch(e){ toast('No se pudo procesar una foto','danger'); }
+      }catch(e){ fallidas.push(archivo); this.ultimoErrorFoto = mensajeErrorFoto(e); lento = true; }
       finally{ hechas++; if(onProgreso) onProgreso(hechas, archivos.length); }
     };
     const cola = archivos.map((a,i)=>[a,i]);
-    await Promise.all(Array.from({ length: Math.min(3, cola.length) }, async ()=>{
-      while(cola.length){ const [a,i] = cola.shift(); await subir(a,i); }
+    // De a 2 a la vez; si una falla, el resto sigue de a una (mejor con poca señal).
+    await Promise.all(Array.from({ length: Math.min(2, cola.length) }, async (_, w)=>{
+      while(cola.length){
+        if(w > 0 && lento) break;
+        const [a,i] = cola.shift(); await subir(a,i);
+      }
     }));
+    this.fotosFallidas = fallidas;
     return buenas;
   },
+  // --- Videos subidos
+  async subirVideo(productoId, prep){
+    await refrescarSesion();
+    const ruta = productoId + '/video-' + Date.now() + '.' + prep.ext;
+    await conReintentos(async ()=>{
+      const r = await conTiempo(sb.storage.from('productos-fotos').upload(ruta, prep.blob, { contentType:prep.mime, cacheControl:'31536000', upsert:true }), 240000, 'Se tardó demasiado (señal débil)');
+      if(r.error) throw new Error(r.error.message);
+    });
+    return sb.storage.from('productos-fotos').getPublicUrl(ruta).data.publicUrl;
+  },
+  async borrarVideoSubido(url){
+    if(!esVideoSubido(url)) return;
+    const marcador = '/productos-fotos/', idx = url.indexOf(marcador);
+    await sb.storage.from('productos-fotos').remove([decodeURIComponent(url.slice(idx + marcador.length).split('?')[0])]);
+  },
+  // Prepara (comprime si hace falta), sube y deja el video en el producto; quita el anterior si lo había.
+  async subirVideoProducto(productoId, archivo, onPrep, onSubiendo, urlAnterior){
+    try{
+      const prep = await prepararVideo(archivo, onPrep);
+      if(onSubiendo) onSubiendo();
+      const url = await this.subirVideo(productoId, prep);
+      const { error } = await sb.from('productos').update({ url_video:url }).eq('id', productoId);
+      if(error){ await this.borrarVideoSubido(url); throw new Error(error.message); }
+      if(urlAnterior) await this.borrarVideoSubido(urlAnterior);
+      return { ok:true, url };
+    }catch(e){ return { ok:false, error: e.claro ? e.message : mensajeErrorFoto(e) }; }
+  },
+  async espacioUsado(){
+    const { data, error } = await sb.rpc('fn_espacio_usado');
+    return error ? null : data;
+  },
+
   // Borra la fila Y los archivos reales en Storage (si no, quedan huérfanos ocupando espacio).
   async eliminarFoto(fotoId){
     const foto = this.state.fotos.find(f=>f.id===fotoId); if(!foto) return { ok:false, error:'NO_ENCONTRADA' };
@@ -1176,6 +1442,7 @@ const DB = {
   // "Archivar Vendidos": el servidor decide (misma regla que antes) — solo
   // elimina fotos de productos vendidos hace N días y los marca archivado=true.
   async archivarVendidos(){
+    await this.limpiarBajoPedido();
     // El SQL (fn_archivar_vendidos) solo borra las filas de fotos: no puede
     // tocar Storage. Por eso, antes, el admin borra desde aquí los archivos
     // reales de los productos que están por archivarse. Si algo falla, se
@@ -1242,14 +1509,17 @@ const DB = {
   // Sube UNA foto suelta (bodega, productos extras) con su miniatura; devuelve la URL pública.
   async subirFotoSuelta(carpeta, archivo){
     const fmt = formatoFoto();
+    await refrescarSesion();
     const { grande, mini } = await procesarFoto(archivo);
     const base = carpeta + '/foto-' + Date.now();
-    const opts = { contentType: fmt.mime, cacheControl: '31536000' };
-    const [up] = await Promise.all([
-      sb.storage.from('productos-fotos').upload(base + '.' + fmt.ext, grande, opts),
-      sb.storage.from('productos-fotos').upload(base + '-t.' + fmt.ext, mini, opts)
-    ]);
-    if(up.error) throw new Error(up.error.message);
+    const opts = { contentType: fmt.mime, cacheControl: '31536000', upsert: true };
+    await conReintentos(async ()=>{
+      const [up] = await conTiempo(Promise.all([
+        sb.storage.from('productos-fotos').upload(base + '.' + fmt.ext, grande, opts),
+        sb.storage.from('productos-fotos').upload(base + '-t.' + fmt.ext, mini, opts)
+      ]), 60000, 'Se tardó demasiado (señal débil)');
+      if(up.error) throw new Error(up.error.message);
+    });
     return sb.storage.from('productos-fotos').getPublicUrl(base + '.' + fmt.ext).data.publicUrl;
   },
   async borrarFotoSuelta(url){
@@ -1765,6 +2035,222 @@ function redimensionarABlob(src, maxDim, calidad){
   const ctx = c.getContext('2d'); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(src, 0, 0, w, h);
   return new Promise(res=>c.toBlob(b=>res(b), formatoFoto().mime, calidad));
 }
+// ---------------------------------------------------------------------
+// Subidas que aguantan mala señal: esperan a que vuelva internet, reintentan
+// con pausas crecientes y no se quedan colgadas si la señal se cae a medias.
+// ---------------------------------------------------------------------
+const dormir = ms=>new Promise(r=>setTimeout(r, ms));
+async function esperarInternet(max){
+  if(navigator.onLine !== false) return;
+  await new Promise(res=>{
+    const fin = ()=>{ clearTimeout(t); window.removeEventListener('online', fin); res(); };
+    const t = setTimeout(fin, max || 40000);
+    window.addEventListener('online', fin);
+  });
+}
+function conTiempo(promesa, ms, mensaje){
+  let t;
+  return Promise.race([promesa, new Promise((_,rej)=>{ t = setTimeout(()=>rej(new Error(mensaje || 'Se tardó demasiado')), ms); })]).finally(()=>clearTimeout(t));
+}
+async function conReintentos(tarea, intentos){
+  intentos = intentos || 3; let ultimo;
+  for(let i = 1; i <= intentos; i++){
+    try{ await esperarInternet(); return await tarea(i); }
+    catch(e){ ultimo = e; if(i < intentos) await dormir(1200 * i * i); }
+  }
+  throw ultimo;
+}
+// La sesión puede haberse vencido con la app en segundo plano: se renueva antes de subir.
+async function refrescarSesion(){ try{ await sb.auth.getSession(); }catch(e){} }
+function mensajeErrorFoto(e){
+  const m = String((e && e.message) || e || '');
+  if(/failed to fetch|network|load failed|tardó/i.test(m)) return 'Sin señal suficiente';
+  if(/jwt|token|expired|401|403/i.test(m)) return 'La sesión venció: sal y vuelve a entrar';
+  return m.slice(0, 80);
+}
+
+// ---------------------------------------------------------------------
+// Videos subidos desde la galería. Se guardan en la carpeta del producto, así que
+// se borran con sus fotos (al pasar los días de vendido o al eliminar el producto).
+// Máximo 60 segundos. Si pesan mucho, se comprimen en el teléfono antes de subir
+// (para cuidar el espacio y los datos de quien los ve).
+// ---------------------------------------------------------------------
+const VIDEO_MAX_SEG = 60, VIDEO_MAX_MB = 45, VIDEO_OBJETIVO_MB = 12;
+function esVideoSubido(url){
+  return !!url && /\/storage\/v1\/object\/public\/productos-fotos\//.test(url) && /\.(mp4|webm|mov|m4v)(\?|$)/i.test(url);
+}
+function leerMetaVideo(file){
+  return new Promise((res, rej)=>{
+    const url = URL.createObjectURL(file), v = document.createElement('video');
+    v.preload = 'metadata'; v.muted = true;
+    v.onloadedmetadata = ()=>{ const m = { duracion: isFinite(v.duration) ? v.duration : 0, ancho: v.videoWidth, alto: v.videoHeight }; URL.revokeObjectURL(url); res(m); };
+    v.onerror = ()=>{ URL.revokeObjectURL(url); rej(new Error('No se pudo leer el video')); };
+    v.src = url;
+  });
+}
+function elegirMimeVideo(){
+  if(!window.MediaRecorder) return null;
+  return ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'].find(t=>MediaRecorder.isTypeSupported(t)) || null;
+}
+// Reproduce el video en silencio y lo vuelve a grabar a 720p y ~2 Mbps.
+function comprimirVideo(file, meta, onProgreso){
+  return new Promise((resolve, reject)=>{
+    const mime = elegirMimeVideo();
+    if(!mime || !HTMLCanvasElement.prototype.captureStream) return reject(new Error('NO_SOPORTADO'));
+    const url = URL.createObjectURL(file), v = document.createElement('video');
+    v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = url;
+    let detenido = false, rec = null;
+    const limpiar = ()=>{ detenido = true; URL.revokeObjectURL(url); try{ v.pause(); }catch(e){} v.removeAttribute('src'); try{ v.load(); }catch(e){} };
+    v.onerror = ()=>{ limpiar(); reject(new Error('No se pudo leer el video')); };
+    v.onloadedmetadata = ()=>{
+      const escala = Math.min(1, 720 / Math.min(v.videoWidth, v.videoHeight));
+      const W = Math.max(2, Math.round(v.videoWidth * escala / 2) * 2), H = Math.max(2, Math.round(v.videoHeight * escala / 2) * 2);
+      const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      const ctx = cv.getContext('2d'), salida = cv.captureStream(30);
+      try{
+        const cap = v.captureStream ? v.captureStream() : (v.mozCaptureStream ? v.mozCaptureStream() : null);
+        if(cap) cap.getAudioTracks().forEach(t=>salida.addTrack(t));
+      }catch(e){}
+      try{ rec = new MediaRecorder(salida, { mimeType:mime, videoBitsPerSecond:2000000, audioBitsPerSecond:96000 }); }
+      catch(e){ limpiar(); return reject(e); }
+      const partes = [], tipo = mime.split(';')[0];
+      rec.ondataavailable = e=>{ if(e.data && e.data.size) partes.push(e.data); };
+      rec.onstop = ()=>{ limpiar(); const blob = new Blob(partes, { type:tipo }); if(blob.size) resolve({ blob, mime:tipo, ext: tipo==='video/mp4' ? 'mp4' : 'webm' }); else reject(new Error('VACIO')); };
+      const dibujar = ()=>{
+        if(detenido) return;
+        ctx.drawImage(v, 0, 0, W, H);
+        if(onProgreso && v.duration) onProgreso(Math.min(1, v.currentTime / v.duration));
+        if(!v.ended) requestAnimationFrame(dibujar);
+      };
+      v.onended = ()=>{ if(rec && rec.state !== 'inactive') rec.stop(); };
+      rec.start(500);
+      v.play().then(()=>requestAnimationFrame(dibujar)).catch(e=>{ limpiar(); try{ rec.stop(); }catch(_){} reject(e); });
+      // seguro: si algo se atora, se corta un poco después de lo que dura el video
+      setTimeout(()=>{ if(!detenido && rec && rec.state !== 'inactive'){ try{ rec.stop(); }catch(_){} } }, (Math.min(meta.duracion || 60, 70) + 15) * 1000);
+    };
+  });
+}
+// Revisa el video y lo deja listo para subir: { blob, mime, ext }. Lanza un Error con un mensaje claro.
+async function prepararVideo(file, onProgreso){
+  const meta = await leerMetaVideo(file);
+  if(meta.duracion > VIDEO_MAX_SEG) throw Object.assign(new Error('El video dura ' + Math.round(meta.duracion) + ' segundos y el máximo es ' + VIDEO_MAX_SEG + '. Recórtalo en tu galería.'), { claro:true });
+  const mb = file.size / 1048576;
+  if(mb > VIDEO_OBJETIVO_MB || Math.min(meta.ancho, meta.alto) > 720){
+    try{
+      const r = await comprimirVideo(file, meta, onProgreso);
+      if(r && r.blob.size < file.size) return r;
+    }catch(e){ /* si no se puede comprimir, se intenta subir tal cual */ }
+  }
+  if(mb > VIDEO_MAX_MB) throw Object.assign(new Error('El video pesa ' + Math.round(mb) + ' MB y el máximo es ' + VIDEO_MAX_MB + '. Prueba con uno más corto.'), { claro:true });
+  const ext = (file.name.match(/\.([a-z0-9]+)$/i) || [,'mp4'])[1].toLowerCase();
+  return { blob:file, mime:file.type || 'video/mp4', ext };
+}
+function videoChipHtml(file, meta){
+  return `<div class="video-chip">${icon('play')}<span class="vc-txt">${escHtml(file.name)}<small>${meta && meta.duracion ? Math.round(meta.duracion) + ' s · ' : ''}${(file.size/1048576).toFixed(1)} MB${file.size/1048576 > VIDEO_OBJETIVO_MB ? ' · se comprime solo' : ''}</small></span><button type="button" class="vc-x" aria-label="Quitar video">${icon('x')}</button></div>`;
+}
+
+// ---------------------------------------------------------------------
+// Recortar una foto antes de subirla (Cropper.js se baja solo la primera vez).
+// ---------------------------------------------------------------------
+function cargarCropper(){
+  if(window.Cropper) return Promise.resolve();
+  if(window.__cropperCargando) return window.__cropperCargando;
+  window.__cropperCargando = new Promise((res, rej)=>{
+    const l = document.createElement('link'); l.rel = 'stylesheet';
+    l.href = 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css';
+    l.integrity = 'sha512-UtLOu9C7NuThQhuXXrGwx9Jb/z9zPQJctuAgNUBK3Z6kkSYT9wJ+2+dh6klS+TDBCV9kNPBbAxbVD+vCcfGPaA==';
+    l.crossOrigin = 'anonymous'; l.referrerPolicy = 'no-referrer'; document.head.appendChild(l);
+    const sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js';
+    sc.integrity = 'sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==';
+    sc.crossOrigin = 'anonymous'; sc.referrerPolicy = 'no-referrer';
+    sc.onload = ()=>res();
+    sc.onerror = ()=>{ window.__cropperCargando = null; rej(new Error('No se pudo abrir el recortador: revisa tu internet')); };
+    document.head.appendChild(sc);
+  });
+  return window.__cropperCargando;
+}
+// Devuelve la foto recortada (File) o null si se cancela.
+function recortarFoto(file){
+  return new Promise(async resolve=>{
+    try{ await cargarCropper(); }catch(e){ toast(e.message, 'danger'); return resolve(null); }
+    const url = URL.createObjectURL(file);
+    const ov = document.createElement('div'); ov.className = 'crop-overlay';
+    ov.innerHTML = `
+      <div class="crop-head"><button type="button" class="btn btn-secondary btn-sm" id="crCancelar">Cancelar</button><div class="crop-titulo">Recortar foto</div><button type="button" class="btn btn-primary btn-sm" id="crUsar">Usar</button></div>
+      <div class="crop-area"><img id="crImg" src="${url}" alt=""></div>
+      <div class="crop-barra">
+        <div class="seg" id="crProp"><button type="button" data-r="" class="on">Libre</button><button type="button" data-r="1">1:1</button><button type="button" data-r="0.8">4:5</button><button type="button" data-r="0.75">3:4</button></div>
+        <div class="crop-rot"><button type="button" class="icon-btn" id="crIzq" aria-label="Girar a la izquierda">${icon('undo')}</button><button type="button" class="icon-btn" id="crDer" aria-label="Girar a la derecha" style="transform:scaleX(-1);">${icon('undo')}</button></div>
+      </div>`;
+    document.body.appendChild(ov);
+    const cropper = new Cropper(document.getElementById('crImg'), { viewMode:1, dragMode:'move', autoCropArea:1, background:false, responsive:true, checkOrientation:true });
+    const cerrar = valor=>{ try{ cropper.destroy(); }catch(e){} ov.remove(); URL.revokeObjectURL(url); resolve(valor); };
+    document.getElementById('crCancelar').addEventListener('click', ()=>cerrar(null));
+    document.getElementById('crIzq').addEventListener('click', ()=>cropper.rotate(-90));
+    document.getElementById('crDer').addEventListener('click', ()=>cropper.rotate(90));
+    document.querySelectorAll('#crProp button').forEach(b=>b.addEventListener('click', ()=>{
+      document.querySelectorAll('#crProp button').forEach(o=>o.classList.toggle('on', o===b));
+      cropper.setAspectRatio(b.dataset.r ? Number(b.dataset.r) : NaN);
+    }));
+    document.getElementById('crUsar').addEventListener('click', ()=>{
+      const lienzo = cropper.getCroppedCanvas({ maxWidth:2400, maxHeight:2400, imageSmoothingQuality:'high', fillColor:'#ffffff' });
+      if(!lienzo) return cerrar(null);
+      lienzo.toBlob(b=>{
+        if(!b) return cerrar(null);
+        cerrar(new File([b], (file.name || 'foto').replace(/\.[a-z0-9]+$/i, '') + '-recorte.jpg', { type:'image/jpeg' }));
+      }, 'image/jpeg', 0.92);
+    });
+  });
+}
+// Miniaturas con "tocar para recortar" y la X para quitar.
+function miniaturasHtml(files){
+  return files.map((f,i)=>`<div class="photo-preview"><img src="${URL.createObjectURL(f)}" alt="" data-c="${i}"><span class="photo-crop-badge">${icon('crop')}</span><button type="button" data-i="${i}" aria-label="Quitar foto">${icon('x')}</button></div>`).join('');
+}
+function enlazarMiniaturas(sel, files, repintar){
+  document.querySelectorAll(sel + ' button[data-i]').forEach(b=>b.addEventListener('click', ()=>{ files.splice(Number(b.dataset.i), 1); repintar(); }));
+  document.querySelectorAll(sel + ' img[data-c]').forEach(im=>im.addEventListener('click', async ()=>{
+    const i = Number(im.dataset.c), nuevo = await recortarFoto(files[i]);
+    if(nuevo){ files[i] = nuevo; repintar(); }
+  }));
+}
+
+// ---------------------------------------------------------------------
+// Fotos compartidas desde otra app (Galería → Compartir → La Cabaña, solo Android).
+// El service worker las deja en IndexedDB y aquí se recogen.
+// ---------------------------------------------------------------------
+let fotosCompartidasPendientes = [];
+async function recogerFotosCompartidas(){
+  if(!window.indexedDB) return [];
+  try{
+    const db = await new Promise((res, rej)=>{
+      const r = indexedDB.open('cabana-compartido', 1);
+      r.onupgradeneeded = ()=>r.result.createObjectStore('fotos', { autoIncrement:true });
+      r.onsuccess = ()=>res(r.result); r.onerror = ()=>rej(r.error);
+    });
+    const filas = await new Promise((res, rej)=>{
+      const tx = db.transaction('fotos', 'readwrite'), st = tx.objectStore('fotos'), g = st.getAll();
+      g.onsuccess = ()=>{ st.clear(); };
+      tx.oncomplete = ()=>res(g.result); tx.onerror = ()=>rej(tx.error);
+    });
+    db.close();
+    return filas.map(f=>new File([f.blob], f.nombre || 'foto.jpg', { type:f.tipo || 'image/jpeg' }));
+  }catch(e){ return []; }
+}
+async function procesarFotosCompartidas(){
+  const fotos = await recogerFotosCompartidas();
+  if(!fotos.length) return;
+  if(!DB.isAdmin()){ toast('Solo la administradora puede crear productos'); return; }
+  fotosCompartidasPendientes = fotos.slice(0, 5);
+  const n = fotosCompartidasPendientes.length;
+  navigate('a-nuevo');
+  toast(n + ' foto' + (n===1?'':'s') + ' lista' + (n===1?'':'s') + ' para el producto nuevo', 'success');
+}
+function abrirFichaPorCodigo(codigo){
+  const prod = DB.state.productos.find(x=>x.codigo === codigo);
+  if(prod) modalVerFicha(prod); else toast('Ese producto ya no está en el inventario');
+}
+
 async function procesarFoto(file){
   const bmp = await cargarBitmapFoto(file);
   const [grande, mini] = await Promise.all([redimensionarABlob(bmp, 1080, 0.72), redimensionarABlob(bmp, 480, 0.7)]);
@@ -1789,7 +2275,52 @@ function estadoInfo(estado){
 // fotos, esta función es la que decide qué badge mostrar (agrega "Archivado").
 function productBadgeInfo(p){
   if(p.archivado) return { label:'Archivado', cls:'badge-neutral' };
+  const modo = DB.modoDe(p);
+  if(modo==='cantidad' && p.estado==='en_inventario'){
+    const n = p.cantidad || 0, min = p.cantidad_minima || 0;
+    if(n <= 0) return { label:'Agotado', cls:'badge-danger' };
+    if(min > 0 && n <= min) return { label:'Quedan '+n, cls:'badge-warning' };
+    return { label:'Disponibles: '+n, cls:'badge-success' };
+  }
+  if(modo==='pedido' && p.estado==='en_inventario'){
+    const cerrado = !!(p.disponible_hasta && new Date(p.disponible_hasta).getTime() <= Date.now());
+    if(p.cantidad) return { label:'Pedidos: '+p.cantidad, cls:'badge-warning' };
+    return cerrado ? { label:'Cerrado', cls:'badge-neutral' } : { label:'Abierto', cls:'badge-success' };
+  }
   return estadoInfo(p.estado);
+}
+// "5 h", "2 días"… para las cuentas regresivas de bajo pedido.
+function textoRestante(ms){
+  if(ms <= 0) return 'cerrado';
+  const min = Math.floor(ms / 60000);
+  if(min < 60) return Math.max(1, min) + ' min';
+  const h = Math.floor(min / 60);
+  if(h < 6) return h + ' h' + (min % 60 ? ' ' + (min % 60) + ' min' : '');
+  if(h < 48) return h + ' h';
+  return Math.floor(h / 24) + ' días';
+}
+function cuentaRegresivaPedido(p){
+  if(DB.modoDe(p)!=='pedido' || !p.disponible_hasta || p.estado!=='en_inventario') return '';
+  const ms = new Date(p.disponible_hasta).getTime() - Date.now();
+  const cls = ms <= 0 ? 'badge-neutral' : ms < 3600000 ? 'badge-danger' : ms < 6*3600000 ? 'badge-warning' : 'badge-info';
+  return `<span class="badge ${cls}" data-tip="Si nadie lo pide antes, se borra solo">${icon('clock')} ${ms<=0?'cerrado':'cierra en '+textoRestante(ms)}</span>`;
+}
+// "Naturales · Café" — vacío para los productos de siempre (área Productos sin tipo).
+function areaTipoTexto(p){
+  if(!DB.hayAreas()) return '';
+  const a = DB.areaDe(p), t = DB.tipoDe(p);
+  return [a.clave==='productos' ? '' : a.nombre, t ? t.nombre : ''].filter(Boolean).join(' · ');
+}
+// Existencias en la tarjeta: la administradora suma o resta con un toque.
+function stockLineaHtml(p){
+  const modo = DB.modoDe(p);
+  if(modo==='unico' || p.estado!=='en_inventario') return '';
+  if(modo==='pedido'){
+    const c = cuentaRegresivaPedido(p), n = DB.pedidosActivos(p.id).length;
+    return `<div class="who">${c}${DB.isAdmin() && n?` <span class="badge badge-warning">${n} pedido${n===1?'':'s'}</span>`:''}</div>`;
+  }
+  if(!DB.isAdmin()) return '';
+  return `<div class="pc-stock"><button type="button" data-action="stock-menos" data-id="${p.id}" aria-label="Restar uno">−</button><b>${p.cantidad||0}</b><button type="button" data-action="stock-mas" data-id="${p.id}" aria-label="Sumar uno">+</button></div>`;
 }
 // Horas que le quedan a una reserva antes de liberarse sola (según la
 // configuración de auto-liberación). Null si no aplica o está deshabilitado.
@@ -1832,6 +2363,7 @@ function parseVideoUrl(url){
   return { plataforma:'desconocido', embedUrl:null, originalUrl:url };
 }
 function renderVideoEmbed(url){
+  if(esVideoSubido(url)) return `<video class="video-subido" src="${url}" controls playsinline preload="metadata"></video>`;
   const info = parseVideoUrl(url);
   if(!info) return '';
   if(info.plataforma==='youtube' || info.plataforma==='tiktok'){
@@ -1908,6 +2440,7 @@ function icon(name){
     share:'<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>',
     dots:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
     pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    crop:'<path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/>',
     menu:'<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     ayuda:'<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
     truck:'<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
@@ -2017,6 +2550,8 @@ const NAV = {
     { section:'INVENTARIO' },
     { page:'a-inventario', label:'Inventario', icon:'box' },
     { page:'a-nuevo', label:'Nuevo Producto', icon:'plus' },
+    { page:'a-areas', label:'Áreas', icon:'switch' },
+    { page:'a-pedidos', label:'Pedidos', icon:'bookmark' },
     { page:'a-categorias', label:'Clasificaciones', icon:'tag' },
     { page:'a-bodega', label:'Bodega', icon:'pin' },
     { section:'VENTAS Y DINERO' },
@@ -2044,6 +2579,8 @@ const PAGE_TITLES = {
   'a-nuevo':['Nuevo Producto','Registrar un producto para la venta'],
   'a-cajas':['Cajas','Lotes de mercancía comprados'],
   'a-categorias':['Clasificaciones','Para ordenar tus productos'],
+  'a-areas':['Áreas','Qué se vende y qué ven las vendedoras'],
+  'a-pedidos':['Pedidos','Lo que piden tus clientes bajo pedido'],
   'a-bodega':['Bodega','Dónde está guardado cada producto'],
   'a-extras':['Productos extras','Inventario aparte, para las vendedoras externas'],
   'a-cajas-ext':['Cajas de entrega','Lo que se llevan las vendedoras externas'],
@@ -2097,6 +2634,7 @@ function modalMas(){
   const u = DB.currentUser();
   const enBarra = new Set([...document.querySelectorAll('#bottomNav button[data-page]')].map(b=>b.dataset.page));
   const pend = DB.isAdmin() ? contarPendientes() : 0;
+  const pedNuevos = DB.isAdmin() ? (DB.state.pedidos||[]).filter(x=>x.estado==='nuevo').length : 0;
   const secciones = [];
   NAV[u.rol].forEach(it=>{
     if(it.section) secciones.push({ titulo:it.section, items:[] });
@@ -2108,7 +2646,7 @@ function modalMas(){
     <div class="modal-head"><div class="modal-title">Más opciones</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body" style="padding-top:0;">
       ${secciones.filter(sec=>sec.items.length).map(sec=>`${sec.titulo?`<div class="mas-seccion">${sec.titulo}</div>`:''}
-        ${sec.items.map(it=>fila(`data-mas-page="${it.page}"`, it.icon, it.label, it.page==='a-pendientes'&&pend?`<span class="nav-badge">${pend}</span>`:'')).join('')}`).join('')}
+        ${sec.items.map(it=>fila(`data-mas-page="${it.page}"`, it.icon, it.label, it.page==='a-pendientes'&&pend?`<span class="nav-badge">${pend}</span>`:(it.page==='a-pedidos'&&pedNuevos?`<span class="nav-badge">${pedNuevos}</span>`:''))).join('')}`).join('')}
       <div class="mas-seccion">Tu cuenta</div>
       ${fila('data-mas-act="cuenta"','palette','Mi cuenta')}
       ${fila('data-mas-act="catalogo"','whatsapp','Compartir catálogo')}
@@ -2449,22 +2987,48 @@ function botonEntrega(p){
 // descripción, categoría, etiquetas y precio.
 // ---------------------------------------------------------------------
 function normalizar(t){ return String(t==null?'':t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
-function coincideProducto(p, q, cat){
+function coincideProducto(p, q, cat, area){
   if(cat && p.categoria!==cat) return false;
+  if(area && DB.areaDe(p).clave!==area) return false;
   const tokens = normalizar(q).split(/\s+/).filter(Boolean);
   if(!tokens.length) return true;
   const ubi = DB.isAdmin() && p.ubicacion_id ? (DB.ubicacionDe(p.ubicacion_id) || {}).nombre : '';
   const pajar = normalizar([p.nombre, p.codigo, p.descripcion, p.categoria, ubi, (p.etiquetas||[]).join(' '), p.precio_venta].join(' '));
   return tokens.every(t=>pajar.includes(t));
 }
-let busquedaInv = { q:'', cat:'' };   // Inventario (admin)
-let busquedaCat = { q:'', cat:'' };   // Catálogo (vendedora)
+let busquedaInv = { q:'', cat:'', area:'' };   // Inventario (admin)
+let busquedaCat = { q:'', cat:'', area:'' };   // Catálogo (vendedora)
 let busquedaClientes = { q:'', filtro:'todos', vend:'' };
 
 function chipsCategoriasHtml(sel){
   return `<button type="button" class="chip${!sel?' active':''}" data-cat="">Todo</button>` +
     DB.state.categorias.map(c=>`<button type="button" class="chip${sel===c.nombre?' active':''}" data-cat="${escHtml(c.nombre)}">${escHtml(c.nombre)}</button>`).join('') +
     (DB.isAdmin() ? `<button type="button" class="chip chip-nueva">+ Nueva</button>` : '');
+}
+// Chips de "Áreas" (Productos, Naturales, Comida…). Solo salen si hay más de una a la vista.
+function areasVisibles(){
+  if(!DB.hayAreas()) return [];
+  return DB.state.areas.filter(a=>a.activa && (DB.isAdmin() || a.visible_vendedoras));
+}
+function chipsAreasHtml(sel){
+  const areas = areasVisibles();
+  if(areas.length < 2) return '';
+  const cuenta = a => DB.state.productos.filter(p=>DB.areaDe(p).clave===a.clave && p.estado!=='vendido' && !p.archivado).length;
+  return `<button type="button" class="chip${!sel?' active':''}" data-area="">Todas</button>` +
+    areas.map(a=>`<button type="button" class="chip${sel===a.clave?' active':''}" data-area="${escHtml(a.clave)}">${escHtml(a.nombre)}<span class="n">${cuenta(a)}</span></button>`).join('');
+}
+function areasBarraHtml(id, sel){
+  const h = chipsAreasHtml(sel);
+  return h ? `<div class="chips-scroll areas" id="${id}">${h}</div>` : '';
+}
+function enlazarChipsAreas(contId, estado, dibujar){
+  const cont = document.getElementById(contId); if(!cont) return;
+  cont.addEventListener('click', e=>{
+    const b = e.target.closest('.chip'); if(!b) return;
+    estado.area = b.dataset.area;
+    cont.innerHTML = chipsAreasHtml(estado.area);
+    dibujar();
+  });
 }
 function enlazarChipsCategoria(contId, estado, dibujar){
   const cont = document.getElementById(contId); if(!cont) return;
@@ -2501,8 +3065,12 @@ function accionesProducto(p, opts){
   const cur = DB.currentUser();
   let ventaActions = '', iconos = '';
   if(p.estado==='en_inventario'){
-    ventaActions = `<button class="btn btn-secondary btn-sm" data-action="apartar" data-id="${p.id}">${icon('bookmark')} Apartar</button>
+    if(!DB.esPorCantidad(p)){
+      if(DB.puedeVender(p)) ventaActions = `<button class="btn btn-secondary btn-sm" data-action="apartar" data-id="${p.id}">${icon('bookmark')} Apartar</button>
                <button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">${icon('crate')} Vender</button>`;
+    } else if(DB.puedeVender(p) && (p.cantidad||0) > 0){
+      ventaActions = `<button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">${icon('crate')} Vender</button>`;
+    }
   } else if(p.estado==='en_reserva' && p.reservado_por_id===cur.id){
     ventaActions = `<button class="btn btn-secondary btn-sm" data-action="liberar" data-id="${p.id}">Liberar</button>
                <button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">${icon('crate')} Vender</button>`;
@@ -2512,6 +3080,7 @@ function accionesProducto(p, opts){
       ${botonesEstadoWsp(p)}`;
   } else if(opts.mode==='admin'){
     iconos = `<button class="icon-btn edit" data-action="editar" data-id="${p.id}" data-tip="Editar">${icon('edit')}</button>
+      ${DB.esPorCantidad(p) && p.estado==='en_inventario' ? `<button class="icon-btn confirm" data-action="stock" data-id="${p.id}" data-tip="Existencias">${icon('box')}</button>` : ''}
       <button class="icon-btn info" data-action="qr" data-id="${p.id}" data-tip="Código QR">${icon('qr')}</button>
       <button class="icon-btn view" data-action="duplicar" data-id="${p.id}" data-tip="Duplicar">${icon('copy')}</button>
       ${botonesEstadoWsp(p)}
@@ -2541,8 +3110,10 @@ function productCard(p, opts){
       <div class="pc-text">
         <div class="name">${escHtml(p.nombre)}${hasVideo?` <span class="pc-video-flag" data-tip="Tiene video">${icon('play')}</span>`:''}</div>
         <div class="cat">${escHtml(p.categoria||'Sin clasificación')}</div>
+        ${areaTipoTexto(p)?`<div class="pc-area">${escHtml(areaTipoTexto(p))}</div>`:''}
         <span class="price">${money(p.precio_venta)}</span>
         <span class="pct">${p.porcentaje_ganancia}% comisión</span>
+        ${stockLineaHtml(p)}
         ${ubi?`<div class="pc-ubi">${icon('pin')} ${escHtml(ubi.nombre)}</div>`:''}
         ${vend?`<div class="who">Apartado por ${escHtml(vend.nombre)} ${reservaCountdownBadge(p)}</div>`:''}
         ${p.vendido_por_id?`<div class="who">Vendido por ${escHtml((DB.state.usuarios.find(u=>u.id===p.vendido_por_id)||{}).nombre||'—')}</div>`:''}
@@ -2566,12 +3137,12 @@ function productFila(p, opts){
   const vend = p.reservado_por_id ? DB.state.usuarios.find(u=>u.id===p.reservado_por_id) : null;
   const mia = p.estado==='en_reserva' && p.reservado_por_id===cur.id;
   const oculto = [
-    (p.estado==='en_inventario' || mia) ? `<button data-action="vender" data-id="${p.id}" data-tip="Vender">${icon('crate')}</button>` : '',
-    p.estado==='en_inventario' ? `<button data-action="apartar" data-id="${p.id}" data-tip="Apartar">${icon('bookmark')}</button>` : '',
+    ((p.estado==='en_inventario' && DB.puedeVender(p) && (!DB.esPorCantidad(p) || (p.cantidad||0)>0)) || mia) ? `<button data-action="vender" data-id="${p.id}" data-tip="Vender">${icon('crate')}</button>` : '',
+    (p.estado==='en_inventario' && DB.puedeVender(p) && !DB.esPorCantidad(p)) ? `<button data-action="apartar" data-id="${p.id}" data-tip="Apartar">${icon('bookmark')}</button>` : '',
     mia ? `<button data-action="liberar" data-id="${p.id}" data-tip="Liberar reserva">${icon('x')}</button>` : '',
     iconos
   ].join('');
-  const sub = [escHtml(p.codigo), ubi ? escHtml(ubi.nombre) : '', vend ? 'Apartado por ' + escHtml(vend.nombre) : ''].filter(Boolean).join(' · ');
+  const sub = [escHtml(p.codigo), escHtml(areaTipoTexto(p)), ubi ? escHtml(ubi.nombre) : '', vend ? 'Apartado por ' + escHtml(vend.nombre) : ''].filter(Boolean).join(' · ');
   const chip = chipEntrega(p);
   return `<div class="product-row" data-id="${p.id}">
     <div class="pr-main" data-action="ver" data-id="${p.id}"><div class="pr-name">${escHtml(p.nombre)}</div><div class="pr-sub">${sub}</div></div>
@@ -2723,13 +3294,13 @@ PAGES['v-dashboard'] = () => {
 
 function catalogoContenido(){
   const cur = DB.currentUser();
-  const { q, cat } = busquedaCat;
-  const f = p=>coincideProducto(p, q, cat);
+  const { q, cat, area } = busquedaCat;
+  const f = p=>coincideProducto(p, q, cat, area);
   const disponibles = DB.state.productos.filter(p=>p.estado==='en_inventario').filter(f);
   const misReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id===cur.id).filter(f);
   const otrasReservas = DB.state.productos.filter(p=>p.estado==='en_reserva' && p.reservado_por_id!==cur.id).filter(f);
   const total = disponibles.length + misReservas.length;
-  const filtrando = !!(q.trim() || cat);
+  const filtrando = !!(q.trim() || cat || area);
   return `${filtrando?`<div class="res-head"><span>${total} producto${total===1?'':'s'} encontrado${total===1?'':'s'}</span><button type="button" class="btn btn-secondary btn-sm" data-action="limpiar-busqueda-cat">Limpiar</button></div>`:''}
     ${(misReservas.length + disponibles.length) ? productosHtml([...misReservas, ...disponibles], 'vendedor') : `<div class="text-faint text-center" style="padding:30px;">${filtrando?'No hay productos con esa búsqueda':'No hay productos disponibles'}</div>`}
     ${otrasReservas.length ? `<div class="panel mt-16"><div class="panel-title mt-0" style="margin-bottom:12px;">Apartados por otras compañeras</div>
@@ -2741,6 +3312,7 @@ PAGES['v-catalogo'] = () => `
       <button class="btn btn-primary btn-sm" id="btnCompartirCatalogo">${icon('whatsapp')} Compartir catálogo</button>
     </div>
     <div class="vista-barra">${toggleFotosHtml()}</div>
+    ${areasBarraHtml('catalogoAreas', busquedaCat.area)}
     <div class="chips-scroll cats" id="catalogoChips">${chipsCategoriasHtml(busquedaCat.cat)}</div>
     <div id="catalogoLista">${catalogoContenido()}</div>`;
 
@@ -2992,7 +3564,9 @@ PAGES['a-pendientes'] = () => {
     .map(p=>({ p, d: DB.diasParaEliminar(p) }))
     .sort((a,b)=>a.d-b.d);
 
-  const seccionVacia = !devs.length && !deudas.length && !entregas.length && !reservas.length && !archivados.length;
+  const pedidosNuevos = (DB.state.pedidos||[]).filter(x=>x.estado==='nuevo');
+  const pocoStock = DB.state.productos.filter(p=>DB.modoDe(p)==='cantidad' && p.estado==='en_inventario' && (p.cantidad_minima||0) > 0 && (p.cantidad||0) <= p.cantidad_minima);
+  const seccionVacia = !devs.length && !deudas.length && !entregas.length && !reservas.length && !archivados.length && !pedidosNuevos.length && !pocoStock.length;
   if(seccionVacia){
     return `<div class="panel text-center" style="padding:50px 20px;">
       <div style="font-size:34px;margin-bottom:10px;">✓</div>
@@ -3002,6 +3576,18 @@ PAGES['a-pendientes'] = () => {
   }
 
   return `
+    ${pedidosNuevos.length ? `<div class="panel">
+      <div class="panel-head"><div class="panel-title">Pedidos nuevos de clientes</div><button class="btn btn-primary btn-sm" onclick="navigate('a-pedidos')">Ver pedidos</button></div>
+      ${pedidosNuevos.slice(0,6).map(x=>pedidoFilaHtml(x, true)).join('')}
+    </div>` : ''}
+
+    ${pocoStock.length ? `<div class="panel">
+      <div class="panel-head"><div class="panel-title">Se están acabando</div><span class="badge badge-warning">${pocoStock.length}</span></div>
+      ${pocoStock.map(p=>`<div class="pedido-fila"><div class="pf-main"><div class="pf-nombre">${escHtml(p.nombre)}</div><div class="pf-sub">${escHtml(areaTipoTexto(p)||'')}</div></div>
+        <span class="badge ${(p.cantidad||0)<=0?'badge-danger':'badge-warning'}">${(p.cantidad||0)<=0?'Agotado':'Quedan '+p.cantidad}</span>
+        <div class="pf-acc"><button class="btn btn-secondary btn-sm" data-action="stock" data-id="${p.id}">${icon('box')} Existencias</button></div></div>`).join('')}
+    </div>` : ''}
+
     ${deudas.length ? `<div class="panel">
       <div class="panel-head"><div class="panel-title">Cuentas por cobrar</div><span class="badge badge-warning">${deudas.length}</span></div>
       <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Cliente</th><th>Monto</th><th>Fecha</th><th>Días</th><th></th></tr></thead><tbody>
@@ -3064,7 +3650,7 @@ PAGES['a-pendientes'] = () => {
 // en vez de secciones gigantes desplegables.
 function estadosInventario(){
   const cfg = DB.state.configuracion;
-  const todos = DB.state.productos.filter(p=>!busquedaInv.cat || p.categoria===busquedaInv.cat);
+  const todos = DB.state.productos.filter(p=>(!busquedaInv.cat || p.categoria===busquedaInv.cat) && (!busquedaInv.area || DB.areaDe(p).clave===busquedaInv.area));
   const lista = [
     { k:'en_inventario', t:'Disponibles', c:'var(--forest-600)', f:p=>p.estado==='en_inventario', vacio:'No hay productos disponibles' },
     { k:'en_reserva', t:'Reservados', c:'var(--amber-500)', f:p=>p.estado==='en_reserva',
@@ -3089,9 +3675,9 @@ function invEstadosHtml(){
     `<button type="button" class="estado-tab${e.k===act.k?' active':''}" data-action="inv-estado" data-key="${e.k}"><span class="dot" style="background:${e.c}"></span>${e.t}<span class="n">${e.items.length}</span></button>`).join('')}</div>`;
 }
 function inventarioContenido(){
-  const { q, cat } = busquedaInv;
+  const { q, cat, area } = busquedaInv;
   if(q.trim()){
-    const r = DB.state.productos.filter(p=>coincideProducto(p, q, cat));
+    const r = DB.state.productos.filter(p=>coincideProducto(p, q, cat, area));
     return `<div class="res-head"><span>${r.length} resultado${r.length===1?'':'s'} en todo el inventario</span><button type="button" class="btn btn-secondary btn-sm" data-action="limpiar-busqueda-inv">Limpiar</button></div>
       ${r.length ? productosHtml(r, 'admin') : `<div class="text-faint text-center" style="padding:30px;">No hay productos con esa búsqueda</div>`}`;
   }
@@ -3124,9 +3710,152 @@ PAGES['a-inventario'] = () => `
       <button class="btn btn-secondary btn-sm solo-celular" id="btnInvMas" aria-label="Más acciones">${icon('dots')}</button>
     </div>
     <div class="vista-barra">${toggleFotosHtml()}</div>
+    ${areasBarraHtml('invAreas', busquedaInv.area)}
     <div id="invEstados">${invEstadosHtml()}</div>
     <div class="chips-scroll cats" id="invChips">${chipsCategoriasHtml(busquedaInv.cat)}</div>
     <div id="kanbanWrap">${inventarioContenido()}</div>`;
+
+/* =====================================================================
+   ÁREA · TIPO · EXISTENCIAS · BAJO PEDIDO  (campos compartidos por
+   "Nuevo producto" y "Editar producto")
+===================================================================== */
+function fechaLocalInput(iso){
+  const d = iso ? new Date(iso) : null; if(!d || isNaN(d)) return '';
+  const z = n=>String(n).padStart(2,'0');
+  return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+'T'+z(d.getHours())+':'+z(d.getMinutes());
+}
+function camposAreaHtml(px, p){
+  if(!DB.hayAreas()) return '';
+  p = p || {};
+  const areas = DB.state.areas.filter(a=>a.activa || a.id===p.area_id);
+  const a0 = areas.find(a=>a.id===p.area_id) || areas.find(a=>a.clave==='productos') || areas[0];
+  const bloqueada = p.estado && p.estado!=='en_inventario';
+  const provs = DB.state.proveedores.filter(x=>x.activo || x.id===p.proveedor_id);
+  return `<div class="form-group"><label>Área</label>
+      <select id="${px}Area"${bloqueada?' disabled':''}>${areas.map(a=>`<option value="${a.id}"${a.id===a0.id?' selected':''}>${escHtml(a.nombre)}</option>`).join('')}</select></div>
+    <div class="form-group" id="${px}TipoBox"><label>Tipo</label><select id="${px}Tipo"></select></div>
+    <div id="${px}CantBox" class="area-extra" hidden>
+      <div class="form-row">
+        <div class="form-group"><label>Cantidad disponible</label><input type="number" inputmode="numeric" min="0" step="1" id="${px}Cant" value="${p.cantidad==null?'':p.cantidad}" placeholder="0"></div>
+        <div class="form-group"><label>Avisarme cuando queden</label><input type="number" inputmode="numeric" min="0" step="1" id="${px}Min" value="${p.cantidad_minima==null?3:p.cantidad_minima}"></div>
+      </div>
+      <div class="text-faint" style="font-size:11.5px;margin-top:-4px;">El precio y el costo de abajo son por cada unidad. Baja sola al vender; el aviso (0 = no avisar) te llega cuando quedan pocas.</div>
+    </div>
+    <div id="${px}PedidoBox" class="area-extra" hidden>
+      <div class="form-group"><label>Disponible hasta *</label>
+        <input type="datetime-local" id="${px}Hasta" value="${fechaLocalInput(p.disponible_hasta)}">
+        <div class="chips-scroll" style="margin-top:8px;">
+          <button type="button" class="chip" data-hasta="0">Hoy 9 pm</button>
+          <button type="button" class="chip" data-hasta="1">Mañana 9 pm</button>
+          <button type="button" class="chip" data-hasta="3">En 3 días</button>
+          <button type="button" class="chip" data-hasta="7">En 1 semana</button>
+        </div>
+        <div class="text-faint" style="font-size:11.5px;">Si nadie lo pide antes de esa fecha, el producto y sus fotos se borran solos. Si alguien lo pide, se queda hasta venderlo.</div>
+      </div>
+      <div class="form-group"><label>Proveedor</label>
+        <select id="${px}Prov"><option value="">Sin proveedor</option>${provs.map(x=>`<option value="${x.id}"${x.id===p.proveedor_id?' selected':''}>${escHtml(x.nombre)}</option>`).join('')}<option value="__nuevo__">+ Nuevo proveedor…</option></select>
+        <div id="${px}ProvNuevo" class="form-row mt-8" hidden><input id="${px}ProvNombre" placeholder="Nombre del proveedor"><input id="${px}ProvTel" inputmode="tel" placeholder="WhatsApp (ej. 5555 1234)"></div>
+      </div>
+    </div>`;
+}
+function enlazarCamposArea(px, p, alCambiar){
+  if(!DB.hayAreas()) return;
+  p = p || {};
+  const $ = id=>document.getElementById(px+id);
+  const pintar = ()=>{
+    const area = DB.state.areas.find(a=>a.id===$('Area').value);
+    const modo = area ? area.modo : 'unico';
+    const tipos = DB.state.tipos.filter(t=>t.area_id===(area&&area.id));
+    $('Tipo').innerHTML = `<option value="">Sin tipo</option>` + tipos.map(t=>`<option value="${t.id}"${t.id===p.tipo_id?' selected':''}>${escHtml(t.nombre)}</option>`).join('');
+    $('TipoBox').hidden = !tipos.length;
+    $('CantBox').hidden = modo !== 'cantidad';
+    $('PedidoBox').hidden = modo !== 'pedido';
+    if(alCambiar) alCambiar(modo, area);
+  };
+  $('Area').addEventListener('change', pintar);
+  $('Prov').addEventListener('change', ()=>{ $('ProvNuevo').hidden = $('Prov').value !== '__nuevo__'; });
+  $('PedidoBox').querySelectorAll('[data-hasta]').forEach(b=>b.addEventListener('click', ()=>{
+    const d = new Date(); d.setDate(d.getDate() + Number(b.dataset.hasta)); d.setHours(21, 0, 0, 0);
+    if(d.getTime() < Date.now()) d.setDate(d.getDate() + 1);
+    $('Hasta').value = fechaLocalInput(d.toISOString());
+  }));
+  pintar();
+}
+// Devuelve los campos listos para guardar, o { _error } si falta algo.
+async function leerCamposArea(px){
+  if(!DB.hayAreas()) return {};
+  const v = id=>{ const el = document.getElementById(px+id); return el ? el.value : ''; };
+  const area = DB.state.areas.find(a=>a.id===v('Area'));
+  if(!area) return {};
+  const out = { area_id: area.id, tipo_id: v('Tipo') || null, cantidad: null, cantidad_minima: 0, proveedor_id: null, disponible_hasta: null };
+  if(area.modo === 'cantidad'){
+    out.cantidad = Math.max(0, parseInt(v('Cant'), 10) || 0);
+    out.cantidad_minima = Math.max(0, parseInt(v('Min'), 10) || 0);
+  } else if(area.modo === 'pedido'){
+    if(!v('Hasta')) return { _error: 'Elige hasta cuándo estará disponible para pedir' };
+    const hasta = new Date(v('Hasta'));
+    if(isNaN(hasta)) return { _error: 'La fecha no es válida' };
+    out.disponible_hasta = hasta.toISOString();
+    let prov = v('Prov');
+    if(prov === '__nuevo__'){
+      const nombre = v('ProvNombre').trim();
+      if(!nombre) return { _error: 'Escribe el nombre del proveedor (o elige "Sin proveedor")' };
+      const r = await DB.guardarProveedor(null, { nombre, telefono: v('ProvTel').trim() || null });
+      if(!r.ok) return { _error: 'No se pudo crear el proveedor: ' + r.error };
+      prov = r.data.id;
+    }
+    out.proveedor_id = prov || null;
+    out.cantidad = undefined;   // en "bajo pedido" la cantidad la mueven los pedidos, no el formulario
+  }
+  return out;
+}
+function mensajeErrorVenta(err){
+  const m = {
+    PRODUCTO_NO_DISPONIBLE: 'otra persona ya lo tomó',
+    SIN_EXISTENCIAS: 'no alcanzan las existencias',
+    AREA_SOLO_ADMIN: 'esta área solo la vende la administradora',
+    CANTIDAD_INVALIDA: 'la cantidad no es válida',
+    USAR_VENTA_POR_CANTIDAD: 'este producto se vende por cantidad',
+    USAR_VENTA_UNICA: 'este producto es una sola pieza'
+  };
+  const k = Object.keys(m).find(c=>String(err||'').includes(c));
+  return 'No se pudo vender: ' + (k ? m[k] : err);
+}
+
+// Existencias: sumar o restar sin entrar a editar.
+function modalExistencias(p){
+  const fila = (n)=>`<button type="button" class="btn btn-secondary btn-sm" data-delta="${n}">${n>0?'+':'−'}${Math.abs(n)}</button>`;
+  openModal(`
+    <div class="modal-head"><div class="modal-title">Existencias</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="ex-actual"><b id="exN">${p.cantidad||0}</b><span>${escHtml(p.nombre)}</span></div>
+      <div class="ex-botones">${[-10,-5,-1,1,5,10].map(fila).join('')}</div>
+      <div class="form-group mt-16"><label>O escribe cuántos entran (+) o salen (−)</label>
+        <div class="stepper-linea"><input type="number" inputmode="numeric" step="1" id="exDelta" placeholder="Ej: 12 o -3"><button type="button" class="btn btn-primary btn-sm" id="exAplicar">Aplicar</button></div></div>
+      ${DB.modoDe(p)==='cantidad' ? `<div class="form-group"><label>Avisarme cuando queden… (0 = no avisar)</label>
+        <div class="stepper-linea"><input type="number" inputmode="numeric" min="0" step="1" id="exMin" value="${p.cantidad_minima||0}"><button type="button" class="btn btn-secondary btn-sm" id="exGuardarMin">Guardar</button></div></div>` : ''}
+    </div>
+    <div class="modal-foot"><button class="btn btn-primary" id="exListo">Listo</button></div>`);
+  const aplicar = async delta=>{
+    if(!delta) return;
+    const r = await DB.ajustarCantidad(p.id, delta);
+    if(!r.ok) return toast(/SIN_EXISTENCIAS/.test(r.error) ? 'No puede quedar en negativo' : 'No se pudo: '+r.error, 'danger');
+    Object.assign(p, r.data);
+    document.getElementById('exN').textContent = p.cantidad || 0;
+  };
+  document.querySelectorAll('[data-delta]').forEach(b=>b.addEventListener('click', ()=>aplicar(Number(b.dataset.delta))));
+  document.getElementById('exAplicar').addEventListener('click', async ()=>{
+    const i = document.getElementById('exDelta'); const n = parseInt(i.value, 10);
+    if(!n) return toast('Escribe un número (positivo suma, negativo resta)','danger');
+    await aplicar(n); i.value = '';
+  });
+  document.getElementById('exGuardarMin')?.addEventListener('click', async ()=>{
+    const n = Math.max(0, parseInt(document.getElementById('exMin').value, 10) || 0);
+    const r = await DB.editarProducto(p.id, { cantidad_minima: n });
+    if(r.ok){ Object.assign(p, r.data); toast('Aviso guardado','success'); } else toast('No se pudo guardar: '+r.error,'danger');
+  });
+  document.getElementById('exListo').addEventListener('click', async ()=>{ closeModal(); await refresh(); });
+}
 
 PAGES['a-nuevo'] = () => `
   <div class="panel np-panel">
@@ -3138,8 +3867,18 @@ PAGES['a-nuevo'] = () => `
       <input type="file" id="npFotoCamara" accept="image/*" capture="environment" hidden>
       <input type="file" id="npFotos" accept="image/*" multiple hidden>
       <div class="photo-preview-grid" id="npPreview"></div>
-      <div class="text-faint" id="npFotosHint" style="font-size:11.5px;margin:6px 0 16px;">Hasta 5 fotos. Se guardan livianas para que el sistema siga rápido.</div>
+      <div class="text-faint" id="npFotosHint" style="font-size:11.5px;margin:6px 0 12px;">Hasta 5 fotos. Se guardan livianas para que el sistema siga rápido.</div>
+      <div class="np-video">
+        <div class="np-photo-actions">
+          <button type="button" class="btn btn-secondary btn-sm" id="npBtnVideo">${icon('play')} Elegir video</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="npBtnGrabar">${icon('image')} Grabar video</button>
+        </div>
+        <input type="file" id="npVideoGal" accept="video/*" hidden>
+        <input type="file" id="npVideoCam" accept="video/*" capture="environment" hidden>
+        <div id="npVideoVista"></div>
+      </div>
 
+      ${camposAreaHtml('np')}
       <div class="form-group"><label>Nombre *</label><input id="npNombre" required placeholder="Ej: Bolsa Louis Vuitton" autocomplete="off"></div>
       <div class="form-group"><label>Precio de venta (${DB.state.configuracion.moneda_simbolo}) *</label><input type="number" inputmode="decimal" step="0.01" id="npPrecio" required placeholder="0.00"></div>
       <div class="form-group"><label>Clasificación</label><select id="npCategoria">${opcionesClasificacion('')}</select>
@@ -3167,6 +3906,107 @@ PAGES['a-nuevo'] = () => `
       <button type="submit" class="btn btn-primary btn-block np-guardar">${icon('check')} Guardar producto</button>
     </form>
   </div>`;
+
+let nuevoAreaClave = null;   // "Producto bajo pedido" abre Nuevo producto ya con esa área
+const MODOS_AREA = {
+  unico:    { t:'Una sola pieza', d:'Cada producto es único: se aparta y se vende una vez (como Productos).' },
+  cantidad: { t:'Por cantidad',   d:'Llevas existencias ("Disponibles: 12"). Bajan solas al vender y te avisan cuando quedan pocas.' },
+  pedido:   { t:'Bajo pedido',    d:'Subes la foto con una fecha límite; el cliente toca "Pedir" y tú se lo pides al proveedor.' }
+};
+function avisoSinAreas(){
+  return `<div class="panel text-center" style="padding:40px 20px;"><div class="panel-title">Falta un paso</div>
+    <div class="text-muted">Corre la migración 22 en Supabase (SQL Editor) para activar las áreas y los pedidos.</div></div>`;
+}
+function areaTarjetaHtml(a){
+  const n = DB.state.productos.filter(p=>DB.areaDe(p).id===a.id && !p.archivado).length;
+  const tipos = DB.state.tipos.filter(t=>t.area_id===a.id);
+  const sw = (campo, texto, ayuda)=>`<label class="area-sw"><span><b>${texto}</b><small>${ayuda}</small></span><span class="sw"><input type="checkbox" data-action="area-switch" data-id="${a.id}" data-campo="${campo}"${a[campo]?' checked':''}><i></i></span></label>`;
+  return `<div class="panel area-card">
+    <div class="area-head">
+      <div><div class="area-nombre">${escHtml(a.nombre)}</div><div class="text-faint" style="font-size:12px;">${MODOS_AREA[a.modo].t} · ${n} producto${n===1?'':'s'}</div></div>
+      <div class="area-btns">
+        <button type="button" class="icon-btn edit" data-action="editar-area" data-id="${a.id}" data-tip="Cambiar nombre">${icon('edit')}</button>
+        ${a.clave==='productos' ? '' : `<button type="button" class="icon-btn delete" data-action="eliminar-area" data-id="${a.id}" data-tip="Eliminar">${icon('trash')}</button>`}
+      </div>
+    </div>
+    <div class="area-switches">
+      ${sw('visible_vendedoras', 'Las vendedoras la ven', 'Aparece en su catálogo')}
+      ${sw('vendedoras_venden', 'Las vendedoras pueden vender', 'Si está apagado, solo vendes tú')}
+      ${sw('visible_publico', 'Sale en el catálogo de los clientes', 'El link que mandas por WhatsApp')}
+    </div>
+    <div class="area-tipos">
+      <span class="area-tipos-t">Tipos</span>
+      <div class="chips-scroll" style="margin:0;padding-bottom:2px;flex-wrap:wrap;">
+        ${tipos.map(t=>`<button type="button" class="chip" data-action="tipo-menu" data-id="${t.id}">${escHtml(t.nombre)}</button>`).join('')}
+        <button type="button" class="chip chip-nueva" data-action="nuevo-tipo" data-id="${a.id}">+ Tipo</button>
+      </div>
+    </div>
+  </div>`;
+}
+PAGES['a-areas'] = () => {
+  if(!DB.hayAreas()) return avisoSinAreas();
+  return `<div class="panel-head"><div class="text-muted" style="font-size:12.5px;max-width:560px;">Cada área ordena un tipo de venta. Tú eliges qué ven y qué pueden vender las vendedoras; por defecto, las áreas nuevas las vendes solo tú.</div>
+    <button class="btn btn-primary" id="btnNuevaArea">${icon('plus')} Nueva área</button></div>
+    ${DB.state.areas.map(areaTarjetaHtml).join('')}`;
+};
+
+const ESTADOS_PEDIDO = {
+  nuevo:            ['Nuevo', 'badge-warning'],
+  pedido_proveedor: ['Pedido al proveedor', 'badge-info'],
+  llego:            ['Ya llegó', 'badge-success'],
+  entregado:        ['Entregado', 'badge-neutral'],
+  cancelado:        ['Cancelado', 'badge-danger']
+};
+function pedidoFilaHtml(x, conProducto){
+  const [txt, cls] = ESTADOS_PEDIDO[x.estado] || [x.estado, 'badge-neutral'];
+  const acciones = x.estado==='llego'
+      ? `<button class="btn btn-primary btn-sm" data-action="pedido-vender" data-id="${x.id}">${icon('crate')} Vender</button>`
+      : (x.estado==='nuevo' || x.estado==='pedido_proveedor')
+        ? `<button class="btn btn-secondary btn-sm" data-action="pedido-estado" data-id="${x.id}" data-estado="llego">Ya llegó</button>` : '';
+  const cancelable = x.estado!=='entregado' && x.estado!=='cancelado';
+  return `<div class="pedido-fila">
+    <div class="pf-main"><div class="pf-nombre">${escHtml(x.cliente_nombre)}${x.cantidad>1?` <span class="pf-cant">× ${x.cantidad}</span>`:''}</div>
+      <div class="pf-sub">${conProducto?escHtml(x.producto_nombre)+' · ':''}${x.cliente_telefono?escHtml(x.cliente_telefono)+' · ':''}${timeAgo(x.created_at)}</div></div>
+    <span class="badge ${cls}">${txt}</span>
+    <div class="pf-acc">${x.cliente_telefono?botonesContacto(x.cliente_telefono):''}${acciones}
+      ${cancelable?`<button class="icon-btn delete" data-action="pedido-estado" data-id="${x.id}" data-estado="cancelado" data-tip="Cancelar pedido">${icon('x')}</button>`:''}</div>
+  </div>`;
+}
+function pedidoProductoHtml(p){
+  const foto = DB.fotosDe(p.id)[0], prov = DB.proveedorDe(p.proveedor_id);
+  const pedidos = DB.pedidosDe(p.id).filter(x=>x.estado!=='cancelado' && x.estado!=='entregado');
+  const nuevos = pedidos.filter(x=>x.estado==='nuevo').length;
+  return `<div class="panel pedido-card">
+    <div class="pedido-head">
+      <div class="pc-photo mini${foto?'':' vacia'}">${foto?imgMini(foto.url_foto, escHtml(p.nombre)):icon('crate')}</div>
+      <div class="ph-text"><div class="ph-nombre">${escHtml(p.nombre)}</div>
+        <div class="ph-sub">${money(p.precio_venta)}${prov?' · '+escHtml(prov.nombre):' · <span class="text-faint">sin proveedor</span>'}</div>
+        <div>${cuentaRegresivaPedido(p)}</div></div>
+    </div>
+    ${pedidos.map(pedidoFilaHtml).join('')}
+    <div class="pedido-pie">
+      <button class="btn btn-primary btn-sm" data-action="pedir-proveedor" data-id="${p.id}">${icon('whatsapp')} Pedir al proveedor${nuevos?` (${nuevos} nuevo${nuevos===1?'':'s'})`:''}</button>
+      <button class="btn btn-secondary btn-sm" data-action="editar" data-id="${p.id}">${icon('edit')} Editar</button>
+    </div>
+  </div>`;
+}
+PAGES['a-pedidos'] = () => {
+  if(!DB.hayAreas()) return avisoSinAreas();
+  const bajo = DB.state.productos.filter(p=>DB.modoDe(p)==='pedido' && !p.archivado);
+  const conPedidos = bajo.filter(p=>DB.pedidosActivos(p.id).length);
+  const abiertos = bajo.filter(p=>p.estado==='en_inventario' && !DB.pedidosActivos(p.id).length);
+  const historial = (DB.state.pedidos||[]).filter(x=>x.estado==='entregado' || x.estado==='cancelado').slice(0, 15);
+  return `<div class="panel-head"><div class="text-muted" style="font-size:12.5px;max-width:560px;">Los clientes piden desde el catálogo. Aquí ves quién pidió, le pides al proveedor y, cuando llega, lo vendes.</div>
+    <div class="area-btns"><button class="btn btn-secondary" id="btnProveedores">${icon('users2')} Proveedores</button>
+      <button class="btn btn-primary" id="btnNuevoBajoPedido">${icon('plus')} Producto bajo pedido</button></div></div>
+    ${conPedidos.length ? conPedidos.map(pedidoProductoHtml).join('') : `<div class="panel text-center text-faint" style="padding:34px 16px;">Todavía no hay pedidos de clientes</div>`}
+    ${abiertos.length ? `<div class="panel"><div class="panel-title" style="margin-bottom:10px;">Abiertos, sin pedidos todavía</div>
+      ${abiertos.map(p=>`<div class="pedido-fila"><div class="pf-main"><div class="pf-nombre">${escHtml(p.nombre)}</div><div class="pf-sub">${money(p.precio_venta)}</div></div>${cuentaRegresivaPedido(p)}
+        <div class="pf-acc"><button class="icon-btn edit" data-action="editar" data-id="${p.id}" data-tip="Editar">${icon('edit')}</button></div></div>`).join('')}</div>` : ''}
+    ${historial.length ? `<div class="panel"><div class="panel-title" style="margin-bottom:10px;">Últimos entregados y cancelados</div>
+      ${historial.map(x=>`<div class="pedido-fila"><div class="pf-main"><div class="pf-nombre">${escHtml(x.cliente_nombre)} <span class="pf-cant">· ${escHtml(x.producto_nombre)}${x.cantidad>1?' × '+x.cantidad:''}</span></div><div class="pf-sub">${timeAgo(x.created_at)}</div></div>
+        <span class="badge ${ESTADOS_PEDIDO[x.estado][1]}">${ESTADOS_PEDIDO[x.estado][0]}</span></div>`).join('')}</div>` : ''}`;
+};
 
 PAGES['a-cajas'] = () => {
   const cajas = DB.state.cajas;
@@ -3338,8 +4178,12 @@ PAGES['a-bitacora'] = () => `
 PAGES['a-config'] = () => {
   const c = DB.state.configuracion;
   return `<div class="panel" style="max-width:600px;">
+    <div class="panel-head"><div class="panel-title">Espacio de fotos y videos</div></div>
+    <div id="espacioUso" class="text-muted">Calculando…</div>
+  </div>
+  <div class="panel" style="max-width:600px;">
     <div class="panel-head"><div class="panel-title">Backup completo</div></div>
-    <p class="text-muted mb-0">Descarga una copia de todo el sistema en un Excel (una hoja por cada tabla: productos, ventas, comisiones, usuarios, etc.). No reemplaza los backups automáticos de Supabase — es un respaldo extra que puedes guardar tú misma cuando quieras.</p>
+    <p class="text-muted mb-0">Descarga una copia de todo el sistema en un Excel.</p>
     <button class="btn btn-secondary mt-16" id="btnBackupCompleto">${icon('download')} Descargar Backup (Excel)</button>
   </div>
   <div class="panel" style="max-width:600px;">
@@ -3500,12 +4344,23 @@ function modalVerFicha(p){
   const fotos = DB.fotosDe(p.id,'inventario');
   const info = estadoInfo(p.estado);
   const verCosto = DB.isAdmin(); // las vendedoras solo ven precio de venta y su % de comisión, nunca costo/margen
+  const yo = DB.currentUser();
+  let pie = '';
+  if(p.estado === 'en_inventario'){
+    if(!DB.esPorCantidad(p)){
+      if(DB.puedeVender(p)) pie = `<div class="modal-foot ficha-foot"><button class="btn btn-secondary" id="fcApartar">${icon('bookmark')} Apartar</button><button class="btn btn-primary" id="fcVender">${icon('crate')} Vender</button></div>`;
+    } else if(DB.puedeVender(p) && (p.cantidad||0) > 0){
+      pie = `<div class="modal-foot ficha-foot"><button class="btn btn-primary" id="fcVender">${icon('crate')} Vender</button></div>`;
+    }
+  }
+  else if(p.estado === 'en_reserva' && yo && p.reservado_por_id === yo.id) pie = `<div class="modal-foot ficha-foot"><button class="btn btn-secondary" id="fcLiberar">Liberar</button><button class="btn btn-primary" id="fcVender">${icon('crate')} Vender</button></div>`;
   openModal(`
     <div class="modal-head"><div class="modal-title">Ficha del Producto</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
       ${fotos.length?`<div class="public-gallery" style="border-radius:12px;margin-bottom:14px;">${fotos.map((f,i)=>`<img src="${f.url_foto}" class="ficha-foto" data-i="${i}">`).join('')}</div>`:''}
       <div class="flex-between"><h3>${p.nombre}</h3><span class="badge ${info.cls}">${info.label}</span></div>
-      <div class="text-faint" style="margin:4px 0 12px;">${p.codigo} · ${p.categoria||'Sin clasificación'}${verCosto && DB.ubicacionDe(p.ubicacion_id) ? ' · ' + escHtml(DB.ubicacionDe(p.ubicacion_id).nombre) : ''}</div>
+      ${DB.esPorCantidad(p) ? `<div style="margin-bottom:8px;">${productBadgeInfo(p).label?`<span class="badge ${productBadgeInfo(p).cls}">${productBadgeInfo(p).label}</span> `:''}${cuentaRegresivaPedido(p)}</div>` : ''}
+      <div class="text-faint" style="margin:4px 0 12px;">${p.codigo} · ${p.categoria||'Sin clasificación'}${areaTipoTexto(p)?' · '+escHtml(areaTipoTexto(p)):''}${verCosto && DB.ubicacionDe(p.ubicacion_id) ? ' · ' + escHtml(DB.ubicacionDe(p.ubicacion_id).nombre) : ''}</div>
       ${renderVideoEmbed(p.url_video)}
       <div class="calc-box">
         ${verCosto?`<div class="calc-row"><span>Costo</span><span>${money(p.costo)}</span></div>`:''}
@@ -3514,8 +4369,12 @@ function modalVerFicha(p){
         <div class="calc-row comision"><span>Comisión (${p.porcentaje_ganancia}%)</span><span>${money(Math.max(p.precio_venta-p.costo,0)*p.porcentaje_ganancia/100)}</span></div>
       </div>
       <p class="text-muted mt-16">${p.descripcion||'Sin descripción.'}</p>
-    </div>`);
+    </div>
+    ${pie}`);
   document.querySelectorAll('.ficha-foto').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos.map(f=>f.url_foto), Number(img.dataset.i))));
+  document.getElementById('fcApartar')?.addEventListener('click', async ()=>{ closeModal(); await ejecutarAccion({ dataset:{ action:'apartar', id:p.id } }); });
+  document.getElementById('fcLiberar')?.addEventListener('click', async ()=>{ closeModal(); await ejecutarAccion({ dataset:{ action:'liberar', id:p.id } }); });
+  document.getElementById('fcVender')?.addEventListener('click', ()=>{ closeModal(); modalVender(p); });
 }
 
 // La URL de la ficha lleva el nombre/teléfono de QUIEN comparte (si los
@@ -3757,44 +4616,63 @@ async function modalEstadoWhatsApp(producto, tipo){
 // Pantalla que sale apenas se guarda un producto nuevo: las fotos se suben
 // aquí mismo (con barra de avance) y al terminar ofrece lo que sigue — casi
 // siempre, compartirlo al Estado de WhatsApp o seguir con el siguiente.
-function modalProductoCreado(prod, fotos){
-  const n = fotos.length;
+function modalProductoCreado(prod, fotos, video){
+  const n = fotos.length, hay = n > 0 || !!video;
   openModal(`
     <div class="modal-head"><div class="modal-title">Producto guardado</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body" style="text-align:center;">
-      <div style="font-weight:800;font-size:18px;">${prod.nombre}</div>
-      <div class="text-muted">${money(prod.precio_venta)} · ${prod.codigo}</div>
-      ${n?`<div id="npProgreso" class="mt-16"><div class="progress-bar"><span id="npProgresoBarra"></span></div><div class="text-muted mt-8" id="npProgresoTxt" style="font-size:12.5px;">Subiendo fotos 0 de ${n}…</div></div>`:''}
-      <div id="npAcciones" style="display:${n?'none':'flex'};flex-direction:column;gap:10px;margin-top:18px;">
+      <div style="font-weight:800;font-size:18px;">${escHtml(prod.nombre)}</div>
+      <div class="text-muted">${money(prod.precio_venta)} · ${escHtml(prod.codigo)}</div>
+      ${hay?`<div id="npProgreso" class="mt-16"><div class="progress-bar"><span id="npProgresoBarra"></span></div><div class="text-muted mt-8" id="npProgresoTxt" style="font-size:12.5px;">Preparando…</div></div>`:''}
+      <div id="npFallo" hidden style="margin-top:16px;padding:12px;border-radius:12px;background:#FBE3E0;color:#8C2F24;text-align:left;font-size:13.5px;">
+        <div id="npFalloTxt" style="margin-bottom:10px;"></div>
+        <button type="button" class="btn btn-primary btn-sm" id="npReintentar">Reintentar</button>
+      </div>
+      <div id="npAcciones" style="display:${hay?'none':'flex'};flex-direction:column;gap:10px;margin-top:18px;">
         <button class="btn btn-primary btn-block" id="npaEstado" hidden>${icon('whatsapp')} Compartir al Estado de WhatsApp</button>
         <button class="btn btn-secondary btn-block" id="npaOtro">${icon('plus')} Agregar otro producto</button>
         <button class="btn btn-ghost btn-block" id="npaInventario">Ver inventario</button>
       </div>
     </div>`);
-  const conectar = ()=>{
-    document.getElementById('npaOtro').addEventListener('click', ()=>{ closeModal(); navigate('a-nuevo'); });
-    document.getElementById('npaInventario').addEventListener('click', ()=>{ closeModal(); irAInventario('en_inventario'); });
-  };
-  conectar();
-  if(!n) return;
-  (async ()=>{
-    const buenas = await DB.subirFotos(prod.id, 'inventario', fotos, (hechas, total)=>{
-      const barra = document.getElementById('npProgresoBarra'), txt = document.getElementById('npProgresoTxt');
-      if(barra) barra.style.width = Math.round(hechas/total*100)+'%';
-      if(txt) txt.textContent = 'Subiendo fotos '+hechas+' de '+total+'…';
-    });
+  document.getElementById('npaOtro').addEventListener('click', ()=>{ closeModal(); navigate('a-nuevo'); });
+  document.getElementById('npaInventario').addEventListener('click', ()=>{ closeModal(); irAInventario('en_inventario'); });
+  if(!hay) return;
+  let fotosBuenas = 0, pendFotos = fotos.slice(), pendVideo = video || null;
+  const txt = t=>{ const e = document.getElementById('npProgresoTxt'); if(e) e.textContent = t; };
+  const barra = p=>{ const e = document.getElementById('npProgresoBarra'); if(e) e.style.width = Math.round(p*100) + '%'; };
+  const ejecutar = async ()=>{
+    document.getElementById('npProgreso')?.removeAttribute('hidden');
+    const fallo = document.getElementById('npFallo'); if(fallo) fallo.hidden = true;
+    const fallos = [];
+    if(pendFotos.length){
+      const b = await DB.subirFotos(prod.id, 'inventario', pendFotos, (h, t)=>{ barra(h/t); txt('Subiendo fotos ' + h + ' de ' + t + '…'); });
+      fotosBuenas += b; pendFotos = DB.fotosFallidas.slice();
+      if(pendFotos.length) fallos.push(pendFotos.length + (pendFotos.length===1?' foto':' fotos') + (DB.ultimoErrorFoto ? ' (' + DB.ultimoErrorFoto + ')' : ''));
+    }
+    if(pendVideo){
+      barra(0); txt('Preparando el video… no cierres esta pantalla');
+      const r = await DB.subirVideoProducto(prod.id, pendVideo, p=>{ barra(p); txt('Preparando el video… ' + Math.round(p*100) + '%'); }, ()=>{ barra(1); txt('Subiendo el video…'); });
+      if(r.ok) pendVideo = null; else fallos.push('el video (' + r.error + ')');
+    }
     await DB.fetchAll();
-    const fresco = DB.state.productos.find(x=>x.id===prod.id) || prod;
+    const fresco = DB.state.productos.find(x=>x.id === prod.id) || prod;
     const acciones = document.getElementById('npAcciones');
-    if(!acciones){ toast(buenas+' foto(s) subidas — '+prod.nombre,'success'); return; } // cerró la pantalla antes de terminar
+    if(!acciones){ toast('Listo: ' + prod.nombre, fallos.length ? 'danger' : 'success'); return; } // cerró la pantalla antes de terminar
     document.getElementById('npProgreso').hidden = true;
     acciones.style.display = 'flex';
-    if(buenas){
+    if(fotosBuenas){
       const bEstado = document.getElementById('npaEstado');
       bEstado.hidden = false;
-      bEstado.addEventListener('click', ()=>{ closeModal(); modalEstadoWhatsApp(fresco, 'nuevo'); });
-    } else toast('No se pudo subir ninguna foto — puedes agregarlas editando el producto','danger');
-  })();
+      if(!bEstado.dataset.ok){ bEstado.dataset.ok = '1'; bEstado.addEventListener('click', ()=>{ closeModal(); modalEstadoWhatsApp(DB.state.productos.find(x=>x.id === prod.id) || fresco, 'nuevo'); }); }
+    }
+    if(fallos.length){
+      document.getElementById('npFalloTxt').textContent = 'No se pudo subir ' + fallos.join(' y ') + '.';
+      document.getElementById('npFallo').hidden = false;
+      const b = document.getElementById('npReintentar'), nuevo = b.cloneNode(true); b.replaceWith(nuevo);
+      nuevo.addEventListener('click', ()=>{ acciones.style.display = 'none'; ejecutar(); });
+    }
+  };
+  ejecutar();
 }
 
 // Catálogo público: UN solo link con todo lo disponible, para mandar por
@@ -3813,20 +4691,24 @@ async function renderCatalogoPublico(){
   const vNombre = params.get('v'), vTel = params.get('tel');
   const saludoWsp = 'Hola'+(vNombre?' '+vNombre:'')+', vi tu catálogo y me interesa';
   const cuerpoSkel = `<div class="sf-grid">${'<div class="sf-skel"><div class="a"></div><div class="b"></div><div class="c"></div></div>'.repeat(6)}</div>`;
-  const hero = n => `<div class="sf-hero">
+  const hero = (n, otras) => `<div class="sf-hero">
       <img class="sf-logo" src="icon-192.png" alt="" onerror="this.style.display='none'">
       <h1>${escHtml(negocio)}</h1>
-      <p>Piezas únicas. Cuando se venden, se acaban.${n!=null?` Hoy hay <b>${n}</b> disponible${n===1?'':'s'}.`:''}</p>
+      <p>${otras?'Lo que tenemos hoy.':'Piezas únicas. Cuando se venden, se acaban.'}${n!=null?` Hoy hay <b>${n}</b> disponible${n===1?'':'s'}.`:''}</p>
       ${vTel?`<a class="sf-contact" href="https://wa.me/${vTel}?text=${encodeURIComponent(saludoWsp)}" target="_blank" rel="noopener">${icon('whatsapp')} ${vNombre?'Escríbele a '+escHtml(vNombre):'Escríbenos por WhatsApp'}</a>`:''}
     </div>`;
   root.innerHTML = hero(null) + cuerpoSkel;
 
   const leerProductos = async ()=>{
-    const { data, error } = await sb.from('vista_producto_publico')
-      .select('codigo,nombre,descripcion,categoria,precio_venta,fotos,url_video').eq('estado','en_inventario').order('codigo', { ascending:false });
-    return error ? null : (data || []);
+    const base = 'codigo,nombre,descripcion,categoria,precio_venta,fotos,url_video';
+    // Con la migración 22 llegan también el área, el tipo, las existencias y la fecha límite de "bajo pedido".
+    let r = await sb.from('vista_producto_publico').select(base + ',area_clave,area_nombre,area_modo,area_orden,tipo,cantidad,disponible_hasta')
+      .eq('estado','en_inventario').order('codigo', { ascending:false });
+    if(r.error) r = await sb.from('vista_producto_publico').select(base).eq('estado','en_inventario').order('codigo', { ascending:false });
+    return r.error ? null : (r.data || []).filter(visiblePublico);
   };
   let productos = (await leerProductos()) || [];
+  const hayOtras = ()=>productos.some(p=>p.area_modo && p.area_modo!=='unico');
 
   // "Nuevo" = llegó desde la última vez que ESTE teléfono abrió el catálogo
   // (se recuerda en el propio navegador; la primera visita no marca nada).
@@ -3841,9 +4723,26 @@ async function renderCatalogoPublico(){
   };
   marcarVistos();
 
-  let cat = '', q = '', orden = 'nuevo';
+  let cat = '', q = '', orden = 'nuevo', area = '';
+  const areasPresentes = ()=>{
+    const m = new Map();
+    productos.forEach(p=>{ if(p.area_clave && !m.has(p.area_clave)) m.set(p.area_clave, { clave:p.area_clave, nombre:p.area_nombre, orden:p.area_orden||0 }); });
+    return [...m.values()].sort((a,b)=>a.orden-b.orden);
+  };
+  const areaChipsHtml = ()=>{
+    const as = areasPresentes();
+    if(as.length < 2) return '';
+    return `<button class="sf-chip${area===''?' active':''}" data-area="">Todo</button>${as.map(a=>`<button class="sf-chip${area===a.clave?' active':''}" data-area="${escHtml(a.clave)}">${escHtml(a.nombre)}</button>`).join('')}`;
+  };
+  const enlazarAreas = ()=>{
+    document.querySelectorAll('#areaChips .sf-chip').forEach(b=>b.addEventListener('click', ()=>{
+      area = b.dataset.area; cat = '';
+      document.getElementById('areaChips').innerHTML = areaChipsHtml(); enlazarAreas();
+      document.getElementById('catChips').innerHTML = chipsHtml(); enlazarChips(); dibujar();
+    }));
+  };
   const chipsHtml = ()=>{
-    const categorias = [...new Set(productos.map(p=>p.categoria).filter(Boolean))].sort();
+    const categorias = [...new Set(productos.filter(p=>!area || p.area_clave===area).map(p=>p.categoria).filter(Boolean))].sort();
     return categorias.length ? `<button class="sf-chip${cat===''?' active':''}" data-cat="">Todo</button>${categorias.map(c=>`<button class="sf-chip${cat===c?' active':''}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join('')}` : '';
   };
   const enlazarChips = ()=>{
@@ -3852,19 +4751,23 @@ async function renderCatalogoPublico(){
     }));
   };
   const linkResto = (vNombre?'&v='+encodeURIComponent(vNombre):'') + (vTel?'&tel='+encodeURIComponent(vTel):'');
-  const mensajeInteres = p => 'Hola'+(vNombre?' '+vNombre:'')+', me interesa: '+p.nombre+' (código '+p.codigo+') — Q '+Number(p.precio_venta).toFixed(2);
+  const mensajeInteres = p => 'Hola'+(vNombre?' '+vNombre:'')+', me interesa: '+p.nombre+' (código '+p.codigo+') — Q '+Number(p.precio_venta).toFixed(2)+'\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo);
 
   const tarjeta = (p, i)=>{
     const fotos = p.fotos || [];
     return `<div class="sf-card" data-codigo="${escHtml(p.codigo)}" style="--i:${Math.min(i,10)}">
       <div class="sf-foto">${fotos[0]?imgMini(fotos[0], escHtml(p.nombre)):`<div class="sf-sinfoto">${icon('crate')}<span>Sin foto</span></div>`}
         ${nuevos.has(p.codigo)?'<span class="sf-nuevo">NUEVO</span>':''}
-        ${fotos.length>1?`<span class="sf-fotos">${icon('image')} ${fotos.length}</span>`:''}</div>
+        ${fotos.length>1?`<span class="sf-fotos">${icon('image')} ${fotos.length}</span>`:''}
+        ${p.url_video?`<span class="sf-video">${icon('play')} Video</span>`:''}
+        ${p.area_modo==='cantidad'?`<span class="sf-stock">Disponibles: ${p.cantidad}</span>`:''}
+        ${p.area_modo==='pedido'?`<span class="sf-pedido" data-cierra="${escHtml(p.disponible_hasta)}">${icon('clock')} Cierra en <span class="t">${textoRestante(new Date(p.disponible_hasta)-Date.now())}</span></span>`:''}</div>
       <div class="sf-info">
-        ${p.categoria?`<div class="sf-cat">${escHtml(p.categoria)}</div>`:''}
+        ${p.categoria||p.tipo?`<div class="sf-cat">${escHtml([p.tipo, p.categoria].filter(Boolean).join(' · '))}</div>`:''}
         <div class="sf-nombre">${escHtml(p.nombre)}</div>
         <div class="sf-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
-        ${vTel ? `<a class="sf-btn" data-wsp href="https://wa.me/${vTel}?text=${encodeURIComponent(mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa</a>`
+        ${p.area_modo==='pedido' ? `<button type="button" class="sf-btn pedir" data-pedir>${icon('bookmark')} Pedir</button>`
+        : vTel ? `<a class="sf-btn" data-wsp href="https://wa.me/${vTel}?text=${encodeURIComponent(mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa</a>`
                : `<button type="button" class="sf-btn sec">Ver detalle</button>`}
       </div>
     </div>`;
@@ -3872,8 +4775,8 @@ async function renderCatalogoPublico(){
 
   const dibujar = ()=>{
     const tokens = normalizar(q).split(/\s+/).filter(Boolean);
-    let lista = productos.filter(p=>(!cat || p.categoria===cat) && (!tokens.length || (()=>{
-      const pajar = normalizar([p.nombre, p.descripcion, p.categoria, p.codigo, p.precio_venta].join(' '));
+    let lista = productos.filter(p=>(!area || p.area_clave===area) && (!cat || p.categoria===cat) && (!tokens.length || (()=>{
+      const pajar = normalizar([p.nombre, p.descripcion, p.categoria, p.tipo, p.area_nombre, p.codigo, p.precio_venta].join(' '));
       return tokens.every(t=>pajar.includes(t));
     })()));
     if(orden==='precio_asc') lista = lista.slice().sort((a,b)=>a.precio_venta-b.precio_venta);
@@ -3882,16 +4785,17 @@ async function renderCatalogoPublico(){
     window.__catLista = lista;
     document.getElementById('catGrid').innerHTML = lista.length ? lista.map(tarjeta).join('')
       : `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':''}</div>`;
-    document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + (q||cat?' encontrado'+(lista.length===1?'':'s'):' disponible'+(lista.length===1?'':'s'));
+    document.getElementById('catConteo').textContent = lista.length + ' producto' + (lista.length===1?'':'s') + (q||cat||area?' encontrado'+(lista.length===1?'':'s'):' disponible'+(lista.length===1?'':'s'));
     const h = document.querySelector('.sf-hero p b'); if(h) h.textContent = productos.length;
   };
 
-  root.innerHTML = hero(productos.length) + `
+  root.innerHTML = hero(productos.length, hayOtras()) + `
     <div class="sf-bar">
       <div class="sf-tools">
         <div class="sf-search">${icon('search')}<input id="catBuscar" type="search" placeholder="Buscar producto…" autocomplete="off" aria-label="Buscar"></div>
         <select id="catOrden" aria-label="Ordenar"><option value="nuevo">Más nuevos</option><option value="precio_asc">Menor precio</option><option value="precio_desc">Mayor precio</option><option value="nombre">A–Z</option></select>
       </div>
+      ${areaChipsHtml()?`<div class="sf-chips" id="areaChips">${areaChipsHtml()}</div>`:`<div class="sf-chips" id="areaChips" hidden></div>`}
       <div class="sf-chips" id="catChips">${chipsHtml()}</div>
     </div>
     <div class="sf-conteo" id="catConteo"></div>
@@ -3901,6 +4805,7 @@ async function renderCatalogoPublico(){
   document.getElementById('catBuscar').addEventListener('input', e=>{ q = e.target.value; dibujar(); });
   document.getElementById('catOrden').addEventListener('change', e=>{ orden = e.target.value; dibujar(); });
   enlazarChips();
+  enlazarAreas();
   dibujar();
 
   // Abrir el detalle al tocar la tarjeta (menos el botón de WhatsApp, que va directo)
@@ -3908,7 +4813,9 @@ async function renderCatalogoPublico(){
     if(e.target.closest('[data-wsp]')) return;
     const card = e.target.closest('.sf-card'); if(!card) return;
     const p = productos.find(x=>x.codigo===card.dataset.codigo);
-    if(p) detalleCatalogo(p, { vNombre, vTel, linkResto, mensajeInteres });
+    if(!p) return;
+    const ctx = { vNombre, vTel, linkResto, mensajeInteres };
+    if(e.target.closest('[data-pedir]')) modalPedirPublico(p, ctx); else detalleCatalogo(p, ctx);
   });
 
   // En vivo: la base avisa por un canal público (sin datos dentro) cuando algo
@@ -3920,14 +4827,92 @@ async function renderCatalogoPublico(){
       const nuevosProductos = await leerProductos();
       if(!nuevosProductos) return;
       productos = nuevosProductos;
-      if(cat && !productos.some(p=>p.categoria===cat)) cat = '';
-      const chips = document.getElementById('catChips');
-      if(chips){ chips.innerHTML = chipsHtml(); enlazarChips(); }
+      refrescarFiltros();
       dibujar();
     }, 600);
   };
+  // Si lo que estaba filtrado desaparece (se vendió, se cerró un pedido…), se limpia el filtro.
+  const refrescarFiltros = ()=>{
+    if(area && !productos.some(p=>p.area_clave===area)) area = '';
+    if(cat && !productos.some(p=>(!area || p.area_clave===area) && p.categoria===cat)) cat = '';
+    const ac = document.getElementById('areaChips');
+    if(ac){ const h = areaChipsHtml(); ac.hidden = !h; ac.innerHTML = h; enlazarAreas(); }
+    const chips = document.getElementById('catChips');
+    if(chips){ chips.innerHTML = chipsHtml(); enlazarChips(); }
+  };
   sb.channel('catalogo').on('broadcast', { event:'cambio' }, actualizar).subscribe();
+  // Cuentas regresivas de "bajo pedido": se actualizan solas y la tarjeta se va cuando cierra.
+  setInterval(()=>{
+    const antes = productos.length;
+    productos = productos.filter(visiblePublico);
+    if(productos.length !== antes){ refrescarFiltros(); dibujar(); return; }
+    document.querySelectorAll('[data-cierra]').forEach(el=>{ const t = el.querySelector('.t'); if(t) t.textContent = textoRestante(new Date(el.dataset.cierra) - Date.now()); });
+  }, 30000);
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) actualizar(); });
+}
+
+// Qué se muestra en el catálogo de los clientes: lo agotado y lo vencido no sale.
+function visiblePublico(p){
+  if(p.area_modo === 'cantidad') return (p.cantidad || 0) > 0;
+  if(p.area_modo === 'pedido') return !!p.disponible_hasta && new Date(p.disponible_hasta).getTime() > Date.now();
+  return true;
+}
+function infoAreaPublicaHtml(p){
+  if(p.area_modo === 'cantidad') return (p.cantidad || 0) > 0 ? `<div class="sf-d-aviso">Disponibles: <b>${p.cantidad}</b></div>` : `<div class="sf-d-aviso cerrado">Agotado por ahora</div>`;
+  if(p.area_modo === 'pedido' && p.disponible_hasta){
+    const ms = new Date(p.disponible_hasta).getTime() - Date.now();
+    return ms > 0 ? `<div class="sf-d-aviso">${icon('clock')} Se puede pedir por <b>${textoRestante(ms)}</b> más</div>` : `<div class="sf-d-aviso cerrado">Los pedidos de este producto ya se cerraron</div>`;
+  }
+  return '';
+}
+const MENSAJES_PEDIDO = {
+  PEDIDO_CERRADO: 'Los pedidos de este producto ya se cerraron.',
+  DEMASIADOS_PEDIDOS: 'Ya hiciste varios pedidos de este producto. Escríbenos por WhatsApp.',
+  NOMBRE_REQUERIDO: 'Escribe tu nombre.',
+  NO_SE_PUEDE_PEDIR: 'Este producto no se puede pedir.',
+  PRODUCTO_NO_ENCONTRADO: 'Este producto ya no está disponible.'
+};
+// El cliente toca "Pedir": se registra el pedido (sin login) y se abre WhatsApp con el mensaje listo.
+function modalPedirPublico(p, ctx){
+  let guardado = {}; try{ guardado = JSON.parse(localStorage.getItem('cab_cliente') || '{}'); }catch(e){}
+  let cant = 1;
+  const ms = new Date(p.disponible_hasta).getTime() - Date.now();
+  openModal(`
+    <div class="modal-head"><div class="modal-title">Pedir</div><button class="icon-btn" onclick="closeModal()" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body" id="pdCuerpo">
+      <div class="pd-prod"><b>${escHtml(p.nombre)}</b><span>Q ${Number(p.precio_venta).toFixed(2)}</span>${ms>0?`<small>${icon('clock')} Se puede pedir por ${textoRestante(ms)} más</small>`:''}</div>
+      <div class="form-group"><label>Tu nombre *</label><input id="pdNombre" value="${escHtml(guardado.nombre||'')}" autocomplete="name" placeholder="¿A nombre de quién?"></div>
+      <div class="form-group"><label>Tu WhatsApp</label><input id="pdTel" inputmode="tel" value="${escHtml(guardado.tel||'')}" autocomplete="tel" placeholder="Para avisarte cuando llegue"></div>
+      <div class="form-group"><label>Cantidad</label>
+        <div class="stepper"><button type="button" id="pdMenos" aria-label="Menos">−</button><input type="number" inputmode="numeric" id="pdCant" min="1" max="10" value="1"><button type="button" id="pdMas" aria-label="Más">+</button></div></div>
+      <div class="text-faint" style="font-size:12px;">Al tocar "Pedir" se registra tu pedido y se abre WhatsApp con el mensaje listo para enviar.</div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="pdEnviar">${icon('bookmark')} Pedir</button></div>`, 'sheet');
+  const inp = document.getElementById('pdCant');
+  const fijar = n=>{ cant = Math.min(10, Math.max(1, Math.floor(n) || 1)); inp.value = cant; };
+  document.getElementById('pdMenos').addEventListener('click', ()=>fijar(cant-1));
+  document.getElementById('pdMas').addEventListener('click', ()=>fijar(cant+1));
+  inp.addEventListener('change', ()=>fijar(Number(inp.value)));
+  document.getElementById('pdEnviar').addEventListener('click', async ev=>{
+    const nombre = document.getElementById('pdNombre').value.trim(), tel = document.getElementById('pdTel').value.trim();
+    if(nombre.length < 2) return toast('Escribe tu nombre','danger');
+    const btn = ev.target.closest('button'); btn.disabled = true; btn.textContent = 'Registrando…';
+    const r = await DB.registrarPedidoPublico(p.codigo, nombre, tel, cant);
+    if(!r.ok){
+      btn.disabled = false; btn.innerHTML = icon('bookmark') + ' Pedir';
+      const k = Object.keys(MENSAJES_PEDIDO).find(c=>String(r.error||'').includes(c));
+      return toast(k ? MENSAJES_PEDIDO[k] : 'No se pudo registrar el pedido. Revisa tu señal e intenta otra vez.', 'danger');
+    }
+    try{ localStorage.setItem('cab_cliente', JSON.stringify({ nombre, tel })); }catch(e){}
+    const link = location.origin + location.pathname + '?p=' + encodeURIComponent(p.codigo);
+    const mensaje = 'Hola' + (ctx.vNombre ? ' ' + ctx.vNombre : '') + ', quiero pedir: ' + p.nombre + (cant > 1 ? ' × ' + cant : '') + ' — Q ' + Number(p.precio_venta).toFixed(2) + '\nA nombre de ' + nombre + '\n' + link;
+    const url = ctx.vTel ? 'https://wa.me/' + ctx.vTel + '?text=' + encodeURIComponent(mensaje) : null;
+    document.getElementById('pdCuerpo').innerHTML = `<div class="pd-ok"><div class="pd-check">${icon('check')}</div><h3>¡Pedido registrado!</h3>
+      <p>${ctx.vTel ? 'Te avisamos por WhatsApp cuando llegue. Si no se abrió el chat, tócalo aquí:' : 'Te avisamos cuando llegue.'}</p>
+      ${url ? `<a class="sf-cta" href="${url}" target="_blank" rel="noopener">${icon('whatsapp')} Abrir WhatsApp</a>` : ''}</div>`;
+    document.querySelector('#modalOverlay .modal-foot').innerHTML = `<button class="btn btn-primary" onclick="closeModal()">Listo</button>`;
+    if(url) window.open(url, '_blank', 'noopener');
+  });
 }
 
 // Detalle de un producto: hoja que sube desde abajo, con galería deslizable.
@@ -3942,13 +4927,16 @@ function detalleCatalogo(p, ctx){
       ${p.categoria?`<span class="sf-d-cat">${escHtml(p.categoria)}</span>`:''}
       <div class="sf-d-nombre">${escHtml(p.nombre)}</div>
       <div class="sf-d-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
+      ${infoAreaPublicaHtml(p)}
       ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
       ${renderVideoEmbed(p.url_video)}
       <div class="sf-cta-bar">
-        ${ctx.vTel?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
+        ${p.area_modo==='pedido' ? `<button type="button" class="sf-cta pedir" id="sfPedir">${icon('bookmark')} Pedir</button>`
+          : ctx.vTel?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
         <button type="button" class="sf-cta sec" id="sfCompartir">${icon('share')} Compartir esta pieza</button>
       </div>
     </div>`, 'sheet');
+  document.getElementById('sfPedir')?.addEventListener('click', ()=>{ closeModal(); modalPedirPublico(p, ctx); });
   const gal = document.getElementById('sfGal');
   gal?.querySelectorAll('img').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));
   const dots = document.querySelectorAll('#sfDots i');
@@ -3973,9 +4961,17 @@ function urlCatalogo(){
   if(tel) url += '&v=' + encodeURIComponent(cur.nombre) + '&tel=' + encodeURIComponent(tel.slice(1));
   return url;
 }
+// ¿Lo ve un cliente en el catálogo público? (área abierta al público, con existencias o con pedidos abiertos)
+function disponibleEnCatalogo(p){
+  const a = DB.areaDe(p);
+  if(!a.visible_publico || !a.activa) return false;
+  if(a.modo === 'cantidad') return (p.cantidad || 0) > 0;
+  if(a.modo === 'pedido') return !!p.disponible_hasta && new Date(p.disponible_hasta).getTime() > Date.now();
+  return true;
+}
 function modalCompartirCatalogo(){
   const url = urlCatalogo();
-  const n = DB.state.productos.filter(p=>p.estado==='en_inventario').length;
+  const n = DB.state.productos.filter(p=>p.estado==='en_inventario' && disponibleEnCatalogo(p)).length;
   const mensaje = `Mira lo que tengo disponible (${n} producto${n===1?'':'s'}): ${url}`;
   openModal(`
     <div class="modal-head"><div class="modal-title">Compartir catálogo</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
@@ -4021,6 +5017,7 @@ function modalEditarProducto(p){
   openModal(`
     <div class="modal-head"><div class="modal-title">Editar Producto</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
+      ${camposAreaHtml('ep', p)}
       <div class="form-group"><label>Nombre</label><input id="epNombre" value="${p.nombre}"></div>
       <div class="form-row">
         <div class="form-group"><label>Clasificación</label><select id="epCategoria">${opcionesClasificacion(p.categoria)}</select>
@@ -4036,7 +5033,13 @@ function modalEditarProducto(p){
         <div class="form-group"><label>Costo</label><input type="number" step="0.01" id="epCosto" value="${p.costo}"></div>
         <div class="form-group"><label>Precio de venta</label><input type="number" step="0.01" id="epPrecio" value="${p.precio_venta}"></div>
       </div>
-      <div class="form-group"><label>Video</label><input id="epVideo" value="${p.url_video||''}"></div>
+      <div class="form-group"><label>Video</label>
+        ${esVideoSubido(p.url_video)
+          ? `${renderVideoEmbed(p.url_video)}<div class="np-photo-actions" style="margin-top:8px;"><button type="button" class="btn btn-secondary btn-sm" id="epCambiarVideo">${icon('play')} Cambiar video</button><button type="button" class="btn btn-secondary btn-sm" id="epQuitarVideo">Quitar video</button></div>`
+          : `<input id="epVideo" value="${p.url_video||''}" placeholder="Link de YouTube o TikTok"><div class="np-photo-actions" style="margin-top:8px;"><button type="button" class="btn btn-secondary btn-sm" id="epCambiarVideo">${icon('play')} Subir video de la galería</button></div>`}
+        <input type="file" id="epVideoArchivo" accept="video/*" hidden>
+        <div id="epVideoVista"></div>
+      </div>
       <div class="form-group"><label>Etiquetas</label><input id="epEtiquetas" value="${(p.etiquetas||[]).join(', ')}" placeholder="Ej: Oferta, Nuevo ingreso"></div>
       <div class="form-group"><label>Descripción</label><textarea id="epDescripcion" rows="3">${p.descripcion||''}</textarea></div>
       <div class="form-group">
@@ -4053,6 +5056,7 @@ function modalEditarProducto(p){
     <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="btnGuardarEdit">Guardar cambios</button></div>`);
 
   enlazarClasificacionNueva('epCategoria','epCategoriaNueva');
+  enlazarCamposArea('ep', p);
   document.querySelectorAll('#epFotosExistentes button[data-foto-id]').forEach(b=>b.addEventListener('click', async ()=>{
     if(!confirm('¿Eliminar esta foto? No se puede deshacer.')) return;
     b.disabled = true;
@@ -4061,13 +5065,35 @@ function modalEditarProducto(p){
     else { toast('No se pudo eliminar: '+res.error,'danger'); b.disabled = false; }
   }));
 
+  let repintarNuevas = ()=>{};
+  let videoNuevo = null, quitarVideo = false;
+  const pintarVideoNuevo = async ()=>{
+    const caja = document.getElementById('epVideoVista');
+    if(!videoNuevo){ caja.innerHTML = ''; return; }
+    let meta = null; try{ meta = await leerMetaVideo(videoNuevo); }catch(e){}
+    caja.innerHTML = videoChipHtml(videoNuevo, meta);
+    caja.querySelector('.vc-x').addEventListener('click', ()=>{ videoNuevo = null; pintarVideoNuevo(); });
+  };
+  document.getElementById('epCambiarVideo').addEventListener('click', ()=>document.getElementById('epVideoArchivo').click());
+  document.getElementById('epVideoArchivo').addEventListener('change', async e=>{
+    const f = e.target.files[0]; e.target.value = ''; if(!f) return;
+    try{
+      const meta = await leerMetaVideo(f);
+      if(meta.duracion > VIDEO_MAX_SEG) return toast('El video dura ' + Math.round(meta.duracion) + ' s y el máximo es ' + VIDEO_MAX_SEG + '. Recórtalo en tu galería.', 'danger');
+    }catch(err){ return toast(err.message, 'danger'); }
+    videoNuevo = f; quitarVideo = false; pintarVideoNuevo();
+  });
+  document.getElementById('epQuitarVideo')?.addEventListener('click', ev=>{
+    quitarVideo = true; ev.target.closest('.form-group').querySelector('video')?.remove(); ev.target.closest('button').textContent = 'Se quitará al guardar'; ev.target.closest('button').disabled = true;
+  });
   if(fotosExistentes.length < 5){
     const dz = document.getElementById('epDropZone'), input = document.getElementById('epFotosNuevas');
     dz.addEventListener('click', ()=>input.click());
     const renderPreviewNuevas = () => {
-      document.getElementById('epPreviewNuevas').innerHTML = fotosBuffer.map((f,i)=>`<div class="photo-preview"><img src="${URL.createObjectURL(f)}"><button data-i="${i}">${icon('x')}</button></div>`).join('');
-      document.querySelectorAll('#epPreviewNuevas button').forEach(b=>b.addEventListener('click', ()=>{ fotosBuffer.splice(Number(b.dataset.i),1); renderPreviewNuevas(); }));
+      document.getElementById('epPreviewNuevas').innerHTML = miniaturasHtml(fotosBuffer);
+      enlazarMiniaturas('#epPreviewNuevas', fotosBuffer, renderPreviewNuevas);
     };
+    repintarNuevas = renderPreviewNuevas;
     input.addEventListener('change', e=>{
       const disponibles = 5 - fotosExistentes.length - fotosBuffer.length;
       fotosBuffer.push(...[...e.target.files].slice(0, disponibles));
@@ -4077,9 +5103,16 @@ function modalEditarProducto(p){
 
   document.getElementById('btnGuardarEdit').addEventListener('click', async ()=>{
     const btn = document.getElementById('btnGuardarEdit'); btn.disabled = true;
-    const urlVideo = await resolverVideoUrl(document.getElementById('epVideo').value);
+    let urlVideo;
+    if(quitarVideo) urlVideo = null;
+    else if(document.getElementById('epVideo')) urlVideo = await resolverVideoUrl(document.getElementById('epVideo').value);
+    else urlVideo = p.url_video;   // video subido, sin cambios
     const gastosPredefinidos = [...document.querySelectorAll('.ep-gasto-check:checked')].map(chk=>chk.value);
+    const campos = await leerCamposArea('ep');
+    if(campos._error){ toast(campos._error,'danger'); btn.disabled = false; return; }
+    if(campos.cantidad === undefined) delete campos.cantidad;
     const res = await DB.editarProducto(p.id, {
+      ...campos,
       nombre: document.getElementById('epNombre').value,
       categoria: (await leerClasificacion('epCategoria','epCategoriaNueva')) || null,
       ubicacion_id: document.getElementById('epUbicacion').value || null,
@@ -4091,13 +5124,27 @@ function modalEditarProducto(p){
       descripcion: document.getElementById('epDescripcion').value,
       gastos_predefinidos: gastosPredefinidos
     });
-    if(res.ok && fotosBuffer.length) await DB.subirFotos(p.id, 'inventario', fotosBuffer);
+    if(res.ok && fotosBuffer.length){
+      await DB.subirFotos(p.id, 'inventario', fotosBuffer);
+      if(DB.fotosFallidas.length){
+        fotosBuffer.splice(0, fotosBuffer.length, ...DB.fotosFallidas);
+        repintarNuevas();
+        toast(DB.fotosFallidas.length + (DB.fotosFallidas.length===1?' foto no se subió':' fotos no se subieron') + ' (' + (DB.ultimoErrorFoto || 'revisa tu señal') + '). Toca Guardar para reintentar','danger');
+        btn.disabled = false; return;
+      }
+    }
+    if(res.ok && quitarVideo && esVideoSubido(p.url_video)) await DB.borrarVideoSubido(p.url_video);
+    if(res.ok && videoNuevo){
+      btn.textContent = 'Preparando el video…';
+      const r = await DB.subirVideoProducto(p.id, videoNuevo, pr=>{ btn.textContent = 'Preparando el video… ' + Math.round(pr*100) + '%'; }, ()=>{ btn.textContent = 'Subiendo el video…'; }, esVideoSubido(p.url_video) ? p.url_video : null);
+      if(!r.ok){ toast('No se pudo subir el video (' + r.error + '). Toca Guardar para reintentar','danger'); btn.textContent = 'Guardar cambios'; btn.disabled = false; return; }
+    }
     if(res.ok){ toast('Producto actualizado','success'); closeModal(); await refresh(); }
     else { toast('No se pudo actualizar: '+res.error,'danger'); btn.disabled = false; }
   });
 }
 
-function modalVender(p){
+function modalVender(p, opts){
   const esAdmin = DB.isAdmin();
   const verCosto = esAdmin; // las vendedoras solo ven precio de venta y su comisión, nunca el costo/margen
   const pctComision = esAdmin ? 100 : p.porcentaje_ganancia; // el admin se queda con el 100%: es su propio negocio
@@ -4114,36 +5161,43 @@ function modalVender(p){
   const gastosOcultos = gastosActivos.filter(g=>g.oculto_vendedoras);
   const gastosDelProducto = gastosActivos.filter(g=>!g.oculto_vendedoras && idsDelProducto.includes(g.id));
   const gastosCheckbox = gastosActivos.filter(g=>!g.oculto_vendedoras && !idsDelProducto.includes(g.id));
-  const montoAutomatico = g => g.tipo==='porcentaje' ? (p.precio_venta*g.monto_default/100) : Number(g.monto_default);
-  const totalAutomaticos = gastosOcultos.reduce((s,g)=>s+montoAutomatico(g),0) + gastosDelProducto.reduce((s,g)=>s+montoAutomatico(g),0);
-  const gananciaFija = p.precio_venta - p.costo; // los gastos ya NO la afectan
+  // Productos por cantidad: se elige cuántas unidades; todo (precio, costo, % de gastos) se multiplica.
+  const porCant = DB.esPorCantidad(p);
+  const maxCant = porCant ? Math.max(1, p.cantidad||0) : 1;
+  let cant = opts && opts.pedido ? Math.min(maxCant, Math.max(1, opts.pedido.cantidad||1)) : 1;
+  const montoAutomatico = g => g.tipo==='porcentaje' ? (p.precio_venta*cant*g.monto_default/100) : Number(g.monto_default);
+  const sumaAuto = () => gastosOcultos.reduce((s,g)=>s+montoAutomatico(g),0) + gastosDelProducto.reduce((s,g)=>s+montoAutomatico(g),0);
+  let totalAutomaticos = sumaAuto();
+  let gananciaFija = (p.precio_venta - p.costo) * cant; // los gastos ya NO la afectan
   const calcTotal = () => {
     let total = totalAutomaticos;
     document.querySelectorAll('.gasto-check').forEach(chk=>{ if(chk.checked) total += Number(document.querySelector(`.gasto-monto[data-id="${chk.dataset.id}"]`).value)||0; });
     document.getElementById('ventaGastosTotal').textContent = '+'+money(total);
-    document.getElementById('ventaTotalCobrar').textContent = money(p.precio_venta + total);
+    document.getElementById('ventaTotalCobrar').textContent = money(p.precio_venta*cant + total);
   };
   openModal(`
     <div class="modal-head"><div class="modal-title">Vender: ${p.nombre}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
+      ${porCant ? `<div class="form-group"><label>Cantidad (hay ${p.cantidad||0})</label>
+        <div class="stepper"><button type="button" id="vqMenos" aria-label="Menos">−</button><input type="number" inputmode="numeric" id="vqCant" min="1" max="${maxCant}" value="${cant}"><button type="button" id="vqMas" aria-label="Más">+</button></div></div>` : ''}
       <p class="text-muted mb-0">Selecciona los gastos que aplican a esta venta (se suman al precio, se cobran aparte al cliente).</p>
       <div class="mt-16">
       ${gastosCheckbox.length ? gastosCheckbox.map(g=>{
-        const monto = g.tipo==='porcentaje' ? (p.precio_venta*g.monto_default/100).toFixed(2) : g.monto_default;
+        const monto = g.tipo==='porcentaje' ? (p.precio_venta*cant*g.monto_default/100).toFixed(2) : g.monto_default;
         return `<div class="gasto-row"><input type="checkbox" class="gasto-check" data-id="${g.id}" data-nombre="${g.nombre}">
           <span class="g-name">${g.nombre} ${g.tipo==='porcentaje'?`(${g.monto_default}%)`:''}</span>
-          <input type="number" class="gasto-monto" data-id="${g.id}" value="${monto}" step="0.01"></div>`;
+          <input type="number" class="gasto-monto" data-id="${g.id}" data-pct="${g.tipo==='porcentaje'?g.monto_default:''}" value="${monto}" step="0.01"></div>`;
       }).join('') : `<div class="text-faint">No hay gastos configurados</div>`}
       </div>
       ${gastosDelProducto.length ? `<div class="text-faint mt-8" style="font-size:11px;">Gastos de este producto (aplican siempre, sin elegirlos): ${gastosDelProducto.map(g=>g.nombre+' ('+money(montoAutomatico(g))+')').join(', ')}</div>` : ''}
       ${esAdmin && gastosOcultos.length ? `<div class="text-faint mt-8" style="font-size:11px;">Automáticos a todas las ventas (las vendedoras no los ven por separado): ${gastosOcultos.map(g=>g.nombre+' ('+money(montoAutomatico(g))+')').join(', ')}</div>` : ''}
       <div class="calc-box">
-        <div class="calc-row"><span>Precio de venta</span><span>${money(p.precio_venta)}</span></div>
-        ${verCosto ? `<div class="calc-row"><span>Costo</span><span>-${money(p.costo)}</span></div>` : ''}
+        <div class="calc-row"><span>Precio de venta</span><span id="vcPrecio">${money(p.precio_venta*cant)}</span></div>
+        ${verCosto ? `<div class="calc-row"><span>Costo</span><span id="vcCosto">-${money(p.costo*cant)}</span></div>` : ''}
         <div class="calc-row"><span>Gastos aplicados</span><span id="ventaGastosTotal">+${money(totalAutomaticos)}</span></div>
-        <div class="calc-row total"><span>Total a cobrar al cliente</span><span id="ventaTotalCobrar">${money(p.precio_venta+totalAutomaticos)}</span></div>
-        ${verCosto ? `<div class="calc-row"><span>Ganancia neta</span><span>${money(gananciaFija)}</span></div>` : ''}
-        <div class="calc-row comision"><span>${esAdmin?'Tu ganancia (100%)':'Tu comisión ('+pctComision+'%)'}</span><span>${money(Math.max(gananciaFija,0)*pctComision/100)}</span></div>
+        <div class="calc-row total"><span>Total a cobrar al cliente</span><span id="ventaTotalCobrar">${money(p.precio_venta*cant+totalAutomaticos)}</span></div>
+        ${verCosto ? `<div class="calc-row"><span>Ganancia neta</span><span id="vcGanancia">${money(gananciaFija)}</span></div>` : ''}
+        <div class="calc-row comision"><span>${esAdmin?'Tu ganancia (100%)':'Tu comisión ('+pctComision+'%)'}</span><span id="vcComision">${money(Math.max(gananciaFija,0)*pctComision/100)}</span></div>
       </div>
       <div class="form-group mt-16">
         <label>¿Ya pagó?</label>
@@ -4176,6 +5230,36 @@ function modalVender(p){
     </div>
     <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="btnConfirmarVenta">${icon('check')} Confirmar Venta</button></div>`);
   document.querySelectorAll('.gasto-check, .gasto-monto').forEach(el=>el.addEventListener('input', calcTotal));
+  const recalc = ()=>{
+    totalAutomaticos = sumaAuto(); gananciaFija = (p.precio_venta - p.costo) * cant;
+    document.querySelectorAll('.gasto-monto[data-pct]').forEach(inp=>{ if(inp.dataset.pct) inp.value = (p.precio_venta*cant*Number(inp.dataset.pct)/100).toFixed(2); });
+    const poner = (id, t)=>{ const el = document.getElementById(id); if(el) el.textContent = t; };
+    poner('vcPrecio', money(p.precio_venta*cant)); poner('vcCosto', '-'+money(p.costo*cant));
+    poner('vcGanancia', money(gananciaFija)); poner('vcComision', money(Math.max(gananciaFija,0)*pctComision/100));
+    calcTotal();
+  };
+  if(porCant){
+    const inp = document.getElementById('vqCant');
+    const fijar = n=>{ cant = Math.min(maxCant, Math.max(1, Math.floor(n) || 1)); inp.value = cant; recalc(); };
+    document.getElementById('vqMenos').addEventListener('click', ()=>fijar(cant-1));
+    document.getElementById('vqMas').addEventListener('click', ()=>fijar(cant+1));
+    inp.addEventListener('input', ()=>{ if(inp.value !== '') fijar(Number(inp.value)); });
+    inp.addEventListener('change', ()=>fijar(Number(inp.value)));
+    recalc();
+  }
+  if(opts && opts.pedido){
+    // Viene de la lista de pedidos: ya sabemos quién es el cliente.
+    const ped = opts.pedido, sel = document.getElementById('ventaCliente');
+    const solo = t=>String(t||'').replace(/\D/g,'');
+    const ya = DB.state.clientes.find(c=>(solo(ped.cliente_telefono) && solo(c.telefono)===solo(ped.cliente_telefono)) || normalizar(c.nombre)===normalizar(ped.cliente_nombre));
+    if(ya) sel.value = ya.id;
+    else {
+      sel.value = '__nuevo__'; document.getElementById('ventaNuevoClienteBox').hidden = false;
+      document.getElementById('ventaNuevoClienteNombre').value = ped.cliente_nombre;
+      document.getElementById('ventaNuevoClienteTelefono').value = ped.cliente_telefono || '';
+    }
+    document.getElementById('ventaDetalles').open = true;
+  }
   document.getElementById('ventaCliente').addEventListener('change', e=>{
     document.getElementById('ventaNuevoClienteBox').hidden = e.target.value !== '__nuevo__';
   });
@@ -4206,10 +5290,131 @@ function modalVender(p){
       clienteId = resCliente.data.id;
     }
 
-    const res = await DB.venderProducto(p.id, gastos, clienteId, estadoPago);
+    const res = porCant ? await DB.venderCantidad(p.id, cant, gastos, clienteId, estadoPago, opts && opts.pedido ? opts.pedido.id : null)
+                        : await DB.venderProducto(p.id, gastos, clienteId, estadoPago);
     if(res.ok && !entregado) await DB.marcarEntregado(res.data.id, false);
     if(res.ok){ toast('¡Venta registrada! Ganaste '+money(res.data.comision_monto),'success'); closeModal(); await refresh(); }
-    else { toast('No se pudo vender: '+(res.error==='PRODUCTO_NO_DISPONIBLE'?'otra persona ya lo tomó':res.error),'danger'); closeModal(); await refresh(); }
+    else { toast(mensajeErrorVenta(res.error),'danger'); closeModal(); await refresh(); }
+  });
+}
+
+function modalArea(a){
+  let modo = a ? a.modo : 'cantidad';
+  openModal(`
+    <div class="modal-head"><div class="modal-title">${a?'Cambiar nombre del área':'Nueva área'}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Nombre *</label><input id="arNombre" value="${a?escHtml(a.nombre):''}" placeholder="Ej: Repostería" autocomplete="off"></div>
+      ${a ? `<div class="text-faint" style="font-size:12px;">${MODOS_AREA[a.modo].t}: ${MODOS_AREA[a.modo].d}</div>` : `
+      <div class="form-group"><label>¿Cómo se vende?</label>
+        <div class="modo-opciones" id="arModos">${Object.keys(MODOS_AREA).map(k=>`<button type="button" class="modo-op${k===modo?' active':''}" data-modo="${k}"><b>${MODOS_AREA[k].t}</b><small>${MODOS_AREA[k].d}</small></button>`).join('')}</div></div>`}
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="arGuardar">${icon('check')} Guardar</button></div>`);
+  document.querySelectorAll('#arModos .modo-op').forEach(b=>b.addEventListener('click', ()=>{
+    modo = b.dataset.modo; document.querySelectorAll('#arModos .modo-op').forEach(x=>x.classList.toggle('active', x===b));
+  }));
+  document.getElementById('arGuardar').addEventListener('click', async ev=>{
+    const nombre = document.getElementById('arNombre').value.trim();
+    if(!nombre) return toast('Escribe el nombre del área','danger');
+    const btn = ev.target.closest('button'); btn.disabled = true;
+    const r = a ? await DB.editarArea(a.id, { nombre }) : await DB.crearArea({ nombre, modo });
+    if(!r.ok){ btn.disabled = false; return toast('No se pudo guardar: '+r.error,'danger'); }
+    toast(a?'Área actualizada':'Área creada — ahora elige qué ven las vendedoras','success'); closeModal(); await refresh();
+  });
+}
+function modalTipo(area, t){
+  openModal(`
+    <div class="modal-head"><div class="modal-title">${t?'Cambiar nombre del tipo':'Nuevo tipo en '+escHtml(area.nombre)}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body"><div class="form-group"><label>Nombre *</label><input id="tpNombre" value="${t?escHtml(t.nombre):''}" placeholder="Ej: Usado" autocomplete="off"></div></div>
+    <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="tpGuardar">${icon('check')} Guardar</button></div>`);
+  document.getElementById('tpGuardar').addEventListener('click', async ev=>{
+    const nombre = document.getElementById('tpNombre').value.trim();
+    if(!nombre) return toast('Escribe el nombre','danger');
+    const btn = ev.target.closest('button'); btn.disabled = true;
+    const r = t ? await DB.editarTipo(t.id, nombre) : await DB.crearTipo(area.id, nombre);
+    if(!r.ok){ btn.disabled = false; return toast(/duplicate|unique/i.test(r.error) ? 'Ya existe un tipo con ese nombre' : 'No se pudo guardar: '+r.error,'danger'); }
+    closeModal(); await refresh();
+  });
+}
+function modalProveedor(x, volver){
+  openModal(`
+    <div class="modal-head"><div class="modal-title">${x?'Editar proveedor':'Nuevo proveedor'}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Nombre *</label><input id="pvNombre" value="${x?escHtml(x.nombre):''}" placeholder="Ej: Seño Marta" autocomplete="off"></div>
+      <div class="form-group"><label>WhatsApp</label><input id="pvTel" inputmode="tel" value="${x&&x.telefono?escHtml(x.telefono):''}" placeholder="Ej: 5555 1234"></div>
+      <div class="form-group"><label>Notas</label><textarea id="pvNotas" rows="2" placeholder="Qué vende, cuándo entrega…">${x&&x.notas?escHtml(x.notas):''}</textarea></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="pvGuardar">${icon('check')} Guardar</button></div>`);
+  document.getElementById('pvGuardar').addEventListener('click', async ev=>{
+    const nombre = document.getElementById('pvNombre').value.trim();
+    if(!nombre) return toast('Escribe el nombre','danger');
+    const btn = ev.target.closest('button'); btn.disabled = true;
+    const r = await DB.guardarProveedor(x ? x.id : null, { nombre, telefono: document.getElementById('pvTel').value.trim() || null, notas: document.getElementById('pvNotas').value.trim() || null });
+    if(!r.ok){ btn.disabled = false; return toast('No se pudo guardar: '+r.error,'danger'); }
+    toast('Proveedor guardado','success'); await DB.fetchAll(); modalProveedores();
+  });
+}
+function modalProveedores(){
+  const lista = DB.state.proveedores;
+  openModal(`
+    <div class="modal-head"><div class="modal-title">Proveedores</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body">
+      ${lista.length ? lista.map(x=>`<div class="pedido-fila"><div class="pf-main"><div class="pf-nombre">${escHtml(x.nombre)}</div><div class="pf-sub">${x.telefono?escHtml(x.telefono):'<span class="text-faint">sin WhatsApp</span>'}</div></div>
+        <div class="pf-acc"><button class="icon-btn edit" data-pv-editar="${x.id}" data-tip="Editar">${icon('edit')}</button><button class="icon-btn delete" data-pv-borrar="${x.id}" data-tip="Eliminar">${icon('trash')}</button></div></div>`).join('')
+        : `<div class="text-faint text-center" style="padding:22px 0;">Aún no tienes proveedores</div>`}
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cerrar</button><button class="btn btn-primary" id="pvNuevo">${icon('plus')} Nuevo proveedor</button></div>`);
+  document.getElementById('pvNuevo').addEventListener('click', ()=>modalProveedor(null));
+  document.querySelectorAll('[data-pv-editar]').forEach(b=>b.addEventListener('click', ()=>modalProveedor(lista.find(x=>x.id===b.dataset.pvEditar))));
+  document.querySelectorAll('[data-pv-borrar]').forEach(b=>b.addEventListener('click', async ()=>{
+    const x = lista.find(y=>y.id===b.dataset.pvBorrar);
+    if(!confirm('¿Eliminar a '+x.nombre+'? Los productos que lo usan quedan sin proveedor.')) return;
+    const r = await DB.eliminarProveedor(x.id);
+    if(!r.ok) return toast('No se pudo eliminar: '+r.error,'danger');
+    await DB.fetchAll(); modalProveedores();
+  }));
+}
+// Arma el mensaje para el proveedor con la foto; WhatsApp no deja mandarlo solo: tú tocas "enviar".
+function modalPedirProveedor(p){
+  const activos = DB.pedidosActivos(p.id);
+  const nuevos = activos.filter(x=>x.estado==='nuevo');
+  const unidades = (nuevos.length ? nuevos : activos).reduce((s,x)=>s+x.cantidad, 0) || 1;
+  const fotoUrl = primeraFotoUrlProducto(p, 'inventario');
+  const provs = DB.state.proveedores.filter(x=>x.activo || x.id===p.proveedor_id);
+  const texto0 = `Buena tarde Seño\nQuiero ${unidades>1?unidades+' ':''}${p.nombre} Seño\nEn la tarde le deposito`;
+  openModal(`
+    <div class="modal-head"><div class="modal-title">Pedir al proveedor</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body">
+      ${fotoUrl?`<img src="${fotoUrl}" alt="" class="pp-foto">`:`<div class="text-faint" style="font-size:12px;margin-bottom:8px;">Este producto no tiene foto.</div>`}
+      <div class="form-group"><label>Proveedor</label>
+        <select id="ppProv"><option value="">Sin proveedor (elijo el chat en WhatsApp)</option>${provs.map(x=>`<option value="${x.id}"${x.id===p.proveedor_id?' selected':''}>${escHtml(x.nombre)}${x.telefono?'':' (sin WhatsApp)'}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Mensaje (puedes cambiarlo)</label><textarea id="ppTexto" rows="4">${escHtml(texto0)}</textarea></div>
+      <div class="text-faint" style="font-size:12px;">WhatsApp no deja enviar solo: se abre listo y tú tocas enviar. Con "Enviar con foto" eliges el chat del proveedor y la foto va incluida.</div>
+    </div>
+    <div class="modal-foot pp-foot">
+      <button class="btn btn-secondary" id="ppChat">${icon('whatsapp')} Abrir su chat</button>
+      <button class="btn btn-primary" id="ppFoto">${icon('share')} Enviar con foto</button>
+    </div>`);
+  let archivo = null;
+  if(fotoUrl) fetch(fotoUrl, { mode:'cors' }).then(r=>r.blob()).then(b=>{ archivo = new File([b], 'producto.jpg', { type: b.type || 'image/jpeg' }); }).catch(()=>{});
+  const marcar = async ()=>{
+    for(const x of nuevos) await DB.cambiarEstadoPedido(x.id, 'pedido_proveedor');
+    if(nuevos.length){ toast('Marcado como pedido al proveedor','success'); await refresh(); }
+  };
+  const proveedor = ()=>DB.proveedorDe(document.getElementById('ppProv').value);
+  document.getElementById('ppChat').addEventListener('click', async ()=>{
+    const texto = document.getElementById('ppTexto').value;
+    const pv = proveedor(), tel = pv && telefonoInternacional(pv.telefono);
+    window.open('https://wa.me/' + (tel ? tel.slice(1) : '') + '?text=' + encodeURIComponent(texto), '_blank', 'noopener');
+    closeModal(); await marcar();
+  });
+  document.getElementById('ppFoto').addEventListener('click', async ()=>{
+    const texto = document.getElementById('ppTexto').value;
+    try{
+      if(archivo && navigator.canShare && navigator.canShare({ files:[archivo] })) await navigator.share({ files:[archivo], text:texto });
+      else if(navigator.share) await navigator.share({ text:texto });
+      else { await navigator.clipboard.writeText(texto); toast('Mensaje copiado. Pégalo en el chat y adjunta la foto','success'); }
+    }catch(e){ if(e && e.name==='AbortError') return; }
+    closeModal(); await marcar();
   });
 }
 
@@ -4267,6 +5472,15 @@ Ctrl/Cmd+K (o la lupa) busca cualquier producto por nombre o código desde cualq
 
 ## Código QR y videos
 Cada producto tiene un código QR que abre su ficha pública (sin iniciar sesión) — útil para mostrarlo a un cliente. Se le puede poner un link de YouTube o TikTok (aunque sea un link corto) y se muestra embebido en la ficha.
+
+## Áreas y tipos
+Cada área ordena un tipo de venta: Productos, Electrodomésticos, 100% naturales, Comida rápida y lácteos, Ferreterías y Bajo pedido (en "Áreas" la admin puede crear más). Dentro de cada una hay "tipos" (por ejemplo, en Productos: Miscelánea, Usado, Nuevo, Importado, Amazon). Por cada área la admin elige tres cosas: si las vendedoras la ven, si pueden vender y si sale en el catálogo que se manda a los clientes. Por defecto, las áreas nuevas las vende solo la admin.
+
+## Existencias (por cantidad)
+En las áreas por cantidad (naturales, comida, ferreterías) el producto no se acaba al venderlo: dice "Disponibles: N" y baja solo con cada venta. La admin suma o resta con los botones + y − de la tarjeta (o desde "Existencias" para sumar varios de golpe). Cuando quedan pocos llega un aviso, y en el catálogo de los clientes lo agotado desaparece solo.
+
+## Bajo pedido y proveedores
+Se sube el producto con su foto, el precio, el proveedor y hasta cuándo se puede pedir. En el catálogo de los clientes aparece con una cuenta regresiva y un botón "Pedir": al tocarlo se registra el pedido y se abre WhatsApp. En "Pedidos" la admin ve quién pidió, usa "Pedir al proveedor" (mensaje listo con la foto), marca "Ya llegó" y vende. Si pasa la fecha y nadie pidió, el producto y sus fotos se borran solos; si alguien pidió, se queda hasta venderse.
 
 ## Usuarios
 Los usuarios NO se crean desde el panel — se dan de alta en Supabase (Authentication > Users), donde solo la administradora tiene acceso. Desde el panel solo se edita su nombre, rol, género, % de comisión, o se desactivan (nunca se borran, para no perder su historial).`;
@@ -4961,6 +6175,7 @@ function modalExtra(e){
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="res-thumb" id="exFotoVista" style="width:64px;height:64px;">${edit&&e.foto_url?imgMini(e.foto_url,''):icon('image')}</div>
           <button type="button" class="btn btn-secondary btn-sm" id="exFotoBtn">${icon('image')} Elegir foto</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="exFotoCortar" hidden>${icon('crop')} Recortar</button>
           <input type="file" id="exFotoInput" accept="image/*" hidden>
         </div></div>
       <details class="mas-opciones"><summary>Más opciones<span class="chev">${icon('chevron')}</span></summary>
@@ -4972,7 +6187,11 @@ function modalExtra(e){
   document.getElementById('exFotoBtn').addEventListener('click', ()=>document.getElementById('exFotoInput').click());
   document.getElementById('exFotoInput').addEventListener('change', ev=>{
     foto = ev.target.files[0] || null;
-    if(foto) document.getElementById('exFotoVista').innerHTML = `<img src="${URL.createObjectURL(foto)}" alt="">`;
+    if(foto){ document.getElementById('exFotoVista').innerHTML = `<img src="${URL.createObjectURL(foto)}" alt="">`; document.getElementById('exFotoCortar').hidden = false; }
+  });
+  document.getElementById('exFotoCortar').addEventListener('click', async ()=>{
+    const nueva = foto && await recortarFoto(foto);
+    if(nueva){ foto = nueva; document.getElementById('exFotoVista').innerHTML = `<img src="${URL.createObjectURL(foto)}" alt="">`; }
   });
   document.getElementById('btnGuardarExtra').addEventListener('click', async ev=>{
     const nombre = document.getElementById('exNombre').value.trim();
@@ -5009,8 +6228,8 @@ function modalPasarInventario(e){
     </div>
     <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="btnPasarInv" disabled>Pasar al inventario</button></div>`, 'lg');
   const pintar = ()=>{
-    document.getElementById('piVista').innerHTML = fotos.map((f,i)=>`<div class="photo-preview"><img src="${URL.createObjectURL(f)}" alt=""><button type="button" data-i="${i}">${icon('x')}</button></div>`).join('');
-    document.querySelectorAll('#piVista button').forEach(b=>b.addEventListener('click', ()=>{ fotos.splice(Number(b.dataset.i),1); pintar(); }));
+    document.getElementById('piVista').innerHTML = miniaturasHtml(fotos);
+    enlazarMiniaturas('#piVista', fotos, pintar);
     document.getElementById('btnPasarInv').disabled = fotos.length === 0;
   };
   const agregar = ev=>{ fotos.push(...[...ev.target.files].slice(0, 5 - fotos.length)); ev.target.value=''; pintar(); };
@@ -5438,12 +6657,16 @@ function modalUbicacionForm(u){
       <div class="form-group"><label>Foto</label>
         <div style="display:flex;align-items:center;gap:12px;">
           <div class="res-thumb" id="ubFotoVista" style="width:72px;height:72px;">${edit&&u.foto_url?imgMini(u.foto_url,''):icon('image')}</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;"><button type="button" class="btn btn-secondary btn-sm" id="ubCamara">${icon('image')} Tomar foto</button><button type="button" class="btn btn-secondary btn-sm" id="ubGaleria">${icon('upload')} Galería</button></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;"><button type="button" class="btn btn-secondary btn-sm" id="ubCamara">${icon('image')} Tomar foto</button><button type="button" class="btn btn-secondary btn-sm" id="ubGaleria">${icon('upload')} Galería</button><button type="button" class="btn btn-secondary btn-sm" id="ubCortar" hidden>${icon('crop')} Recortar</button></div>
           <input type="file" id="ubInputCamara" accept="image/*" capture="environment" hidden><input type="file" id="ubInputGaleria" accept="image/*" hidden>
         </div></div>
     </div>
     <div class="modal-foot">${edit?`<button class="btn btn-ghost" id="ubEliminar" style="margin-right:auto;color:var(--red-700);">Eliminar</button>`:''}<button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="ubGuardar">${edit?'Guardar':'Crear'}</button></div>`);
-  const elegir = ev=>{ foto = ev.target.files[0] || null; if(foto) document.getElementById('ubFotoVista').innerHTML = `<img src="${URL.createObjectURL(foto)}" alt="">`; };
+  const elegir = ev=>{ foto = ev.target.files[0] || null; if(foto){ document.getElementById('ubFotoVista').innerHTML = `<img src="${URL.createObjectURL(foto)}" alt="">`; document.getElementById('ubCortar').hidden = false; } };
+  document.getElementById('ubCortar').addEventListener('click', async ()=>{
+    const nueva = foto && await recortarFoto(foto);
+    if(nueva){ foto = nueva; document.getElementById('ubFotoVista').innerHTML = `<img src="${URL.createObjectURL(foto)}" alt="">`; }
+  });
   document.getElementById('ubCamara').addEventListener('click', ()=>document.getElementById('ubInputCamara').click());
   document.getElementById('ubGaleria').addEventListener('click', ()=>document.getElementById('ubInputGaleria').click());
   document.getElementById('ubInputCamara').addEventListener('change', elegir);
@@ -5528,7 +6751,33 @@ function bindPageEvents(page){
   if(page==='a-bitacora') document.getElementById('btnBorrarBitacora')?.addEventListener('click', modalConfirmarBorrarBitacora);
   if(page==='a-nuevo'){
     enlazarClasificacionNueva('npCategoria','npCategoriaNueva');
-    let fotosBuffer = [];
+    enlazarCamposArea('np', null, modo=>{ if(modo!=='unico') document.querySelector('#formNuevoProducto .mas-opciones').open = true; });
+    if(nuevoAreaClave && DB.hayAreas()){
+      const a = DB.state.areas.find(x=>x.clave===nuevoAreaClave), sel = document.getElementById('npArea');
+      if(a && sel){ sel.value = a.id; sel.dispatchEvent(new Event('change')); }
+    }
+    nuevoAreaClave = null;
+    let videoBuffer = null;
+    const pintarVideo = async ()=>{
+      const caja = document.getElementById('npVideoVista');
+      if(!videoBuffer){ caja.innerHTML = ''; return; }
+      let meta = null; try{ meta = await leerMetaVideo(videoBuffer); }catch(e){}
+      caja.innerHTML = videoChipHtml(videoBuffer, meta);
+      caja.querySelector('.vc-x').addEventListener('click', ()=>{ videoBuffer = null; pintarVideo(); });
+    };
+    const elegirVideo = async e=>{
+      const f = e.target.files[0]; e.target.value = ''; if(!f) return;
+      try{
+        const meta = await leerMetaVideo(f);
+        if(meta.duracion > VIDEO_MAX_SEG) return toast('El video dura ' + Math.round(meta.duracion) + ' s y el máximo es ' + VIDEO_MAX_SEG + '. Recórtalo en tu galería.', 'danger');
+      }catch(err){ return toast(err.message, 'danger'); }
+      videoBuffer = f; pintarVideo();
+    };
+    document.getElementById('npBtnVideo').addEventListener('click', ()=>document.getElementById('npVideoGal').click());
+    document.getElementById('npBtnGrabar').addEventListener('click', ()=>document.getElementById('npVideoCam').click());
+    document.getElementById('npVideoGal').addEventListener('change', elegirVideo);
+    document.getElementById('npVideoCam').addEventListener('change', elegirVideo);
+    let fotosBuffer = fotosCompartidasPendientes.splice(0, 5);
     const agregar = e=>{
       fotosBuffer.push(...[...e.target.files].slice(0, 5-fotosBuffer.length));
       e.target.value = '';
@@ -5539,10 +6788,11 @@ function bindPageEvents(page){
     document.getElementById('npFotoCamara').addEventListener('change', agregar);
     document.getElementById('npFotos').addEventListener('change', agregar);
     function renderPreview(){
-      document.getElementById('npPreview').innerHTML = fotosBuffer.map((f,i)=>`<div class="photo-preview"><img src="${URL.createObjectURL(f)}"><button type="button" data-i="${i}">${icon('x')}</button></div>`).join('');
-      document.querySelectorAll('#npPreview button').forEach(b=>b.addEventListener('click', ()=>{ fotosBuffer.splice(Number(b.dataset.i),1); renderPreview(); }));
+      document.getElementById('npPreview').innerHTML = miniaturasHtml(fotosBuffer);
+      enlazarMiniaturas('#npPreview', fotosBuffer, renderPreview);
       document.getElementById('npFotosHint').textContent = fotosBuffer.length ? fotosBuffer.length+' de 5 fotos' : 'Hasta 5 fotos. Se guardan livianas para que el sistema siga rápido.';
     }
+    if(fotosBuffer.length) renderPreview();
     document.getElementById('formNuevoProducto').addEventListener('submit', async e=>{
       e.preventDefault();
       const nombre = document.getElementById('npNombre').value.trim();
@@ -5553,13 +6803,15 @@ function bindPageEvents(page){
       btn.disabled = true; btn.textContent = 'Guardando...';
       const urlVideo = await resolverVideoUrl(document.getElementById('npVideo').value);
       const gastosPredefinidos = [...document.querySelectorAll('.np-gasto-check:checked')].map(chk=>chk.value);
-      const res = await DB.crearProducto({
+      const campos = await leerCamposArea('np');
+      if(campos._error){ toast(campos._error,'danger'); btn.disabled = false; btn.innerHTML = btnHtml; return; }
+      const res = await DB.crearProducto({ ...campos,
         nombre, categoria: await leerClasificacion('npCategoria','npCategoriaNueva'), ubicacion_id: document.getElementById('npUbicacion').value||null, caja_id: document.getElementById('npCaja').value||null,
         descripcion: document.getElementById('npDescripcion').value, costo: document.getElementById('npCosto').value || 0, precio_venta: precio,
         porcentaje_ganancia: document.getElementById('npPorcentaje').value, url_video: urlVideo,
         etiquetas: document.getElementById('npEtiquetas').value, gastos_predefinidos: gastosPredefinidos
       }, []);
-      if(res.ok){ modalProductoCreado(res.data, fotosBuffer); }
+      if(res.ok){ modalProductoCreado(res.data, fotosBuffer, videoBuffer); }
       else { toast('No se pudo crear: '+res.error,'danger'); btn.disabled = false; btn.innerHTML = btnHtml; }
     });
   }
@@ -5570,6 +6822,7 @@ function bindPageEvents(page){
     document.getElementById('swFotos').addEventListener('change', e=>{ verFotos = e.target.checked; guardarVerFotos(verFotos); dibujar(); });
     search.addEventListener('input', ()=>{ busquedaCat.q = search.value; dibujar(); });
     enlazarChipsCategoria('catalogoChips', busquedaCat, dibujar);
+    enlazarChipsAreas('catalogoAreas', busquedaCat, dibujar);
   }
   if(page==='a-inventario'){
     const search = document.getElementById('invSearch');
@@ -5577,12 +6830,18 @@ function bindPageEvents(page){
     centrarTabActiva();
     search.addEventListener('input', ()=>{ busquedaInv.q = search.value; dibujarInventario(); });
     enlazarChipsCategoria('invChips', busquedaInv, dibujarInventario);
+    enlazarChipsAreas('invAreas', busquedaInv, dibujarInventario);
     document.getElementById('btnArchivar').addEventListener('click', accionArchivarVendidos);
     document.getElementById('btnImportarCSV').addEventListener('click', modalImportarCSV);
     document.getElementById('btnInvMas').addEventListener('click', ()=>hojaAcciones('Más acciones', '', [
       { icono: icon('trash'), texto: 'Archivar vendidos<br><small class="text-faint">Borra las fotos de lo vendido hace '+DB.state.configuracion.dias_archivo_productos_vendidos+' días o más</small>', hacer: accionArchivarVendidos },
       { icono: icon('upload'), texto: 'Importar CSV', hacer: modalImportarCSV }
     ]));
+  }
+  if(page==='a-areas') document.getElementById('btnNuevaArea')?.addEventListener('click', ()=>modalArea(null));
+  if(page==='a-pedidos'){
+    document.getElementById('btnProveedores')?.addEventListener('click', modalProveedores);
+    document.getElementById('btnNuevoBajoPedido')?.addEventListener('click', ()=>{ nuevoAreaClave = 'bajo_pedido'; navigate('a-nuevo'); });
   }
   if(page==='a-cajas') document.getElementById('btnNuevaCaja').addEventListener('click', modalNuevaCaja);
   if(page==='a-categorias') document.getElementById('btnNuevaCategoria').addEventListener('click', ()=>modalCategoria(null));
@@ -5594,6 +6853,14 @@ function bindPageEvents(page){
   if(page==='a-bodega') document.getElementById('btnNuevaUbicacion').addEventListener('click', ()=>modalUbicacionForm(null));
   if(page==='a-gastos') document.getElementById('btnNuevoGasto').addEventListener('click', ()=>modalGasto(null));
   if(page==='a-config'){
+    DB.espacioUsado().then(r=>{
+      const caja = document.getElementById('espacioUso'); if(!caja) return;
+      if(!r){ caja.textContent = 'No se pudo calcular'; return; }
+      const mb = r.bytes / 1048576, pct = Math.min(100, mb / 1024 * 100);
+      caja.innerHTML = `<div style="font-weight:700;color:var(--color-text);">${mb < 100 ? mb.toFixed(1) : Math.round(mb)} MB de 1 GB</div>
+        <div class="progress-bar" style="margin-top:8px;"><span style="width:${Math.max(2, pct)}%;${pct>90?'background:#B3261E;':pct>70?'background:#B5762A;':''}"></span></div>
+        <div style="margin-top:6px;font-size:12.5px;">${r.archivos} archivo${r.archivos===1?'':'s'}</div>`;
+    });
     document.getElementById('btnBackupCompleto').addEventListener('click', exportBackupCompleto);
     document.getElementById('formConfig').addEventListener('submit', async e=>{
       e.preventDefault();
@@ -5692,9 +6959,16 @@ function exportBackupCompleto(){
   };
   addSheet('Productos', DB.state.productos.map(p=>({
     'Código':p.codigo, 'Nombre':p.nombre, 'Categoría':p.categoria||'', 'Etiquetas':(p.etiquetas||[]).join(', '),
+    'Área':DB.areaDe(p).nombre, 'Tipo':(DB.tipoDe(p)||{}).nombre||'', 'Existencias':p.cantidad==null?'':p.cantidad,
     'Costo':p.costo, 'Precio':p.precio_venta, '% Comisión':p.porcentaje_ganancia, 'Estado':p.estado,
+    'Disponible hasta':p.disponible_hasta?fmtDateShort(p.disponible_hasta):'',
     'Archivado':p.archivado?'Sí':'No', 'Creado':fmtDateShort(p.created_at)
   })));
+  if(DB.hayAreas()){
+    addSheet('Pedidos', (DB.state.pedidos||[]).map(x=>({ 'Producto':x.producto_nombre, 'Código':x.producto_codigo, 'Cliente':x.cliente_nombre, 'Teléfono':x.cliente_telefono||'',
+      'Cantidad':x.cantidad, 'Estado':(ESTADOS_PEDIDO[x.estado]||[x.estado])[0], 'Fecha':fmtDateShort(x.created_at) })));
+    addSheet('Proveedores', (DB.state.proveedores||[]).map(x=>({ 'Nombre':x.nombre, 'WhatsApp':x.telefono||'', 'Notas':x.notas||'' })));
+  }
   addSheet('Ventas', DB.state.venta_historial.map(v=>{
     const u = DB.state.usuarios.find(x=>x.id===v.vendedor_id);
     return { 'Producto':v.producto_nombre, 'Código':v.producto_codigo, 'Categoría':v.categoria||'', 'Vendedor':u?u.nombre:'',
@@ -5750,6 +7024,46 @@ async function ejecutarAccion(btn){
   if(action==='apartar'){ const r=await DB.apartarProducto(id); if(r.ok) toast('Producto apartado','success'); else toast(r.error==='PRODUCTO_NO_DISPONIBLE'?'Ya no está disponible':'No se pudo apartar: '+r.error,'danger'); await refresh(); }
   else if(action==='liberar'){ const r=await DB.liberarProducto(id); if(r.ok) toast('Reserva liberada','success'); else toast('No se pudo liberar: '+r.error,'danger'); await refresh(); }
   else if(action==='vender'){ const prod=p(); if(prod) modalVender(prod); }
+  else if(action==='stock'){ const prod=p(); if(prod) modalExistencias(prod); }
+  else if(action==='stock-mas' || action==='stock-menos'){
+    const r = await DB.ajustarCantidad(id, action==='stock-mas' ? 1 : -1);
+    if(r.ok){ const prod=p(); if(prod) Object.assign(prod, r.data); if(currentPage==='a-inventario') dibujarInventario(); else await refresh(); }
+    else toast(/SIN_EXISTENCIAS/.test(r.error) ? 'Ya no quedan' : 'No se pudo: '+r.error, 'danger');
+  }
+  else if(action==='area-switch'){
+    const campo = btn.dataset.campo, val = btn.checked, cambios = { [campo]: val };
+    if(campo==='visible_vendedoras' && !val) cambios.vendedoras_venden = false;
+    if(campo==='vendedoras_venden' && val) cambios.visible_vendedoras = true;
+    const r = await DB.editarArea(id, cambios);
+    if(!r.ok) toast('No se pudo guardar: '+r.error,'danger');
+    await refresh();
+  }
+  else if(action==='editar-area'){ modalArea(DB.state.areas.find(a=>a.id===id)); }
+  else if(action==='eliminar-area'){
+    const a = DB.state.areas.find(x=>x.id===id);
+    if(DB.state.productos.some(p=>p.area_id===id)) return toast('Esta área todavía tiene productos. Cámbialos de área o elimínalos primero.','danger');
+    if(confirm('¿Eliminar el área "'+a.nombre+'" y sus tipos?')){ const r=await DB.eliminarArea(id); if(r.ok){ toast('Área eliminada','success'); await refresh(); } else toast('No se pudo eliminar: '+r.error,'danger'); }
+  }
+  else if(action==='nuevo-tipo'){ modalTipo(DB.state.areas.find(a=>a.id===id), null); }
+  else if(action==='tipo-menu'){
+    const t = DB.state.tipos.find(x=>x.id===id), area = DB.state.areas.find(a=>a.id===t.area_id);
+    hojaAcciones(escHtml(t.nombre), escHtml(area.nombre), [
+      { icono: icon('edit'), texto: 'Cambiar nombre', hacer: ()=>modalTipo(area, t) },
+      { icono: icon('trash'), texto: 'Eliminar este tipo<br><small class="text-faint">Los productos con este tipo se quedan sin tipo</small>', peligro:true,
+        hacer: async ()=>{ const r = await DB.eliminarTipo(t.id); if(r.ok){ toast('Tipo eliminado','success'); await refresh(); } else toast('No se pudo eliminar: '+r.error,'danger'); } }
+    ]);
+  }
+  else if(action==='pedido-estado'){
+    const nuevo = btn.dataset.estado;
+    if(nuevo==='cancelado' && !confirm('¿Cancelar este pedido?')) return;
+    const r = await DB.cambiarEstadoPedido(id, nuevo);
+    if(r.ok){ toast(nuevo==='cancelado'?'Pedido cancelado':'Listo','success'); await refresh(); } else toast('No se pudo: '+r.error,'danger');
+  }
+  else if(action==='pedido-vender'){
+    const ped = (DB.state.pedidos||[]).find(x=>x.id===id), prod = ped && DB.state.productos.find(x=>x.id===ped.producto_id);
+    if(prod) modalVender(prod, { pedido: ped });
+  }
+  else if(action==='pedir-proveedor'){ const prod=p(); if(prod) modalPedirProveedor(prod); }
   else if(action==='ver'){ const prod=p(); if(prod) modalVerFicha(prod); }
   else if(action==='editar'){ const prod=p(); if(prod) modalEditarProducto(prod); }
   else if(action==='duplicar'){ const r=await DB.duplicarProducto(id); if(r.ok){ toast('Producto duplicado — edítalo para ajustarlo','success'); await refresh(); modalEditarProducto(DB.state.productos.find(x=>x.id===r.data.id)); } else toast('No se pudo duplicar: '+r.error,'danger'); }
@@ -5791,8 +7105,8 @@ async function ejecutarAccion(btn){
   else if(action==='ver-historial-cliente'){ modalHistorialCliente(DB.state.clientes.find(c=>c.id===id)); }
   else if(action==='toggle-seccion'){ const key=btn.dataset.key; inventarioSeccionAbierta = (inventarioSeccionAbierta===key) ? null : key; navigate(currentPage); }
   else if(action==='inv-estado'){ inventarioSeccionAbierta = btn.dataset.key; dibujarInventario(); }
-  else if(action==='limpiar-busqueda-inv'){ busquedaInv = { q:'', cat:'' }; navigate(currentPage); }
-  else if(action==='limpiar-busqueda-cat'){ busquedaCat = { q:'', cat:'' }; navigate(currentPage); }
+  else if(action==='limpiar-busqueda-inv'){ busquedaInv = { q:'', cat:'', area:'' }; navigate(currentPage); }
+  else if(action==='limpiar-busqueda-cat'){ busquedaCat = { q:'', cat:'', area:'' }; navigate(currentPage); }
   else if(action==='extras-estado'){ busquedaExtras.estado = btn.dataset.key; dibujarExtras(); }
   else if(action==='limpiar-busqueda-extras'){ busquedaExtras.q = ''; navigate(currentPage); }
   else if(action==='mas-extra'){
@@ -5868,7 +7182,9 @@ function contarPendientes(){
   const entregasPend = DB.state.venta_historial.filter(v=>v.entregado===false && v.estado_venta==='vendido').length;
   const reservasUrgentes = DB.state.productos.filter(p=>{ const h=horasParaLiberar(p); return h!==null && h<=6; }).length;
   const archivadosUrgentes = DB.state.productos.filter(p=>{ const d=DB.diasParaEliminar(p); return d!==null && d<=5; }).length;
-  return devs + deudas + entregasPend + reservasUrgentes + archivadosUrgentes;
+  const pedidosNuevos = (DB.state.pedidos||[]).filter(x=>x.estado==='nuevo').length;
+  const pocoStock = DB.state.productos.filter(p=>DB.modoDe(p)==='cantidad' && p.estado==='en_inventario' && (p.cantidad_minima||0) > 0 && (p.cantidad||0) <= p.cantidad_minima).length;
+  return devs + deudas + entregasPend + reservasUrgentes + archivadosUrgentes + pedidosNuevos + pocoStock;
 }
 function refreshBadges(){
   const cur = DB.currentUser(); if(!cur) return;
@@ -5880,6 +7196,15 @@ function refreshBadges(){
     let badge = navBtn.querySelector('.nav-badge');
     if(n>0){
       if(!badge){ badge = document.createElement('span'); badge.className='nav-badge'; navBtn.appendChild(badge); }
+      badge.textContent = n;
+    } else if(badge) badge.remove();
+  }
+  const navPed = document.querySelector('.nav-item[data-page="a-pedidos"]');
+  if(navPed){
+    const n = (DB.state.pedidos||[]).filter(x=>x.estado==='nuevo').length;
+    let badge = navPed.querySelector('.nav-badge');
+    if(n>0){
+      if(!badge){ badge = document.createElement('span'); badge.className='nav-badge'; navPed.appendChild(badge); }
       badge.textContent = n;
     } else if(badge) badge.remove();
   }
@@ -5950,12 +7275,16 @@ async function renderPublicPage(codigo){
       ${p.categoria?`<span class="sf-d-cat">${escHtml(p.categoria)}</span>`:''}
       <div class="flex-between" style="align-items:flex-start;gap:10px;"><div class="sf-d-nombre" style="margin-top:10px;">${escHtml(p.nombre)}</div>${p.estado!=='en_inventario'?`<span class="badge ${info.cls}" style="margin-top:12px;">${info.label}</span>`:''}</div>
       <div class="sf-d-precio">Q ${Number(p.precio_venta).toFixed(2)}</div>
+      ${infoAreaPublicaHtml(p)}
       ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
       ${renderVideoEmbed(p.url_video)}
-      ${vendedorTel ? `<a class="sf-cta" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre)}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
+      ${p.area_modo==='pedido' && visiblePublico(p) ? `<button type="button" class="sf-cta pedir" id="sfPedirFicha">${icon('bookmark')} Pedir</button>` : ''}
+      ${(p.area_modo==='pedido' || (p.area_modo==='cantidad' && !visiblePublico(p))) ? '' : vendedorTel ? `<a class="sf-cta" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre+' (código '+p.codigo+')\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
     </div>
   </div>`;
   document.querySelectorAll('.ficha-foto').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));
+  document.getElementById('sfPedirFicha')?.addEventListener('click', ()=>modalPedirPublico(p, { vNombre: vendedorNombre, vTel: vendedorTel }));
+  root.insertAdjacentHTML('beforeend', '<div class="sf-equipo"><a href="' + location.pathname + '?p=' + encodeURIComponent(p.codigo) + '&equipo=1">Acceso del equipo</a></div>');
 }
 
 /* =====================================================================
@@ -6002,6 +7331,13 @@ function showApp(user){
   // app instalada en iOS no puede imprimir (ver ahí el porqué): al cargar acá
   // (ya en Safari normal, con la sesión ya iniciada) vamos directo a Reportes
   // y disparamos la impresión sola.
+  const pcod = new URLSearchParams(location.search).get('p');
+  if(pcod && !window.__fichaAbierta){
+    window.__fichaAbierta = true;
+    try{ history.replaceState(null, '', location.pathname); }catch(e){}
+    setTimeout(()=>abrirFichaPorCodigo(pcod), 400);
+  }
+  procesarFotosCompartidas();
   const params = new URLSearchParams(location.search);
   if(params.get('autoprint')==='reporte' && user.rol==='administrador'){
     reporteRangoDias = Number(params.get('dias')) || 14;
@@ -6099,7 +7435,9 @@ async function sincronizarAhora(){
 function iniciarRealtime(){
   if(realtimeCanal) return;
   realtimeCanal = sb.channel('panel-cambios');
-  ['productos','fotos_producto','venta_historial','abonos','devoluciones','notificaciones'].forEach(t=>
+  const tablas = ['productos','fotos_producto','venta_historial','abonos','devoluciones','notificaciones'];
+  if(DB.hayAreas()) tablas.push('areas', ...(DB.isAdmin() ? ['pedidos'] : []));
+  tablas.forEach(t=>
     realtimeCanal.on('postgres_changes', { event:'*', schema:'public', table:t }, sincronizarRealtime));
   realtimeCanal.subscribe();
 }
@@ -6125,14 +7463,20 @@ sb.auth.onAuthStateChange((event)=>{
 });
 
 // Entrada: ¿es una ficha pública (QR / link compartido) o el panel normal?
-const params = new URLSearchParams(location.search);
-if(params.get('p')){
-  renderPublicPage(params.get('p'));
-} else if(params.get('catalogo')){
-  renderCatalogoPublico();
-} else {
-  boot();
-}
+(async function entrada(){
+  const params = new URLSearchParams(location.search);
+  if(params.get('p')){
+    // Con sesión del equipo (o pidiendo entrar) se abre el panel y la ficha para vender;
+    // si no, es un cliente y ve la ficha pública.
+    let sesion = null;
+    try{ sesion = (await sb.auth.getSession()).data.session; }catch(e){}
+    if(sesion || params.get('equipo')) boot(); else renderPublicPage(params.get('p'));
+  } else if(params.get('catalogo')){
+    renderCatalogoPublico();
+  } else {
+    boot();
+  }
+})();
 </script>
 </body>
 </html>

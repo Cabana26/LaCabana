@@ -1005,6 +1005,20 @@ tr.entrega-pend td{background:var(--red-100);}
 .sf-btn.agotado-btn{background:var(--color-surface-alt);color:var(--color-text-muted);box-shadow:none;cursor:default;}
 @media (max-width:420px){.ss-ver{display:none;}}
 @media (prefers-reduced-motion:reduce){.sf-rubro{transition:none;}}
+/* ---- Pedidos: estado de cuenta ---- */
+.pf-cuenta{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px;font-size:11.5px;color:var(--color-text-muted);}
+.pf-cuenta .sin{color:var(--amber-700);font-weight:700;}
+.pf-cuenta b{color:var(--color-text);}
+.pf-badges{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.pf-ok{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--forest-700);}
+.pf-ok svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:3;}
+.ec-envio{margin-top:10px;padding:12px;border-radius:12px;background:var(--color-surface-alt);border:1px dashed var(--color-border);}
+.ec-preview-t{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-muted);margin:4px 0 8px;}
+.ec-preview{white-space:pre-wrap;word-break:break-word;font-size:13px;line-height:1.45;padding:12px 14px;border-radius:14px 14px 14px 4px;background:#DCF8C6;color:#1c2a1a;max-height:260px;overflow:auto;}
+:root[data-theme="dark"] .ec-preview{background:#1F3D2B;color:#E4F5E8;}
+.aviso-info{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 11px;border-radius:10px;background:var(--forest-100);color:var(--forest-700);font-size:12px;font-weight:600;}
+.aviso-info svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.6;flex-shrink:0;}
+
 .swatches{display:flex;gap:10px;flex-wrap:wrap;}
 .swatch{width:34px;height:34px;border-radius:50%;border:3px solid var(--color-surface);box-shadow:0 0 0 1.5px var(--color-border);cursor:pointer;transition:transform 120ms var(--ease-out);}
 .swatch:active{transform:scale(.92);}
@@ -1123,7 +1137,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '20-oct-2026 · v11';
+const VERSION_PANEL = '20-oct-2026 · v12';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -1285,14 +1299,22 @@ const DB = {
     if(error) return { ok:false, error: error.message };
     return { ok:true, data };
   },
+  // Estado de cuenta del pedido: entrega, dirección, fecha estimada, envío, abono y si ya se le avisó al cliente.
+  async guardarPedido(pedidoId, d){
+    const { data, error } = await sb.from('pedidos').update({ ...d, actualizado_en: new Date().toISOString() }).eq('id', pedidoId).select().single();
+    if(error) return { ok:false, error: error.message };
+    const i = (this.state.pedidos||[]).findIndex(x=>x.id===pedidoId); if(i>=0) this.state.pedidos[i] = { ...this.state.pedidos[i], ...data };
+    return { ok:true, data };
+  },
   async cambiarEstadoPedido(pedidoId, estado){
     const { data, error } = await sb.rpc('fn_cambiar_estado_pedido', { p_pedido_id: pedidoId, p_estado: estado });
     if(error) return { ok:false, error: error.message };
     return { ok:true, data };
   },
   // Sin login: el cliente toca "Pedir" en el catálogo público.
-  async registrarPedidoPublico(codigo, nombre, telefono, cantidad){
-    const { data, error } = await sb.rpc('fn_registrar_pedido', { p_codigo: codigo, p_nombre: nombre, p_telefono: telefono||null, p_cantidad: cantidad||1 });
+  async registrarPedidoPublico(codigo, nombre, telefono, cantidad, entrega, direccion){
+    const { data, error } = await sb.rpc('fn_registrar_pedido', { p_codigo: codigo, p_nombre: nombre, p_telefono: telefono||null, p_cantidad: cantidad||1,
+      p_entrega: entrega==='envio' ? 'envio' : 'recoger', p_direccion: direccion||null });
     if(error) return { ok:false, error: error.message };
     return { ok:true, data };
   },
@@ -4140,32 +4162,127 @@ const ESTADOS_PEDIDO = {
   entregado:        ['Entregado', 'badge-neutral'],
   cancelado:        ['Cancelado', 'badge-danger']
 };
-// Botón de WhatsApp con el mensaje que toca según el paso del pedido.
-function avisoPedidoHtml(x){
-  const tel = telefonoInternacional(x.cliente_telefono);
-  if(!tel) return '';
-  const cant = x.cantidad > 1 ? ' × ' + x.cantidad : '';
-  const msg = {
-    nuevo: `Hola ${x.cliente_nombre}, recibimos tu pedido: ${x.producto_nombre}${cant}. Te confirmo en cuanto lo pida al proveedor.`,
-    pedido_proveedor: `Hola ${x.cliente_nombre}, ya pedimos tu ${x.producto_nombre}${cant}. Te aviso apenas llegue.`,
-    llego: `¡Hola ${x.cliente_nombre}! Ya llegó tu ${x.producto_nombre}${cant}. ¿Cuándo pasas por él?`
-  }[x.estado] || `Hola ${x.cliente_nombre}, te escribo por tu pedido de ${x.producto_nombre}.`;
-  const tip = { nuevo:'Confirmarle el pedido', pedido_proveedor:'Avisarle que ya lo pediste', llego:'Avisarle que ya llegó' }[x.estado] || 'Escribirle';
-  return `<a href="https://wa.me/${tel.slice(1)}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener" class="icon-btn confirm" data-tip="${tip}">${icon('whatsapp')}</a>
-    <a href="tel:${tel}" class="icon-btn info" data-tip="Llamar">${icon('phone')}</a>`;
+// ---------- Estado de cuenta del pedido ----------
+function negocioNombre(){ return (document.querySelector('.login-logo .name') || {}).textContent || 'La Cabaña'; }
+// El cobro de envío sale de Gastos (el gasto activo cuyo nombre dice "envío").
+function gastoEnvio(){ return DB.state.gastos.find(g=>g.activo && /env[ií]o/i.test(g.nombre)) || null; }
+function envioSugerido(subtotal){
+  const g = gastoEnvio(); if(!g) return 0;
+  return g.tipo==='porcentaje' ? Math.round(subtotal * Number(g.monto_default)) / 100 : (Number(g.monto_default) || 0);
 }
+function cuentaPedido(x, over){
+  const prod = DB.state.productos.find(p=>p.id===x.producto_id);
+  const o = { ...x, ...(over||{}) };
+  const unit = Number(x.precio_unit != null ? x.precio_unit : (prod ? prod.precio_venta : 0)) || 0;
+  const subtotal = unit * (o.cantidad || 1);
+  const envio = o.entrega==='envio' ? (Number(o.costo_envio) || 0) : 0;
+  const abonado = Number(o.abonado) || 0;
+  const total = subtotal + envio;
+  return { unit, cantidad:o.cantidad||1, subtotal, envio, total, abonado, saldo: Math.max(0, total - abonado) };
+}
+function fechaBonita(iso){ return iso ? new Date(iso + 'T12:00:00').toLocaleDateString('es-GT', { weekday:'long', day:'numeric', month:'long' }) : ''; }
+function fechaCortaPedido(iso){ return iso ? new Date(iso + 'T12:00:00').toLocaleDateString('es-GT', { weekday:'short', day:'numeric', month:'short' }).replace('.', '') : ''; }
+function mensajeCuentaPedido(x, over){
+  const o = { ...x, ...(over||{}) }, c = cuentaPedido(x, over);
+  const L = [];
+  L.push(`Hola ${o.cliente_nombre}, te escribe ${negocioNombre()}.`, '');
+  L.push(({ nuevo:'*Tu pedido está confirmado.*', pedido_proveedor:'*Ya pedimos tu producto al proveedor.*', llego:'*¡Ya llegó tu producto!*' })[o.estado] || '*Estado de tu pedido*', '');
+  L.push('*Estado de cuenta*');
+  L.push(`Producto: ${o.producto_nombre}${o.cantidad>1?' × '+o.cantidad:''}`);
+  if(o.estado==='llego') L.push('Estado: ya está con nosotros');
+  else L.push(o.fecha_estimada ? `Llega aproximadamente: ${fechaBonita(o.fecha_estimada)}` : 'Llega: te aviso la fecha apenas la tengamos');
+  L.push(o.entrega==='envio' ? `Entrega: te lo enviamos${o.direccion?' a '+o.direccion:''}` : 'Entrega: pasas a recogerlo');
+  L.push('');
+  L.push(`${c.cantidad>1?c.cantidad+' × '+money(c.unit):'Producto'}: ${money(c.subtotal)}`);
+  if(o.entrega==='envio') L.push(`Envío: ${money(c.envio)}`);
+  if(c.abonado > 0){ L.push(`Total: ${money(c.total)}`, `Abonado: ${money(c.abonado)}`, `*Saldo por pagar: ${money(c.saldo)}*`); }
+  else L.push(`*Total a pagar: ${money(c.total)}*`);
+  L.push('');
+  if(o.estado==='llego') L.push(o.entrega==='envio' ? 'Confírmame que sigues en esa dirección y coordinamos el envío.' : 'Puedes pasar por él cuando gustes; avísame a qué hora.');
+  else L.push('Cualquier duda, escríbeme por aquí.');
+  return L.join('\n');
+}
+// ¿Ya se le avisó al cliente de este paso del pedido?
+function pedidoActivo(x){ return x.estado!=='entregado' && x.estado!=='cancelado'; }
+function faltaAvisar(x){ return pedidoActivo(x) && !!x.cliente_telefono && x.avisado_estado !== x.estado; }
+
+function modalEstadoCuenta(x){
+  const subtotal0 = cuentaPedido(x).subtotal;
+  const g = gastoEnvio();
+  let entrega = x.entrega || 'recoger';
+  openModal(`
+    <div class="modal-head"><div><div class="modal-title">Estado de cuenta</div><div class="text-muted" style="font-size:12.5px;">${escHtml(x.cliente_nombre)}${x.cliente_telefono?' · '+escHtml(x.cliente_telefono):' · sin teléfono'}</div></div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>¿Cómo lo recibe?</label>
+        <div class="pill-tabs mb-0" id="ecEntrega"><button type="button" class="pill-tab${entrega==='recoger'?' active':''}" data-valor="recoger">Pasa a recogerlo</button><button type="button" class="pill-tab${entrega==='envio'?' active':''}" data-valor="envio">Se le envía</button></div>
+        <div id="ecEnvioBox" class="ec-envio" ${entrega==='envio'?'':'hidden'}>
+          <div class="form-group" style="margin-bottom:10px;"><label>Cobro por envío (${DB.state.configuracion.moneda_simbolo})</label><input type="number" inputmode="decimal" step="0.01" id="ecEnvio" value="${x.costo_envio>0 ? x.costo_envio : envioSugerido(subtotal0)}">
+            <div class="text-faint" style="font-size:11.5px;margin-top:4px;">${g?'Tomado de Gastos: «'+escHtml(g.nombre)+'». Puedes cambiarlo para este pedido.':'No hay un gasto de envío en Gastos; escribe el monto.'}</div></div>
+          <div class="form-group" style="margin-bottom:0;"><label>Dirección o zona</label><textarea id="ecDir" rows="2" placeholder="Dónde se le entrega">${escHtml(x.direccion||'')}</textarea></div>
+        </div></div>
+      <div class="form-group"><label>¿Qué día estará su producto?</label>
+        <input type="date" id="ecFecha" value="${x.fecha_estimada||''}">
+        <div class="chips-scroll" style="margin-top:8px;"><button type="button" class="chip" data-dias="1">Mañana</button><button type="button" class="chip" data-dias="2">En 2 días</button><button type="button" class="chip" data-dias="3">En 3 días</button><button type="button" class="chip" data-dias="5">En 5 días</button><button type="button" class="chip" data-dias="7">En 1 semana</button></div></div>
+      <div class="form-group"><label>Abono recibido (${DB.state.configuracion.moneda_simbolo}) — opcional</label><input type="number" inputmode="decimal" step="0.01" min="0" id="ecAbono" value="${x.abonado>0?x.abonado:''}" placeholder="0.00"></div>
+      <div class="ec-preview-t">Así lo recibe por WhatsApp</div>
+      <div class="ec-preview" id="ecPreview"></div>
+    </div>
+    <div class="modal-foot pp-foot">
+      <button class="btn btn-secondary" id="ecGuardar">Solo guardar</button>
+      <button class="btn btn-primary" id="ecEnviar">${icon('whatsapp')} Enviar por WhatsApp</button>
+    </div>`);
+  const $ = id=>document.getElementById(id);
+  const leer = ()=>({
+    entrega, direccion: entrega==='envio' ? $('ecDir').value.trim() : null,
+    fecha_estimada: $('ecFecha').value || null,
+    costo_envio: entrega==='envio' ? (Number($('ecEnvio').value) || 0) : 0,
+    abonado: Number($('ecAbono').value) || 0
+  });
+  const pintar = ()=>{ $('ecPreview').textContent = mensajeCuentaPedido(x, leer()); };
+  document.querySelectorAll('#ecEntrega .pill-tab').forEach(b=>b.addEventListener('click', ()=>{
+    entrega = b.dataset.valor; document.querySelectorAll('#ecEntrega .pill-tab').forEach(t=>t.classList.toggle('active', t===b));
+    $('ecEnvioBox').hidden = entrega !== 'envio'; pintar();
+  }));
+  document.querySelectorAll('[data-dias]').forEach(b=>b.addEventListener('click', ()=>{
+    const d = new Date(); d.setDate(d.getDate() + Number(b.dataset.dias));
+    $('ecFecha').value = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); pintar();
+  }));
+  ['ecEnvio','ecDir','ecFecha','ecAbono'].forEach(id=>$(id) && $(id).addEventListener('input', pintar));
+  pintar();
+  $('ecGuardar').addEventListener('click', async ev=>{
+    const btn = ev.target.closest('button'); btn.disabled = true;
+    const r = await DB.guardarPedido(x.id, leer());
+    if(!r.ok){ btn.disabled = false; return toast('No se pudo guardar: '+r.error,'danger'); }
+    toast('Guardado','success'); closeModal(); await refresh();
+  });
+  $('ecEnviar').addEventListener('click', async ev=>{
+    const datos = leer();
+    if(datos.entrega==='envio' && !datos.direccion) return toast('Escribe la dirección del envío','danger');
+    const btn = ev.target.closest('button'); btn.disabled = true;
+    const tel = telefonoInternacional(x.cliente_telefono);
+    window.open('https://wa.me/' + (tel ? tel.slice(1) : '') + '?text=' + encodeURIComponent(mensajeCuentaPedido(x, datos)), '_blank', 'noopener');
+    const r = await DB.guardarPedido(x.id, { ...datos, avisado_estado: x.estado, avisado_en: new Date().toISOString() });
+    if(!r.ok){ btn.disabled = false; return toast('Se abrió WhatsApp, pero no se pudo guardar: '+r.error,'danger'); }
+    toast('Listo: queda marcado como avisado','success'); closeModal(); await refresh();
+  });
+}
+
 function pedidoFilaHtml(x, conProducto){
   const [txt, cls] = ESTADOS_PEDIDO[x.estado] || [x.estado, 'badge-neutral'];
+  const activo = pedidoActivo(x), falta = faltaAvisar(x), c = cuentaPedido(x);
   const acciones = x.estado==='llego'
       ? `<button class="btn btn-primary btn-sm" data-action="pedido-vender" data-id="${x.id}">${icon('crate')} Vender</button>`
       : (x.estado==='nuevo' || x.estado==='pedido_proveedor')
         ? `<button class="btn btn-secondary btn-sm" data-action="pedido-estado" data-id="${x.id}" data-estado="llego">Ya llegó</button>` : '';
-  const cancelable = x.estado!=='entregado' && x.estado!=='cancelado';
+  const tel = telefonoInternacional(x.cliente_telefono);
+  const aviso = !activo ? '' : `<button class="btn ${falta?'btn-primary':'btn-secondary'} btn-sm" data-action="pedido-avisar" data-id="${x.id}">${icon('whatsapp')} ${falta?'Avisar':'Estado de cuenta'}</button>${tel?`<a href="tel:${tel}" class="icon-btn info" data-tip="Llamar">${icon('phone')}</a>`:''}`;
+  const cuenta = activo ? `<div class="pf-cuenta"><span>${x.entrega==='envio'?'Envío':'Recoge'}</span>${x.fecha_estimada?`<span>Llega ${fechaCortaPedido(x.fecha_estimada)}</span>`:`<span class="sin">Sin fecha</span>`}<span><b>${money(c.total)}</b></span>${c.abonado>0?`<span>Saldo ${money(c.saldo)}</span>`:''}</div>` : '';
+  const cancelable = activo;
   return `<div class="pedido-fila">
     <div class="pf-main"><div class="pf-nombre">${escHtml(x.cliente_nombre)}${x.cantidad>1?` <span class="pf-cant">× ${x.cantidad}</span>`:''}</div>
-      <div class="pf-sub">${conProducto?escHtml(x.producto_nombre)+' · ':''}${x.cliente_telefono?escHtml(x.cliente_telefono)+' · ':''}${timeAgo(x.created_at)}</div></div>
-    <span class="badge ${cls}">${txt}</span>
-    <div class="pf-acc">${avisoPedidoHtml(x)}${acciones}
+      <div class="pf-sub">${conProducto?escHtml(x.producto_nombre)+' · ':''}${x.cliente_telefono?escHtml(x.cliente_telefono)+' · ':''}${timeAgo(x.created_at)}</div>${cuenta}</div>
+    <span class="pf-badges"><span class="badge ${cls}">${txt}</span>${falta?`<span class="badge badge-warning">Falta avisar</span>`:(activo && x.avisado_estado===x.estado?`<span class="pf-ok">${icon('check')} Avisado</span>`:'')}</span>
+    <div class="pf-acc">${aviso}${acciones}
       ${cancelable?`<button class="icon-btn delete" data-action="pedido-estado" data-id="${x.id}" data-estado="cancelado" data-tip="Cancelar pedido">${icon('x')}</button>`:''}</div>
   </div>`;
 }
@@ -5123,6 +5240,10 @@ function modalPedirPublico(p, ctx){
       <div class="form-group"><label>Tu WhatsApp</label><input id="pdTel" inputmode="tel" value="${escHtml(guardado.tel||'')}" autocomplete="tel" placeholder="Para avisarte cuando llegue"></div>
       <div class="form-group"><label>Cantidad</label>
         <div class="stepper"><button type="button" id="pdMenos" aria-label="Menos">−</button><input type="number" inputmode="numeric" id="pdCant" min="1" max="10" value="1"><button type="button" id="pdMas" aria-label="Más">+</button></div></div>
+      <div class="form-group"><label>¿Cómo lo quieres?</label>
+        <div class="pill-tabs mb-0" id="pdEntregaTabs"><button type="button" class="pill-tab active" data-valor="recoger">Paso a recogerlo</button><button type="button" class="pill-tab" data-valor="envio">Envíenmelo</button></div>
+        <div id="pdDirBox" hidden style="margin-top:10px;"><textarea id="pdDir" rows="2" placeholder="Dirección o zona para el envío">${escHtml(guardado.dir||'')}</textarea>
+          <div class="text-faint" style="font-size:11.5px;margin-top:4px;">El envío tiene un costo; te confirmamos el total por WhatsApp.</div></div></div>
       <div class="text-faint" style="font-size:12px;">Al tocar "Pedir" se registra tu pedido y se abre WhatsApp con el mensaje listo para enviar.</div>
     </div>
     <div class="modal-foot"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="pdEnviar">${icon('bookmark')} Pedir</button></div>`, 'sheet');
@@ -5131,19 +5252,26 @@ function modalPedirPublico(p, ctx){
   document.getElementById('pdMenos').addEventListener('click', ()=>fijar(cant-1));
   document.getElementById('pdMas').addEventListener('click', ()=>fijar(cant+1));
   inp.addEventListener('change', ()=>fijar(Number(inp.value)));
+  let entrega = 'recoger';
+  document.querySelectorAll('#pdEntregaTabs .pill-tab').forEach(b=>b.addEventListener('click', ()=>{
+    entrega = b.dataset.valor; document.querySelectorAll('#pdEntregaTabs .pill-tab').forEach(t=>t.classList.toggle('active', t===b));
+    document.getElementById('pdDirBox').hidden = entrega !== 'envio';
+  }));
   document.getElementById('pdEnviar').addEventListener('click', async ev=>{
     const nombre = document.getElementById('pdNombre').value.trim(), tel = document.getElementById('pdTel').value.trim();
+    const dir = entrega === 'envio' ? document.getElementById('pdDir').value.trim() : '';
     if(nombre.length < 2) return toast('Escribe tu nombre','danger');
+    if(entrega === 'envio' && dir.length < 4) return toast('Escribe la dirección o zona del envío','danger');
     const btn = ev.target.closest('button'); btn.disabled = true; btn.textContent = 'Registrando…';
-    const r = await DB.registrarPedidoPublico(p.codigo, nombre, tel, cant);
+    const r = await DB.registrarPedidoPublico(p.codigo, nombre, tel, cant, entrega, dir);
     if(!r.ok){
       btn.disabled = false; btn.innerHTML = icon('bookmark') + ' Pedir';
       const k = Object.keys(MENSAJES_PEDIDO).find(c=>String(r.error||'').includes(c));
       return toast(k ? MENSAJES_PEDIDO[k] : 'No se pudo registrar el pedido. Revisa tu señal e intenta otra vez.', 'danger');
     }
-    try{ localStorage.setItem('cab_cliente', JSON.stringify({ nombre, tel })); }catch(e){}
+    try{ localStorage.setItem('cab_cliente', JSON.stringify({ nombre, tel, dir })); }catch(e){}
     const link = location.origin + location.pathname + '?p=' + encodeURIComponent(p.codigo);
-    const mensaje = 'Hola' + (ctx.vNombre ? ' ' + ctx.vNombre : '') + ', quiero pedir: ' + p.nombre + (cant > 1 ? ' × ' + cant : '') + ' — Q ' + Number(p.precio_venta).toFixed(2) + '\nA nombre de ' + nombre + '\n' + link;
+    const mensaje = 'Hola' + (ctx.vNombre ? ' ' + ctx.vNombre : '') + ', quiero pedir: ' + p.nombre + (cant > 1 ? ' × ' + cant : '') + ' — Q ' + Number(p.precio_venta).toFixed(2) + '\nA nombre de ' + nombre + '\n' + (entrega === 'envio' ? 'Quiero que me lo envíen a: ' + dir : 'Paso a recogerlo') + '\n' + link;
     const url = ctx.vTel ? 'https://wa.me/' + ctx.vTel + '?text=' + encodeURIComponent(mensaje) : null;
     document.getElementById('pdCuerpo').innerHTML = `<div class="pd-ok"><div class="pd-check">${icon('check')}</div><h3>¡Pedido registrado!</h3>
       <p>${ctx.vTel ? 'Te avisamos por WhatsApp cuando llegue. Si no se abrió el chat, tócalo aquí:' : 'Te avisamos cuando llegue.'}</p>
@@ -5403,6 +5531,7 @@ function modalVender(p, opts){
   const porCant = DB.esPorCantidad(p);
   const maxCant = porCant ? Math.max(1, p.cantidad||0) : 1;
   let cant = opts && opts.pedido ? Math.min(maxCant, Math.max(1, opts.pedido.cantidad||1)) : 1;
+  const abonoPedido = opts && opts.pedido ? (Number(opts.pedido.abonado) || 0) : 0;
   const montoAutomatico = g => g.tipo==='porcentaje' ? (p.precio_venta*cant*g.monto_default/100) : Number(g.monto_default);
   const sumaAuto = () => gastosOcultos.reduce((s,g)=>s+montoAutomatico(g),0) + gastosDelProducto.reduce((s,g)=>s+montoAutomatico(g),0);
   let totalAutomaticos = sumaAuto();
@@ -5517,6 +5646,20 @@ function modalVender(p, opts){
     entregado = btn.dataset.valor === '1';
     document.getElementById('ventaEntregaAviso').hidden = entregado;
   }));
+  if(opts && opts.pedido){
+    // Lo acordado con el cliente ya viene puesto: el envío (de Gastos), lo que abonó y si se entrega o lo recoge.
+    const ped = opts.pedido;
+    if(ped.entrega==='envio'){
+      const ge = gastoEnvio();
+      const chk = ge && document.querySelector(`.gasto-check[data-id="${ge.id}"]`);
+      if(chk){ chk.checked = true; const m = document.querySelector(`.gasto-monto[data-id="${ge.id}"]`); if(m) m.value = (Number(ped.costo_envio)||0).toFixed(2); calcTotal(); }
+      document.querySelector('#ventaEntregaTabs [data-valor="0"]').click();   // envío: queda "por entregar" hasta que salga
+    }
+    if(abonoPedido > 0 && abonoPedido < p.precio_venta * cant){
+      document.querySelector('#ventaEstadoPagoTabs [data-valor="pendiente"]').click();
+      document.getElementById('ventaDetalles').insertAdjacentHTML('afterend', `<div class="aviso-info">${icon('check')} Ya abonó ${money(abonoPedido)}; el saldo queda pendiente.</div>`);
+    }
+  }
   document.getElementById('btnConfirmarVenta').addEventListener('click', async ()=>{
     const gastos = [...gastosOcultos, ...gastosDelProducto].map(g=>({ gasto_id:g.id, nombre:g.nombre, monto:montoAutomatico(g) }));
     document.querySelectorAll('.gasto-check').forEach(chk=>{ if(chk.checked) gastos.push({ gasto_id:chk.dataset.id, nombre:chk.dataset.nombre, monto:Number(document.querySelector(`.gasto-monto[data-id="${chk.dataset.id}"]`).value)||0 }); });
@@ -5533,6 +5676,7 @@ function modalVender(p, opts){
 
     const res = porCant ? await DB.venderCantidad(p.id, cant, gastos, clienteId, estadoPago, opts && opts.pedido ? opts.pedido.id : null)
                         : await DB.venderProducto(p.id, gastos, clienteId, estadoPago);
+    if(res.ok && abonoPedido > 0 && estadoPago === 'pendiente') await DB.abonarVenta(res.data.id, Math.min(abonoPedido, p.precio_venta * cant));
     if(res.ok && !entregado) await DB.marcarEntregado(res.data.id, false);
     if(res.ok){ toast('¡Venta registrada! Ganaste '+money(res.data.comision_monto),'success'); closeModal(); await refresh(); }
     else { toast(mensajeErrorVenta(res.error),'danger'); closeModal(); await refresh(); }
@@ -5736,6 +5880,9 @@ Cuando vendes algo y marcas "Por entregar", toda la ficha del producto queda en 
 
 ## Bajo pedido y proveedores
 Se sube el producto con su foto, el precio, el proveedor y hasta cuándo se puede pedir. En el catálogo de los clientes aparece con una cuenta regresiva y un botón "Pedir": al tocarlo se registra el pedido y se abre WhatsApp. En "Pedidos" la admin ve quién pidió, usa "Pedir al proveedor" (mensaje listo con la foto), marca "Ya llegó" y vende. Si pasa la fecha y nadie pidió, el producto y sus fotos se borran solos; si alguien pidió, se queda hasta venderse.
+
+## Estado de cuenta del pedido
+En cada pedido, "Avisar" arma el mensaje de WhatsApp con el estado de cuenta: qué día estará su producto, si pasa a recogerlo o se le envía (el cobro de envío se toma de Gastos y se puede cambiar para ese pedido), lo que ya abonó, el total y el saldo. El mensaje cambia según el paso: pedido confirmado, ya pedido al proveedor, o ya llegó. Los pedidos que todavía no se le avisó al cliente de su paso muestran "Falta avisar". Al marcar "Ya llegó" se abre solo el aviso. Al vender desde el pedido ya viene puesto el envío, el abono y si queda por entregar.
 
 ## Usuarios
 Los usuarios NO se crean desde el panel — se dan de alta en Supabase (Authentication > Users), donde solo la administradora tiene acceso. Desde el panel solo se edita su nombre, rol, género, % de comisión, o se desactivan (nunca se borran, para no perder su historial).`;
@@ -7316,8 +7463,13 @@ async function ejecutarAccion(btn){
     const nuevo = btn.dataset.estado;
     if(nuevo==='cancelado' && !confirm('¿Cancelar este pedido?')) return;
     const r = await DB.cambiarEstadoPedido(id, nuevo);
-    if(r.ok){ toast(nuevo==='cancelado'?'Pedido cancelado':'Listo','success'); await refresh(); } else toast('No se pudo: '+r.error,'danger');
+    if(r.ok){
+      toast(nuevo==='cancelado'?'Pedido cancelado':'Listo','success'); await refresh();
+      // Apenas llega, lo natural es avisarle al cliente con su estado de cuenta.
+      if(nuevo==='llego'){ const ped = (DB.state.pedidos||[]).find(x=>x.id===id); if(ped) modalEstadoCuenta(ped); }
+    } else toast('No se pudo: '+r.error,'danger');
   }
+  else if(action==='pedido-avisar'){ const ped = (DB.state.pedidos||[]).find(x=>x.id===id); if(ped) modalEstadoCuenta(ped); }
   else if(action==='pedido-vender'){
     const ped = (DB.state.pedidos||[]).find(x=>x.id===id), prod = ped && DB.state.productos.find(x=>x.id===ped.producto_id);
     if(prod) modalVender(prod, { pedido: ped });

@@ -982,6 +982,7 @@ tr.entrega-pend td{background:var(--red-100);}
 .sf-rubros::-webkit-scrollbar{display:none;}
 .sf-rubro{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:18px;border:1.5px solid var(--color-border);background:var(--color-surface);cursor:pointer;color:var(--color-text);text-align:left;transition:transform 140ms var(--ease-out),background 140ms var(--ease-out),border-color 140ms var(--ease-out);}
 .sf-rubro:active{transform:scale(.97);}
+.sf-rubro.vacio:not(.on){opacity:.62;}
 .sr-ic{width:38px;height:38px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--coffee-100);background:color-mix(in srgb,var(--rubro) 16%,transparent);color:var(--rubro);}
 .sr-ic svg{width:21px;height:21px;stroke:currentColor;fill:none;}
 .sr-t{display:flex;flex-direction:column;line-height:1.2;}
@@ -1137,7 +1138,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '20-oct-2026 · v12';
+const VERSION_PANEL = '20-oct-2026 · v13';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -5039,6 +5040,12 @@ async function renderCatalogoPublico(){
     }
     return filas.filter(visiblePublico);
   };
+  // Los rubros abiertos al público: así las divisiones se ven aunque todavía no tengan productos.
+  const leerAreas = async ()=>{
+    const r = await sb.from('vista_areas_publicas').select('clave,nombre,modo,orden,color,icono').order('orden');
+    return r.error ? [] : (r.data || []);
+  };
+  let areasPub = await leerAreas();
   let productos = (await leerProductos()) || [];
   const hayOtras = ()=>productos.some(p=>p.area_modo && p.area_modo!=='unico');
 
@@ -5059,6 +5066,7 @@ async function renderCatalogoPublico(){
   // Rubros que hay hoy en el catálogo (con su color e ícono).
   const areasPresentes = ()=>{
     const m = new Map();
+    areasPub.forEach(a=>m.set(a.clave, { clave:a.clave, nombre:a.nombre, orden:a.orden||0, color:a.color||'#B07A7A', icono:a.icono||'box', modo:a.modo }));
     productos.forEach(p=>{ if(p.area_clave && !m.has(p.area_clave)) m.set(p.area_clave, { clave:p.area_clave, nombre:p.area_nombre, orden:p.area_orden||0, color:p.area_color||'#B07A7A', icono:p.area_icono||'box', modo:p.area_modo }); });
     return [...m.values()].sort((a,b)=>a.orden-b.orden);
   };
@@ -5067,8 +5075,8 @@ async function renderCatalogoPublico(){
   const rubrosHtml = ()=>{
     const as = areasPresentes();
     if(as.length < 2) return '';
-    const tile = (clave, nombre, ic, color, n)=>`<button type="button" class="sf-rubro${area===clave?' on':''}" data-area="${escHtml(clave)}" style="--rubro:${color}">
-        <span class="sr-ic">${icon(ic)}</span><span class="sr-t"><b>${escHtml(nombre)}</b><small>${n} producto${n===1?'':'s'}</small></span></button>`;
+    const tile = (clave, nombre, ic, color, n)=>`<button type="button" class="sf-rubro${area===clave?' on':''}${n?'':' vacio'}" data-area="${escHtml(clave)}" style="--rubro:${color}">
+        <span class="sr-ic">${icon(ic)}</span><span class="sr-t"><b>${escHtml(nombre)}</b><small>${n?n+' producto'+(n===1?'':'s'):'Pronto'}</small></span></button>`;
     return tile('', 'Todo', 'dashboard', '#5B4A42', productos.length) + as.map(a=>tile(a.clave, a.nombre, a.icono, a.color, productos.filter(p=>p.area_clave===a.clave).length)).join('');
   };
   // Clasificación dentro del rubro: sus tipos (Usado, Nuevo, Café, Miel…).
@@ -5130,7 +5138,10 @@ async function renderCatalogoPublico(){
     window.__catLista = lista;
     const as = areasPresentes();
     let html;
-    if(!lista.length) html = `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':''}</div>`;
+    const aSel = area ? as.find(a=>a.clave===area) : null;
+    if(!lista.length) html = (aSel && !productos.some(p=>p.area_clave===area) && !q && !cat && !tipoSel)
+      ? `<div class="sf-vacio">${icon(aSel.icono)}<b>Pronto habrá productos en ${escHtml(aSel.nombre)}</b>Vuelve a mirar en unos días, o escríbenos y te contamos.</div>`
+      : `<div class="sf-vacio">${icon('search')}<b>${productos.length?'No encontramos eso':'Pronto habrá piezas nuevas'}</b>${productos.length?'Prueba con otra palabra o quita el filtro.':''}</div>`;
     else if(!area && as.length >= 2){
       // "Todo": cada rubro en su propia sección, con su color y su nombre.
       let i = 0;
@@ -5184,13 +5195,14 @@ async function renderCatalogoPublico(){
       const nuevosProductos = await leerProductos();
       if(!nuevosProductos) return;
       productos = nuevosProductos;
+      areasPub = await leerAreas();
       refrescarFiltros();
       dibujar();
     }, 600);
   };
   // Si lo que estaba filtrado desaparece (se vendió, se cerró un pedido…), se limpia el filtro.
   const refrescarFiltros = ()=>{
-    if(area && !productos.some(p=>p.area_clave===area)) area = '';
+    if(area && !areasPresentes().some(a=>a.clave===area)) area = '';
     if(tipoSel && !productos.some(p=>(!area || p.area_clave===area) && p.tipo===tipoSel)) tipoSel = '';
     if(cat && !productos.some(p=>(!area || p.area_clave===area) && p.categoria===cat)) cat = '';
     pintarFiltros();

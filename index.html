@@ -1006,6 +1006,29 @@ tr.entrega-pend td{background:var(--red-100);}
 .sf-btn.agotado-btn{background:var(--color-surface-alt);color:var(--color-text-muted);box-shadow:none;cursor:default;}
 @media (max-width:420px){.ss-ver{display:none;}}
 @media (prefers-reduced-motion:reduce){.sf-rubro{transition:none;}}
+/* ---- Rubros en cuadrícula: se acomodan en varias filas, se ven todos y no se aplastan ---- */
+.sf-rubros{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;padding:16px 16px 6px;}
+.sf-rubro{width:100%;min-width:0;align-items:center;padding:10px 12px 10px 10px;}
+.sf-rubro .sr-t{min-width:0;}
+.sf-rubro .sr-t b{white-space:normal;overflow-wrap:break-word;line-height:1.2;}
+.sf-rubro:not(:first-child){flex-direction:column;align-items:flex-start;gap:8px;padding:12px;}
+.sf-rubro:first-child{grid-column:1/-1;}
+@media (min-width:600px){.sf-rubros{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media (min-width:900px){.sf-rubros{grid-template-columns:repeat(4,minmax(0,1fr));}}
+.rubro-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;padding:4px 0 12px;margin:0 0 2px;}
+.rubro-tile{width:100%;min-width:0;max-width:none;}
+.rubro-tile .rt-nombre{overflow-wrap:break-word;padding-right:18px;}
+.rubro-tile:first-child{grid-column:1/-1;flex-direction:row;align-items:center;gap:10px;}
+.rubro-tile:first-child .rt-ic{margin-bottom:0;}
+.rubro-tile:first-child .rt-nombre{flex:1;padding-right:0;}
+.rubro-tile:first-child .rt-rojo{position:static;order:3;}
+@media (min-width:600px){.rubro-tiles{grid-template-columns:repeat(3,minmax(0,1fr));}}
+@media (min-width:900px){.rubro-tiles{grid-template-columns:repeat(4,minmax(0,1fr));}}
+/* Los tipos también bajan de línea en vez de deslizarse */
+.tipos-fila,#tipoChips{flex-wrap:wrap;overflow-x:visible;}
+.tipos-fila{row-gap:8px;}
+#tipoChips{row-gap:8px;padding-bottom:6px;}
+
 /* ---- Pedidos: estado de cuenta ---- */
 .pf-cuenta{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px;font-size:11.5px;color:var(--color-text-muted);}
 .pf-cuenta .sin{color:var(--amber-700);font-weight:700;}
@@ -1138,7 +1161,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '20-oct-2026 · v13';
+const VERSION_PANEL = '20-oct-2026 · v14';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado

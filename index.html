@@ -1222,7 +1222,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '20-oct-2026 · v16';
+const VERSION_PANEL = '21-oct-2026 · v17';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -2859,6 +2859,7 @@ function buildBottomNav(){
     { page:'a-inventario', label:'Inventario', ic:'box' },
     { page:'a-nuevo', label:'Nuevo', ic:'plus', add:true },
     { page:'a-pedidos', label:'Pedidos', ic:'bookmark' },
+    { page:'a-clientes', label:'Clientes', ic:'users2' },
     { mas:true, label:'Más', ic:'menu' }
   ] : [
     { page:'v-dashboard', label:'Inicio', ic:'dashboard' },

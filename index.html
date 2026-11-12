@@ -415,9 +415,9 @@ tbody tr:hover{background:var(--color-surface-alt);}
 .mas-opciones{border:1px solid var(--color-border);border-radius:12px;padding:0 14px;margin:4px 0 18px;background:var(--color-surface-alt);}
 .mas-opciones summary{cursor:pointer;padding:14px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;}
 .mas-opciones summary::-webkit-details-marker{display:none;}
-.mas-opciones[open] summary{border-bottom:1px solid var(--color-border);margin-bottom:14px;}
+.mas-opciones[open] > summary{border-bottom:1px solid var(--color-border);margin-bottom:14px;}
 .mas-opciones .chev svg{width:18px;height:18px;stroke:var(--color-text-muted);transition:transform 160ms var(--ease-out);}
-.mas-opciones[open] .chev svg{transform:rotate(180deg);}
+.mas-opciones[open] > summary .chev svg{transform:rotate(180deg);}
 .progress-bar{height:8px;background:var(--color-surface-alt);border-radius:99px;overflow:hidden;}
 .progress-bar>span{display:block;height:100%;width:0;background:var(--color-accent);transition:width 200ms var(--ease-out);}
 .photo-drop{border:1.5px dashed var(--color-border);border-radius:10px;padding:10px 12px;text-align:center;cursor:pointer;background:var(--color-surface-alt);
@@ -686,6 +686,24 @@ a.mas-item{text-decoration:none;color:inherit;}
 .cl-deuda small{display:block;font-size:12px;color:var(--color-text-muted);}
 .cl-actions{display:flex;gap:8px;align-items:center;border-top:1px solid var(--color-border);padding-top:10px;}
 .cl-actions .spacer{flex:1;}
+.vt-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px;}
+.vt-card{display:flex;flex-direction:column;gap:12px;padding:14px;border:1px solid var(--color-border);border-radius:14px;background:var(--color-surface);}
+.vt-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.vt-prod{min-width:0;display:flex;flex-direction:column;gap:2px;}
+.vt-prod b{font-size:15px;line-height:1.3;overflow-wrap:anywhere;}
+.vt-prod small,.vt-monto small,.vt-cli small{font-size:12px;color:var(--color-text-muted);}
+.vt-monto{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0;text-align:right;}
+.vt-monto b{font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;}
+.vt-cli{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:var(--color-surface-alt);}
+.vt-cli>svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--color-text-muted);stroke-width:2;}
+.vt-cli>div{min-width:0;display:flex;flex-direction:column;}
+.vt-estados{display:flex;flex-wrap:wrap;gap:8px;}
+.vt-acciones{display:flex;flex-wrap:wrap;gap:8px;}
+.vt-acciones .btn{flex:1 1 140px;justify-content:center;}
+.vt-card.entrega-pend{background:var(--red-100);border:2px solid var(--red-600);}
+.vt-card.entrega-pend .vt-prod b{color:var(--red-700);}
+.vt-card.entrega-pend .vt-cli{background:rgba(255,255,255,.55);}
+.vt-vacio{padding:24px 8px;text-align:center;}
 .cobro-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px;}
 .cobro-card{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--color-border);border-radius:14px;background:var(--color-surface);}
 .cobro-main{flex:1;min-width:0;}
@@ -1113,6 +1131,33 @@ tr.entrega-pend td{background:var(--red-100);}
 #bottomNav button{position:relative;}
 .bn-badge{position:absolute;top:3px;left:calc(50% + 4px);min-width:20px;height:20px;padding:0 4px;border-radius:999px;background:var(--red-600);color:#fff;font-size:12px;font-weight:800;font-style:normal;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--color-surface);}
 
+/* ---- Mi cuenta (en el teléfono del cliente) ---- */
+.mc-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:4px;margin-bottom:14px;border-radius:16px;background:var(--color-surface-alt);}
+.mc-tab{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:6px 8px;border:none;border-radius:12px;background:none;font:inherit;font-size:13px;font-weight:700;line-height:1.2;text-align:center;color:var(--color-text-muted);cursor:pointer;transition:background 140ms var(--ease-out),color 140ms var(--ease-out),transform 120ms var(--ease-out);}
+.mc-tab:active{transform:scale(.97);}
+.mc-tab.active{background:var(--color-surface);color:var(--color-text);box-shadow:var(--shadow-sm, 0 1px 3px rgba(0,0,0,.08));}
+.mc-tab i{font-style:normal;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--color-accent);color:#fff;font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mc-estado{display:inline-flex;align-items:center;align-self:flex-start;margin-top:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:800;background:var(--coffee-100);color:var(--color-text-muted);}
+.mc-estado.ok{background:var(--forest-100);color:var(--forest-700);}
+.mc-estado.debe,.mc-estado.pend{background:var(--red-100);color:var(--red-700);}
+.mc-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.mc-badges .mc-estado{margin-top:0;}
+.mp-card.mc-debe{border-color:var(--red-600);}
+.mc-resumen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:14px;}
+.mc-resumen div{min-width:0;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:var(--color-surface-alt);}
+.mc-resumen small{font-size:12px;color:var(--color-text-muted);}
+.mc-resumen b{font-size:15px;font-weight:800;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;}
+.mc-resumen .debe b{color:var(--red-700);}
+.mc-salir{display:flex;margin:8px auto 0;}
+.ec-botones{display:flex;flex-wrap:wrap;gap:10px;}
+.ec-botones .btn{flex:1 1 180px;justify-content:center;}
+.ec-cambiar{display:flex;margin:16px auto 0;}
+.cli-consultas{display:grid;gap:8px;}
+.cc-fila{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface);}
+.cc-t{min-width:0;display:flex;flex-direction:column;}
+.cc-t b{font-size:14px;overflow-wrap:anywhere;}
+.cc-t small{font-size:12px;color:var(--color-text-muted);}
+@media (prefers-reduced-motion:reduce){.mc-tab{transition:none;}}
 /* ---- Mis pedidos (en el teléfono del cliente) ---- */
 .sf-mis{display:flex;align-items:center;gap:12px;width:calc(100% - 32px);margin:16px 16px 0;padding:11px 14px 11px 11px;border-radius:18px;border:1.5px solid var(--color-accent);background:var(--color-surface);color:var(--color-text);cursor:pointer;text-align:left;transition:transform 140ms var(--ease-out);}
 .sf-mis:active{transform:scale(.98);}
@@ -1133,6 +1178,7 @@ tr.entrega-pend td{background:var(--red-100);}
 .mp-card.apagado{opacity:.75;}
 .mp-head{display:flex;gap:12px;align-items:center;}
 .mp-head img,.mp-ic{width:54px;height:54px;border-radius:12px;object-fit:cover;flex-shrink:0;background:var(--coffee-100);display:inline-flex;align-items:center;justify-content:center;color:var(--color-text-faint);}
+.mp-ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;}
 .mp-t{display:flex;flex-direction:column;line-height:1.25;min-width:0;}
 .mp-t b{font-size:14px;}
 .mp-t small{font-size:12px;color:var(--color-text-muted);}
@@ -1210,6 +1256,8 @@ tr.entrega-pend td{background:var(--red-100);}
 .cli-op.on>svg:last-child{opacity:1;}
 .cli-op:active{transform:scale(.98);}
 .cli-nada{padding:10px 4px;font-size:13px;}
+.ep-cliente summary>span:first-child{min-width:0;overflow-wrap:anywhere;font-weight:600;}
+.ep-cliente summary b{font-weight:800;}
 @media (prefers-reduced-motion:reduce){.cli-venta,.cli-op{transition:none;}}
 .aviso-info{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 11px;border-radius:10px;background:var(--forest-100);color:var(--forest-700);font-size:12px;font-weight:600;}
 .aviso-info svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.6;flex-shrink:0;}
@@ -1362,7 +1410,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '11-nov-2026 · v20';
+const VERSION_PANEL = '11-nov-2026 · v22';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -1431,7 +1479,7 @@ const DB = {
   async cargarTodo(){
     const [usuariosRes, usuariosPubRes, configRes, cajasRes, productosRes, fotosRes,
            categoriasRes, gastosRes, gastosAplicadosRes, ventaHistorialRes,
-           pagosRes, devolucionesRes, bitacoraRes, notifRes, clientesRes, abonosRes, areasRes, tiposRes] = await Promise.all([
+           pagosRes, devolucionesRes, bitacoraRes, notifRes, clientesRes, abonosRes, areasRes, tiposRes, consultasRes] = await Promise.all([
       sb.from('usuarios').select('*'),
       sb.from('usuarios_publico').select('*'),
       sb.from('configuracion').select('*'),
@@ -1450,6 +1498,7 @@ const DB = {
       sb.from('abonos').select('*').order('created_at', { ascending:false }),
       sb.from('areas').select('*').order('orden'),
       sb.from('tipos_producto').select('*').order('orden'),
+      sb.from('consultas_catalogo').select('*').order('created_at', { ascending:false }).limit(500),
     ]);
     const caida = [usuariosRes, usuariosPubRes, configRes, productosRes, ventaHistorialRes].find(r=>r && r.error && esErrorDeRed(r.error.message));
     if(caida) throw new Error(caida.error.message);
@@ -1476,6 +1525,7 @@ const DB = {
       clientes: clientesRes.data || [],
       abonos: abonosRes.data || [],
       areas: areasRes.data || [], tipos: tiposRes.data || [], proveedores: [], pedidos: [],
+      consultas: consultasRes.data || [],
       ubicaciones: [], externas: [], extras: [], cajas_ext: [], extras_items: [], extras_pagos: [],
     };
     const yo = st.usuarios.find(u=>u.id===this.authUserId);
@@ -2218,6 +2268,8 @@ const DB = {
   // Abono parcial o total — monto no puede ser mayor al saldo pendiente (lo valida el server).
   // Dejar el monto igual al saldo completo es la forma de "pagar todo de un click".
   abonarVenta(ventaId, monto){ return conSenal('abonar', [ventaId, monto]); },
+  // Enlace personal del cliente para "Mi cuenta" en el catálogo (migración 24). nuevo = cambia el código.
+  enlaceCliente(clienteId, nuevo){ return rpcRes('fn_enlace_cliente', { p_cliente_id:clienteId, p_nuevo:!!nuevo }); },
   // Asignar o cambiar el cliente de una venta ya hecha (migración 23). Sin ella, la admin lo hace directo.
   async asignarClienteVenta(ventaId, clienteId){
     const r = await rpcRes('fn_asignar_cliente_venta', { p_venta_id:ventaId, p_cliente_id:clienteId || null });
@@ -4142,41 +4194,41 @@ function botonesContacto(telefono){
 
 // Exclusiva para vistas de vendedora: nunca muestra costo ni ganancia neta
 // (eso revelaría el margen), solo precio de venta y su propia comisión.
-function renderVentasTable(ventas, showVendedor){
-  const cols = showVendedor ? 9 : 8;
-  return `<div class="table-wrap"><table><thead><tr><th>Producto</th><th>Cliente</th>${showVendedor?'<th>Vendedora</th>':''}<th>Fecha</th><th>Precio</th><th>Tu comisión</th><th>Estado</th><th>Cliente pagó</th><th>Entrega</th></tr></thead><tbody>
-  ${ventas.length ? ventas.map(v=>{
+function renderVentasTable(ventas, showVendedor, conDevolucion){
+  if(!ventas.length) return `<div class="vt-vacio text-faint">Sin ventas registradas</div>`;
+  return `<div class="vt-lista">${ventas.map(v=>{
     const vend = DB.state.usuarios.find(u=>u.id===v.vendedor_id);
-    const info = v.estado_venta==='devuelto' ? {label:'Devuelto',cls:'badge-danger'} : {label:v.comision_estado==='pagada'?'Comisión pagada':'Comisión ganada', cls: v.comision_estado==='pagada'?'badge-info':'badge-success'};
+    const devuelta = v.estado_venta==='devuelto';
+    const comision = devuelta ? { label:'Devuelto', cls:'badge-danger' } : { label:v.comision_estado==='pagada'?'Comisión pagada':'Comisión ganada', cls:v.comision_estado==='pagada'?'badge-info':'badge-success' };
     const pendiente = v.estado_pago==='pendiente';
     const abonado = pendiente && v.monto_pagado>0;
-    return `<tr class="${v.estado_venta==='vendido' && v.entregado===false?'entrega-pend':''}"><td>${v.producto_nombre}<div class="text-faint" style="font-size:12px;">${v.producto_codigo}</div></td>
-      <td>${clienteVentaHtml(v)}</td>
-      ${showVendedor?`<td>${vend?vend.nombre:'—'}</td>`:''}
-      <td>${fmtDateShort(v.fecha_venta)}</td><td>${money(v.precio_venta)}</td><td>${money(v.comision_monto)}</td>
-      <td><span class="badge ${info.cls}">${info.label}</span></td>
-      <td><span class="badge ${pendiente?'badge-warning':'badge-success'}">${pendiente?(abonado?'Abono parcial':'Pendiente'):'Pagado'}</span>
-        ${abonado?`<div class="text-faint" style="font-size:12px;">debe ${money(saldoPendiente(v))}</div>`:''}
-        ${pendiente?`<button class="btn btn-ghost btn-sm" style="padding:3px 8px;" data-action="marcar-pago-cliente" data-id="${v.id}">Abonar</button>`:''}</td>
-      <td>${v.estado_venta!=='vendido'?'—':`<span class="badge ${v.entregado===false?'entrega-no':'entrega-ok'}">${v.entregado===false?'Pendiente de entrega':'Entregado'}</span>
-        <button class="btn btn-ghost btn-sm" style="padding:3px 8px;" data-action="toggle-entrega" data-id="${v.id}">${v.entregado===false?'Marcar entregado':'Marcar pendiente'}</button>`}</td></tr>`;
-  }).join('') : `<tr class="empty-row"><td colspan="${cols}">Sin ventas registradas</td></tr>`}
-  </tbody></table></div>`;
+    const porEntregar = !devuelta && v.entregado===false;
+    const devPend = conDevolucion && !devuelta && DB.state.devoluciones.find(d=>d.venta_historial_id===v.id && d.estado==='pendiente');
+    return `<div class="vt-card${porEntregar?' entrega-pend':''}">
+      <div class="vt-top">
+        <div class="vt-prod"><b>${escHtml(v.producto_nombre)}</b><small>${escHtml(v.producto_codigo)} · ${fmtDateShort(v.fecha_venta)}</small></div>
+        <div class="vt-monto"><b>${money(v.precio_venta)}</b><small>Comisión ${money(v.comision_monto)}</small></div>
+      </div>
+      <div class="vt-cli">${icon('users2')}<div>${clienteVentaHtml(v)}${showVendedor && vend ? `<small>Vendió ${escHtml(vend.nombre)}</small>` : ''}</div></div>
+      <div class="vt-estados">
+        <span class="badge ${comision.cls}">${comision.label}</span>
+        <span class="badge ${pendiente?'badge-warning':'badge-success'}">${pendiente?(abonado?'Debe '+money(saldoPendiente(v)):'Pendiente de pago'):'Pagado'}</span>
+        ${devuelta ? '' : `<span class="badge ${porEntregar?'entrega-no':'entrega-ok'}">${porEntregar?'Pendiente de entrega':'Entregado'}</span>`}
+        ${devPend ? '<span class="badge badge-warning">Devolución solicitada</span>' : ''}
+      </div>
+      ${(pendiente || !devuelta) ? `<div class="vt-acciones">
+        ${pendiente ? `<button class="btn btn-primary btn-sm" data-action="marcar-pago-cliente" data-id="${v.id}">${icon('wallet')} Abonar</button>` : ''}
+        ${devuelta ? '' : `<button class="btn btn-secondary btn-sm" data-action="toggle-entrega" data-id="${v.id}">${icon('truck')} ${porEntregar?'Marcar entregado':'Marcar pendiente'}</button>`}
+        ${conDevolucion && !devuelta && !devPend ? `<button class="btn btn-ghost btn-sm" data-action="solicitar-devolucion" data-id="${v.id}">${icon('undo')} Solicitar devolución</button>` : ''}
+      </div>` : ''}
+    </div>`;
+  }).join('')}</div>`;
 }
 
 PAGES['v-ventas'] = () => {
   const cur = DB.currentUser();
   const ventas = DB.state.venta_historial.filter(v=>v.vendedor_id===cur.id);
-  return `<div class="panel">${renderVentasTable(ventas,false)}</div>
-  <div class="panel"><div class="panel-title" style="margin-bottom:12px;">Solicitar devolución</div>
-    <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody>
-    ${ventas.filter(v=>v.estado_venta==='vendido').map(v=>{
-      const pend = DB.state.devoluciones.find(d=>d.venta_historial_id===v.id && d.estado==='pendiente');
-      return `<tr><td>${v.producto_nombre}</td><td>${fmtDateShort(v.fecha_venta)}</td><td>${pend?'<span class="badge badge-warning">Solicitud pendiente</span>':'—'}</td>
-        <td>${pend?'':`<button class="btn btn-secondary btn-sm" data-action="solicitar-devolucion" data-id="${v.id}">Solicitar devolución</button>`}</td></tr>`;
-    }).join('') || `<tr class="empty-row"><td colspan="4">No tienes ventas confirmadas</td></tr>`}
-    </tbody></table></div>
-  </div>`;
+  return `<div class="panel">${renderVentasTable(ventas, false, true)}</div>`;
 };
 
 PAGES['v-comisiones'] = () => {
@@ -5356,13 +5408,11 @@ function modalVerFicha(p){
   });
 }
 
-// Asignar o cambiar el cliente de una venta ya hecha (por si se olvidó al vender).
-function modalClienteVenta(v, alTerminar){
-  if(String(v.id).startsWith('tmp-')) return toast('Esta venta todavía no se envía. Asígnale el cliente cuando vuelva la señal.', 'danger');
-  const volver = ()=>{ if(alTerminar) alTerminar(); };
-  let elegido = v.cliente_id || '';
+// Selector de cliente con buscador por nombre o teléfono y "Crear cliente nuevo" ahí mismo.
+// Se usa al asignar el cliente de una venta y al editar un producto vendido.
+function selectorCliente(raiz, inicial, alElegir){
+  let elegido = inicial || '';
   const clientes = DB.state.clientes.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre, 'es'));
-  const debe = v.estado_pago==='pendiente' ? saldoPendiente(v) : 0;
   const fila = c=>{ const id = c ? c.id : '';
     return `<button type="button" class="cli-op${elegido===id?' on':''}" data-cli="${id}">${icon(c?'users2':'x')}<span><b>${c?escHtml(c.nombre):'Sin cliente'}</b>${c && c.telefono?`<small>${escHtml(c.telefono)}</small>`:''}</span>${icon('check')}</button>`; };
   const lista = q=>{
@@ -5370,47 +5420,72 @@ function modalClienteVenta(v, alTerminar){
     const hallados = clientes.filter(c=>!t || normalizar(c.nombre + ' ' + (c.telefono||'')).includes(t));
     return (t ? '' : fila(null)) + hallados.slice(0, 80).map(fila).join('') + (t && !hallados.length ? '<div class="text-faint cli-nada">No hay clientes con ese nombre o teléfono.</div>' : '');
   };
+  raiz.innerHTML = `
+    <div class="cli-buscar">${icon('search')}<input class="cs-buscar" type="search" placeholder="Nombre o teléfono" autocomplete="off" aria-label="Buscar cliente"></div>
+    <div class="cli-lista cs-lista">${lista('')}</div>
+    <details class="mas-opciones cs-nuevo" style="margin:12px 0 0;"><summary>Crear cliente nuevo<span class="chev">${icon('chevron')}</span></summary>
+      <div class="form-row" style="padding-bottom:14px;"><input class="cs-nombre" placeholder="Nombre del cliente" autocomplete="off" aria-label="Nombre del cliente"><input class="cs-tel" type="tel" inputmode="tel" placeholder="Teléfono (opcional)" aria-label="Teléfono"></div>
+    </details>`;
+  const caja = raiz.querySelector('.cs-lista'), buscar = raiz.querySelector('.cs-buscar'), det = raiz.querySelector('.cs-nuevo');
+  const nombreDe = id=>{ const c = clientes.find(x=>x.id===id); return c ? c.nombre : ''; };
+  buscar.addEventListener('input', ()=>{ caja.innerHTML = lista(buscar.value); });
+  caja.addEventListener('click', e=>{
+    const b = e.target.closest('.cli-op'); if(!b) return;
+    elegido = b.dataset.cli;
+    caja.querySelectorAll('.cli-op').forEach(x=>x.classList.toggle('on', x===b));
+    det.open = false;
+    if(alElegir) alElegir(nombreDe(elegido));
+  });
+  raiz.querySelector('.cs-nombre').addEventListener('input', e=>{ if(alElegir && e.target.value.trim()) alElegir(e.target.value.trim() + ' (nuevo)'); });
+  return {
+    // ¿Hay algo distinto a lo que ya tenía?
+    cambio(){ return (det.open && !!raiz.querySelector('.cs-nombre').value.trim()) || elegido !== (inicial || ''); },
+    // Crea el cliente nuevo si se escribió uno y devuelve el elegido.
+    async resolver(){
+      const nuevo = det.open ? raiz.querySelector('.cs-nombre').value.trim() : '';
+      if(nuevo){
+        const rc = await DB.crearCliente({ nombre:nuevo, telefono:raiz.querySelector('.cs-tel').value.trim() });
+        if(!rc.ok) return { ok:false, error:'No se pudo crear el cliente: ' + rc.error };
+        clientes.push(rc.data); elegido = rc.data.id;
+        raiz.querySelector('.cs-nombre').value = ''; det.open = false; caja.innerHTML = lista(buscar.value);
+      }
+      return { ok:true, id:elegido, nombre:nombreDe(elegido) };
+    }
+  };
+}
+// Guarda el cliente elegido en la venta. Devuelve false si algo falló (ya avisó).
+async function guardarClienteVenta(v, sel){
+  const r0 = await sel.resolver();
+  if(!r0.ok){ toast(r0.error, 'danger'); return false; }
+  if((r0.id || '') === (v.cliente_id || '')) return true;
+  const r = await DB.asignarClienteVenta(v.id, r0.id || null);
+  if(!r.ok){ toast('No se pudo cambiar el cliente: ' + mensajeErrorClienteVenta(r.error), 'danger'); return false; }
+  toast(r0.id ? 'Cliente asignado: ' + r0.nombre : 'La venta quedó sin cliente', 'success');
+  return true;
+}
+// Asignar o cambiar el cliente de una venta ya hecha (por si se olvidó al vender).
+function modalClienteVenta(v, alTerminar){
+  if(String(v.id).startsWith('tmp-')) return toast('Esta venta todavía no se envía. Asígnale el cliente cuando vuelva la señal.', 'danger');
+  const volver = ()=>{ if(alTerminar) alTerminar(); };
+  const debe = v.estado_pago==='pendiente' ? saldoPendiente(v) : 0;
   openModal(`
     <div class="modal-head"><div><div class="modal-title">${v.cliente_id?'Cambiar cliente':'Asignar cliente'}</div>
       <div class="text-muted" style="font-size:13px;">${escHtml(v.producto_nombre)} · ${fmtDateShort(v.fecha_venta)} · ${money(v.precio_venta)}</div></div>
       <button class="icon-btn" id="cvCerrar" aria-label="Cerrar">${icon('x')}</button></div>
     <div class="modal-body">
       ${debe > 0 ? `<div class="aviso-info" style="margin:0 0 12px;">${icon('wallet')} Debe ${money(debe)}: la deuda queda a nombre del cliente que elijas.</div>` : ''}
-      <div class="cli-buscar">${icon('search')}<input id="cvBuscar" type="search" placeholder="Buscar por nombre o teléfono" autocomplete="off" aria-label="Buscar cliente"></div>
-      <div class="cli-lista" id="cvLista">${lista('')}</div>
-      <details class="mas-opciones" id="cvNuevo" style="margin:12px 0 0;"><summary>Crear cliente nuevo<span class="chev">${icon('chevron')}</span></summary>
-        <div class="form-row" style="padding-bottom:14px;"><input id="cvNombre" placeholder="Nombre del cliente" autocomplete="off"><input id="cvTel" type="tel" inputmode="tel" placeholder="Teléfono (opcional)"></div>
-      </details>
+      <div id="cvSelector"></div>
     </div>
     <div class="modal-foot"><button class="btn btn-secondary" id="cvCancelar">Cancelar</button><button class="btn btn-primary" id="cvGuardar">${icon('check')} Guardar</button></div>`);
-  const caja = document.getElementById('cvLista');
-  document.getElementById('cvBuscar').addEventListener('input', e=>{ caja.innerHTML = lista(e.target.value); });
-  caja.addEventListener('click', e=>{
-    const b = e.target.closest('.cli-op'); if(!b) return;
-    elegido = b.dataset.cli;
-    caja.querySelectorAll('.cli-op').forEach(x=>x.classList.toggle('on', x===b));
-    document.getElementById('cvNuevo').open = false;
-  });
+  const sel = selectorCliente(document.getElementById('cvSelector'), v.cliente_id);
   const cancelar = ()=>{ closeModal(); volver(); };
   document.getElementById('cvCerrar').addEventListener('click', cancelar);
   document.getElementById('cvCancelar').addEventListener('click', cancelar);
   document.getElementById('cvGuardar').addEventListener('click', async ()=>{
     const btn = document.getElementById('cvGuardar');
-    const nuevo = document.getElementById('cvNuevo').open ? document.getElementById('cvNombre').value.trim() : '';
+    if(!sel.cambio()){ cancelar(); return; }
     btn.disabled = true;
-    let id = elegido, nombre = '';
-    if(nuevo){
-      const rc = await DB.crearCliente({ nombre:nuevo, telefono:document.getElementById('cvTel').value.trim() });
-      if(!rc.ok){ btn.disabled = false; return toast('No se pudo crear el cliente: ' + rc.error, 'danger'); }
-      id = rc.data.id; nombre = rc.data.nombre;
-    } else if(document.getElementById('cvNuevo').open && !elegido && !v.cliente_id){
-      btn.disabled = false; return toast('Escribe el nombre del cliente nuevo o elige uno de la lista', 'danger');
-    }
-    if((id || '') === (v.cliente_id || '')){ cancelar(); return; }
-    const r = await DB.asignarClienteVenta(v.id, id || null);
-    if(!r.ok){ btn.disabled = false; return toast('No se pudo: ' + mensajeErrorClienteVenta(r.error), 'danger'); }
-    if(!nombre && id){ const c = DB.state.clientes.find(x=>x.id===id); nombre = c ? c.nombre : ''; }
-    toast(id ? 'Cliente asignado: ' + nombre : 'La venta quedó sin cliente', 'success');
+    if(!(await guardarClienteVenta(v, sel))){ btn.disabled = false; return; }
     closeModal(); await refresh(); volver();
   });
 }
@@ -5849,6 +5924,11 @@ async function renderCatalogoPublico(){
   document.title = negocio + ' · Catálogo';
   const params = new URLSearchParams(location.search);
   const vNombre = params.get('v'), vTel = params.get('tel');
+  // Enlace personal del cliente: el teléfono lo recuerda y se quita de la dirección (así no se comparte sin querer).
+  if(/^[a-f0-9]{32,64}$/i.test(params.get('c') || '')){
+    guardarCuentaCodigo(params.get('c')); params.delete('c');
+    try{ history.replaceState(null, '', location.pathname + '?' + params.toString()); }catch(e){}
+  }
   const saludoWsp = 'Hola'+(vNombre?' '+vNombre:'')+', vi tu catálogo y me interesa';
   const cuerpoSkel = `<div class="sf-grid">${'<div class="sf-skel"><div class="a"></div><div class="b"></div><div class="c"></div></div>'.repeat(6)}</div>`;
   const hero = (n, otras) => `<div class="sf-hero">
@@ -6020,24 +6100,36 @@ async function renderCatalogoPublico(){
   document.getElementById('catChips').addEventListener('click', e=>{ const b = e.target.closest('[data-cat]'); if(b){ cat = b.dataset.cat; pintarFiltros(); dibujar(); } });
   dibujar();
 
-  // "Mis pedidos": lo que este teléfono recuerda de lo que el cliente pidió.
-  window.__ctxCatalogo = { vNombre, vTel, linkResto, mensajeInteres };
+  // "Mi cuenta": lo que le interesó, sus pedidos y (con su enlace) sus compras.
+  window.__ctxCatalogo = { vNombre, vTel, linkResto, mensajeInteres, productos:()=>productos, abrir:p=>detalleCatalogo(p, window.__ctxCatalogo) };
   const pintarMisPedidos = ()=>{
     const b = document.getElementById('btnMisPedidos'); if(!b) return;
-    const l = leerPedidosLocales(); b.hidden = !l.length; if(!l.length) return;
+    const l = leerPedidosLocales(), ints = leerIntereses(), cuenta = cuentaGuardada();
     const proceso = l.filter(pedidoEnProceso).length, llego = l.filter(x=>!x.perdido && x.estado==='llego').length;
+    const debe = cuenta ? totalDebeCuenta(cuenta) : 0, n = ints.length + l.length + (cuenta ? (cuenta.compras||[]).length : 0);
+    const sub = llego ? (llego===1?'¡Un pedido ya llegó!':'¡'+llego+' pedidos ya llegaron!')
+      : debe > 0 ? 'Tu saldo: Q ' + debe.toFixed(2)
+      : proceso ? (proceso===1?'1 pedido en camino':proceso+' pedidos en camino')
+      : cuenta ? 'Tus compras y lo que te interesó'
+      : ints.length ? 'Lo que te interesó' : 'Tus pedidos y lo que te interesa';
+    b.hidden = false;
     b.classList.toggle('llego', llego > 0);
-    b.innerHTML = `<span class="sm-ic">${icon(llego?'check':'bookmark')}</span><span class="sm-t"><b>Mis pedidos</b><small>${llego ? (llego===1?'¡Un pedido ya llegó!':'¡'+llego+' pedidos ya llegaron!') : proceso ? proceso+' en camino' : 'Ver mi historial'}</small></span><span class="sm-n">${l.length}</span>`;
+    b.innerHTML = `<span class="sm-ic">${icon(llego?'check':'users2')}</span><span class="sm-t"><b>Mi cuenta${cuenta && cuenta.nombre ? ' · ' + escHtml(String(cuenta.nombre).split(' ')[0]) : ''}</b><small>${sub}</small></span>${n?`<span class="sm-n">${n}</span>`:''}`;
   };
   window.__pintarMisPedidos = pintarMisPedidos;
-  document.getElementById('btnMisPedidos').addEventListener('click', ()=>modalMisPedidos(window.__ctxCatalogo));
+  document.getElementById('btnMisPedidos').addEventListener('click', ()=>modalMiCuenta(window.__ctxCatalogo));
   pintarMisPedidos();
   refrescarPedidosLocales().then(pintarMisPedidos);
+  refrescarCuenta().then(pintarMisPedidos);
 
   // Abrir el detalle al tocar la tarjeta (menos el botón de WhatsApp, que va directo)
   document.getElementById('catGrid').addEventListener('click', e=>{
-    if(e.target.closest('[data-wsp]')) return;
-    if(e.target.closest('[data-mis]')){ modalMisPedidos(window.__ctxCatalogo); return; }
+    if(e.target.closest('[data-wsp]')){
+      const c = e.target.closest('.sf-card'), px = c && productos.find(x=>x.codigo===c.dataset.codigo);
+      if(px) recordarInteres(px);
+      return;
+    }
+    if(e.target.closest('[data-mis]')){ modalMiCuenta(window.__ctxCatalogo, 'pedidos'); return; }
     const sec = e.target.closest('.sf-sec');
     if(sec){ elegirRubro(sec.dataset.area); return; }
     const card = e.target.closest('.sf-card'); if(!card) return;
@@ -6150,21 +6242,125 @@ function tarjetaMiPedido(x, ctx){
       <button type="button" class="btn btn-ghost btn-sm" data-mp-quitar="${x.id}">Quitar de mi lista</button></div>
   </div>`;
 }
-async function modalMisPedidos(ctx){
+function modalMisPedidos(ctx){ return modalMiCuenta(ctx, 'pedidos'); }
+
+// ---------- "Mi cuenta" del cliente: lo que le interesó, sus pedidos y sus compras ----------
+// Lo que le interesó se guarda en su teléfono; sus compras llegan solo con su enlace personal (migración 24).
+const CLAVE_CUENTA = 'cab_cuenta', CLAVE_CUENTA_DATOS = 'cab_cuenta_datos', CLAVE_INTERES = 'cab_interes', CLAVE_INTERES_OCULTO = 'cab_interes_oculto';
+function leerLS(k, def){ try{ const v = JSON.parse(localStorage.getItem(k) || 'null'); return v == null ? def : v; }catch(e){ return def; } }
+function guardarLS(k, v){ try{ if(v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function cuentaCodigo(){ return leerLS(CLAVE_CUENTA, null); }
+function guardarCuentaCodigo(c){ if(c !== cuentaCodigo()) guardarLS(CLAVE_CUENTA_DATOS, null); guardarLS(CLAVE_CUENTA, c); }
+function salirDeCuenta(){ guardarLS(CLAVE_CUENTA, null); guardarLS(CLAVE_CUENTA_DATOS, null); }
+function cuentaGuardada(){ return cuentaCodigo() ? leerLS(CLAVE_CUENTA_DATOS, null) : null; }
+function totalDebeCuenta(c){ return (c.compras || []).reduce((t, v)=>t + (v.estado_pago==='pendiente' ? Math.max(0, (Number(v.precio_venta)||0) - (Number(v.monto_pagado)||0)) : 0), 0); }
+// Pide al servidor lo de su enlace. Sin señal se queda con lo último que se supo.
+async function refrescarCuenta(){
+  const c = cuentaCodigo(); if(!c) return null;
+  let r; try{ r = await sb.rpc('fn_cuenta_cliente', { p_codigo:c }); }catch(e){ return cuentaGuardada(); }
+  if(r.error) return cuentaGuardada();
+  if(!r.data){ salirDeCuenta(); return null; }      // el enlace se cambió desde el panel
+  guardarLS(CLAVE_CUENTA_DATOS, r.data);
+  return r.data;
+}
+function leerIntereses(){ const a = leerLS(CLAVE_INTERES, []); return Array.isArray(a) ? a : []; }
+// Tocó "Me interesa": queda en su teléfono y, si tiene su enlace, también en su ficha del panel.
+function recordarInteres(p){
+  guardarLS(CLAVE_INTERES, [{ codigo:p.codigo, nombre:p.nombre, precio:Number(p.precio_venta)||0, foto:(p.fotos||[])[0] || null, fecha:new Date().toISOString() },
+    ...leerIntereses().filter(x=>x.codigo !== p.codigo)].slice(0, 40));
+  guardarLS(CLAVE_INTERES_OCULTO, leerLS(CLAVE_INTERES_OCULTO, []).filter(c=>c !== p.codigo));
+  const c = cuentaCodigo();
+  if(c) sb.rpc('fn_registrar_consulta', { p_codigo:c, p_producto_codigo:p.codigo }).then(()=>{}, ()=>{});
+  if(window.__pintarMisPedidos) window.__pintarMisPedidos();
+}
+function fechaCat(d){ return d ? new Date(d).toLocaleDateString('es-GT', { day:'numeric', month:'short' }).replace('.', '') : ''; }
+function qCat(n){ return 'Q ' + (Number(n) || 0).toFixed(2); }
+function tarjetaInteres(x, p, ctx){
+  const estado = !p ? ['vendido', 'Ya se vendió'] : agotadoPublico(p) ? ['agotado', 'Agotado por ahora'] : ['ok', 'Disponible'];
+  const foto = (p && (p.fotos||[])[0]) || x.foto, precio = p ? p.precio_venta : x.precio;
+  return `<div class="mp-card${p ? '' : ' apagado'}">
+    <div class="mp-head">${foto?`<img src="${escHtml(foto)}" alt="">`:`<span class="mp-ic">${icon('crate')}</span>`}
+      <div class="mp-t"><b>${escHtml(x.nombre || x.codigo)}</b><small>${precio ? qCat(precio) + ' · ' : ''}Preguntaste el ${fechaCat(x.fecha)}</small>
+        <span class="mc-estado ${estado[0]}">${estado[1]}</span></div></div>
+    <div class="mp-acc">
+      ${p ? `<button type="button" class="btn btn-secondary btn-sm" data-mc-ver="${escHtml(x.codigo)}">${icon('eye')} Ver</button>` : ''}
+      ${p && ctx.vTel && ctx.mensajeInteres && !agotadoPublico(p) ? `<a class="btn btn-secondary btn-sm" data-mc-wsp="${escHtml(x.codigo)}" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Preguntar</a>` : ''}
+      <button type="button" class="btn btn-ghost btn-sm" data-mc-quitar="${escHtml(x.codigo)}">Quitar de mi lista</button>
+    </div></div>`;
+}
+function tarjetaCompra(v, ctx){
+  const precio = Number(v.precio_venta) || 0, pagado = Number(v.monto_pagado) || 0;
+  const debe = v.estado_pago==='pendiente' ? Math.max(0, precio - pagado) : 0, abonos = v.abonos || [];
+  const porEntregar = v.entregado === false;
+  return `<div class="mp-card${debe > 0 ? ' mc-debe' : ''}">
+    <div class="mp-head">${v.foto?`<img src="${escHtml(v.foto)}" alt="">`:`<span class="mp-ic">${icon('crate')}</span>`}
+      <div class="mp-t"><b>${escHtml(v.producto_nombre)}</b><small>Compraste el ${fechaCat(v.fecha_venta)} · ${qCat(precio)}</small></div></div>
+    <div class="mc-badges"><span class="mc-estado ${debe > 0 ? 'debe' : 'ok'}">${debe > 0 ? 'Debes ' + qCat(debe) : 'Pagado'}</span>
+      <span class="mc-estado ${porEntregar ? 'pend' : 'ok'}">${porEntregar ? 'Por entregar' : 'Entregado'}</span></div>
+    ${abonos.length || debe > 0 ? `<div class="mp-cuenta"><div><span>Precio</span><b>${qCat(precio)}</b></div>
+      ${abonos.map(a=>`<div><span>Abono del ${fechaCat(a.fecha)}</span><b>${qCat(a.monto)}</b></div>`).join('')}
+      <div class="tot"><span>${debe > 0 ? 'Saldo' : 'Pagado'}</span><b>${qCat(debe > 0 ? debe : pagado)}</b></div></div>` : ''}
+    ${ctx.vTel ? `<div class="mp-acc"><a class="btn btn-secondary btn-sm" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent('Hola' + (ctx.vNombre ? ' ' + ctx.vNombre : '') + ', te escribo por mi compra de ' + v.producto_nombre + ' (código ' + v.producto_codigo + ').')}" target="_blank" rel="noopener">${icon('whatsapp')} Preguntar por esta compra</a></div>` : ''}
+  </div>`;
+}
+const vacioCuenta = (ic, t, d)=>`<div class="sf-vacio" style="padding:30px 10px;">${icon(ic)}<b>${t}</b>${d}</div>`;
+async function modalMiCuenta(ctx, pestana){
   ctx = ctx || window.__ctxCatalogo || {};
-  const pintar = lista=>{
-    document.getElementById('mpCuerpo').innerHTML = lista.length ? lista.map(x=>tarjetaMiPedido(x, ctx)).join('') : `<div class="sf-vacio" style="padding:30px 10px;">${icon('bookmark')}<b>No tienes pedidos guardados</b>Cuando pidas algo, aquí vas a ver cómo va.</div>`;
-    document.querySelectorAll('[data-mp-quitar]').forEach(b=>b.addEventListener('click', async ()=>{
-      if(!await confirmar('¿Quitar este pedido de tu lista? No se cancela, solo deja de aparecer aquí.')) return;
-      quitarPedidoLocal(b.dataset.mpQuitar); pintar(leerPedidosLocales()); if(window.__pintarMisPedidos) window.__pintarMisPedidos();
-    }));
+  let cuenta = cuentaGuardada(), pedidos = leerPedidosLocales();
+  const prods = ()=>ctx.productos ? ctx.productos() : null;
+  // Lo de su teléfono más lo que el servidor recuerda de su enlace (por si preguntó desde otro teléfono).
+  const intereses = ()=>{
+    const ocultos = new Set(leerLS(CLAVE_INTERES_OCULTO, [])), vistos = new Set(), lista = [];
+    [...leerIntereses(), ...((cuenta && cuenta.consultas) || [])].forEach(x=>{ if(!vistos.has(x.codigo) && !ocultos.has(x.codigo)){ vistos.add(x.codigo); lista.push(x); } });
+    return lista.sort((a,b)=>new Date(b.fecha) - new Date(a.fecha));
   };
+  const productoDe = codigo=>{ const l = prods(); return l ? (l.find(y=>y.codigo===codigo) || null) : undefined; };
+  if(!pestana) pestana = pedidos.some(x=>!x.perdido && x.estado==='llego') ? 'pedidos' : (cuenta && (cuenta.compras||[]).length) ? 'compras' : intereses().length ? 'interes' : pedidos.length ? 'pedidos' : 'interes';
   openModal(`
-    <div class="modal-head"><div><div class="modal-title">Mis pedidos</div><div class="text-muted" style="font-size:12px;">Guardados en este teléfono</div></div><button class="icon-btn" onclick="closeModal()" aria-label="Cerrar">${icon('x')}</button></div>
-    <div class="modal-body" id="mpCuerpo"></div>`, 'sheet');
-  pintar(leerPedidosLocales());                    // primero lo que ya se sabe…
-  const al = await refrescarPedidosLocales();      // …y luego se actualiza con el estado real
-  if(document.getElementById('mpCuerpo')) pintar(al);
+    <div class="modal-head"><div><div class="modal-title">Mi cuenta</div><div class="text-muted" id="mcSub" style="font-size:12px;"></div></div><button class="icon-btn" onclick="closeModal()" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body"><div class="mc-tabs" id="mcTabs" role="tablist"></div><div id="mcCuerpo"></div></div>`, 'sheet');
+  const pintar = ()=>{
+    const cuerpo = document.getElementById('mcCuerpo'); if(!cuerpo) return;
+    const ints = intereses(), compras = (cuenta && cuenta.compras) || [];
+    document.getElementById('mcSub').textContent = cuenta && cuenta.nombre ? 'Hola, ' + cuenta.nombre : 'Guardado en este teléfono';
+    document.getElementById('mcTabs').innerHTML = [['interes', 'Me interesaron', ints.length], ['pedidos', 'Mis pedidos', pedidos.length], ['compras', 'Mis compras', compras.length]]
+      .map(([k, t, n])=>`<button type="button" role="tab" aria-selected="${k===pestana}" class="mc-tab${k===pestana?' active':''}" data-tab="${k}"><span>${t}</span>${n?`<i>${n}</i>`:''}</button>`).join('');
+    if(pestana === 'interes'){
+      cuerpo.innerHTML = ints.length ? ints.map(x=>{ const pr = productoDe(x.codigo); return tarjetaInteres(x, pr === undefined ? { codigo:x.codigo, nombre:x.nombre, precio_venta:x.precio, fotos:x.foto?[x.foto]:[] } : pr, ctx); }).join('')
+        : vacioCuenta('eye', 'Todavía no preguntaste por nada', 'Cuando toques “Me interesa” en un producto, aquí lo vas a ver con si sigue disponible.');
+    } else if(pestana === 'pedidos'){
+      cuerpo.innerHTML = pedidos.length ? pedidos.map(x=>tarjetaMiPedido(x, ctx)).join('')
+        : vacioCuenta('bookmark', 'No tienes pedidos guardados', 'Cuando pidas algo, aquí vas a ver cómo va.');
+    } else {
+      if(!cuenta) cuerpo.innerHTML = vacioCuenta('receipt', 'Aquí vas a ver tus compras', 'Pídele a tu vendedora el enlace de tu cuenta. Al abrirlo en este teléfono, aquí aparece lo que compraste, lo que debes y tus abonos.');
+      else {
+        const total = compras.reduce((t, v)=>t + (Number(v.precio_venta)||0), 0), debe = totalDebeCuenta(cuenta);
+        cuerpo.innerHTML = `<div class="mc-resumen"><div><small>Compras</small><b>${compras.length}</b></div><div><small>Total</small><b>${qCat(total)}</b></div><div class="${debe>0?'debe':''}"><small>${debe>0?'Debes':'Saldo'}</small><b>${qCat(debe)}</b></div></div>`
+          + (compras.length ? compras.map(v=>tarjetaCompra(v, ctx)).join('') : vacioCuenta('receipt', 'Todavía no hay compras', 'Cuando te vendamos algo, aquí aparece.'))
+          + `<button type="button" class="btn btn-ghost btn-sm mc-salir" data-mc-salir>Salir de mi cuenta en este teléfono</button>`;
+      }
+    }
+  };
+  document.getElementById('mcTabs').addEventListener('click', e=>{ const b = e.target.closest('[data-tab]'); if(b){ pestana = b.dataset.tab; pintar(); } });
+  document.getElementById('mcCuerpo').addEventListener('click', async e=>{
+    const ver = e.target.closest('[data-mc-ver]'), quitar = e.target.closest('[data-mc-quitar]'), wsp = e.target.closest('[data-mc-wsp]');
+    const quitarPed = e.target.closest('[data-mp-quitar]'), salir = e.target.closest('[data-mc-salir]');
+    if(ver){ const pr = productoDe(ver.dataset.mcVer); if(pr && ctx.abrir){ closeModal(); ctx.abrir(pr); } return; }
+    if(wsp){ const pr = productoDe(wsp.dataset.mcWsp); if(pr) recordarInteres(pr); return; }
+    if(quitar){ guardarLS(CLAVE_INTERES_OCULTO, [...leerLS(CLAVE_INTERES_OCULTO, []), quitar.dataset.mcQuitar].slice(-200)); guardarLS(CLAVE_INTERES, leerIntereses().filter(x=>x.codigo !== quitar.dataset.mcQuitar)); pintar(); if(window.__pintarMisPedidos) window.__pintarMisPedidos(); return; }
+    if(quitarPed){
+      if(!await confirmar('¿Quitar este pedido de tu lista? No se cancela, solo deja de aparecer aquí.')) return;
+      quitarPedidoLocal(quitarPed.dataset.mpQuitar); pedidos = leerPedidosLocales(); pintar(); if(window.__pintarMisPedidos) window.__pintarMisPedidos(); return;
+    }
+    if(salir){
+      if(!await confirmar('¿Salir de tu cuenta en este teléfono?\nTus compras dejan de verse aquí. Para volver a verlas abre otra vez tu enlace.', { aceptar:'Salir', peligro:false })) return;
+      salirDeCuenta(); cuenta = null; pintar(); if(window.__pintarMisPedidos) window.__pintarMisPedidos();
+    }
+  });
+  pintar();                                                        // primero lo que ya se sabe…
+  const [al, cu] = await Promise.all([refrescarPedidosLocales(), refrescarCuenta()]);   // …y luego lo real
+  pedidos = al; cuenta = cu;
+  pintar();
   if(window.__pintarMisPedidos) window.__pintarMisPedidos();
 }
 
@@ -6245,11 +6441,12 @@ function detalleCatalogo(p, ctx){
       ${renderVideoEmbed(p.url_video)}
       <div class="sf-cta-bar">
         ${p.area_modo==='pedido' ? `<button type="button" class="sf-cta pedir" id="sfPedir">${icon('bookmark')} Pedir</button>`
-          : (ctx.vTel && !agotadoPublico(p))?`<a class="sf-cta" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
+          : (ctx.vTel && !agotadoPublico(p))?`<a class="sf-cta" id="sfInteres" href="https://wa.me/${ctx.vTel}?text=${encodeURIComponent(ctx.mensajeInteres(p))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>`:''}
         <button type="button" class="sf-cta sec" id="sfCompartir">${icon('share')} Compartir esta pieza</button>
       </div>
     </div>`, 'sheet');
   document.getElementById('sfPedir')?.addEventListener('click', ()=>{ closeModal(); modalPedirPublico(p, ctx); });
+  document.getElementById('sfInteres')?.addEventListener('click', ()=>recordarInteres(p));
   const gal = document.getElementById('sfGal');
   gal?.querySelectorAll('img').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));
   const dots = document.querySelectorAll('#sfDots i');
@@ -6327,9 +6524,18 @@ function modalQR(p){
 function modalEditarProducto(p){
   let fotosBuffer = [];
   const fotosExistentes = DB.fotosDe(p.id, 'inventario');
+  // Producto ya vendido: aquí mismo se asigna o cambia a quién se le vendió.
+  const ventaEdit = p.estado==='vendido' ? ventaDeProducto(p) : null;
+  const conCliente = puedeCambiarCliente(ventaEdit) && !String(ventaEdit.id).startsWith('tmp-');
+  const clienteEdit = conCliente && ventaEdit.cliente_id ? DB.state.clientes.find(c=>c.id===ventaEdit.cliente_id) : null;
   openModal(`
     <div class="modal-head"><div class="modal-title">Editar Producto</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
+      ${conCliente ? `<details class="mas-opciones ep-cliente"${ventaEdit.cliente_id?'':' open'}>
+        <summary><span>Cliente de la venta: <b id="epClienteNombre">${clienteEdit ? escHtml(clienteEdit.nombre) : 'Sin cliente'}</b></span><span class="chev">${icon('chevron')}</span></summary>
+        ${ventaEdit.estado_pago==='pendiente' && saldoPendiente(ventaEdit) > 0 ? `<div class="aviso-info" style="margin:0 0 12px;">${icon('wallet')} Debe ${money(saldoPendiente(ventaEdit))}: la deuda queda a nombre del cliente que elijas.</div>` : ''}
+        <div id="epClienteSel" style="padding-bottom:14px;"></div>
+      </details>` : ''}
       ${camposAreaHtml('ep', p)}
       <div class="form-group"><label>Nombre</label><input id="epNombre" value="${p.nombre}"></div>
       <div class="form-row">
@@ -6371,6 +6577,7 @@ function modalEditarProducto(p){
 
   enlazarClasificacionNueva('epCategoria','epCategoriaNueva');
   enlazarCamposArea('ep', p);
+  const selCliente = conCliente ? selectorCliente(document.getElementById('epClienteSel'), ventaEdit.cliente_id, nombre=>{ document.getElementById('epClienteNombre').textContent = nombre || 'Sin cliente'; }) : null;
   document.querySelectorAll('#epFotosExistentes button[data-foto-id]').forEach(b=>b.addEventListener('click', async ()=>{
     if(!await confirmar('¿Eliminar esta foto? No se puede deshacer.')) return;
     b.disabled = true;
@@ -6455,6 +6662,7 @@ function modalEditarProducto(p){
       const r = await DB.subirVideoProducto(p.id, videoNuevo, pr=>{ btn.textContent = 'Preparando el video… ' + Math.round(pr*100) + '%'; }, ()=>{ btn.textContent = 'Subiendo el video…'; }, esVideoSubido(p.url_video) ? p.url_video : null);
       if(!r.ok){ toast('No se pudo subir el video (' + r.error + '). Toca Guardar para reintentar','danger'); btn.textContent = 'Guardar cambios'; btn.disabled = false; return; }
     }
+    if(res.ok && selCliente && selCliente.cambio() && !(await guardarClienteVenta(ventaEdit, selCliente))){ btn.textContent = 'Guardar cambios'; btn.disabled = false; return; }
     if(res.ok){ toast('Producto actualizado','success'); closeModal(); await refresh(); }
     else { toast('No se pudo actualizar: '+res.error,'danger'); btn.disabled = false; }
   });
@@ -6846,8 +7054,11 @@ El menú está en grupos: Inicio, Vender (inventario, nuevo producto, pedidos, c
 ## Videos en el Estado de WhatsApp
 Si el producto tiene un video subido desde la galería, al abrir su Estado (nuevo ingreso o vendido) aparece "Crear video para el Estado". Se arma en vertical con el mismo diseño de la imagen, usa los primeros 30 segundos y se comparte igual que la imagen. Tarda más o menos lo que dura el video. Los links de YouTube o TikTok no se pueden usar.
 
+## Mi cuenta del cliente en el catálogo
+Arriba del catálogo hay un botón "Mi cuenta" con tres partes: Me interesaron (lo que tocó en "Me interesa" y si sigue disponible), Mis pedidos y Mis compras. Para que vea sus compras, lo que debe y sus abonos, envíale su enlace: en Clientes, en "···" del cliente o en su historial, "Enviar su enlace de Mi cuenta". Con ese enlace, en su historial también ves por qué productos preguntó. Si el enlace llega a otra persona, usa "Cambiar enlace" y el anterior deja de servir.
+
 ## Cliente de una venta ya hecha
-Si se te olvidó poner el cliente al vender, tócalo después: en el producto vendido del Inventario (botón de las personitas o en "···"), en su ficha ("Asignar cliente") o en las listas de ventas, donde dice "Sin cliente". También sirve para cambiarlo si se eligió mal; si debía algo, la deuda pasa al cliente nuevo. La administradora lo hace en todas las ventas y cada vendedora en las suyas.
+Si se te olvidó poner el cliente al vender, tócalo después: en el producto vendido del Inventario (botón de las personitas o en "···"), en su ficha ("Asignar cliente"), al editar el producto ("Cliente de la venta") o en las listas de ventas, donde dice "Sin cliente". También sirve para cambiarlo si se eligió mal; si debía algo, la deuda pasa al cliente nuevo. La administradora lo hace en todas las ventas y cada vendedora en las suyas.
 
 ## Sin internet
 El panel guarda en el teléfono lo último que vio. Si se va la señal, abre igual con esos datos y arriba aparece una franja amarilla "Sin conexión".
@@ -7154,8 +7365,41 @@ function modalAbonar(ventaId){
   });
 }
 
+// Enlace de "Mi cuenta" del cliente: al abrirlo, su teléfono ve sus compras y lo que le interesó.
+async function modalEnlaceCliente(c, nuevo){
+  const r = await DB.enlaceCliente(c.id, nuevo);
+  if(!r.ok) return toast(/could not find the function/i.test(r.error) ? 'Falta correr en Supabase el SQL de la migración 24.' : 'No se pudo: ' + mensajeErrorClienteVenta(r.error), 'danger');
+  const url = urlCatalogo() + '&c=' + r.data;
+  const texto = 'Hola ' + String(c.nombre).split(' ')[0] + ', aquí puedes ver tus compras, lo que debes y tus pedidos en nuestro catálogo:\n' + url;
+  const tel = telefonoInternacional(c.telefono);
+  openModal(`
+    <div class="modal-head"><div><div class="modal-title">Enlace de Mi cuenta</div><div class="text-muted" style="font-size:13px;">${escHtml(c.nombre)}</div></div><button class="icon-btn" onclick="closeModal()" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Su enlace personal</label><input id="ecUrl" value="${escHtml(url)}" readonly></div>
+      <div class="ec-botones">
+        <a class="btn btn-primary" href="https://wa.me/${tel ? tel.slice(1) : ''}?text=${encodeURIComponent(texto)}" target="_blank" rel="noopener">${icon('whatsapp')} Enviar por WhatsApp</a>
+        <button type="button" class="btn btn-secondary" id="ecCopiar">${icon('copy')} Copiar enlace</button>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm ec-cambiar" id="ecCambiar">${icon('refresh')} Cambiar enlace</button>
+    </div>`);
+  document.getElementById('ecCopiar').addEventListener('click', async ()=>{
+    try{ await navigator.clipboard.writeText(url); toast('Enlace copiado', 'success'); }
+    catch(e){ const i = document.getElementById('ecUrl'); i.select(); toast('Mantén presionado el enlace para copiarlo', 'success'); }
+  });
+  document.getElementById('ecCambiar').addEventListener('click', async ()=>{
+    if(!await confirmar('¿Cambiar el enlace de ' + c.nombre + '?\nEl enlace anterior deja de servir; tendrás que enviarle el nuevo.', { aceptar:'Cambiar', peligro:true })) return;
+    modalEnlaceCliente(c, true);
+  });
+}
+// Por qué productos preguntó desde el catálogo (con su enlace), lo más nuevo primero.
+function consultasDeCliente(clienteId){
+  const vistos = new Set();
+  return (DB.state.consultas || []).filter(k=>k.cliente_id===clienteId).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at))
+    .filter(k=>{ if(vistos.has(k.producto_codigo)) return false; vistos.add(k.producto_codigo); return true; });
+}
 function modalHistorialCliente(cliente){
   const r = DB.resumenCliente(cliente.id);
+  const consultas = consultasDeCliente(cliente.id);
   openModal(`
     <div class="modal-head"><div class="modal-title">${icon('users2')} ${cliente.nombre}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
@@ -7169,6 +7413,12 @@ function modalHistorialCliente(cliente){
         <div class="calc-row total" style="${r.deuda>0?'color:var(--red-700);':''}"><span>Deuda actual</span><span>${money(r.deuda)}</span></div>
       </div>
       ${r.deuda>0?`<div class="mt-8">${botonEstadoCuentaWhatsApp(cliente)}</div>`:''}
+      <button type="button" class="btn btn-secondary btn-sm mt-8" id="hcEnlace">${icon('share')} Enviar su enlace de Mi cuenta</button>
+      ${consultas.length ? `<div class="mt-16"><div class="panel-title" style="font-size:14px;margin-bottom:8px;">Preguntó por</div><div class="cli-consultas">
+        ${consultas.slice(0, 30).map(k=>{ const pr = DB.state.productos.find(x=>x.codigo===k.producto_codigo);
+          const est = !pr ? ['badge-neutral','Ya no está'] : pr.estado==='vendido' ? ['badge-info','Vendido'] : pr.estado==='en_reserva' ? ['badge-warning','Apartado'] : ['badge-success','Disponible'];
+          return `<div class="cc-fila"><div class="cc-t"><b>${escHtml(k.producto_nombre || k.producto_codigo)}</b><small>${escHtml(k.producto_codigo)} · ${fmtDateShort(k.created_at)}</small></div><span class="badge ${est[0]}">${est[1]}</span></div>`; }).join('')}
+      </div></div>` : ''}
       <div class="table-wrap mt-16"><table><thead><tr><th>Producto</th><th>Fecha</th><th>Saldo</th><th>Estado</th><th></th></tr></thead><tbody>
       ${r.compras.length ? r.compras.slice().sort((a,b)=>new Date(b.fecha_venta)-new Date(a.fecha_venta)).map(v=>{
         const saldo = saldoPendiente(v);
@@ -7181,6 +7431,7 @@ function modalHistorialCliente(cliente){
         : `<tr class="empty-row"><td colspan="5">Sin compras registradas todavía</td></tr>`}
       </tbody></table></div>
     </div>`, 'lg');
+  document.getElementById('hcEnlace').addEventListener('click', ()=>modalEnlaceCliente(cliente));
 }
 
 // Doble confirmación real para una acción irreversible: 1) el admin decide
@@ -8643,7 +8894,8 @@ async function ejecutarAccion(btn){
     const r = DB.resumenCliente(c.id);
     const filas = [
       { icono: icon('file'), texto: 'Ver historial y deudas', hacer: ()=>modalHistorialCliente(c) },
-      { icono: icon('edit'), texto: 'Editar cliente', hacer: ()=>modalCliente(c) }
+      { icono: icon('edit'), texto: 'Editar cliente', hacer: ()=>modalCliente(c) },
+      { icono: icon('share'), texto: 'Enviar su enlace de Mi cuenta', hacer: ()=>modalEnlaceCliente(c) }
     ];
     if(r.deuda>0 && telefonoInternacional(c.telefono)) filas.push({ icono: icon('receipt'), texto: 'Enviar estado de cuenta por WhatsApp', href: hrefEstadoCuentaWhatsApp(c) });
     if(DB.isAdmin()) filas.push({ icono: icon('trash'), texto: 'Eliminar cliente', peligro:true, hacer: ()=>ejecutarAccion({ dataset:{ action:'eliminar-cliente', id:c.id } }) });
@@ -8766,15 +9018,16 @@ async function renderPublicPage(codigo){
       ${p.descripcion?`<div class="sf-d-desc">${escHtml(p.descripcion)}</div>`:''}
       ${renderVideoEmbed(p.url_video)}
       ${p.area_modo==='pedido' && visiblePublico(p) ? `<button type="button" class="sf-cta pedir" id="sfPedirFicha">${icon('bookmark')} Pedir</button>` : ''}
-      ${(p.area_modo==='pedido' || agotadoPublico(p)) ? '' : vendedorTel ? `<a class="sf-cta" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre+' (código '+p.codigo+')\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
+      ${(p.area_modo==='pedido' || agotadoPublico(p)) ? '' : vendedorTel ? `<a class="sf-cta" id="pfInteres" href="https://wa.me/${vendedorTel}?text=${encodeURIComponent('Hola'+(vendedorNombre?' '+vendedorNombre:'')+', me interesa este producto: '+p.nombre+' (código '+p.codigo+')\n'+location.origin+location.pathname+'?p='+encodeURIComponent(p.codigo))}" target="_blank" rel="noopener">${icon('whatsapp')} Me interesa por WhatsApp</a>` : ''}
     </div>
   </div>`;
   document.querySelectorAll('.ficha-foto').forEach(img=>img.addEventListener('click', ()=>openLightbox(fotos, Number(img.dataset.i))));
   document.getElementById('sfPedirFicha')?.addEventListener('click', ()=>modalPedirPublico(p, { vNombre: vendedorNombre, vTel: vendedorTel }));
-  if(leerPedidosLocales().length){
+  document.getElementById('pfInteres')?.addEventListener('click', ()=>recordarInteres(p));
+  if(leerPedidosLocales().length || leerIntereses().length || cuentaCodigo()){
     window.__ctxCatalogo = { vNombre: vendedorNombre, vTel: vendedorTel };
-    root.querySelector('.public-body')?.insertAdjacentHTML('beforeend', `<button type="button" class="sf-cta sec" id="sfMisPed">${icon('bookmark')} Ver mis pedidos</button>`);
-    document.getElementById('sfMisPed')?.addEventListener('click', ()=>modalMisPedidos(window.__ctxCatalogo));
+    root.querySelector('.public-body')?.insertAdjacentHTML('beforeend', `<button type="button" class="sf-cta sec" id="sfMisPed">${icon('users2')} Mi cuenta</button>`);
+    document.getElementById('sfMisPed')?.addEventListener('click', ()=>modalMiCuenta(window.__ctxCatalogo));
   }
   root.insertAdjacentHTML('beforeend', '<div class="sf-equipo"><a href="' + location.pathname + '?p=' + encodeURIComponent(p.codigo) + '&equipo=1">Acceso del equipo</a></div>');
 }

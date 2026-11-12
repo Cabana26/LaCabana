@@ -1192,6 +1192,25 @@ tr.entrega-pend td{background:var(--red-100);}
 .ec-preview-t{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-muted);margin:4px 0 8px;}
 .ec-preview{white-space:pre-wrap;word-break:break-word;font-size:13px;line-height:1.45;padding:12px 14px;border-radius:14px 14px 14px 4px;background:#DCF8C6;color:#1c2a1a;max-height:260px;overflow:auto;}
 :root[data-theme="dark"] .ec-preview{background:#1F3D2B;color:#E4F5E8;}
+.cli-venta{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:4px 0;border:0;background:none;font:inherit;font-weight:600;color:var(--color-text);text-align:left;cursor:pointer;transition:transform 120ms var(--ease-out),color 120ms var(--ease-out);}
+.cli-venta svg{width:14px;height:14px;flex-shrink:0;fill:none;stroke:var(--color-accent-dark);stroke-width:2;}
+.cli-venta.vacio{color:var(--color-accent-dark);}
+.cli-venta:active{transform:scale(.97);}
+.cli-buscar{display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface);}
+.cli-buscar svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--color-text-muted);stroke-width:2;}
+.cli-buscar input{flex:1;min-width:0;min-height:44px;border:0;padding:0;background:transparent;box-shadow:none;font-size:15px;outline:none;}
+.cli-lista{display:grid;gap:8px;margin-top:12px;max-height:min(46vh,360px);overflow-y:auto;padding:2px;}
+.cli-op{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:8px 12px;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface);font:inherit;color:var(--color-text);text-align:left;cursor:pointer;transition:background 120ms var(--ease-out),border-color 120ms var(--ease-out),transform 120ms var(--ease-out);}
+.cli-op svg{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--color-text-muted);stroke-width:2;}
+.cli-op span{flex:1;min-width:0;display:flex;flex-direction:column;}
+.cli-op b{overflow-wrap:anywhere;}
+.cli-op small{font-size:12px;color:var(--color-text-muted);}
+.cli-op>svg:last-child{opacity:0;stroke:var(--color-accent-dark);stroke-width:2.6;}
+.cli-op.on{border-color:var(--color-accent);background:var(--mauve-100);}
+.cli-op.on>svg:last-child{opacity:1;}
+.cli-op:active{transform:scale(.98);}
+.cli-nada{padding:10px 4px;font-size:13px;}
+@media (prefers-reduced-motion:reduce){.cli-venta,.cli-op{transition:none;}}
 .aviso-info{display:flex;align-items:center;gap:8px;margin-top:10px;padding:9px 11px;border-radius:10px;background:var(--forest-100);color:var(--forest-700);font-size:12px;font-weight:600;}
 .aviso-info svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.6;flex-shrink:0;}
 
@@ -1232,6 +1251,7 @@ tr.entrega-pend td{background:var(--red-100);}
   .cn-precio,.cn-cant{min-height:44px;}
   .cn-chk{width:24px;height:24px;}
   .area-sw{min-height:52px;}
+  .cli-venta{min-height:44px;}
   .photo-preview button{width:30px;height:30px;font-size:14px;}
   .photo-preview button::before{content:'';position:absolute;inset:-8px;}
   .sw{width:52px;height:30px;}
@@ -1342,7 +1362,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '29-oct-2026 · v19';
+const VERSION_PANEL = '11-nov-2026 · v20';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -2198,6 +2218,14 @@ const DB = {
   // Abono parcial o total — monto no puede ser mayor al saldo pendiente (lo valida el server).
   // Dejar el monto igual al saldo completo es la forma de "pagar todo de un click".
   abonarVenta(ventaId, monto){ return conSenal('abonar', [ventaId, monto]); },
+  // Asignar o cambiar el cliente de una venta ya hecha (migración 23). Sin ella, la admin lo hace directo.
+  async asignarClienteVenta(ventaId, clienteId){
+    const r = await rpcRes('fn_asignar_cliente_venta', { p_venta_id:ventaId, p_cliente_id:clienteId || null });
+    if(r.ok || !/could not find the function|fn_asignar_cliente_venta/i.test(r.error)) return r;
+    if(!this.isAdmin()) return { ok:false, error:'Falta correr en Supabase el SQL de la migración 23.' };
+    const { data, error } = await sb.from('venta_historial').update({ cliente_id:clienteId || null }).eq('id', ventaId).select().single();
+    return error ? { ok:false, error:error.message } : { ok:true, data };
+  },
   async marcarEstadoCompartido(productoId, tipo){
     const { error } = await sb.rpc('fn_marcar_estado_compartido', { p_producto_id: productoId, p_tipo: tipo });
     if(error) return { ok:false, error: error.message };
@@ -3704,6 +3732,21 @@ function ventaDeProducto(p){
     .sort((a,b)=>new Date(b.fecha_venta)-new Date(a.fecha_venta))[0];
 }
 // Verde = ya entregado; ámbar = pendiente de entrega. Un click alterna.
+// Cliente de una venta ya hecha: la admin en todas; cada vendedora en las suyas.
+function puedeCambiarCliente(v){
+  return !!v && v.estado_venta==='vendido' && (DB.isAdmin() || v.vendedor_id===DB.authUserId);
+}
+function botonClienteVenta(p){
+  if(p.estado!=='vendido') return '';
+  const v = ventaDeProducto(p); if(!puedeCambiarCliente(v)) return '';
+  return `<button class="icon-btn info" data-action="cliente-venta" data-id="${v.id}" data-tip="${v.cliente_id?'Cambiar cliente':'Asignar cliente'}">${icon('users2')}</button>`;
+}
+// En las listas el nombre del cliente (o "Sin cliente") se toca para asignarlo o cambiarlo.
+function clienteVentaHtml(v){
+  const c = v.cliente_id && DB.state.clientes.find(x=>x.id===v.cliente_id);
+  if(!puedeCambiarCliente(v)) return c ? escHtml(c.nombre) : '<span class="text-faint">Sin cliente</span>';
+  return `<button type="button" class="cli-venta${c?'':' vacio'}" data-action="cliente-venta" data-id="${v.id}">${c?escHtml(c.nombre):'Sin cliente'}${icon('edit')}</button>`;
+}
 function botonEntrega(p){
   if(p.estado!=='vendido') return '';
   const v = ventaDeProducto(p); if(!v) return '';
@@ -3822,7 +3865,8 @@ function accionesProducto(p, opts){
   }
   if(opts.mode==='vendedor'){
     iconos = `<button class="icon-btn info" data-action="qr" data-id="${p.id}" data-tip="Código QR / compartir">${icon('qr')}</button>
-      ${botonesEstadoWsp(p)}`;
+      ${botonesEstadoWsp(p)}
+      ${botonClienteVenta(p)}`;
   } else if(opts.mode==='admin'){
     iconos = `<button class="icon-btn edit" data-action="editar" data-id="${p.id}" data-tip="Editar">${icon('edit')}</button>
       ${DB.esPorCantidad(p) && p.estado==='en_inventario' ? `<button class="icon-btn confirm" data-action="stock" data-id="${p.id}" data-tip="Existencias">${icon('box')}</button>` : ''}
@@ -3831,6 +3875,7 @@ function accionesProducto(p, opts){
       <button class="icon-btn view" data-action="duplicar" data-id="${p.id}" data-tip="Duplicar">${icon('copy')}</button>
       ${botonesEstadoWsp(p)}
       ${botonEntrega(p)}
+      ${botonClienteVenta(p)}
       ${(p.estado==='en_inventario' || p.archivado)?`<button class="icon-btn delete" data-action="eliminar" data-id="${p.id}" data-tip="${p.archivado?'Eliminar ahora':'Eliminar'}">${icon('trash')}</button>`:''}
       ${p.estado==='en_reserva' && p.reservado_por_id!==cur.id?`<button class="icon-btn delete" data-action="liberar" data-id="${p.id}" data-tip="Liberar reserva">${icon('x')}</button>`:''}
       ${p.estado==='devuelto'?`<button class="icon-btn confirm" data-action="reingresar" data-id="${p.id}" data-tip="Regresar a inventario">${icon('undo')}</button>`:''}`;
@@ -4098,14 +4143,15 @@ function botonesContacto(telefono){
 // Exclusiva para vistas de vendedora: nunca muestra costo ni ganancia neta
 // (eso revelaría el margen), solo precio de venta y su propia comisión.
 function renderVentasTable(ventas, showVendedor){
-  const cols = showVendedor ? 8 : 7;
-  return `<div class="table-wrap"><table><thead><tr><th>Producto</th>${showVendedor?'<th>Vendedora</th>':''}<th>Fecha</th><th>Precio</th><th>Tu comisión</th><th>Estado</th><th>Cliente pagó</th><th>Entrega</th></tr></thead><tbody>
+  const cols = showVendedor ? 9 : 8;
+  return `<div class="table-wrap"><table><thead><tr><th>Producto</th><th>Cliente</th>${showVendedor?'<th>Vendedora</th>':''}<th>Fecha</th><th>Precio</th><th>Tu comisión</th><th>Estado</th><th>Cliente pagó</th><th>Entrega</th></tr></thead><tbody>
   ${ventas.length ? ventas.map(v=>{
     const vend = DB.state.usuarios.find(u=>u.id===v.vendedor_id);
     const info = v.estado_venta==='devuelto' ? {label:'Devuelto',cls:'badge-danger'} : {label:v.comision_estado==='pagada'?'Comisión pagada':'Comisión ganada', cls: v.comision_estado==='pagada'?'badge-info':'badge-success'};
     const pendiente = v.estado_pago==='pendiente';
     const abonado = pendiente && v.monto_pagado>0;
     return `<tr class="${v.estado_venta==='vendido' && v.entregado===false?'entrega-pend':''}"><td>${v.producto_nombre}<div class="text-faint" style="font-size:12px;">${v.producto_codigo}</div></td>
+      <td>${clienteVentaHtml(v)}</td>
       ${showVendedor?`<td>${vend?vend.nombre:'—'}</td>`:''}
       <td>${fmtDateShort(v.fecha_venta)}</td><td>${money(v.precio_venta)}</td><td>${money(v.comision_monto)}</td>
       <td><span class="badge ${info.cls}">${info.label}</span></td>
@@ -4379,7 +4425,7 @@ PAGES['a-pendientes'] = () => {
       <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Cliente</th><th>Monto</th><th>Fecha</th><th>Días</th><th></th></tr></thead><tbody>
       ${deudas.slice().sort((a,b)=>new Date(a.fecha_venta)-new Date(b.fecha_venta)).map(v=>{
         const cliente = DB.state.clientes.find(c=>c.id===v.cliente_id);
-        return `<tr><td>${v.producto_nombre}</td><td>${cliente?cliente.nombre:'<span class="text-faint">Sin cliente asignado</span>'}</td>
+        return `<tr><td>${v.producto_nombre}</td><td>${clienteVentaHtml(v)}</td>
           <td>${money(saldoPendiente(v))}${v.monto_pagado>0?`<div class="text-faint" style="font-size:12px;">de ${money(v.precio_venta)}</div>`:''}</td><td>${fmtDateShort(v.fecha_venta)}</td><td>${deudaBadge(v)}</td>
           <td><button class="btn btn-primary btn-sm" data-action="marcar-pago-cliente" data-id="${v.id}">${icon('check')} Abonar</button></td></tr>`;
       }).join('')}
@@ -4405,7 +4451,7 @@ PAGES['a-pendientes'] = () => {
       ${entregas.slice().sort((a,b)=>new Date(a.fecha_venta)-new Date(b.fecha_venta)).map(v=>{
         const cliente = DB.state.clientes.find(c=>c.id===v.cliente_id);
         const vend = DB.state.usuarios.find(u=>u.id===v.vendedor_id);
-        return `<tr class="entrega-pend"><td>${v.producto_nombre}</td><td>${cliente?cliente.nombre:'<span class="text-faint">Sin cliente asignado</span>'}</td><td>${vend?vend.nombre:'—'}</td><td>${fmtDateShort(v.fecha_venta)}</td>
+        return `<tr class="entrega-pend"><td>${v.producto_nombre}</td><td>${clienteVentaHtml(v)}</td><td>${vend?vend.nombre:'—'}</td><td>${fmtDateShort(v.fecha_venta)}</td>
           <td><button class="btn btn-primary btn-sm" data-action="toggle-entrega" data-id="${v.id}">${icon('check')} Marcar entregado</button></td></tr>`;
       }).join('')}
       </tbody></table></div>
@@ -5049,7 +5095,7 @@ PAGES['a-clientes'] = () => {
         const vend = DB.state.usuarios.find(u=>u.id===v.vendedor_id);
         return `<div class="cobro-card">
           <div class="cobro-main"><div class="cobro-prod">${escHtml(v.producto_nombre)}</div>
-            <div class="cobro-sub">${cliente?escHtml(cliente.nombre):'Sin cliente asignado'}${vend?' · '+escHtml(vend.nombre):''}</div>
+            <div class="cobro-sub">${clienteVentaHtml(v)}${vend?' · '+escHtml(vend.nombre):''}</div>
             <div class="cobro-sub">${fmtDateShort(v.fecha_venta)}${v.monto_pagado>0?' · abonó '+money(v.monto_pagado):''}</div></div>
           <div class="cobro-der"><div class="cobro-monto">${money(saldoPendiente(v))}</div>${deudaBadge(v)}
             <button class="btn btn-primary btn-sm" data-action="marcar-pago-cliente" data-id="${v.id}">${icon('check')} Abonar</button></div>
@@ -5280,6 +5326,9 @@ function modalVerFicha(p){
     }
   }
   else if(p.estado === 'en_reserva' && yo && p.reservado_por_id === yo.id) pie = `<div class="modal-foot ficha-foot"><button class="btn btn-secondary" id="fcLiberar">Liberar</button><button class="btn btn-primary" id="fcVender">${icon('crate')} Vender</button></div>`;
+  const ventaHecha = p.estado === 'vendido' ? ventaDeProducto(p) : null;
+  const clienteHecho = ventaHecha && ventaHecha.cliente_id ? DB.state.clientes.find(c=>c.id===ventaHecha.cliente_id) : null;
+  if(puedeCambiarCliente(ventaHecha)) pie = `<div class="modal-foot ficha-foot"><button class="btn btn-primary" id="fcCliente">${icon('users2')} ${ventaHecha.cliente_id?'Cambiar cliente':'Asignar cliente'}</button></div>`;
   openModal(`
     <div class="modal-head"><div class="modal-title">Ficha del Producto</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
     <div class="modal-body">
@@ -5293,6 +5342,7 @@ function modalVerFicha(p){
         <div class="calc-row"><span>Precio de venta</span><span>${money(p.precio_venta)}</span></div>
         ${verCosto?`<div class="calc-row total"><span>Ganancia potencial</span><span>${money(p.precio_venta-p.costo)}</span></div>`:''}
         <div class="calc-row comision"><span>Comisión (${p.porcentaje_ganancia}%)</span><span>${money(Math.max(p.precio_venta-p.costo,0)*p.porcentaje_ganancia/100)}</span></div>
+        ${ventaHecha ? `<div class="calc-row"><span>Cliente</span><span>${clienteHecho ? escHtml(clienteHecho.nombre) : 'Sin cliente'}</span></div>` : ''}
       </div>
       <p class="text-muted mt-16">${p.descripcion||'Sin descripción.'}</p>
     </div>
@@ -5301,6 +5351,74 @@ function modalVerFicha(p){
   document.getElementById('fcApartar')?.addEventListener('click', async ()=>{ closeModal(); await ejecutarAccion({ dataset:{ action:'apartar', id:p.id } }); });
   document.getElementById('fcLiberar')?.addEventListener('click', async ()=>{ closeModal(); await ejecutarAccion({ dataset:{ action:'liberar', id:p.id } }); });
   document.getElementById('fcVender')?.addEventListener('click', ()=>{ closeModal(); modalVender(p); });
+  document.getElementById('fcCliente')?.addEventListener('click', ()=>{
+    modalClienteVenta(ventaHecha, ()=>{ const fresco = DB.state.productos.find(x=>x.id===p.id); if(fresco) modalVerFicha(fresco); });
+  });
+}
+
+// Asignar o cambiar el cliente de una venta ya hecha (por si se olvidó al vender).
+function modalClienteVenta(v, alTerminar){
+  if(String(v.id).startsWith('tmp-')) return toast('Esta venta todavía no se envía. Asígnale el cliente cuando vuelva la señal.', 'danger');
+  const volver = ()=>{ if(alTerminar) alTerminar(); };
+  let elegido = v.cliente_id || '';
+  const clientes = DB.state.clientes.slice().sort((a,b)=>a.nombre.localeCompare(b.nombre, 'es'));
+  const debe = v.estado_pago==='pendiente' ? saldoPendiente(v) : 0;
+  const fila = c=>{ const id = c ? c.id : '';
+    return `<button type="button" class="cli-op${elegido===id?' on':''}" data-cli="${id}">${icon(c?'users2':'x')}<span><b>${c?escHtml(c.nombre):'Sin cliente'}</b>${c && c.telefono?`<small>${escHtml(c.telefono)}</small>`:''}</span>${icon('check')}</button>`; };
+  const lista = q=>{
+    const t = normalizar(q).trim();
+    const hallados = clientes.filter(c=>!t || normalizar(c.nombre + ' ' + (c.telefono||'')).includes(t));
+    return (t ? '' : fila(null)) + hallados.slice(0, 80).map(fila).join('') + (t && !hallados.length ? '<div class="text-faint cli-nada">No hay clientes con ese nombre o teléfono.</div>' : '');
+  };
+  openModal(`
+    <div class="modal-head"><div><div class="modal-title">${v.cliente_id?'Cambiar cliente':'Asignar cliente'}</div>
+      <div class="text-muted" style="font-size:13px;">${escHtml(v.producto_nombre)} · ${fmtDateShort(v.fecha_venta)} · ${money(v.precio_venta)}</div></div>
+      <button class="icon-btn" id="cvCerrar" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body">
+      ${debe > 0 ? `<div class="aviso-info" style="margin:0 0 12px;">${icon('wallet')} Debe ${money(debe)}: la deuda queda a nombre del cliente que elijas.</div>` : ''}
+      <div class="cli-buscar">${icon('search')}<input id="cvBuscar" type="search" placeholder="Buscar por nombre o teléfono" autocomplete="off" aria-label="Buscar cliente"></div>
+      <div class="cli-lista" id="cvLista">${lista('')}</div>
+      <details class="mas-opciones" id="cvNuevo" style="margin:12px 0 0;"><summary>Crear cliente nuevo<span class="chev">${icon('chevron')}</span></summary>
+        <div class="form-row" style="padding-bottom:14px;"><input id="cvNombre" placeholder="Nombre del cliente" autocomplete="off"><input id="cvTel" type="tel" inputmode="tel" placeholder="Teléfono (opcional)"></div>
+      </details>
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" id="cvCancelar">Cancelar</button><button class="btn btn-primary" id="cvGuardar">${icon('check')} Guardar</button></div>`);
+  const caja = document.getElementById('cvLista');
+  document.getElementById('cvBuscar').addEventListener('input', e=>{ caja.innerHTML = lista(e.target.value); });
+  caja.addEventListener('click', e=>{
+    const b = e.target.closest('.cli-op'); if(!b) return;
+    elegido = b.dataset.cli;
+    caja.querySelectorAll('.cli-op').forEach(x=>x.classList.toggle('on', x===b));
+    document.getElementById('cvNuevo').open = false;
+  });
+  const cancelar = ()=>{ closeModal(); volver(); };
+  document.getElementById('cvCerrar').addEventListener('click', cancelar);
+  document.getElementById('cvCancelar').addEventListener('click', cancelar);
+  document.getElementById('cvGuardar').addEventListener('click', async ()=>{
+    const btn = document.getElementById('cvGuardar');
+    const nuevo = document.getElementById('cvNuevo').open ? document.getElementById('cvNombre').value.trim() : '';
+    btn.disabled = true;
+    let id = elegido, nombre = '';
+    if(nuevo){
+      const rc = await DB.crearCliente({ nombre:nuevo, telefono:document.getElementById('cvTel').value.trim() });
+      if(!rc.ok){ btn.disabled = false; return toast('No se pudo crear el cliente: ' + rc.error, 'danger'); }
+      id = rc.data.id; nombre = rc.data.nombre;
+    } else if(document.getElementById('cvNuevo').open && !elegido && !v.cliente_id){
+      btn.disabled = false; return toast('Escribe el nombre del cliente nuevo o elige uno de la lista', 'danger');
+    }
+    if((id || '') === (v.cliente_id || '')){ cancelar(); return; }
+    const r = await DB.asignarClienteVenta(v.id, id || null);
+    if(!r.ok){ btn.disabled = false; return toast('No se pudo: ' + mensajeErrorClienteVenta(r.error), 'danger'); }
+    if(!nombre && id){ const c = DB.state.clientes.find(x=>x.id===id); nombre = c ? c.nombre : ''; }
+    toast(id ? 'Cliente asignado: ' + nombre : 'La venta quedó sin cliente', 'success');
+    closeModal(); await refresh(); volver();
+  });
+}
+function mensajeErrorClienteVenta(err){
+  if(/SIN_PERMISO/.test(err)) return 'solo puedes cambiar el cliente de tus propias ventas';
+  if(/CLIENTE_NO_EXISTE/.test(err)) return 'ese cliente ya no existe';
+  if(/VENTA_NO_EXISTE/.test(err)) return 'esa venta ya no existe';
+  return err;
 }
 
 // La URL de la ficha lleva el nombre/teléfono de QUIEN comparte (si los
@@ -6727,6 +6845,9 @@ El menú está en grupos: Inicio, Vender (inventario, nuevo producto, pedidos, c
 
 ## Videos en el Estado de WhatsApp
 Si el producto tiene un video subido desde la galería, al abrir su Estado (nuevo ingreso o vendido) aparece "Crear video para el Estado". Se arma en vertical con el mismo diseño de la imagen, usa los primeros 30 segundos y se comparte igual que la imagen. Tarda más o menos lo que dura el video. Los links de YouTube o TikTok no se pueden usar.
+
+## Cliente de una venta ya hecha
+Si se te olvidó poner el cliente al vender, tócalo después: en el producto vendido del Inventario (botón de las personitas o en "···"), en su ficha ("Asignar cliente") o en las listas de ventas, donde dice "Sin cliente". También sirve para cambiarlo si se eligió mal; si debía algo, la deuda pasa al cliente nuevo. La administradora lo hace en todas las ventas y cada vendedora en las suyas.
 
 ## Sin internet
 El panel guarda en el teléfono lo último que vio. Si se va la señal, abre igual con esos datos y arriba aparece una franja amarilla "Sin conexión".
@@ -8431,6 +8552,7 @@ async function ejecutarAccion(btn){
   else if(action==='qr'){ const prod=p(); if(prod) modalQR(prod); }
   else if(action==='estado-nuevo'){ const prod=p(); if(prod) modalEstadoWhatsApp(prod, 'nuevo'); }
   else if(action==='estado-vendido'){ const prod=p(); if(prod) modalEstadoWhatsApp(prod, 'vendido'); }
+  else if(action==='cliente-venta'){ const v = DB.state.venta_historial.find(x=>x.id===id); if(v) modalClienteVenta(v); }
   else if(action==='toggle-entrega'){ const v=DB.state.venta_historial.find(x=>x.id===id); if(v){ const nuevo = v.entregado===false; const r=await DB.marcarEntregado(id, nuevo); if(r.ok){ toast(nuevo?'Marcado como entregado':'Marcado como pendiente de entrega','success'); await refresh(); } else toast('No se pudo: '+r.error,'danger'); } }
   else if(action==='cerrar-caja'){ if(await confirmar('¿Cerrar esta caja?')){ const r=await DB.cerrarCaja(id); if(r.ok){ toast('Caja cerrada','success'); await refresh(); } else toast('No se pudo cerrar: '+r.error,'danger'); } }
   else if(action==='editar-categoria'){ modalCategoria(DB.state.categorias.find(c=>c.id===id)); }

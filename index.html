@@ -1200,6 +1200,9 @@ tr.entrega-pend td{background:var(--red-100);}
 .hc-abono b{font-variant-numeric:tabular-nums;}
 .hc-abono .icon-btn{width:36px;height:36px;flex-shrink:0;}
 .hc-ver{display:flex;margin:12px auto 0;}
+.hc-der .icon-btn{width:36px;height:36px;flex-shrink:0;}
+.cp-rapidos{display:flex;flex-wrap:wrap;gap:8px;}
+.cp-queda{margin-top:14px;}
 .ea-borrar{display:flex;margin:16px 0 0;color:var(--red-700);}
 .hc-der{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .cc-fila{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface);}
@@ -1487,7 +1490,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '16-nov-2026 · v26';
+const VERSION_PANEL = '16-nov-2026 · v27';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -2348,6 +2351,7 @@ const DB = {
   // Corregir un abono mal registrado (solo la admin, migración 25). La venta se recalcula sola.
   editarAbono(abonoId, monto){ return rpcRes('fn_editar_abono', { p_abono_id:abonoId, p_monto:monto }); },
   borrarAbono(abonoId){ return rpcRes('fn_borrar_abono', { p_abono_id:abonoId }); },
+  corregirPagoVenta(ventaId, pagado){ return rpcRes('fn_corregir_pago_venta', { p_venta_id:ventaId, p_pagado:pagado }); },
   // Enlace personal del cliente para "Mi cuenta" en el catálogo (migración 24). nuevo = cambia el código.
   enlaceCliente(clienteId, nuevo){ return rpcRes('fn_enlace_cliente', { p_cliente_id:clienteId, p_nuevo:!!nuevo }); },
   // Asignar o cambiar el cliente de una venta ya hecha (migración 23). Sin ella, la admin lo hace directo.
@@ -7208,7 +7212,7 @@ Arriba del catálogo hay un botón "Mi cuenta" con tres partes: Me interesaron (
 Si se te olvidó poner el cliente al vender, tócalo después: en el producto vendido del Inventario (botón de las personitas o en "···"), en su ficha ("Asignar cliente"), al editar el producto ("Cliente de la venta") o en las listas de ventas, donde dice "Sin cliente". También sirve para cambiarlo si se eligió mal; si debía algo, la deuda pasa al cliente nuevo. La administradora lo hace en todas las ventas y cada vendedora en las suyas.
 
 ## Corregir un abono
-Si registraste mal un abono, abre el historial del cliente: debajo de cada venta salen sus abonos con un lápiz. Ahí cambias el monto o lo borras, y la venta se recalcula sola (Pagado o lo que debe). Solo la administradora puede hacerlo. Las ventas ya pagadas y entregadas se guardan en "Ver las anteriores" para que la lista quede limpia; siguen contando en ganancias y reportes.
+Si registraste mal un abono, abre el historial del cliente: debajo de cada venta salen sus abonos con un lápiz. Si la venta se registró pagada de contado (sin abonos), el lápiz está junto a "Pagado" y ahí pones cuánto pagó en realidad. Ahí cambias el monto o lo borras, y la venta se recalcula sola (Pagado o lo que debe). Solo la administradora puede hacerlo. Las ventas ya pagadas y entregadas se guardan en "Ver las anteriores" para que la lista quede limpia; siguen contando en ganancias y reportes.
 
 ## Sin internet
 El panel guarda en el teléfono lo último que vio. Si se va la señal, abre igual con esos datos y arriba aparece una franja amarilla "Sin conexión".
@@ -7562,6 +7566,7 @@ function modalHistorialCliente(cliente, verAnteriores){
     return `<div class="hc-compra${pendiente?' debe':''}">
       <div class="hc-t"><b>${escHtml(v.producto_nombre)}</b><small>${fmtDateShort(v.fecha_venta)} · ${money(v.precio_venta)}${v.entregado===false ? ' · por entregar' : ''}</small></div>
       <div class="hc-der"><span class="badge ${pendiente?'badge-warning':'badge-success'}">${pendiente ? 'Debe '+money(saldo) : 'Pagado'}</span>
+        ${admin && !abonos.length && !String(v.id).startsWith('tmp-') ? `<button type="button" class="icon-btn edit" data-action="corregir-pago-venta" data-id="${v.id}" data-cliente="${cliente.id}" aria-label="Corregir cuánto pagó">${icon('edit')}</button>` : ''}
         ${pendiente ? `<button type="button" class="btn btn-primary btn-sm" data-action="abonar-desde-cliente" data-id="${v.id}" data-cliente="${cliente.id}">${icon('wallet')} Abonar</button>` : ''}</div>
       ${abonos.length ? `<div class="hc-abonos">${abonos.slice().reverse().map(a=>`<div class="hc-abono"><span>Abono del ${fmtDateShort(a.created_at)}</span><b>${money(a.monto)}</b>
           ${admin && !String(a.id).startsWith('tmp-') ? `<button type="button" class="icon-btn edit" data-action="editar-abono" data-id="${a.id}" data-cliente="${cliente.id}" aria-label="Corregir abono">${icon('edit')}</button>` : ''}</div>`).join('')}</div>` : ''}
@@ -7598,6 +7603,46 @@ function modalHistorialCliente(cliente, verAnteriores){
     </div>`, 'lg');
   document.getElementById('hcEnlace').addEventListener('click', ()=>modalEnlaceCliente(cliente));
   document.getElementById('hcVerAnteriores')?.addEventListener('click', ()=>modalHistorialCliente(cliente, !verAnteriores));
+}
+// Venta sin abonos (pagada de contado o sin pagar): se corrige cuánto pagó en total.
+function modalCorregirPago(ventaId, alTerminar){
+  const v = DB.state.venta_historial.find(x=>x.id===ventaId); if(!v) return;
+  const precio = Number(v.precio_venta) || 0;
+  const actual = v.estado_pago==='pagado' ? precio : (Number(v.monto_pagado) || 0);
+  const volver = ()=>{ closeModal(); if(alTerminar) alTerminar(); };
+  openModal(`
+    <div class="modal-head"><div><div class="modal-title">Corregir pago</div><div class="text-muted" style="font-size:13px;">${escHtml(v.producto_nombre)} · ${fmtDateShort(v.fecha_venta)} · ${money(precio)}</div></div><button class="icon-btn" id="cpCerrar" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>¿Cuánto ha pagado?</label><input type="number" inputmode="decimal" step="0.01" min="0" max="${precio.toFixed(2)}" id="cpMonto" value="${actual.toFixed(2)}"></div>
+      <div class="cp-rapidos"><button type="button" class="btn btn-secondary btn-sm" data-cp="${precio.toFixed(2)}">Todo (${money(precio)})</button><button type="button" class="btn btn-secondary btn-sm" data-cp="0">Nada (${money(0)})</button></div>
+      <div class="cp-queda" id="cpQueda"></div>
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" id="cpCancelar">Cancelar</button><button class="btn btn-primary" id="cpGuardar">${icon('check')} Guardar</button></div>`);
+  const inp = document.getElementById('cpMonto');
+  const pintarQueda = ()=>{
+    const m = Number(inp.value) || 0;
+    document.getElementById('cpQueda').innerHTML = m >= precio - 0.005 ? `<span class="badge badge-success">Queda pagado</span>`
+      : `<span class="badge badge-warning">Queda debiendo ${money(Math.max(0, precio - m))}</span>`;
+  };
+  inp.addEventListener('input', pintarQueda);
+  document.querySelectorAll('[data-cp]').forEach(b=>b.addEventListener('click', ()=>{ inp.value = b.dataset.cp; pintarQueda(); }));
+  pintarQueda();
+  document.getElementById('cpCerrar').addEventListener('click', volver);
+  document.getElementById('cpCancelar').addEventListener('click', volver);
+  document.getElementById('cpGuardar').addEventListener('click', async ()=>{
+    const m = Number(inp.value);
+    if(inp.value === '' || isNaN(m) || m < 0) return toast('Escribe cuánto ha pagado', 'danger');
+    if(m > precio + 0.005) return toast('No puede ser mayor al precio (' + money(precio) + ')', 'danger');
+    if(Math.abs(m - actual) < 0.005){ volver(); return; }
+    const b = document.getElementById('cpGuardar'); b.disabled = true;
+    const r = await DB.corregirPagoVenta(v.id, m);
+    if(!r.ok){
+      b.disabled = false;
+      return toast('No se pudo: ' + (/could not find the function/i.test(r.error) ? 'Falta correr en Supabase el SQL de la migración 25.' : /USA_LOS_ABONOS/.test(r.error) ? 'esta venta ya tiene abonos; corrígelos con su lápiz' : mensajeErrorAbono(r.error)), 'danger');
+    }
+    toast(m >= precio - 0.005 ? 'Pago corregido: queda pagado' : 'Pago corregido: debe ' + money(precio - m), 'success');
+    closeModal(); await refresh(); if(alTerminar) alTerminar();
+  });
 }
 // Corregir un abono: cambiar el monto o borrarlo. Al terminar regresa al historial del cliente.
 function modalEditarAbono(abonoId, alTerminar){
@@ -9052,6 +9097,9 @@ async function ejecutarAccion(btn){
   else if(action==='aprobar-dev'){ const r=await DB.resolverDevolucion(id,true); if(r.ok){ toast('Devolución aprobada','success'); await refresh(); } else toast('No se pudo: '+r.error,'danger'); }
   else if(action==='rechazar-dev'){ const r=await DB.resolverDevolucion(id,false); if(r.ok){ toast('Devolución rechazada'); await refresh(); } else toast('No se pudo: '+r.error,'danger'); }
   else if(action==='marcar-pago-cliente'){ modalAbonar(id); }
+  else if(action==='corregir-pago-venta'){
+    modalCorregirPago(id, ()=>{ const c = DB.state.clientes.find(x=>x.id===btn.dataset.cliente); if(c) modalHistorialCliente(c); });
+  }
   else if(action==='editar-abono'){
     modalEditarAbono(id, ()=>{ const c = DB.state.clientes.find(x=>x.id===btn.dataset.cliente); if(c) modalHistorialCliente(c); });
   }

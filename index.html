@@ -238,7 +238,8 @@ tbody tr:hover{background:var(--color-surface-alt);}
 .empty-row td{text-align:center;color:var(--color-text-faint);padding:30px;}
 
 /* ---------- badges ---------- */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap;}
+.badge svg{width:12px;height:12px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2.4;}
 .badge-success{background:var(--forest-100);color:var(--forest-700);}
 .badge-warning{background:var(--amber-100);color:var(--amber-700);}
 .badge-info{background:var(--sage-100);color:var(--sage-700);}
@@ -724,6 +725,40 @@ a.mas-item{text-decoration:none;color:inherit;}
 .qa-tile:active{transform:scale(.96);}
 .qa-tile .qa-ic{width:38px;height:38px;border-radius:12px;background:var(--coffee-100);display:flex;align-items:center;justify-content:center;}
 .qa-tile svg{width:20px;height:20px;stroke:var(--color-accent-dark);fill:none;}
+.hero-link{display:inline-flex;align-items:center;gap:4px;margin-top:14px;padding:8px 14px;min-height:40px;border:none;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background 140ms var(--ease-out),transform 120ms var(--ease-out);}
+.hero-link:active{transform:scale(.97);}
+.hero-link svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;transform:rotate(-90deg);}
+.seccion-titulo{font-size:18px;font-weight:800;margin:30px 2px 12px;}
+.inv-top{display:flex;gap:10px;align-items:center;margin-bottom:12px;}
+.inv-top .buscador{flex:1;min-width:0;}
+.inv-top .buscador input{width:100%;min-width:0;}
+.inv-mas{flex:0 0 48px;min-height:44px;padding-left:0;padding-right:0;justify-content:center;}
+.inv-mas svg{fill:currentColor;}
+.inv-filtro{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.inv-filtro-btn{flex:1 1 240px;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 14px 8px 8px;border:1px solid var(--color-border);border-radius:16px;background:var(--color-surface);font:inherit;color:var(--color-text);text-align:left;cursor:pointer;transition:border-color 140ms var(--ease-out),transform 120ms var(--ease-out);}
+.inv-filtro-btn:active{transform:scale(.98);}
+.inv-filtro-btn.activo{border-color:var(--rubro, var(--color-accent));border-width:2px;}
+.if-ic{width:40px;height:40px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:color-mix(in srgb, var(--rubro, #5B4A42) 14%, transparent);color:var(--rubro, var(--color-text));}
+.if-ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;}
+.if-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25;}
+.if-t small{font-size:12px;color:var(--color-text-muted);}
+.if-t b{font-size:15px;font-weight:800;overflow-wrap:anywhere;}
+.inv-filtro-btn>svg:last-child{width:18px;height:18px;flex-shrink:0;fill:none;stroke:var(--color-text-muted);stroke-width:2;}
+.inv-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.fi-sec{margin-bottom:18px;}
+.fi-t{font-size:14px;font-weight:800;margin-bottom:10px;}
+.fi-sec .chips-scroll,.fi-chips{display:flex;flex-wrap:wrap;gap:8px;overflow:visible;margin-top:10px;}
+.fi-chips{margin-top:0;}
+.card-grid.inv-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));}
+@media (max-width:640px){.card-grid.inv-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.product-card.pc-simple .icon-actions-row{display:none;}
+.product-card.pc-simple .pc-more{display:flex;}
+.product-card.pc-simple .name{font-size:15px;line-height:1.3;}
+.product-card.pc-simple .price{display:block;font-size:17px;font-weight:800;margin-top:4px;}
+.pcs-linea{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:6px;font-size:12px;color:var(--color-text-muted);}
+.pcs-linea svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;}
+.pcs-linea.rojo{color:var(--red-700);font-weight:800;}
+@media (prefers-reduced-motion:reduce){.hero-link,.inv-filtro-btn{transition:none;}}
 .hero-card{background:var(--color-accent);color:#fff;border-radius:18px;padding:18px 18px 16px;margin-bottom:16px;}
 .hero-label{font-size:12px;opacity:.88;text-transform:uppercase;letter-spacing:.07em;font-weight:700;}
 .hero-num{font-size:32px;font-weight:800;margin:4px 0 6px;line-height:1.1;}
@@ -1153,6 +1188,20 @@ tr.entrega-pend td{background:var(--red-100);}
 .ec-botones .btn{flex:1 1 180px;justify-content:center;}
 .ec-cambiar{display:flex;margin:16px auto 0;}
 .cli-consultas{display:grid;gap:8px;}
+.hc-compras{display:grid;gap:8px;}
+.hc-compra{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 12px;padding:12px;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface);}
+.hc-compra.debe{border-color:color-mix(in srgb, var(--amber-500) 45%, var(--color-border));}
+.hc-t{flex:1 1 170px;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.hc-t b{font-size:14px;overflow-wrap:anywhere;}
+.hc-t small{font-size:12px;color:var(--color-text-muted);}
+.hc-abonos{flex-basis:100%;display:grid;gap:6px;padding-top:8px;border-top:1px dashed var(--color-border);}
+.hc-abono{display:flex;align-items:center;gap:10px;font-size:13px;}
+.hc-abono span{flex:1;min-width:0;color:var(--color-text-muted);}
+.hc-abono b{font-variant-numeric:tabular-nums;}
+.hc-abono .icon-btn{width:36px;height:36px;flex-shrink:0;}
+.hc-ver{display:flex;margin:12px auto 0;}
+.ea-borrar{display:flex;margin:16px 0 0;color:var(--red-700);}
+.hc-der{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
 .cc-fila{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--color-border);border-radius:12px;background:var(--color-surface);}
 .cc-t{min-width:0;display:flex;flex-direction:column;}
 .cc-t b{font-size:14px;overflow-wrap:anywhere;}
@@ -1306,6 +1355,34 @@ tr.entrega-pend td{background:var(--red-100);}
   .sw i::after{width:24px;height:24px;}
   .sw input:checked + i::after{transform:translateX(22px);}
 }
+/* ---- Celular: las tablas se vuelven tarjetas (nada se mueve de lado) y los números se leen fácil ---- */
+@media (max-width:640px){
+  .table-wrap.tabla-movil{overflow:visible;}
+  .tabla-movil table,.tabla-movil tbody,.tabla-movil tr,.tabla-movil td{display:block;width:100%;}
+  .tabla-movil thead{display:none;}
+  .tabla-movil tr{border:1px solid var(--color-border);border-radius:12px;padding:10px 12px;margin-bottom:8px;background:var(--color-surface);}
+  .tabla-movil tr.entrega-pend{background:var(--red-100);border-color:var(--red-600);}
+  .tabla-movil td{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;padding:5px 0;border:none;text-align:right;white-space:normal;overflow-wrap:anywhere;}
+  .tabla-movil td::before{content:attr(data-label);flex-shrink:0;max-width:48%;font-size:12px;font-weight:600;color:var(--color-text-muted);text-align:left;}
+  .tabla-movil td:not([data-label])::before{content:none;}
+  .tabla-movil td:not([data-label]){justify-content:flex-end;flex-wrap:wrap;}
+  .tabla-movil td:first-child{justify-content:flex-start;text-align:left;font-size:14.5px;font-weight:700;padding-top:0;}
+  .tabla-movil td:first-child::before{content:none;}
+  .tabla-movil td:empty{display:none;}
+  .tabla-movil td .badge{white-space:nowrap;}
+  .tabla-movil td:not(:first-child){flex-wrap:wrap;}
+  .tabla-movil td:not(:first-child)>div{flex-basis:100%;text-align:right;}
+  .tabla-movil tr.empty-row{border-style:dashed;}
+  .tabla-movil tr.empty-row td{justify-content:center;text-align:center;font-weight:500;color:var(--color-text-muted);}
+  .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px;}
+  .kpi-grid>:last-child:nth-child(odd){grid-column:1/-1;}
+  .kpi-card{padding:12px 14px;}
+  .kpi-top{gap:8px;margin-bottom:8px;}
+  .kpi-icon{width:30px;height:30px;border-radius:9px;}
+  .kpi-label{text-transform:none;letter-spacing:0;font-size:13px;font-weight:600;line-height:1.25;color:var(--color-text-muted);}
+  .kpi-value{font-size:20px;}
+}
+
 </style>
 </head>
 <body>
@@ -1410,7 +1487,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Cambia con cada entrega del index.html: sirve para saber si el celular tiene la versión nueva.
-const VERSION_PANEL = '11-nov-2026 · v22';
+const VERSION_PANEL = '16-nov-2026 · v26';
 const money = (n) => ((DB.state && DB.state.configuracion && DB.state.configuracion.moneda_simbolo) || 'Q') + ' ' + (Number(n)||0).toFixed(2);
 
 // configuracion llega como filas clave/valor/tipo; el resto del panel espera un objeto plano ya tipado
@@ -2268,6 +2345,9 @@ const DB = {
   // Abono parcial o total — monto no puede ser mayor al saldo pendiente (lo valida el server).
   // Dejar el monto igual al saldo completo es la forma de "pagar todo de un click".
   abonarVenta(ventaId, monto){ return conSenal('abonar', [ventaId, monto]); },
+  // Corregir un abono mal registrado (solo la admin, migración 25). La venta se recalcula sola.
+  editarAbono(abonoId, monto){ return rpcRes('fn_editar_abono', { p_abono_id:abonoId, p_monto:monto }); },
+  borrarAbono(abonoId){ return rpcRes('fn_borrar_abono', { p_abono_id:abonoId }); },
   // Enlace personal del cliente para "Mi cuenta" en el catálogo (migración 24). nuevo = cambia el código.
   enlaceCliente(clienteId, nuevo){ return rpcRes('fn_enlace_cliente', { p_cliente_id:clienteId, p_nuevo:!!nuevo }); },
   // Asignar o cambiar el cliente de una venta ya hecha (migración 23). Sin ella, la admin lo hace directo.
@@ -2999,7 +3079,7 @@ function imgMini(url, alt){
 function estadoInfo(estado){
   return ({
     en_inventario: { label:'Disponible', cls:'badge-success' },
-    en_reserva:    { label:'En Reserva', cls:'badge-warning' },
+    en_reserva:    { label:'Apartado', cls:'badge-warning' },
     vendido:       { label:'Vendido',    cls:'badge-info' },
     devuelto:      { label:'Devuelto',   cls:'badge-danger' }
   })[estado] || { label: estado, cls:'badge-neutral' };
@@ -3082,15 +3162,17 @@ function horasParaLiberar(p){
 }
 function fmtHoras(h){
   if(h < 1) return Math.max(1,Math.round(h*60))+' min';
-  return Math.round(h)+' h';
+  if(h < 24) return Math.round(h)+' h';
+  const d = Math.round(h/24);
+  return d+(d===1?' día':' días');
 }
 // Pinta un badge de cuenta regresiva para una reserva; null si no aplica.
-function reservaCountdownBadge(p){
+function reservaCountdownBadge(p, corto){
   const h = horasParaLiberar(p);
   if(h===null) return '';
   const urgente = h <= 1, medio = h <= 6;
   const cls = urgente ? 'badge-danger' : medio ? 'badge-warning' : 'badge-neutral';
-  return `<span class="badge ${cls}" data-tip="Se libera sola si nadie vende">${icon('clock')} vence en ${fmtHoras(h)}</span>`;
+  return `<span class="badge ${cls}" data-tip="Se libera sola si nadie vende">${icon('clock')} ${corto ? '' : 'Se libera en '}${fmtHoras(h)}</span>`;
 }
 // Lo que falta pagar de una venta (precio menos lo ya abonado) — nunca negativo.
 function saldoPendiente(v){ return Math.max(0, v.precio_venta - (v.monto_pagado||0)); }
@@ -3586,6 +3668,10 @@ function panelQueHacer(){
   if(admin){
     const devs = DB.state.devoluciones.filter(d=>d.estado==='pendiente').length;
     if(devs) filas.push({ n:devs, txt:'devolución por revisar', sub:'Una vendedora pidió devolver un producto', ir:"navigate('a-devoluciones')" });
+    const pedNuevos = (DB.state.pedidos||[]).filter(x=>x.estado==='nuevo').length;
+    if(pedNuevos) filas.push({ n:pedNuevos, txt:pedNuevos===1?'pedido nuevo':'pedidos nuevos', sub:'Un cliente pidió desde el catálogo', ir:"navigate('a-pedidos')" });
+    const acaban = DB.state.productos.filter(p=>DB.modoDe(p)==='cantidad' && p.estado==='en_inventario' && (p.cantidad_minima||0) > 0 && (p.cantidad||0) <= p.cantidad_minima).length;
+    if(acaban) filas.push({ n:acaban, txt:acaban===1?'producto se está acabando':'productos se están acabando', sub:'Revisa las existencias', ir:"navigate('a-pendientes')" });
     const res = DB.state.productos.filter(p=>{ const h=horasParaLiberar(p); return h!==null && h<=6; }).length;
     if(res) filas.push({ n:res, txt:'reserva por vencer', sub:'Se liberan solas en menos de 6 horas', ir:"irAInventario('en_reserva')" });
     const c = DB.state.configuracion;
@@ -3972,6 +4058,35 @@ function productCard(p, opts){
     </div>
   </div>`;
 }
+// Tarjeta "lo justo" del Inventario: foto, estado, nombre, precio y un solo botón. Lo demás en "···".
+function productCardSimple(p, opts){
+  const info = productBadgeInfo(p), cur = DB.currentUser();
+  const foto = DB.fotosDe(p.id)[0];
+  const { iconos } = accionesProducto(p, opts);
+  const mia = p.estado==='en_reserva' && p.reservado_por_id===cur.id;
+  const vende = DB.puedeVender(p) && ((p.estado==='en_inventario' && (!DB.esPorCantidad(p) || (p.cantidad||0)>0)) || mia);
+  const extra = (p.estado==='en_inventario' && DB.puedeVender(p) && !DB.esPorCantidad(p) ? `<button data-action="apartar" data-id="${p.id}" data-tip="Apartar">${icon('bookmark')}</button>` : '')
+    + (mia ? `<button data-action="liberar" data-id="${p.id}" data-tip="Liberar">${icon('x')}</button>` : '');
+  const pend = entregasPendientes(p), rubro = DB.areaDe(p), conRubro = DB.hayAreas() && hayVariosRubros();
+  const vend = p.reservado_por_id ? DB.state.usuarios.find(u=>u.id===p.reservado_por_id) : null;
+  const dias = p.archivado ? DB.diasParaEliminar(p) : 0;
+  const linea = pend ? `<div class="pcs-linea rojo">${icon('clock')} Por entregar${DB.esPorCantidad(p)?': '+pend:''}</div>`
+    : p.estado==='en_reserva' && vend ? `<div class="pcs-linea">Apartado por ${escHtml(vend.nombre.split(' ')[0])} ${reservaCountdownBadge(p)}</div>`
+    : p.archivado ? `<div class="pcs-linea">${icon('trash')} ${dias<=0?'Se elimina pronto':'Se elimina en '+dias+' día'+(dias===1?'':'s')}</div>`
+    : DB.modoDe(p)==='pedido' && p.disponible_hasta ? `<div class="pcs-linea">${cuentaRegresivaPedido(p)}</div>` : '';
+  return `<div class="product-card pc-simple${pend?' entrega-pend':''}${conRubro?' con-rubro':''}" data-id="${p.id}"${conRubro?` style="${rubroEstilo(rubro)}"`:''}>
+    <div class="pc-info" data-action="ver" data-id="${p.id}">
+      <div class="pc-photo${foto?'':' vacia'}">${foto?imgMini(foto.url_foto, escHtml(p.nombre)):icon('crate')+'<span>Sin foto</span>'}
+        <span class="badge ${info.cls} pc-badge">${info.label}</span>
+        <button type="button" class="pc-more" data-action="mas-producto" data-id="${p.id}" aria-label="Más opciones">${icon('dots')}</button></div>
+      <div class="pc-text"><div class="name">${escHtml(p.nombre)}</div><span class="price">${money(p.precio_venta)}</span>${linea}</div>
+    </div>
+    <div class="body">
+      ${vende ? `<div class="actions"><button class="btn btn-primary btn-sm" data-action="vender" data-id="${p.id}">Vender</button></div>` : ''}
+      <div class="icon-actions-row">${extra}${iconos}</div>
+    </div>
+  </div>`;
+}
 // Fila sin foto: nombre, código, precio y estado; todo lo demás en el botón "···".
 function productFila(p, opts){
   opts = opts || {};
@@ -4007,7 +4122,7 @@ function productosHtml(lista, mode){
   if(verFotos){
     const clave = claveLista(), hasta = mostrarHasta[clave] || PASO_LISTA;
     const parte = lista.length > hasta ? lista.slice(0, hasta) : lista;
-    return `<div class="card-grid">${parte.map(p=>productCard(p,{mode})).join('')}</div>`
+    return `<div class="card-grid${mode==='admin'?' inv-grid':''}">${parte.map(p=>mode==='admin' ? productCardSimple(p,{mode}) : productCard(p,{mode})).join('')}</div>`
       + (lista.length > hasta ? `<div class="ver-mas-caja"><button type="button" class="btn btn-secondary ver-mas" data-action="ver-mas-productos" data-clave="${escHtml(clave)}">Ver más (${lista.length - hasta})</button></div>` : '');
   }
   return listaAgrupadaHtml(lista, p=>p.categoria, p=>productFila(p,{mode}));
@@ -4368,7 +4483,6 @@ function panelRubros(vendidas){
   </div>`;
 }
 PAGES['a-dashboard'] = () => {
-  const productos = DB.state.productos;
   const vendidas = DB.state.venta_historial.filter(v=>v.estado_venta==='vendido');
   const ini = inicioMesActual(), hoyIni = inicioDia();
   const iniPrev = new Date(ini); iniPrev.setMonth(iniPrev.getMonth()-1);
@@ -4379,40 +4493,45 @@ PAGES['a-dashboard'] = () => {
   const vendidoPrev = ventasPrev.reduce((s,v)=>s+v.precio_venta,0);
   const gananciaMes = ventasMes.reduce((s,v)=>s+v.ganancia_neta,0);
   const delta = vendidoPrev>0 ? Math.round((vendidoMes-vendidoPrev)/vendidoPrev*100) : null;
-  const comisionesPendientes = DB.state.venta_historial.filter(v=>v.comision_estado==='ganada').reduce((s,v)=>s+v.comision_monto,0);
-  const porCobrar = DB.ventasPendientesDeCobro().reduce((s,v)=>s+saldoPendiente(v),0);
-  const bitacoraReciente = DB.state.bitacora.slice(0,8);
-  const porVendedor = {};
-  vendidas.forEach(v=>{ porVendedor[v.vendedor_id]=(porVendedor[v.vendedor_id]||0)+v.comision_monto; });
-  const topVendedorId = Object.keys(porVendedor).sort((a,b)=>porVendedor[b]-porVendedor[a])[0];
-  const topVendedor = topVendedorId ? DB.state.usuarios.find(u=>u.id===topVendedorId) : null;
-  const ultimas = DB.state.venta_historial.slice(0,5);
+  const ultimas = DB.state.venta_historial.slice(0,3);
+  // Tres bloques: cuánto llevas, qué falta hoy y lo último que se vendió. Lo demás vive en Reportes.
   return `
     ${saludoInicio()}
-    ${panelQueHacer()}
-    ${accionesRapidas()}
-    ${panelExternas()}
-    ${panelRubros(vendidas)}
     <div class="hero-card">
       <div class="hero-label">Vendido este mes</div>
       <div class="hero-num">${money(vendidoMes)}</div>
       ${delta===null ? '' : `<span class="hero-delta">${delta>=0?'▲':'▼'} ${Math.abs(delta)}% vs. mes pasado</span>`}
       <div class="hero-stats">
+        <div><b>${money(gananciaMes)}</b><span>ganancia</span></div>
         <div><b>${ventasMes.length}</b><span>ventas del mes</span></div>
-        <div><b>${money(gananciaMes)}</b><span>ganancia neta</span></div>
         <div><b>${ventasHoy.length}</b><span>ventas hoy</span></div>
       </div>
+      <button type="button" class="hero-link" onclick="navigate('a-reportes')">Ver reportes${icon('chevron')}</button>
     </div>
-    <div class="kpi-grid">
-      ${kpi('En Inventario', productos.filter(p=>p.estado==='en_inventario').length,'crate','icon-neutral',null,"irAInventario('en_inventario')")}
-      ${kpi('En Reserva', productos.filter(p=>p.estado==='en_reserva').length,'bookmark','icon-warn',null,"irAInventario('en_reserva')")}
-      ${kpi('Por Cobrar', money(porCobrar),'wallet','icon-danger',null,"navigate('a-clientes')")}
-      ${kpi('Comisiones Pendientes', money(comisionesPendientes),'percent','icon-info',null,"navigate('a-comisiones')")}
-    </div>
+    ${panelQueHacer()}
     <div class="panel">
-      <div class="panel-head"><div class="panel-title">Últimas ventas</div><button class="btn btn-secondary btn-sm" onclick="navigate('a-reportes')">Reportes</button></div>
+      <div class="panel-head"><div class="panel-title">Últimas ventas</div>${ultimas.length ? `<button class="btn btn-ghost btn-sm" onclick="navigate('a-reportes')">Ver todas</button>` : ''}</div>
       ${ultimas.map(v=>ventaItemHtml(v,{vendedora:true})).join('') || `<div class="text-faint text-center" style="padding:16px 0;">Aún no hay ventas registradas</div>`}
+    </div>`;
+};
+// Lo que antes llenaba el Inicio: ahora al final de Reportes.
+function panelNegocioAhora(){
+  const productos = DB.state.productos;
+  const vendidas = DB.state.venta_historial.filter(v=>v.estado_venta==='vendido');
+  const comisionesPendientes = DB.state.venta_historial.filter(v=>v.comision_estado==='ganada').reduce((s,v)=>s+v.comision_monto,0);
+  const porVendedor = {};
+  vendidas.forEach(v=>{ porVendedor[v.vendedor_id]=(porVendedor[v.vendedor_id]||0)+v.comision_monto; });
+  const topVendedorId = Object.keys(porVendedor).sort((a,b)=>porVendedor[b]-porVendedor[a])[0];
+  const topVendedor = topVendedorId ? DB.state.usuarios.find(u=>u.id===topVendedorId) : null;
+  const bitacoraReciente = DB.state.bitacora.slice(0,8);
+  return `<h3 class="seccion-titulo">Tu negocio ahora</h3>
+    <div class="kpi-grid">
+      ${kpi('En inventario', productos.filter(p=>p.estado==='en_inventario').length,'crate','icon-neutral',null,"irAInventario('en_inventario')")}
+      ${kpi('Apartados', productos.filter(p=>p.estado==='en_reserva').length,'bookmark','icon-warn',null,"irAInventario('en_reserva')")}
+      ${kpi('Comisiones por pagar', money(comisionesPendientes),'percent','icon-info',null,"navigate('a-comisiones')")}
     </div>
+    ${panelRubros(vendidas)}
+    ${panelExternas()}
     ${topVendedor ? `<div class="panel">
       <div class="panel-title" style="margin-bottom:14px;">Vendedora destacada</div>
       <div style="display:flex;align-items:center;gap:14px;">
@@ -4429,7 +4548,7 @@ PAGES['a-dashboard'] = () => {
           : `<div class="text-faint">Sin actividad todavía</div>`}
       </div>
     </details>`;
-};
+}
 
 // Bandeja única de todo lo que necesita revisión del admin: devoluciones
 // pendientes de aprobar, reservas por vencer pronto (se liberan solas) y
@@ -4510,11 +4629,11 @@ PAGES['a-pendientes'] = () => {
     </div>` : ''}
 
     ${reservas.length ? `<div class="panel">
-      <div class="panel-head"><div class="panel-title">Reservas — se liberan solas si nadie vende</div><span class="badge badge-neutral">${reservas.length}</span></div>
-      <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Apartado por</th><th>Vence en</th><th></th></tr></thead><tbody>
+      <div class="panel-head"><div class="panel-title">Apartados que se liberan solos</div><span class="badge badge-neutral">${reservas.length}</span></div>
+      <div class="table-wrap"><table><thead><tr><th>Producto</th><th>Apartado por</th><th>Se libera en</th><th></th></tr></thead><tbody>
       ${reservas.map(({p,h})=>{
         const vend = DB.state.usuarios.find(u=>u.id===p.reservado_por_id);
-        return `<tr><td>${p.nombre}</td><td>${vend?vend.nombre:'—'}</td><td>${reservaCountdownBadge(p)}</td>
+        return `<tr><td>${p.nombre}</td><td>${vend?vend.nombre:'—'}</td><td>${reservaCountdownBadge(p, true)}</td>
           <td><button class="btn btn-secondary btn-sm" data-action="liberar" data-id="${p.id}">Liberar ahora</button></td></tr>`;
       }).join('')}
       </tbody></table></div>
@@ -4537,8 +4656,8 @@ function estadosInventario(){
   const todos = DB.state.productos.filter(p=>(!busquedaInv.cat || p.categoria===busquedaInv.cat) && (!busquedaInv.area || DB.areaDe(p).clave===busquedaInv.area) && (!busquedaInv.tipo || p.tipo_id===busquedaInv.tipo));
   const lista = [
     { k:'en_inventario', t:'Disponibles', c:'var(--forest-600)', f:p=>p.estado==='en_inventario', vacio:'No hay productos disponibles' },
-    { k:'en_reserva', t:'Reservados', c:'var(--amber-500)', f:p=>p.estado==='en_reserva',
-      vacio:'No hay productos reservados' },
+    { k:'en_reserva', t:'Apartados', c:'var(--amber-500)', f:p=>p.estado==='en_reserva',
+      vacio:'No hay productos apartados' },
     { k:'por_entregar', t:'Por entregar', c:'var(--red-600)', f:p=>entregasPendientes(p)>0, solo:true,
       vacio:'No hay nada por entregar' },
     { k:'vendido', t:'Vendidos', c:'var(--sage-600)', f:p=>p.estado==='vendido' && !p.archivado,
@@ -4557,7 +4676,7 @@ function estadoInventarioActual(){
 function invEstadosHtml(){
   if(busquedaInv.q.trim()) return '';
   const act = estadoInventarioActual();
-  return `<div class="chips-scroll estado-tabs">${estadosInventario().map(e=>
+  return `<div class="estado-tabs inv-tabs">${estadosInventario().map(e=>
     `<button type="button" class="estado-tab${e.k===act.k?' active':''}${e.k==='por_entregar'?' rojo':''}" data-action="inv-estado" data-key="${e.k}"><span class="dot" style="background:${e.c}"></span>${e.t}<span class="n">${e.items.length}</span></button>`).join('')}</div>`;
 }
 function inventarioContenido(){
@@ -4588,19 +4707,46 @@ async function accionArchivarVendidos(){
   toast(n ? 'Fotos eliminadas de '+n+' producto(s) vendido(s)' : 'No hay productos vendidos listos para archivar todavía', n?'success':'');
   await refresh();
 }
+// Arriba solo lo necesario: buscar, un botón para filtrar y las pestañas de estado. Lo demás en "···".
 PAGES['a-inventario'] = () => `
-    <div class="toolbar">
-      <div class="buscador"><input id="invSearch" type="search" placeholder="Buscar producto o código…" autocomplete="off" value="${escHtml(busquedaInv.q)}">${iconoBuscar()}</div>
-      <button class="btn btn-primary btn-sm" id="btnCompartirCatalogo">${icon('whatsapp')} Compartir catálogo</button>
-      <button class="btn btn-secondary btn-sm solo-escritorio" id="btnArchivar" data-tip="Elimina las fotos de los productos vendidos hace más de ${DB.state.configuracion.dias_archivo_productos_vendidos} días">${icon('trash')} Archivar Vendidos</button>
-      <button class="btn btn-secondary btn-sm solo-escritorio" id="btnImportarCSV">${icon('upload')} Importar lista</button>
-      <button class="btn btn-secondary btn-sm solo-celular" id="btnInvMas" aria-label="Más acciones">${icon('dots')}</button>
+    <div class="inv-top">
+      <div class="buscador"><input id="invSearch" type="search" placeholder="Buscar producto o código…" autocomplete="off" value="${escHtml(busquedaInv.q)}" aria-label="Buscar producto">${iconoBuscar()}</div>
+      <button class="btn btn-secondary inv-mas" id="btnInvMas" aria-label="Más acciones">${icon('dots')}</button>
     </div>
-    <div class="vista-barra">${toggleFotosHtml()}</div>
-    ${filtrosRubrosBarraHtml('invFiltros', busquedaInv)}
+    <div class="inv-filtro" id="invFiltroBar">${invFiltroBarHtml()}</div>
     <div id="invEstados">${invEstadosHtml()}</div>
-    <div class="chips-scroll cats" id="invChips">${chipsCategoriasHtml(busquedaInv.cat)}</div>
     <div id="kanbanWrap">${inventarioContenido()}</div>`;
+function invFiltroBarHtml(){
+  const a = busquedaInv.area ? areasVisibles().find(x=>x.clave===busquedaInv.area) : null;
+  const t = busquedaInv.tipo ? (DB.state.tipos||[]).find(x=>x.id===busquedaInv.tipo) : null;
+  const partes = [a ? a.nombre : (areasVisibles().length > 1 ? 'Todos los rubros' : 'Todo'), t ? t.nombre : '', busquedaInv.cat].filter(Boolean);
+  const activo = !!(busquedaInv.area || busquedaInv.tipo || busquedaInv.cat);
+  return `<button type="button" class="inv-filtro-btn${activo?' activo':''}" data-filtro-abrir style="${a ? rubroEstilo(a) : ''}">
+      <span class="if-ic">${icon(a ? (a.icono||'box') : 'dashboard')}</span><span class="if-t"><small>Mostrando</small><b>${escHtml(partes.join(' · '))}</b></span>${icon('chevron')}</button>
+    ${activo ? `<button type="button" class="btn btn-ghost btn-sm" data-filtro-quitar>Quitar filtro</button>` : ''}`;
+}
+function pintarFiltroInv(){ const b = document.getElementById('invFiltroBar'); if(b) b.innerHTML = invFiltroBarHtml(); }
+// Rubro, tipo y clasificación juntos en una sola ventana.
+function modalFiltrosInv(){
+  const cuerpo = ()=>`${areasVisibles().length > 1 ? `<div class="fi-sec"><div class="fi-t">Rubro</div>${tilesRubrosHtml(busquedaInv)}${tiposFilaHtml(busquedaInv)}</div>` : ''}
+    <div class="fi-sec"><div class="fi-t">Clasificación</div><div class="fi-chips">${chipsCategoriasHtml(busquedaInv.cat)}</div></div>`;
+  openModal(`
+    <div class="modal-head"><div class="modal-title">Filtrar productos</div><button class="icon-btn" onclick="closeModal()" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body" id="fiCuerpo">${cuerpo()}</div>
+    <div class="modal-foot"><button class="btn btn-secondary" id="fiQuitar">Quitar filtros</button><button class="btn btn-primary" id="fiListo">${icon('check')} Listo</button></div>`, 'sheet');
+  const aplicar = ()=>{ document.getElementById('fiCuerpo').innerHTML = cuerpo(); pintarFiltroInv(); dibujarInventario(); };
+  document.getElementById('fiCuerpo').addEventListener('click', e=>{
+    if(e.target.closest('.chip-nueva')){ modalCategoria(null); return; }
+    const t = e.target.closest('[data-tipo]'), a = e.target.closest('[data-area]'), c = e.target.closest('.chip[data-cat]');
+    if(t) busquedaInv.tipo = t.dataset.tipo;
+    else if(a){ busquedaInv.area = a.dataset.area; busquedaInv.tipo = ''; }
+    else if(c) busquedaInv.cat = c.dataset.cat;
+    else return;
+    aplicar();
+  });
+  document.getElementById('fiQuitar').addEventListener('click', ()=>{ busquedaInv.area = busquedaInv.tipo = busquedaInv.cat = ''; aplicar(); });
+  document.getElementById('fiListo').addEventListener('click', closeModal);
+}
 
 /* =====================================================================
    ÁREA · TIPO · EXISTENCIAS · BAJO PEDIDO  (campos compartidos por
@@ -5299,7 +5445,8 @@ PAGES['a-reportes'] = () => {
         ${r.catEntries.length ? r.catEntries.map(([c,v])=>`<tr><td>${c}</td><td>${money(v)}</td></tr>`).join('') : `<tr class="empty-row"><td colspan="2">Sin datos</td></tr>`}
         </tbody></table></div>
       </div>
-    </div>`;
+    </div>
+    ${panelNegocioAhora()}`;
 };
 
 /* =====================================================================
@@ -7005,7 +7152,7 @@ Panel para administrar el inventario y las ventas de productos únicos (bolsas, 
 
 ## El ciclo de un producto
 - Disponible: cualquiera puede apartarlo o venderlo directo.
-- En Reserva: alguien lo apartó; solo esa persona (o la admin) puede venderlo o liberarlo. Si nadie lo vende a tiempo, se libera sola (configurable en Configuración).
+- Apartado: alguien lo apartó; solo esa persona (o la admin) puede venderlo o liberarlo. Si nadie lo vende a tiempo, se libera solo (configurable en Configuración).
 - Vendido: ya se vendió — la primera persona en venderlo gana la comisión de ESE producto.
 - Devuelto: si se aprueba una devolución, vuelve a este estado y la comisión se reversa; desde Inventario se puede "reingresar" para que vuelva a estar Disponible.
 
@@ -7059,6 +7206,9 @@ Arriba del catálogo hay un botón "Mi cuenta" con tres partes: Me interesaron (
 
 ## Cliente de una venta ya hecha
 Si se te olvidó poner el cliente al vender, tócalo después: en el producto vendido del Inventario (botón de las personitas o en "···"), en su ficha ("Asignar cliente"), al editar el producto ("Cliente de la venta") o en las listas de ventas, donde dice "Sin cliente". También sirve para cambiarlo si se eligió mal; si debía algo, la deuda pasa al cliente nuevo. La administradora lo hace en todas las ventas y cada vendedora en las suyas.
+
+## Corregir un abono
+Si registraste mal un abono, abre el historial del cliente: debajo de cada venta salen sus abonos con un lápiz. Ahí cambias el monto o lo borras, y la venta se recalcula sola (Pagado o lo que debe). Solo la administradora puede hacerlo. Las ventas ya pagadas y entregadas se guardan en "Ver las anteriores" para que la lista quede limpia; siguen contando en ganancias y reportes.
 
 ## Sin internet
 El panel guarda en el teléfono lo último que vio. Si se va la señal, abre igual con esos datos y arriba aparece una franja amarilla "Sin conexión".
@@ -7324,6 +7474,8 @@ function iconEstadoCuentaWhatsApp(cliente){
   return `<a class="icon-btn confirm" href="${hrefEstadoCuentaWhatsApp(cliente)}" target="_blank" rel="noopener" data-tip="Enviar estado de cuenta por WhatsApp">${icon('receipt')}</a>`;
 }
 function mensajeErrorAbono(err){
+  if(/ABONO_NO_EXISTE/.test(err)) return 'Ese abono ya no existe';
+  if(/MONTO_MAYOR_AL_SALDO/.test(err)) return 'Con ese monto pagaría más que el precio';
   if(err==='MONTO_MAYOR_AL_SALDO') return 'Ese monto es mayor a lo que debe';
   if(err==='MONTO_INVALIDO') return 'Escribe un monto válido';
   if(err==='SIN_PERMISO') return 'No tienes permiso sobre esa venta';
@@ -7331,7 +7483,7 @@ function mensajeErrorAbono(err){
 }
 // Un solo modal para las dos cosas: pagar TODO (deja el monto tal cual,
 // viene precargado con el saldo completo) o un abono parcial (lo cambias).
-function modalAbonar(ventaId){
+function modalAbonar(ventaId, alTerminar){
   const v = DB.state.venta_historial.find(x=>x.id===ventaId);
   if(!v) return;
   const saldo = saldoPendiente(v);
@@ -7361,6 +7513,7 @@ function modalAbonar(ventaId){
     if(res.ok){
       toast((res.data.estado_pago==='pagado' ? 'Deuda saldada' : 'Abono registrado — saldo: '+money(saldoPendiente(res.data))) + (res.sinSenal ? ' (se envía cuando vuelva la señal)' : ''), 'success');
       closeModal(); await refresh();
+      if(alTerminar) alTerminar();
     } else { toast('No se pudo: '+mensajeErrorAbono(res.error), 'danger'); btn.disabled=false; }
   });
 }
@@ -7397,8 +7550,23 @@ function consultasDeCliente(clienteId){
   return (DB.state.consultas || []).filter(k=>k.cliente_id===clienteId).sort((a,b)=>new Date(b.created_at)-new Date(a.created_at))
     .filter(k=>{ if(vistos.has(k.producto_codigo)) return false; vistos.add(k.producto_codigo); return true; });
 }
-function modalHistorialCliente(cliente){
+function modalHistorialCliente(cliente, verAnteriores){
   const r = DB.resumenCliente(cliente.id);
+  // Lo ya pagado y entregado se guarda en "Ver las anteriores"; arriba solo queda lo que falta.
+  const ordenadas = r.compras.slice().sort((a,b)=>new Date(b.fecha_venta)-new Date(a.fecha_venta));
+  const terminada = v=>v.estado_pago!=='pendiente' && v.entregado!==false;
+  const activas = ordenadas.filter(v=>!terminada(v)), anteriores = ordenadas.filter(terminada);
+  const admin = DB.isAdmin();
+  const tarjetaCompra = v=>{
+    const saldo = saldoPendiente(v), pendiente = v.estado_pago==='pendiente', abonos = DB.abonosDe(v.id);
+    return `<div class="hc-compra${pendiente?' debe':''}">
+      <div class="hc-t"><b>${escHtml(v.producto_nombre)}</b><small>${fmtDateShort(v.fecha_venta)} · ${money(v.precio_venta)}${v.entregado===false ? ' · por entregar' : ''}</small></div>
+      <div class="hc-der"><span class="badge ${pendiente?'badge-warning':'badge-success'}">${pendiente ? 'Debe '+money(saldo) : 'Pagado'}</span>
+        ${pendiente ? `<button type="button" class="btn btn-primary btn-sm" data-action="abonar-desde-cliente" data-id="${v.id}" data-cliente="${cliente.id}">${icon('wallet')} Abonar</button>` : ''}</div>
+      ${abonos.length ? `<div class="hc-abonos">${abonos.slice().reverse().map(a=>`<div class="hc-abono"><span>Abono del ${fmtDateShort(a.created_at)}</span><b>${money(a.monto)}</b>
+          ${admin && !String(a.id).startsWith('tmp-') ? `<button type="button" class="icon-btn edit" data-action="editar-abono" data-id="${a.id}" data-cliente="${cliente.id}" aria-label="Corregir abono">${icon('edit')}</button>` : ''}</div>`).join('')}</div>` : ''}
+    </div>`;
+  };
   const consultas = consultasDeCliente(cliente.id);
   openModal(`
     <div class="modal-head"><div class="modal-title">${icon('users2')} ${cliente.nombre}</div><button class="icon-btn" onclick="closeModal()">${icon('x')}</button></div>
@@ -7419,19 +7587,53 @@ function modalHistorialCliente(cliente){
           const est = !pr ? ['badge-neutral','Ya no está'] : pr.estado==='vendido' ? ['badge-info','Vendido'] : pr.estado==='en_reserva' ? ['badge-warning','Apartado'] : ['badge-success','Disponible'];
           return `<div class="cc-fila"><div class="cc-t"><b>${escHtml(k.producto_nombre || k.producto_codigo)}</b><small>${escHtml(k.producto_codigo)} · ${fmtDateShort(k.created_at)}</small></div><span class="badge ${est[0]}">${est[1]}</span></div>`; }).join('')}
       </div></div>` : ''}
-      <div class="table-wrap mt-16"><table><thead><tr><th>Producto</th><th>Fecha</th><th>Saldo</th><th>Estado</th><th></th></tr></thead><tbody>
-      ${r.compras.length ? r.compras.slice().sort((a,b)=>new Date(b.fecha_venta)-new Date(a.fecha_venta)).map(v=>{
-        const saldo = saldoPendiente(v);
-        const abonado = v.monto_pagado>0 && v.estado_pago==='pendiente';
-        return `<tr><td>${v.producto_nombre}</td><td>${fmtDateShort(v.fecha_venta)}</td>
-        <td>${money(saldo)}${abonado?`<div class="text-faint" style="font-size:12px;">abonó ${money(v.monto_pagado)} de ${money(v.precio_venta)}</div>`:''}</td>
-        <td><span class="badge ${v.estado_pago==='pagado'?'badge-success':'badge-warning'}">${v.estado_pago==='pagado'?'Pagado':abonado?'Abono parcial':'Pendiente'}</span></td>
-        <td>${v.estado_pago==='pendiente'?`<button class="btn btn-primary btn-sm" data-action="marcar-pago-cliente" data-id="${v.id}">${icon('check')} Abonar</button>`:''}</td></tr>`;
-      }).join('')
-        : `<tr class="empty-row"><td colspan="5">Sin compras registradas todavía</td></tr>`}
-      </tbody></table></div>
+      <div class="panel-title mt-16" style="font-size:14px;margin-bottom:8px;">${activas.length ? 'Por cobrar o entregar' : 'Compras'}</div>
+      <div class="hc-compras">
+      ${activas.length ? activas.map(tarjetaCompra).join('') : `<div class="text-faint text-center" style="padding:12px 0;">${anteriores.length ? 'Todo pagado y entregado' : 'Sin compras registradas todavía'}</div>`}
+      </div>
+      ${anteriores.length ? (verAnteriores
+        ? `<div class="panel-title mt-16" style="font-size:14px;margin-bottom:8px;">Anteriores (pagadas y entregadas)</div><div class="hc-compras">${anteriores.map(tarjetaCompra).join('')}</div>
+           <button type="button" class="btn btn-ghost btn-sm hc-ver" id="hcVerAnteriores">Esconder las anteriores</button>`
+        : `<button type="button" class="btn btn-secondary btn-sm hc-ver" id="hcVerAnteriores">Ver las anteriores (${anteriores.length})</button>`) : ''}
     </div>`, 'lg');
   document.getElementById('hcEnlace').addEventListener('click', ()=>modalEnlaceCliente(cliente));
+  document.getElementById('hcVerAnteriores')?.addEventListener('click', ()=>modalHistorialCliente(cliente, !verAnteriores));
+}
+// Corregir un abono: cambiar el monto o borrarlo. Al terminar regresa al historial del cliente.
+function modalEditarAbono(abonoId, alTerminar){
+  const a = DB.state.abonos.find(x=>x.id===abonoId); if(!a) return;
+  const v = DB.state.venta_historial.find(x=>x.id===a.venta_historial_id); if(!v) return;
+  const maximo = (Number(v.precio_venta)||0) - (Number(v.monto_pagado)||0) + (Number(a.monto)||0);
+  const volver = ()=>{ closeModal(); if(alTerminar) alTerminar(); };
+  openModal(`
+    <div class="modal-head"><div><div class="modal-title">Corregir abono</div><div class="text-muted" style="font-size:13px;">${escHtml(v.producto_nombre)} · ${fmtDateShort(a.created_at)}</div></div><button class="icon-btn" id="eaCerrar" aria-label="Cerrar">${icon('x')}</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>Monto correcto</label><input type="number" inputmode="decimal" step="0.01" min="0.01" max="${maximo.toFixed(2)}" id="eaMonto" value="${Number(a.monto).toFixed(2)}"></div>
+      <div class="text-faint" style="font-size:12px;">Como máximo ${money(maximo)} (el precio menos los otros abonos).</div>
+      <button type="button" class="btn btn-ghost btn-sm ea-borrar" id="eaBorrar">${icon('trash')} Borrar este abono</button>
+    </div>
+    <div class="modal-foot"><button class="btn btn-secondary" id="eaCancelar">Cancelar</button><button class="btn btn-primary" id="eaGuardar">${icon('check')} Guardar</button></div>`);
+  const falta = e=>/could not find the function/i.test(e) ? 'Falta correr en Supabase el SQL de la migración 25.' : mensajeErrorAbono(e);
+  document.getElementById('eaCerrar').addEventListener('click', volver);
+  document.getElementById('eaCancelar').addEventListener('click', volver);
+  document.getElementById('eaGuardar').addEventListener('click', async ()=>{
+    const monto = Number(document.getElementById('eaMonto').value);
+    if(!monto || monto <= 0) return toast('Escribe un monto válido', 'danger');
+    if(monto > maximo + 0.005) return toast('No puede ser mayor a ' + money(maximo), 'danger');
+    if(Math.abs(monto - Number(a.monto)) < 0.005){ volver(); return; }
+    const b = document.getElementById('eaGuardar'); b.disabled = true;
+    const r = await DB.editarAbono(a.id, monto);
+    if(!r.ok){ b.disabled = false; return toast('No se pudo: ' + falta(r.error), 'danger'); }
+    toast('Abono corregido a ' + money(monto), 'success');
+    closeModal(); await refresh(); if(alTerminar) alTerminar();
+  });
+  document.getElementById('eaBorrar').addEventListener('click', async ()=>{
+    if(!await confirmar('¿Borrar este abono de ' + money(a.monto) + '?\nLa venta vuelve a deber ese monto.', { aceptar:'Borrar' })) return;
+    const r = await DB.borrarAbono(a.id);
+    if(!r.ok) return toast('No se pudo: ' + falta(r.error), 'danger');
+    toast('Abono borrado', 'success');
+    closeModal(); await refresh(); if(alTerminar) alTerminar();
+  });
 }
 
 // Doble confirmación real para una acción irreversible: 1) el admin decide
@@ -8449,7 +8651,7 @@ function modalAsignarUbicacion(u){
    EVENTOS POR PÁGINA (delegación central abajo se encarga de [data-action])
 ===================================================================== */
 function bindPageEvents(page){
-  if(page==='a-dashboard') document.getElementById('btnBorrarBitacoraDash')?.addEventListener('click', modalConfirmarBorrarBitacora);
+  if(page==='a-reportes') document.getElementById('btnBorrarBitacoraDash')?.addEventListener('click', modalConfirmarBorrarBitacora);
   if(page==='a-usuarios') document.getElementById('btnNuevoUsuario')?.addEventListener('click', modalNuevoUsuario);
   if(page==='a-bitacora') document.getElementById('btnBorrarBitacora')?.addEventListener('click', modalConfirmarBorrarBitacora);
   if(page==='a-nuevo'){
@@ -8529,14 +8731,14 @@ function bindPageEvents(page){
   }
   if(page==='a-inventario'){
     const search = document.getElementById('invSearch');
-    document.getElementById('swFotos').addEventListener('change', e=>{ verFotos = e.target.checked; guardarVerFotos(verFotos); dibujarInventario(); });
-    centrarTabActiva();
     search.addEventListener('input', ()=>{ busquedaInv.q = search.value; dibujarInventario(); });
-    enlazarChipsCategoria('invChips', busquedaInv, dibujarInventario);
-    enlazarFiltrosRubros('invFiltros', busquedaInv, dibujarInventario);
-    document.getElementById('btnArchivar').addEventListener('click', accionArchivarVendidos);
-    document.getElementById('btnImportarCSV').addEventListener('click', modalImportarCSV);
+    document.getElementById('invFiltroBar').addEventListener('click', e=>{
+      if(e.target.closest('[data-filtro-abrir]')) modalFiltrosInv();
+      else if(e.target.closest('[data-filtro-quitar]')){ busquedaInv.area = busquedaInv.tipo = busquedaInv.cat = ''; pintarFiltroInv(); dibujarInventario(); }
+    });
     document.getElementById('btnInvMas').addEventListener('click', ()=>hojaAcciones('Más acciones', '', [
+      { icono: icon('whatsapp'), texto: 'Compartir catálogo', hacer: modalCompartirCatalogo },
+      { icono: icon('image'), texto: verFotos ? 'Ver en lista, sin fotos' : 'Ver con fotos', hacer: ()=>{ verFotos = !verFotos; guardarVerFotos(verFotos); dibujarInventario(); } },
       { icono: icon('trash'), texto: 'Archivar vendidos<br><small class="text-faint">Borra las fotos de lo ya vendido</small>', hacer: accionArchivarVendidos },
       { icono: icon('upload'), texto: 'Importar lista de productos', hacer: modalImportarCSV }
     ]));
@@ -8721,6 +8923,24 @@ function exportBackupCompleto(){
 document.getElementById('mainContent').addEventListener('click', e=>{
   const btn = e.target.closest('[data-action]'); if(btn) ejecutarAccion(btn);
 });
+// En el celular cada fila de una tabla se ve como tarjeta: a cada celda se le pone el nombre de su columna.
+function tablasEnTarjetas(raiz){
+  (raiz || document).querySelectorAll('.table-wrap:not(.tabla-movil)').forEach(w=>{
+    const t = w.querySelector('table'); if(!t) return;
+    const nombres = [...t.querySelectorAll('thead th')].map(th=>th.textContent.trim());
+    t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td, i)=>{ if(nombres[i]) td.dataset.label = nombres[i]; }));
+    w.classList.add('tabla-movil');
+  });
+}
+['mainContent', 'modalRoot'].forEach(id=>{
+  let pend = false;
+  new MutationObserver(()=>{ if(pend) return; pend = true; setTimeout(()=>{ pend = false; tablasEnTarjetas(document.getElementById(id)); }, 0); })
+    .observe(document.getElementById(id), { childList:true, subtree:true });
+});
+// Los botones con acción dentro de una ventana (por ejemplo "Abonar" en el historial del cliente) también funcionan.
+document.getElementById('modalRoot').addEventListener('click', e=>{
+  const btn = e.target.closest('[data-action]'); if(btn) ejecutarAccion(btn);
+});
 // Hoja inferior "···" de un producto: lista las mismas acciones de su fila de
 // íconos, pero con nombre y a tamaño de dedo.
 function hojaAcciones(titulo, subtitulo, filas){
@@ -8832,6 +9052,13 @@ async function ejecutarAccion(btn){
   else if(action==='aprobar-dev'){ const r=await DB.resolverDevolucion(id,true); if(r.ok){ toast('Devolución aprobada','success'); await refresh(); } else toast('No se pudo: '+r.error,'danger'); }
   else if(action==='rechazar-dev'){ const r=await DB.resolverDevolucion(id,false); if(r.ok){ toast('Devolución rechazada'); await refresh(); } else toast('No se pudo: '+r.error,'danger'); }
   else if(action==='marcar-pago-cliente'){ modalAbonar(id); }
+  else if(action==='editar-abono'){
+    modalEditarAbono(id, ()=>{ const c = DB.state.clientes.find(x=>x.id===btn.dataset.cliente); if(c) modalHistorialCliente(c); });
+  }
+  else if(action==='abonar-desde-cliente'){
+    const volver = ()=>{ const c = DB.state.clientes.find(x=>x.id===btn.dataset.cliente); if(c) modalHistorialCliente(c); };
+    modalAbonar(id, volver);
+  }
   else if(action==='editar-cliente'){ modalCliente(DB.state.clientes.find(c=>c.id===id)); }
   else if(action==='eliminar-cliente'){ if(await confirmar('¿Eliminar este cliente? Su historial de compras se conserva, solo deja de aparecer en el catálogo.')){ const r=await DB.eliminarCliente(id); if(r.ok){ toast('Cliente eliminado','success'); await refresh(); } else toast('No se pudo eliminar: '+r.error,'danger'); } }
   else if(action==='ver-historial-cliente'){ modalHistorialCliente(DB.state.clientes.find(c=>c.id===id)); }
